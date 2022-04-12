@@ -42,7 +42,6 @@
 	<!-- sqlSessionFactory 객체 : Mybatis와 스프링의 연동(연결정보,SQL실행) -->
 	<bean id="sqlSessionFactory" 
 		class="org.mybatis.spring.SqlSessionFactoryBean">
-		
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="configLocation" 
 				  value="classpath:/mybatis-config.xml"></property>
@@ -66,6 +65,7 @@
 	
 	
 	<!-- rootcontext 파일에서 패키지 정보를 읽어온다.(객체정보를 가져옴) -->
+	<mybatis-spring:scan base-package="com.soft.service"/>
 	<context:component-scan base-package="com.soft.service"></context:component-scan>
 	<context:component-scan base-package="com.soft.vo"></context:component-scan>
 	<context:component-scan base-package="com.soft.mappers"></context:component-scan>
