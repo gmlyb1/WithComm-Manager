@@ -2,55 +2,63 @@ package com.soft.vo;
 
 public class UserVO extends PageVO{
 
-	private String username;
-	private String userid;
-	private String userpw;
-	private String user_auth;
-	private String user_email;
-	private String user_tel;
+	private String userName;
+	private String userId;
+	private String userPw;
+	private String userAuth;
+	private String userEmail;
+	private String userTel;
+	private String userRegDate;
 	
-	public String getUsername() {
-		return username;
+	public String getUserName() {
+		return userName;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
-	public String getUserid() {
-		return userid;
+	public String getUserId() {
+		return userId;
 	}
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
-	public String getUserpw() {
-		return userpw;
+	public String getUserPw() {
+		return userPw;
 	}
-	public void setUserpw(String userpw) {
-		this.userpw = userpw;
+	public void setUserPw(String userPw) {
+		this.userPw = userPw;
 	}
-	public String getUser_auth() {
-		return user_auth;
+	public String getUserAuth() {
+		return userAuth;
 	}
-	public void setUser_auth(String user_auth) {
-		this.user_auth = user_auth;
+	public void setUserAuth(String userAuth) {
+		this.userAuth = userAuth;
 	}
-	public String getUser_email() {
-		return user_email;
+	public String getUserEmail() {
+		return userEmail;
 	}
-	public void setUser_email(String user_email) {
-		this.user_email = user_email;
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
-	public String getUser_tel() {
-		return user_tel;
+	public String getUserTel() {
+		return userTel;
 	}
-	public void setUser_tel(String user_tel) {
-		this.user_tel = user_tel;
+	public void setUserTel(String userTel) {
+		this.userTel = userTel;
+	}
+	public String getUserRegDate() {
+		return userRegDate;
+	}
+	public void setUserRegDate(String userRegDate) {
+		this.userRegDate = userRegDate;
 	}
 	
 	@Override
 	public String toString() {
-		return "UserVO [username=" + username + ", userid=" + userid + ", userpw=" + userpw + ", user_auth=" + user_auth
-				+ ", user_email=" + user_email + ", user_tel=" + user_tel + "]";
+		return "UserVO [userName=" + userName + ", userId=" + userId + ", userPw=" + userPw + ", userAuth=" + userAuth
+				+ ", userEmail=" + userEmail + ", userTel=" + userTel + ", userRegDate=" + userRegDate + "]";
 	}
+	
 	
 	
 	
