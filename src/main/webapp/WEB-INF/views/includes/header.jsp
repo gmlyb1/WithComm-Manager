@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html lang="en">
 
 <head>
@@ -204,11 +207,19 @@
 									</div>
 								</form>
 							</div></li>
-						<!-- register and login  -->
-							
-					
-					
-					
+							<!-- register and login  -->
+					<a href="${pageContext.request.contextPath}/account/login" class="btn btn-primary btn-icon-split" style="width:auto; height:30px; margin-top:20px; margin-right:5px; text-align:center;">
+					    <span class="icon text-white-50">
+					        <i class="fas fa-flag"></i>
+					    </span>
+					    <span class="text">로그인</span>
+					</a>
+					<a href="${pageContext.request.contextPath}/account/register" class="btn btn-success btn-icon-split" style="width:auto; height:30px; margin-top:20px;">
+					    <span class="icon text-white-50">
+					        <i class="fas fa-check"></i>
+					    </span>
+					    <span class="text">회원가입</span>
+					</a>
 
 						<!-- Nav Item - User Information -->
 						<li class="nav-item dropdown no-arrow"><a

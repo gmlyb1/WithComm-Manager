@@ -5,7 +5,12 @@
   
 <mapper namespace="our.soft.mapper.boardMapper">  
   
-  
+	<select id="getList" parameterType="BoardVO" resultType="BoardVO">
+		SELECT
+		   *
+		FROM
+		tbl_board;
+	</select>  
   
   
   
