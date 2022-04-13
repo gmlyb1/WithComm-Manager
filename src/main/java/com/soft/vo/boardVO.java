@@ -2,18 +2,18 @@ package com.soft.vo;
 
 public class boardVO {
 
-	private int board_rnum;
+	private int board_idx;
 	private String board_title;
 	private String board_content;
 	private String board_writer;
 	private String board_regdate;
 	private String board_updatedate;
 	
-	public int getBoard_rnum() {
-		return board_rnum;
+	public int getBoard_idx() {
+		return board_idx;
 	}
-	public void setBoard_rnum(int board_rnum) {
-		this.board_rnum = board_rnum;
+	public void setBoard_idx(int board_idx) {
+		this.board_idx = board_idx;
 	}
 	public String getBoard_title() {
 		return board_title;
@@ -48,10 +48,11 @@ public class boardVO {
 	
 	@Override
 	public String toString() {
-		return "BoardVO [board_rnum=" + board_rnum + ", board_title=" + board_title + ", board_content=" + board_content
+		return "boardVO [board_idx=" + board_idx + ", board_title=" + board_title + ", board_content=" + board_content
 				+ ", board_writer=" + board_writer + ", board_regdate=" + board_regdate + ", board_updatedate="
 				+ board_updatedate + "]";
 	}
+	
 	
 	
 }

@@ -3,7 +3,6 @@ package com.soft.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.soft.serviceInterFace.AccountService;
 import com.soft.vo.memberVO;
 
 @Service("AccountService")

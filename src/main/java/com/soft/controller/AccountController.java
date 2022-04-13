@@ -18,13 +18,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.soft.serviceInterFace.AccountService;
+import com.soft.service.AccountService;
 import com.soft.vo.memberVO;
 
 import net.sf.json.JSONObject;
 
 import org.apache.commons.codec.binary.Base64;
-import org.apache.jasper.tagplugins.jstl.core.Out;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
@@ -32,7 +31,7 @@ import org.codehaus.jackson.type.TypeReference;
 public class AccountController {
 
 	@Autowired
-	private AccountService userService;
+	private AccountService accountService;
 	
 	@RequestMapping(value ="/account/register", method=RequestMethod.GET)
 	public String register() {
@@ -56,7 +55,7 @@ public class AccountController {
 			  	memberVO searchVO = (memberVO) mapper.readValue(filterJSON, new TypeReference<memberVO>() {
 				});
 			  	
-			  	int idCnt = userService.getIdCnt(searchVO);
+			  	int idCnt = accountService.getIdCnt(searchVO);
 			  	resMap.put("res", "ok");
 			  	resMap.put("idCnt", idCnt);
 		  
@@ -83,7 +82,7 @@ public class AccountController {
 				searchVO.setMe_regDate(time1);
 				String encrypt = encryptPassword(searchVO.getMe_pwd().trim());
 				searchVO.setMe_pwd(encrypt);
-				userService.insertMember(searchVO);
+				accountService.insertMember(searchVO);
 				redirect.addFlashAttribute("msg","회원가입이 완료되었습니다.");
 				
 		} catch (Exception e) {

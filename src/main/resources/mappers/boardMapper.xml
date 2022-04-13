@@ -5,11 +5,11 @@
   
 <mapper namespace="com.soft.mappers.boardMapper">  
   
-  <select id="getBoardList" parameterType="BoardVO" resultType="BoardVO">
+  <select id="getBoardList" parameterType="boardVO" resultType="boardVO">
   select
    *
   from
-  tb_board;
+  tbl_board;
   </select>
   
   

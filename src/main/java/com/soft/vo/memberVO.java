@@ -4,7 +4,7 @@ import java.io.UnsupportedEncodingException;
 
 public class memberVO extends pageVO{
 	
-	private String me_idx;
+	private int me_idx;
 	private String me_name;
 	private String me_id;
 	private String me_pwd;
@@ -24,11 +24,11 @@ public class memberVO extends pageVO{
 		this.qustr = qs;
 	}
 
-	public String getMe_idx() {
+	public int getMe_idx() {
 		return me_idx;
 	}
 
-	public void setMe_idx(String me_idx) {
+	public void setMe_idx(int me_idx) {
 		this.me_idx = me_idx;
 	}
 
@@ -119,6 +119,4 @@ public class memberVO extends pageVO{
 				+ me_latest_login + ", me_delete_yn=" + me_delete_yn + ", me_regDate=" + me_regDate + ", qustr=" + qustr
 				+ "]";
 	}
-
-	
 }
