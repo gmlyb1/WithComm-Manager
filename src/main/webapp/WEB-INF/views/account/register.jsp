@@ -1,102 +1,245 @@
 <!DOCTYPE html>
-<html lang="en">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+var path = "${pageContext.request.contextPath }";
+ 
+$(document).ready(function() {
+ 
+});
+ 
+function duplicate() {
+ 
+var user_Id = $("#userId").val();
+ 
+var submitObj = new Object();
+submitObj.user_Id = userId;
+ 
+$.ajax({
+url : "path + "/account/getIdCnt",
+type : "POST",
+contentType : "application/json;charset=UTF-8",
+data : JSON.stringify(submitObj),
+dataType : "json",
+async : false
+}).done(function(resMap) {
+if (resMap.res == "ok") {
+if (resMap.idCnt == 0) {
+alert("사용할 수 있는 아이디입니다.");
+$("#userIdYn").val("Y");
+} else {
+alert("사용할 수 없는 아이디입니다. 아이디를 다시 선택해주세요.");
+$("#userIdYn").val("N");
+}
+}
+}).fail(function(e) {
+alert("등록 시도에 실패하였습니다." + e);
+}).always(function() {
+pass = false;
+});
+}
+ 
+function fnSubmit() {
+ 
+var email_rule =  /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+var tel_rule = /^\d{2,3}-\d{3,4}-\d{4}$/;
+ 
+if ($("#userName").val() == null || $("#userName").val() == "") {
+alert("이름을 입력해주세요.");
+$("#userName").focus();
+ 
+return false;
+}
+ 
+if ($("#userId").val() == null || $("#userId").val() == "") {
+alert("아이디를 입력해주세요.");
+$("#userId").focus();
+ 
+return false;
+}
+ 
+if ($("#userIdYn").val() != 'Y') {
+alert("아이디 중복체크를 눌러주세요.");
+$("#userIdYn").focus();
+ 
+return false;
+}
+ 
+if ($("#userTel").val() == null || $("#userTel").val() == "") {
+alert("전화번호를 입력해주세요.");
+$("#userTel").focus();
+ 
+return false;
+}
+ 
+if(!tel_rule.test($("#userTel").val())){
+alert("전화번호 형식에 맞게 입력해주세요.");
+return false;
+}
+ 
+if ($("#userEmail").val() == null || $("#userEmail").val() == "") {
+alert("이메일을 입력해주세요.");
+$("#userEmail").focus();
+ 
+return false;
+}
+ 
+if(!email_rule.test($("#userEmail").val())){
+alert("이메일을 형식에 맞게 입력해주세요.");
+return false;
+}
+ 
+if ($("#userPw").val() == null || $("#userPw").val() == "") {
+alert("비밀번호를 입력해주세요.");
+$("#userPw").focus();
+ 
+return false;
+}
+ 
+if ($("#userPw2").val() == null || $("#userPw2").val() == "") {
+alert("비밀번호 확인을 입력해주세요.");
+$("#userPw2").focus();
+ 
+return false;
+}
+ 
+if ($("#userPw").val() != $("#userPw2").val()) {
+alert("비밀번호가 일치하지 않습니다.");
+$("#userPw2").focus();
+ 
+return false;
+}
+ 
+if (confirm("회원가입하시겠습니까?")) {
+ 
+$("#createForm").submit();
+ 
+return false;
+}
+}
+ 
+</script>
 
 <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
 
-    <title>SB Admin 2 - Register</title>
+<title>SB Admin 2 - Register</title>
 
-    <!-- Custom fonts for this template-->
-    <link href="/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+<!-- Custom fonts for this template-->
+<link href="/resources/vendor/fontawesome-free/css/all.min.css"
+	rel="stylesheet" type="text/css">
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+	rel="stylesheet">
 
-    <!-- Custom styles for this template-->
-    <link href="/resources/css/sb-admin-2.min.css" rel="stylesheet">
+<!-- Custom styles for this template-->
+<link href="/resources/css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 
-<body class="bg-gradient-primary">
+<form commandName="searchVO" id="createForm" action="/account/register_action.do" method="post">
+	<input type="hidden" id="userIdYn" name="userIdYn" value="N" />
 
-    <div class="container">
+	<body class="bg-gradient-primary">
+		<div class="container">
+			<div class="card o-hidden border-0 shadow-lg my-5">
+				<div class="card-body p-0">
+					<!-- Nested Row within Card Body -->
+					<div class="row">
+						<div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+						<div class="col-lg-7">
+							<div class="p-5">
+								<div class="text-center">
+									<h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+								</div>
+								<form class="user">
+									<div class="form-group row">
+										<div class="col-sm-12 mb-3 mb-sm-0">
+											<input type="text" class="form-control form-control-user"
+												id="userName" name="userName" style="text-align: center;"
+												placeholder="이름">
+										</div>
+									</div>
+									<div class="form-group row">
+										<div class="col-sm-8 mb-3 mb-sm-0">
+											<input type="text" class="form-control form-control-user"
+												id="userId" name="userId" style="text-align: center;"
+												placeholder="아이디">
+										</div>
+										<div class="col-sm-4 mb-3 mb-sm-0">
+											<a href="#" class="btn btn-success btn-icon-split"
+												style="text-align: center;"
+												onclick="duplicate(); return false;"> <span
+												class="icon text-white-50"> <i class="fas fa-check"></i>
+											</span> <span class="text">중복체크</span>
+											</a>
+										</div>
+									</div>
+									<div class="form-group row">
+										<div class="col-sm-12 mb-3 mb-sm-0">
+											<input type="text" class="form-control form-control-user"
+												id="userTel" name="userTel" style="text-align: center;"
+												placeholder="전화번호">
+										</div>
+									</div>
+									<div class="form-group row">
+										<div class="col-sm-12 mb-3 mb-sm-0">
+											<input type="text" class="form-control form-control-user"
+												id="userEmail" name="userEmail" style="text-align: center;"
+												placeholder="이메일 주소">
+										</div>
+									</div>
+									<div class="form-group row">
+										<div class="col-sm-12 mb-3 mb-sm-0">
+											<input type="password" class="form-control form-control-user"
+												id="userPw" name="userPw" style="text-align: center;"
+												placeholder="비밀번호">
+										</div>
+									</div>
+									<div class="form-group row">
+										<div class="col-sm-12 mb-3 mb-sm-0">
+											<input type="password" class="form-control form-control-user"
+												id="userPw2" name="userPw2" style="text-align: center;"
+												placeholder="비밀번호 확인">
+										</div>
+									</div>
+									<a href="#" class="btn btn-primary btn-user btn-block"
+										onclick="fnSubmit(); return false;"> 회원가입 </a>
+									<hr>
+									<a href="index.html" class="btn btn-google btn-user btn-block">
+										아이디/비밀번호 찾기 </a> <a href="index.html"
+										class="btn btn-facebook btn-user btn-block"> 로그인 </a> <a
+										href="/" class="btn btn-warning btn-user btn-block"> 홈페이지
+									</a>
+								</form>
+								<hr>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-        <div class="card o-hidden border-0 shadow-lg my-5">
-            <div class="card-body p-0">
-                <!-- Nested Row within Card Body -->
-                <div class="row">
-                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
-                    <div class="col-lg-7">
-                        <div class="p-5">
-                            <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
-                            </div>
-                            <form class="user">
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" id="exampleFirstName"
-                                            placeholder="First Name">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName"
-                                            placeholder="Last Name">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Email Address">
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="Password">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="exampleRepeatPassword" placeholder="Repeat Password">
-                                    </div>
-                                </div>
-                                <a href="login.html" class="btn btn-primary btn-user btn-block">
-                                    Register Account
-                                </a>
-                                <hr>
-                                <a href="index.html" class="btn btn-google btn-user btn-block">
-                                    <i class="fab fa-google fa-fw"></i> Register with Google
-                                </a>
-                                <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                                    <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
-                                </a>
-                            </form>
-                            <hr>
-                            <div class="text-center">
-                                <a class="small" href="forgot-password.html">Forgot Password?</a>
-                            </div>
-                            <div class="text-center">
-                                <a class="small" href="login.html">Already have an account? Login!</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+		<!-- Bootstrap core JavaScript-->
+		<script src="/resources/vendor/jquery/jquery.min.js"></script>
+		<script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    </div>
+		<!-- Core plugin JavaScript-->
+		<script src="/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="/resources/vendor/jquery/jquery.min.js"></script>
-    <script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+		<!-- Custom scripts for all pages-->
+		<script src="/resources/js/sb-admin-2.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="/resources/js/sb-admin-2.min.js"></script>
-
-</body>
-
+	</body>
+</form>
 </html>

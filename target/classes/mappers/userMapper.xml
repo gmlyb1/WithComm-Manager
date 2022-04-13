@@ -5,9 +5,43 @@
   
 <mapper namespace="our.soft.mapper.userMapper">  
   
+  <select id="getIdCnt" parameterType="UserVO" resultType="Integer">
+       select
+       	count(*)
+       from
+        tbl_user
+       where 
+        userId = #{userId}
+  </select>
   
-  
-  
+  <insert id="insertMember">
+  		insert into tbl_member
+  		   (
+			 userName
+			,userId
+			,userPw
+			,userAuth
+			,userEmail
+			,userTel
+			,userIdYn
+			,userLatestLogin
+			,userDeleteYn
+			,userRegDate
+  		   )
+  			values
+  		   (
+	  		 #{userName}
+			,#{userId}  		
+	  		,#{userPw}
+	  		,#{userAuth}
+	  		,#{userEmail}
+	  		,#{userTel}
+	  		,#{userIdYn}
+	  		,#{userLatestLogin}
+	  		,#{userDeleteYn}
+	  		,#{userRegDate}
+  		   )
+  </insert>
   
   
   

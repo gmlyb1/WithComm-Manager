@@ -8,10 +8,13 @@ public class UserVO extends PageVO{
 	private String userAuth;
 	private String userEmail;
 	private String userTel;
+	private String userIdYn;
+	private String userLatestLogin;
+	private String userDeleteYn;
 	private String userRegDate;
 	
 	public String getUserName() {
-		return userName;
+	   return userName;
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;
@@ -46,6 +49,24 @@ public class UserVO extends PageVO{
 	public void setUserTel(String userTel) {
 		this.userTel = userTel;
 	}
+	public String getUserIdYn() {
+		return userIdYn;
+	}
+	public void setUserIdYn(String userIdYn) {
+		this.userIdYn = userIdYn;
+	}
+	public String getUserLatestLogin() {
+		return userLatestLogin;
+	}
+	public void setUserLatestLogin(String userLatestLogin) {
+		this.userLatestLogin = userLatestLogin;
+	}
+	public String getUserDeleteYn() {
+		return userDeleteYn;
+	}
+	public void setUserDeleteYn(String userDeleteYn) {
+		this.userDeleteYn = userDeleteYn;
+	}
 	public String getUserRegDate() {
 		return userRegDate;
 	}
@@ -56,8 +77,14 @@ public class UserVO extends PageVO{
 	@Override
 	public String toString() {
 		return "UserVO [userName=" + userName + ", userId=" + userId + ", userPw=" + userPw + ", userAuth=" + userAuth
-				+ ", userEmail=" + userEmail + ", userTel=" + userTel + ", userRegDate=" + userRegDate + "]";
+				+ ", userEmail=" + userEmail + ", userTel=" + userTel + ", userIdYn=" + userIdYn + ", userLatestLogin="
+				+ userLatestLogin + ", userDeleteYn=" + userDeleteYn + ", userRegDate=" + userRegDate + "]";
 	}
+	
+	
+	
+	
+	
 	
 	
 	
