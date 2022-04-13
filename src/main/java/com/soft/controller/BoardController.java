@@ -13,7 +13,7 @@ import com.soft.service.BoardMapper;
 import com.soft.service.BoardService;
 //import com.soft.service.BoardMapper;
 //import com.soft.service.BoardService;
-import com.soft.vo.BoardVO;
+import com.soft.vo.boardVO;
 
 @Controller
 public class BoardController {
@@ -27,10 +27,10 @@ public class BoardController {
 	
 	
 	@RequestMapping(value ="/board/list",method = RequestMethod.GET)
-	public String BoardLists(@ModelAttribute("searchVO") BoardVO searchVO, Model model) {
+	public String BoardLists(@ModelAttribute("searchVO") boardVO searchVO, Model model) {
 		
 		
-		  List<BoardVO> boardList = boardService.getBoardList(searchVO);
+		  List<boardVO> boardList = boardService.getBoardList(searchVO);
 		  model.addAttribute("boardList", boardList);
 		 
 		

@@ -1,6 +1,6 @@
 package com.soft.vo;
 
-public class BoardVO {
+public class boardVO {
 
 	private int board_rnum;
 	private String board_title;

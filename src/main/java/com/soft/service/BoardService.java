@@ -2,9 +2,9 @@ package com.soft.service;
 
 import java.util.List;
 
-import com.soft.vo.BoardVO;
+import com.soft.vo.boardVO;
 
 public interface BoardService {
 
-	List<BoardVO> getBoardList(BoardVO searchVO);
+	List<boardVO> getBoardList(boardVO searchVO);
 }

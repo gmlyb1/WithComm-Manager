@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.soft.vo.BoardVO;
+import com.soft.vo.boardVO;
 
 @Mapper
 public interface BoardMapper {
 
-	public List<BoardVO> getBoardList(BoardVO searchVO);
+	public List<boardVO> getBoardList(boardVO searchVO);
 }

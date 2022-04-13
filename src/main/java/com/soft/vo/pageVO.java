@@ -1,5 +1,5 @@
 package com.soft.vo;
 
-public class PageVO{
+public class pageVO{
 
 }

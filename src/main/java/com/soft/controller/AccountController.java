@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.soft.serviceInterFace.UserService;
-import com.soft.vo.UserVO;
+import com.soft.serviceInterFace.AccountService;
+import com.soft.vo.memberVO;
 
 import net.sf.json.JSONObject;
 
@@ -29,10 +29,10 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
 @Controller
-public class UserController {
+public class AccountController {
 
 	@Autowired
-	private UserService userService;
+	private AccountService userService;
 	
 	@RequestMapping(value ="/account/register", method=RequestMethod.GET)
 	public String register() {
@@ -53,7 +53,7 @@ public class UserController {
 		
 		  try {
 			  	ObjectMapper mapper = new ObjectMapper();
-			  	UserVO searchVO = (UserVO) mapper.readValue(filterJSON, new TypeReference<UserVO>() {
+			  	memberVO searchVO = (memberVO) mapper.readValue(filterJSON, new TypeReference<memberVO>() {
 				});
 			  	
 			  	int idCnt = userService.getIdCnt(searchVO);
@@ -74,15 +74,15 @@ public class UserController {
 	
 	// 회원가입 등록 컨트롤러
 	@RequestMapping(value= "/account/register_action",method= RequestMethod.POST)
-	public String resgister_action(@ModelAttribute("searchVO") UserVO searchVO, HttpServletRequest request, RedirectAttributes redirect) {
+	public String resgister_action(@ModelAttribute("searchVO") memberVO searchVO, HttpServletRequest request, RedirectAttributes redirect) {
 		
 		try {
 				SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 				Date time = new Date();
 				String time1 = format1.format(time);
-				searchVO.setUserRegDate(time1);
-				String encrypt = encryptPassword(searchVO.getUserPw().trim());
-				searchVO.setUserPw(encrypt);
+				searchVO.setMe_regDate(time1);
+				String encrypt = encryptPassword(searchVO.getMe_pwd().trim());
+				searchVO.setMe_pwd(encrypt);
 				userService.insertMember(searchVO);
 				redirect.addFlashAttribute("msg","회원가입이 완료되었습니다.");
 				
