@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.soft.service.BoardMapper;
 import com.soft.service.BoardService;
+import com.soft.service.impl.BoardMapper;
 //import com.soft.service.BoardMapper;
 //import com.soft.service.BoardService;
 import com.soft.vo.boardVO;
@@ -21,16 +21,12 @@ public class BoardController {
 	
 	  @Autowired
 	  private BoardService boardService;
-	 
-	  @Autowired 
-	  private BoardMapper boardMapper;
-	
 	
 	@RequestMapping(value ="/board/list",method = RequestMethod.GET)
-	public String BoardLists(@ModelAttribute("searchVO") boardVO searchVO, Model model) {
+	public String list(@ModelAttribute("searchVO") boardVO searchVO, Model model) {
 		
 		
-		  List<boardVO> boardList = boardService.getBoardList(searchVO);
+		  List<boardVO> boardList = boardService.getList(searchVO);
 		  model.addAttribute("boardList", boardList);
 		 
 		

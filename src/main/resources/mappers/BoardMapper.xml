@@ -3,9 +3,9 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.soft.mappers.boardMapper">  
+<mapper namespace="com.soft.service.impl.BoardMapper">  
   
-  <select id="getBoardList" parameterType="boardVO" resultType="boardVO">
+  <select id="getList" parameterType="boardVO" resultType="boardVO">
   select
    *
   from

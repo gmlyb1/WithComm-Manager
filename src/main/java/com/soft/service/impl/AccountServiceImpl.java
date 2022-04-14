@@ -1,8 +1,9 @@
-package com.soft.service;
+package com.soft.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.soft.service.AccountService;
 import com.soft.vo.memberVO;
 
 @Service("AccountService")

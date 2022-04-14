@@ -2,6 +2,9 @@ package com.soft.vo;
 
 import java.io.UnsupportedEncodingException;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class memberVO extends pageVO{
 	
 	private int me_idx;

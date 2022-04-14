@@ -1,4 +1,4 @@
-package com.soft.service;
+package com.soft.service.impl;
 
 import java.util.List;
 
@@ -9,5 +9,5 @@ import com.soft.vo.boardVO;
 @Mapper
 public interface BoardMapper {
 
-	public List<boardVO> getBoardList(boardVO searchVO);
+	public List<boardVO> getList(boardVO searchVO);
 }

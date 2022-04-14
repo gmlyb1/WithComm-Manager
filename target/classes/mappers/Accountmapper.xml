@@ -3,9 +3,9 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.soft.mapper.Accountmapper">  
+<mapper namespace="com.soft.service.impl.Accountmapper">  
   
-  <select id="getIdCnt" parameterType="com.spring.web.vo.memberVO" resultType="java.lang.Integer">
+  <select id="getIdCnt" parameterType="memberVO" resultType="java.lang.Integer">
        select
        	count(*)
        from

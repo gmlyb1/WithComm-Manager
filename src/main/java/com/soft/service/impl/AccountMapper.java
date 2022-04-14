@@ -1,4 +1,4 @@
-package com.soft.service;
+package com.soft.service.impl;
 
 import org.apache.ibatis.annotations.Mapper;
 

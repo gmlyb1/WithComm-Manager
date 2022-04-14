@@ -1,5 +1,8 @@
 package com.soft.vo;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class boardVO {
 
 	private int board_idx;

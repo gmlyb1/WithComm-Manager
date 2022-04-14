@@ -1,8 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-	
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 				<%@include file="../includes/header.jsp" %>
 
                 <!-- Begin Page Content -->
@@ -24,21 +23,21 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th class="text-center">번호</th>
+                                            <th class="text-center">제목</th>
+                                            <th class="text-center">내용</th>
+                                            <th class="text-center">작성자</th>
+                                            <th class="text-center">등록일</th>
                                         </tr>
-                                        <tr>
-                                        	<td>테스트아이디</td>
-                                        	<td>하드코딩</td>
-                                        	<td>데이터받아오기회사</td>
-                                        	<td>20</td>
-                                        	<td>하드코딩</td>
-                                        	<td>하드코딩</td>
-                                        </tr>
+									<c:forEach var="list" items="${boardList}">
+										<tr>
+											<td class="text-center">${list.board_idx}</td>
+											<td class="text-center">${list.board_title}</td>
+											<td class="text-center">${list.board_content}</td>
+											<td class="text-center">${list.board_writer}</td>
+											<td class="text-center">${list.board_regdate}</td>
+										</tr>
+									</c:forEach>
                                     </thead>
                                     </tbody>
                                 </table>
@@ -48,4 +47,8 @@
 
                 </div>
                 <!-- /.container-fluid -->
-							<%@include file="../includes/footer.jsp" %>
+
+            </div>
+            <!-- End of Main Content -->
+				<%@include file="../includes/footer.jsp" %>
+            

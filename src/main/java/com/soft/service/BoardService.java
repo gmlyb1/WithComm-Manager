@@ -6,5 +6,5 @@ import com.soft.vo.boardVO;
 
 public interface BoardService {
 
-	List<boardVO> getBoardList(boardVO searchVO);
+	List<boardVO> getList(boardVO searchVO);
 }
