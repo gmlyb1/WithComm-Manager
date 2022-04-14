@@ -6,13 +6,30 @@
 <mapper namespace="com.soft.service.impl.BoardMapper">  
   
   <select id="getList" parameterType="boardVO" resultType="boardVO">
-  select
-   *
-  from
-  tbl_board;
+	  select
+	   *
+	  from
+	  tbl_board;
   </select>
   
-  
+  <insert id="insertBoard">
+  		insert into tbl_board
+  		(
+  	      board_idx
+  	     ,board_writer
+  	     ,board_title
+  	     ,board_content
+  	     ,board_regdate
+  		)
+		values
+		(
+		  #{board_idx}
+		 ,#{board_writer}
+		 ,#{board_title}
+		 ,#{board_content}
+		 ,#{board_regdate}
+		)  
+  </insert>
   
   
   

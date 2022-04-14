@@ -14,10 +14,19 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private BoardMapper mapper;
 	
+	//글목록 메서드
 	@Override
 	public List<boardVO> getList(boardVO searchVO) {
 		return mapper.getList(searchVO);
 	}
 
+	//글쓰기 메서드
+	@Override
+	public void insertBoard(boardVO searchVO) {
+			mapper.insertBoard(searchVO);
+	}
+
+	
+	
 	
 }
