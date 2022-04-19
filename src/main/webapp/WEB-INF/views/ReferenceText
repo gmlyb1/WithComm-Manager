@@ -120,3 +120,51 @@
                         </li>
 
                         <div class="topbar-divider d-none d-sm-block"></div>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        		
+		  String encrypt = encryptPassword(searchVO.getMe_pwd().trim());
+		  searchVO.setMe_pwd(encrypt);
+		  
+		  memberVO loginInfo = accountService.actionLogin(searchVO);
+		  
+		  if(loginInfo == null) { redirectAttributes.addFlashAttribute("msg",
+		  "로그인을 실패하였습니다."); return "redirect:/account/login.do"; }
+		  
+		  Cookie rememberCookie = new Cookie("CustomCheck", loginInfo.getMe_id());
+		  rememberCookie.setPath("/"); if(searchVO.isCustomCheck()) {
+		  rememberCookie.setMaxAge(60*60*24*7); } else { rememberCookie.setMaxAge(0); }
+		  httpServletResponse.addCookie(rememberCookie);
+		  
+		  LoginVO loginVO = new LoginVO(); loginVO.setId(loginInfo.getMe_id());
+		  loginVO.setName(loginInfo.getMe_name());
+		  loginVO.setPwd(loginInfo.getMe_pwd());
+		  loginVO.setAuth(loginInfo.getMe_auth());
+		  loginVO.setEmail(loginInfo.getMe_email());
+		  loginVO.setTel(loginInfo.getMe_tel());
+		  loginVO.setLatest_login(loginInfo.getMe_latest_login());
+		   loginVO.setRegdate(loginInfo.getMe_regDate());
+		 
+		   session.setAttribute("loginVO", loginVO);
+		  
+		   accountService.updateLastLogin(searchVO);
+		  
+		   Object URL = session.getAttribute("URL");
+		  
+		   String requestURL = "/"; if(StringUtils.isNotBlank((String) URL)) requestURL
+		   = (String)URL;
+		 

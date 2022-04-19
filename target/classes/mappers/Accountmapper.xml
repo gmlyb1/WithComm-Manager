@@ -5,16 +5,16 @@
   
 <mapper namespace="com.soft.service.impl.Accountmapper">  
   
-  <select id="getIdCnt" parameterType="memberVO" resultType="java.lang.Integer">
+  <select id="getIdCnt" parameterType="com.soft.vo.memberVO" resultType="java.lang.Integer">
        select
        	count(*)
        from
-        tbl_user
+        tbl_member
        where 
         me_id = #{me_id}
   </select>
   
-  <select id="actionLogin" parameterType="memberVO" resultType="memberVO">
+  <select id="actionLogin" parameterType="com.soft.vo.memberVO" resultType="com.soft.vo.memberVO">
   		select
   		 * 
   		from
@@ -25,7 +25,7 @@
   			me_pwd = #{me_pwd} 
   </select>
   
-  <update id="updateLastLogin" parameterType="memberVO">
+ <update id="updateLastLogin" parameterType="com.soft.vo.memberVO">
   	update
   		tbl_member
 	set
@@ -33,10 +33,10 @@
 	where
 		me_id=#{me_id}
   </update>
-  
+   
   
   <insert id="insertMember">
-  		insert into tbl_user
+  		insert into tbl_member
   		   (
 			 me_name
 			,me_id
@@ -58,7 +58,7 @@
 	  		,#{me_tel}
 	  		,#{me_latest_login}
 	  		,#{me_delete_yn}
-	  		,#{me_regDate}
+	  		,null
   		   )
   </insert>
   

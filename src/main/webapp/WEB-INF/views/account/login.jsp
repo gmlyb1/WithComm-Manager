@@ -72,7 +72,7 @@
                            <label class="custom-control-label" for="customCheck">아이디 기억</label>                                                                                  
                        </div>                                                                                                                                                         
                    </div>                                                                                                                                                             
-        <a href="#" class="btn btn-primary btn-user btn-block" onclick="return frmCheck();">로그인</a>                                                                                    
+        <button type="submit" class="btn btn-primary btn-user btn-block" onclick="return frmCheck();">로그인</button>                                                                                    
             <hr>                                                                                                                                                                            
             <a href="/account/register" class="btn btn-google btn-user btn-block">회원가입</a>                                                                                              
             <a href="#" class="btn btn-facebook btn-user btn-block">아이디/비밀번호 찾기</a>                                                                                                

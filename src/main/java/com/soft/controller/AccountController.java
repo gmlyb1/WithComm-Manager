@@ -40,39 +40,15 @@ public class AccountController {
 	@Autowired
 	private AccountService accountService;
 	
-	@RequestMapping(value= "/account/getIdCnt", method = RequestMethod.POST)
-	@ResponseBody
-	public String loginCntReset(@RequestBody String filterJSON, HttpServletResponse response, ModelMap model) throws Exception{
-		
-		  JSONObject resMap = new JSONObject();
-		
-		  try {
-			  	ObjectMapper mapper = new ObjectMapper();
-			  	memberVO searchVO = (memberVO) mapper.readValue(filterJSON, new TypeReference<memberVO>() {
-				});
-			  	
-			  	int idCnt = accountService.getIdCnt(searchVO);
-			  	resMap.put("res", "ok");
-			  	resMap.put("idCnt", idCnt);
-		  
-		  } catch (Exception e) {
-			  System.out.println(e.toString());
-			  resMap.put("res", "error");
-		
-		  }
-		  response.setContentType("text/html; charset=UTF-8");
-		  PrintWriter out = response.getWriter();
-		  out.print(resMap);
-		  
-		  return null;
-	}
 	
 	
+	// 회원가입 메서드
 	@RequestMapping(value ="/account/register", method=RequestMethod.GET)
 	public String register() {
 		return "/account/register";
 	}
 	
+	// 회원가입 액션 메서드
 	@RequestMapping(value="/account/register_action", method=RequestMethod.POST)
 	public String register_action(@ModelAttribute("searchVO") memberVO searchVO,HttpServletRequest request, RedirectAttributes redirect) {
 		
@@ -90,7 +66,7 @@ public class AccountController {
 		} catch (Exception e) {
 			redirect.addFlashAttribute("msg", "오류가 발생되었습니다.");
 		}
-		return "redirct:/";
+		return "redirct:/home";
 	}
 	
 	public static String encryptPassword(String data) throws Exception {
@@ -105,12 +81,9 @@ public class AccountController {
 		hashValue = md.digest(plainText);
 		
 		return new String(Base64.encodeBase64(hashValue));
-		
-		
 	}
 	
-	
-	
+	//로그인 메서드
 	@RequestMapping(value ="/account/login",method=RequestMethod.GET)
 	public String login(HttpServletRequest request, Model model, memberVO searchVO, @CookieValue(value="CustomCheck", required=false) Cookie rememberCookie) {
 		
@@ -121,22 +94,8 @@ public class AccountController {
 		return "/account/login";
 	}
 	
-	@RequestMapping(value = "/account/logout", method=RequestMethod.GET)
-		public String logout(HttpServletRequest request, SessionStatus status, HttpSession session, HttpServletResponse httpServletResponse,ModelMap model) throws Exception {
-		
-		Object URL = session.getAttribute("URL");
-		status.setComplete();
-		session.removeAttribute("loginVO");
-		session.invalidate();
-		
-		String requestURL = "/";
-		if(StringUtils.isNotBlank((String)URL)) requestURL = (String)URL;
-		
-		return "redirect:"+requestURL;
-	}
 	
-	
-	
+	//로그인 액션 메서드
 	@RequestMapping(value = "/account/login_action",method=RequestMethod.POST)
 	public String actionLogin(@ModelAttribute("searchVO") memberVO searchVO, HttpServletRequest request,
 			HttpSession session, RedirectAttributes redirectAttributes, HttpServletResponse httpServletResponse,
@@ -181,8 +140,55 @@ public class AccountController {
 		if(StringUtils.isNotBlank((String) URL)) requestURL = (String)URL;
 		
 		
+		return "redirect:/home";
+	}
+
+	//로그아웃 메서드
+	@RequestMapping(value = "/account/logout", method=RequestMethod.GET)
+		public String logout(HttpServletRequest request, SessionStatus status, HttpSession session, HttpServletResponse response,ModelMap model) throws Exception {
+		
+		Object URL = session.getAttribute("URL");
+		status.setComplete();
+		session.removeAttribute("loginVO");
+		session.invalidate();
+
+		//response.setContentType("text/html; charset=utf-8");
+		//PrintWriter out = response.getWriter();
+		
+		String requestURL = "/";
+		if(StringUtils.isNotBlank((String)URL)) requestURL = (String)URL;
+		
 		return "redirect:"+requestURL;
 	}
+	
+	
+	@RequestMapping(value= "/account/getIdCnt", method = RequestMethod.POST)
+	@ResponseBody
+	public String loginCntReset(@RequestBody String filterJSON, HttpServletResponse response, ModelMap model) throws Exception{
+		
+		  JSONObject resMap = new JSONObject();
+		
+		  try {
+			  	ObjectMapper mapper = new ObjectMapper();
+			  	memberVO searchVO = (memberVO) mapper.readValue(filterJSON, new TypeReference<memberVO>() {
+				});
+			  	
+			  	int idCnt = accountService.getIdCnt(searchVO);
+			  	resMap.put("res", "ok");
+			  	resMap.put("idCnt", idCnt);
+		  
+		  } catch (Exception e) {
+			  System.out.println(e.toString());
+			  resMap.put("res", "error");
+		
+		  }
+		  response.setContentType("text/html; charset=UTF-8");
+		  PrintWriter out = response.getWriter();
+		  out.print(resMap);
+		  
+		  return null;
+	}
+	
 	
 
 
