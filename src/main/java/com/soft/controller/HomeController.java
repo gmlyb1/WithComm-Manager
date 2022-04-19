@@ -27,22 +27,19 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, HttpServletRequest request , Model model) {
+	public String home(Locale locale,HttpServletRequest request,Model model) {
 		
 		Map<String, ?> inputFlashMap = RequestContextUtils.getInputFlashMap(request);
-		if(null != inputFlashMap)
-		{
-			model.addAttribute("msg", (String) inputFlashMap.get("msg"));
+		if(null != inputFlashMap) {
+			model.addAttribute("msg", (String)inputFlashMap.get("msg"));
 		}
-		
-		logger.info("Welcome home! The client locale is {}.", locale);
+		logger.info("welcome home! The client locale is {}.", locale);
 		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
 		String formattedDate = dateFormat.format(date);
 		
-		model.addAttribute("serverTime", formattedDate );
+		model.addAttribute("serverTime", formattedDate);
 		
 		return "home";
 	}

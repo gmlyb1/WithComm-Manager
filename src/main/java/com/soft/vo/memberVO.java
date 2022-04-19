@@ -17,7 +17,16 @@ public class memberVO extends pageVO{
 	private String me_latest_login;
 	private String me_delete_yn;
 	private String me_regDate;
+	private String me_id_yn;
 	
+	public String getMe_id_yn() {
+		return me_id_yn;
+	}
+
+	public void setMe_id_yn(String me_id_yn) {
+		this.me_id_yn = me_id_yn;
+	}
+
 	private String qustr;
 
 	public void setQustr() throws UnsupportedEncodingException {
@@ -130,7 +139,10 @@ public class memberVO extends pageVO{
 	public String toString() {
 		return "memberVO [me_idx=" + me_idx + ", me_name=" + me_name + ", me_id=" + me_id + ", me_pwd=" + me_pwd
 				+ ", me_auth=" + me_auth + ", me_email=" + me_email + ", me_tel=" + me_tel + ", me_latest_login="
-				+ me_latest_login + ", me_delete_yn=" + me_delete_yn + ", me_regDate=" + me_regDate + ", qustr=" + qustr
-				+ "]";
+				+ me_latest_login + ", me_delete_yn=" + me_delete_yn + ", me_regDate=" + me_regDate + ", me_id_yn="
+				+ me_id_yn + ", qustr=" + qustr + ", customCheck=" + customCheck + "]";
 	}
+
+	
+	
 }

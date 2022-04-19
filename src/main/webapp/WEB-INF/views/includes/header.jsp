@@ -210,14 +210,14 @@
                             </div>
                         </li>
 
-						<a href="#" class="btn btn-primary btn-icon-split" style="width:auto; height:35px; margin-top:20px; margin-right:5px; text-align:center;">
+						<a href="${pageContext.request.contextPath}/account/login" class="btn btn-primary btn-icon-split" style="width:auto; height:35px; margin-top:20px; margin-right:5px; text-align:center;">
     						<span class="icon text-white-50">
        						 <i class="fas fa-flag"></i>
    							</span>
     						<span class="text">로그인</span>
 						</a>
 						
-						<a href="#" class="btn btn-success btn-icon-split" style="width:auto; height:35px; margin-top:20px;">
+						<a href="${pageContext.request.contextPath}/account/register" class="btn btn-success btn-icon-split" style="width:auto; height:35px; margin-top:20px;">
 						    <span class="icon text-white-50">
 						        <i class="fas fa-check"></i>
 						    </span>
