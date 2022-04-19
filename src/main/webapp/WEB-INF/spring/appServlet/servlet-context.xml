@@ -9,6 +9,21 @@
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
+	
+	<!-- 인터셉터 등록 -->
+	<beans:bean id="UrlInterceptor" class="com.soft.interceptor.UrlInterceptor"/>
+	<interceptors>
+	<interceptor>
+		<mapping path="/**/**"/>
+		<exclude-mapping path="/resources/**"/>
+		<exclude-mapping path="/account/**"/>
+		<beans:ref bean="UrlInterceptor"/>
+	</interceptor>
+	</interceptors>
+	
+	
+	
+	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 	

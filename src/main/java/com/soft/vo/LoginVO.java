@@ -1,6 +1,6 @@
 package com.soft.vo;
 
-public class loginVO extends pageVO{
+public class LoginVO extends pageVO{
 
 	private int idx;
 	private String name;

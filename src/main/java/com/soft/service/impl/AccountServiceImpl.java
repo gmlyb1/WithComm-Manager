@@ -22,4 +22,15 @@ public class AccountServiceImpl implements AccountService{
 		mapper.insertMember(searchVO);
 	}
 
+	@Override
+	public memberVO actionLogin(memberVO searchVO) {
+		return mapper.actionLogin(searchVO);
+	}
+
+	@Override
+	public void updateLastLogin(memberVO searchVO) {
+		mapper.updateLastLogin(searchVO);
+	}
+
+
 }

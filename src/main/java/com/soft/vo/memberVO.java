@@ -27,6 +27,17 @@ public class memberVO extends pageVO{
 		this.qustr = qs;
 	}
 
+	private boolean customCheck;
+	
+	
+	public boolean isCustomCheck() {
+		return customCheck;
+	}
+
+	public void setCustomCheck(boolean customCheck) {
+		this.customCheck = customCheck;
+	}
+
 	public int getMe_idx() {
 		return me_idx;
 	}

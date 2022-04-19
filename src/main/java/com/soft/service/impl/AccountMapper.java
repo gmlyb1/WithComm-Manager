@@ -7,7 +7,8 @@ import com.soft.vo.memberVO;
 @Mapper
 public interface AccountMapper {
 
-	public int getIdCnt(memberVO searchVO);
-	
-	public void insertMember(memberVO searchVO);
+	 int getIdCnt(memberVO searchVO);
+	 void insertMember(memberVO searchVO);
+	 memberVO actionLogin(memberVO searchVO);
+	 void updateLastLogin(memberVO searchVO);
 }

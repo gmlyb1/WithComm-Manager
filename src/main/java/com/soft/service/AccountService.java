@@ -4,6 +4,8 @@ import com.soft.vo.memberVO;
 
 public interface AccountService {
 
-	public int getIdCnt(memberVO searchVO);
-	public void insertMember(memberVO searchVO);
+	 int getIdCnt(memberVO searchVO);
+	 void insertMember(memberVO searchVO);
+	 memberVO actionLogin(memberVO searchVO);
+	 void updateLastLogin(memberVO searchVO);
 }

@@ -14,6 +14,27 @@
         me_id = #{me_id}
   </select>
   
+  <select id="actionLogin" parameterType="memberVO" resultType="memberVO">
+  		select
+  		 * 
+  		from
+  			tbl_member
+  		where
+  			me_id = #{me_id}
+  		and
+  			me_pwd = #{me_pwd} 
+  </select>
+  
+  <update id="updateLastLogin" parameterType="memberVO">
+  	update
+  		tbl_member
+	set
+		me_latest_login = sysdate()
+	where
+		me_id=#{me_id}
+  </update>
+  
+  
   <insert id="insertMember">
   		insert into tbl_user
   		   (
