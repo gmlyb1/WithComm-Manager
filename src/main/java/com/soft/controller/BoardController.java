@@ -5,8 +5,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,8 +27,10 @@ import com.soft.vo.boardVO;
 @Controller
 public class BoardController {
 
-	@Autowired
-	  private BoardService boardService;
+	@Inject
+	private BoardService boardService;
+	
+	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
 	@RequestMapping(value ="/board/list",method = RequestMethod.GET)
 	public String list(@ModelAttribute("searchVO") boardVO searchVO, HttpServletRequest request,Model model) {

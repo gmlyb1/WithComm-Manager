@@ -2,7 +2,10 @@ package com.soft.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.soft.vo.memberVO;
+
 
 public interface AccountService {
 
