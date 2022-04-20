@@ -72,7 +72,33 @@
   		,	#{me_regDate}
   		,	#{me_id_yn}
   	)
-  	
   	</insert>
+  	
+  	<!-- 회원 수정 -->
+  	<update id="updateMem">
+  	update tbl_member
+  			set 
+  		me_name = #{me_name}
+  	,	me_id =   #{me_id}
+  	,	me_pwd =  #{me_pwd}
+  	,	me_auth = #{me_auth}
+  	,	me_email = #{me_email}
+  	,	me_tel	= #{me_email}
+  	,   me_latest_login = #{me_latest_login}
+  	,   me_delete_yn = #{delete_yn}
+  	,   me_regDate = #{me_regDate}
+  	,   me_id_yn = #{me_id_yn}
+  	where
+  		me_id =#{me_id} and me_pwd = #{me_pwd}
+  	</update>
+  	
+  	
+  	<!-- 회원 탈퇴 -->
+	<delete id="deleteMem">
+		delete 
+		 from
+	  tbl_member
+	where me_id = #{me_id} and me_pwd = #{me_pwd}		
+	</delete>  	
   	
 </mapper>

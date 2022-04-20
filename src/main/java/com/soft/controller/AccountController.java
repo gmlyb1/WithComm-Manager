@@ -113,6 +113,15 @@ public class AccountController {
 		return "redirect:/account/register";
 	}
 	
+	// È¸¿øÁ¤º¸ ¼öÁ¤ (GET)
+	@RequestMapping(value= "/updateMem" , method=RequestMethod.GET)
+	public String mem_updateGET() throws Exception{
+		
+		
+		return "/account/updateMem";
+	}
+	
+	
 	// È¸¿øÁ¤º¸ ¼öÁ¤
 	@RequestMapping(value = "/updateMem", method=RequestMethod.POST)
 	public String mem_update(MultipartHttpServletRequest multiRequest, Model model) throws Exception {
@@ -136,5 +145,33 @@ public class AccountController {
 		
 		return "redirect:/infoMem";
 	}
+
+	
+	// È¸¿ø Å»Åð GET
+	@RequestMapping(value = "/deleteMem", method=RequestMethod.GET)
+	public String deleteMem(Model model)throws Exception {
+		List<memberVO> listMem = accountService.memList();
+		
+		model.addAttribute("listMem", listMem);
+		
+		return "/account/deleteMem";
+	}
+	
+	//È¸¿ø Å»Åð POST
+	@RequestMapping(value = "/deleteMem" , method=RequestMethod.POST)
+	public String deleteMemPOST(MultipartHttpServletRequest multiRequest, HttpSession session, Model model) throws Exception {
+		memberVO vo = new memberVO();
+		vo.setMe_id((String) multiRequest.getParameter("me_id"));
+		vo.setMe_email((String) multiRequest.getParameter("me_email"));
+		vo.setMe_pwd((String) multiRequest.getParameter("me_pwd"));
+		
+		int result = accountService.memDelete(vo);
+		
+		model.addAttribute("deleteMem_result", result);
+		
+		
+		return "redirect:/account/deleteMem";
+	}
+	
 	
 }
