@@ -26,15 +26,6 @@
 	
 	</script>
     
-     <%
-     	Integer me_id = 0;
-     
-     	if(session.getAttribute("me_id") != null) {
-     		me_id = (Integer) session.getAttribute("me_id");
-     	}
-     %>
-    
-    
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
