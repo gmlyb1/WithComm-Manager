@@ -17,7 +17,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.soft.service.BoardService;
-import com.soft.service.impl.BoardMapper;
 //import com.soft.service.BoardMapper;
 //import com.soft.service.BoardService;
 import com.soft.vo.boardVO;

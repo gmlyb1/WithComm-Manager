@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.security.MessageDigest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.soft.service.AccountService;
@@ -40,159 +42,67 @@ public class AccountController {
 	@Autowired
 	private AccountService accountService;
 	
-	
-	
-	// 회원가입 메서드
-	@RequestMapping(value ="/account/register", method=RequestMethod.GET)
-	public String register() {
-		return "/account/register";
-	}
-	
-	// 회원가입 액션 메서드
-	@RequestMapping(value="/account/register_action", method=RequestMethod.POST)
-	public String register_action(@ModelAttribute("searchVO") memberVO searchVO,HttpServletRequest request, RedirectAttributes redirect) {
-		
-		try {
-				
-			SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
-			Date time = new Date();
-			String time1 = format1.format(time);
-			searchVO.setMe_regDate(time1);
-			String encrypt = encryptPassword(searchVO.getMe_pwd().trim());
-					searchVO.setMe_pwd(encrypt);
-					
-			accountService.insertMember(searchVO);
-			redirect.addFlashAttribute("msg", "회원가입이 완료되었습니다.");
-		} catch (Exception e) {
-			redirect.addFlashAttribute("msg", "오류가 발생되었습니다.");
-		}
-		return "redirct:/home";
-	}
-	
-	public static String encryptPassword(String data) throws Exception {
-		if(data == null ) {
-			return "";
-		}
-		
-		byte[] plainText = null; // 평문
-		byte[] hashValue = null; // 해쉬값
-		
-		MessageDigest md = MessageDigest.getInstance("SHA-256");
-		hashValue = md.digest(plainText);
-		
-		return new String(Base64.encodeBase64(hashValue));
-	}
-	
-	//로그인 메서드
-	@RequestMapping(value ="/account/login",method=RequestMethod.GET)
-	public String login(HttpServletRequest request, Model model, memberVO searchVO, @CookieValue(value="CustomCheck", required=false) Cookie rememberCookie) {
-		
-		if(rememberCookie != null) {
-			model.addAttribute("rememberCookie", rememberCookie);
-		}
+	//로그인 
+	@RequestMapping(value = "/account/login", method = RequestMethod.GET)
+	public String loginPage() throws Exception{
 		
 		return "/account/login";
 	}
 	
-	
-	//로그인 액션 메서드
-	@RequestMapping(value = "/account/login_action",method=RequestMethod.POST)
-	public String actionLogin(@ModelAttribute("searchVO") memberVO searchVO, HttpServletRequest request,
-			HttpSession session, RedirectAttributes redirectAttributes, HttpServletResponse httpServletResponse,
-			ModelMap model) throws Exception{
+	//로그인 처리
+	@RequestMapping(value = "/account/login", method = RequestMethod.POST)
+	public String loginAction(memberVO VO, HttpSession session, Model model) throws Exception {
+		List loginList = accountService.memLogin(VO);
 		
-		String encrypt = encryptPassword(searchVO.getMe_pwd().trim());
-		searchVO.setMe_pwd(encrypt);
+		memberVO resultVO = (memberVO)loginList.get(0);
+		int result = (int)loginList.get(1);
 		
-		memberVO loginInfo = accountService.actionLogin(searchVO);
+		// 로그인 세션
+		session.setAttribute("result", result);
 		
-		if(loginInfo == null) {
-			redirectAttributes.addFlashAttribute("msg", "로그인을 실패하였습니다.");
-			return "redirect:/account/login.do";
+		if(resultVO != null) {
+			session.setAttribute("resultVO", resultVO);
+			session.setAttribute("me_id", resultVO.getMe_id());
 		}
-		
-		Cookie rememberCookie = new Cookie("CustomCheck", loginInfo.getMe_id());
-		rememberCookie.setPath("/");
-		if(searchVO.isCustomCheck()) {
-			rememberCookie.setMaxAge(60*60*24*7);
-		} else {
-			rememberCookie.setMaxAge(0);
-		}
-		httpServletResponse.addCookie(rememberCookie);
-		
-		LoginVO loginVO = new LoginVO();
-		loginVO.setId(loginInfo.getMe_id());
-		loginVO.setName(loginInfo.getMe_name());
-		loginVO.setPwd(loginInfo.getMe_pwd());
-		loginVO.setAuth(loginInfo.getMe_auth());
-		loginVO.setEmail(loginInfo.getMe_email());
-		loginVO.setTel(loginInfo.getMe_tel());
-		loginVO.setLatest_login(loginInfo.getMe_latest_login());
-		loginVO.setRegdate(loginInfo.getMe_regDate());
-		
-		session.setAttribute("loginVO", loginVO);
-		
-		accountService.updateLastLogin(searchVO);
-		
-		Object URL = session.getAttribute("URL");
-		
-		String requestURL = "/";
-		if(StringUtils.isNotBlank((String) URL)) requestURL = (String)URL;
-		
-		
-		return "redirect:/home";
-	}
 
-	//로그아웃 메서드
-	@RequestMapping(value = "/account/logout", method=RequestMethod.GET)
-		public String logout(HttpServletRequest request, SessionStatus status, HttpSession session, HttpServletResponse response,ModelMap model) throws Exception {
-		
-		Object URL = session.getAttribute("URL");
-		status.setComplete();
-		session.removeAttribute("loginVO");
+	return "redirect:/home";
+	}
+	
+	// 로그아웃
+	@RequestMapping(value = "/logout", method=RequestMethod.GET)
+	public void logout(HttpSession session, HttpServletResponse response) throws Exception {
 		session.invalidate();
-
-		//response.setContentType("text/html; charset=utf-8");
-		//PrintWriter out = response.getWriter();
 		
-		String requestURL = "/";
-		if(StringUtils.isNotBlank((String)URL)) requestURL = (String)URL;
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
 		
-		return "redirect:"+requestURL;
+		out.print("<script>alert('로그아웃 되었습니다'); location.href='/account/login';</script>");
+		out.flush();
 	}
 	
+	// 회원가입 - 처리
+	@RequestMapping(value = "/account/register" , method = RequestMethod.POST)
+	public String RegisterID(MultipartHttpServletRequest multirequest, Model model) throws Exception {
+		
+		int checkID = accountService.checkMemId(Integer.parseInt(multirequest.getParameter("me_id")));
+		
+		if(checkID == 1) {
+			model.addAttribute("checkID", checkID);
+		}else {
+			model.addAttribute("checkID", checkID);
+		
+		memberVO vo = new memberVO();
+		
+		vo.setMe_name((String) multirequest.getParameter("me_name"));
+		vo.setMe_id((String) multirequest.getParameter("me_id"));
+		vo.setMe_pwd((String) multirequest.getParameter("me_pwd"));
+		vo.setMe_email((String) multirequest.getParameter("me_email"));
+		vo.setMe_tel((String) multirequest.getParameter("me_tel"));
+		accountService.memJoin(vo);		
+		}
+		
+	return "redirect:/account/register";
 	
-	@RequestMapping(value= "/account/getIdCnt", method = RequestMethod.POST)
-	@ResponseBody
-	public String loginCntReset(@RequestBody String filterJSON, HttpServletResponse response, ModelMap model) throws Exception{
-		
-		  JSONObject resMap = new JSONObject();
-		
-		  try {
-			  	ObjectMapper mapper = new ObjectMapper();
-			  	memberVO searchVO = (memberVO) mapper.readValue(filterJSON, new TypeReference<memberVO>() {
-				});
-			  	
-			  	int idCnt = accountService.getIdCnt(searchVO);
-			  	resMap.put("res", "ok");
-			  	resMap.put("idCnt", idCnt);
-		  
-		  } catch (Exception e) {
-			  System.out.println(e.toString());
-			  resMap.put("res", "error");
-		
-		  }
-		  response.setContentType("text/html; charset=UTF-8");
-		  PrintWriter out = response.getWriter();
-		  out.print(resMap);
-		  
-		  return null;
+	
 	}
-	
-	
-
-
-
-	
-	
 }

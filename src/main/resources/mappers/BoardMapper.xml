@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.soft.service.impl.BoardMapper">  
+<mapper namespace="com.mappers.BoardMapper">  
   
   <select id="getList" parameterType="boardVO" resultType="boardVO">
 	  select

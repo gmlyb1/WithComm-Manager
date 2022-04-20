@@ -65,8 +65,8 @@
 	
 	
 	<!-- rootcontext 파일에서 패키지 정보를 읽어온다.(객체정보를 가져옴) -->
-	<mybatis-spring:scan base-package="com.soft.service.impl"/>
-	<context:component-scan base-package="com.soft.service.impl"></context:component-scan>
+	<mybatis-spring:scan base-package="com.soft.dao"/>
+	<context:component-scan base-package="com.soft.dao"></context:component-scan>
 	<context:component-scan base-package="com.soft.vo"></context:component-scan>
 	<context:component-scan base-package="com.soft.mappers"></context:component-scan>
 	
