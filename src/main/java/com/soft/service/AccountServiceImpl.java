@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.soft.dao.AccountDAO;
@@ -31,7 +30,7 @@ public class AccountServiceImpl implements AccountService {
 
 	// ·Î±×ÀÎ
 	@Override
-	public List memLogin(memberVO vo) throws Exception {
+	public List loginMem(memberVO vo) throws Exception {
 		List loginList = accountDAO.loginMem(vo);
 		return loginList;
 	}

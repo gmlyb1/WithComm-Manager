@@ -16,7 +16,7 @@ public interface AccountService {
 	public void memJoin(memberVO vo) throws Exception;
 	
 	// 로그인
-	public List memLogin(memberVO vo) throws Exception;
+	public List loginMem(memberVO vo) throws Exception;
 	
 	// 회원정보
 	public memberVO memInfo(int me_id)throws Exception;

@@ -16,7 +16,7 @@ public class AccountDAOImpl implements AccountDAO {
 	@Inject
 	private SqlSession session;
 
-	private static final String namespace = "com.mappers.AccountMapper";
+	private static final String namespace = "com.soft.dao.AccountDAO";
 	
 	// ID 중복체크
 	@Override
@@ -37,6 +37,7 @@ public class AccountDAOImpl implements AccountDAO {
 	@Override
 	public void joinMem(memberVO vo) throws Exception {
 		
+		
 		int result = session.insert(namespace + ".joinMem", vo);
 		
 	}
@@ -46,20 +47,24 @@ public class AccountDAOImpl implements AccountDAO {
 	public List loginMem(memberVO vo) throws Exception {
 		
 		int result = -2;
-		memberVO resultVO = session.selectOne(namespace + ".loginIncludeID", vo);
 		
+		memberVO resultVO = session.selectOne(namespace+ ".loginIncludeID" , vo);
 		if(resultVO != null) {
 			result = -1;
-			resultVO = session.selectOne(namespace + ".loginMem", vo);
+			resultVO = session.selectOne(namespace+".loginMem",vo);
 			
 			if(resultVO != null) {
 				result = 1;
 			}
 		}
 		
+		System.out.println(" DAO : 로그인 결과 : " + result);
+		
 		List loginList = new ArrayList<Object>();
 		loginList.add(resultVO);
 		loginList.add(result);
+		
+		System.out.println(loginList);;
 		
 		return loginList;
 	}

@@ -5,7 +5,7 @@
   
 <mapper namespace="com.mappers.BoardMapper">  
   
-  <select id="getList" parameterType="boardVO" resultType="boardVO">
+   <select id="getList" parameterType="boardVO" resultType="boardVO">
 	  select
 	   *
 	  from

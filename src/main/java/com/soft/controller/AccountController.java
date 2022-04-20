@@ -73,7 +73,7 @@ public class AccountController {
 	// 로그인 액션
 	@RequestMapping(value = "/account/login" , method=RequestMethod.POST)
 	public String loginAction(memberVO vo, HttpSession session, Model model) throws Exception {
-		List loginMem = accountService.memLogin(vo);
+		List loginMem = accountService.loginMem(vo);
 		memberVO resultVO = (memberVO)loginMem.get(0);
 		int result = (Integer)loginMem.get(1);
 		
@@ -89,8 +89,8 @@ public class AccountController {
 	
 	// 회원가입 - 처리
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String Register(MultipartHttpServletRequest multiRequest, Model model) throws Exception {
-		int checkID = accountService.checkMemId(Integer.parseInt(multiRequest.getParameter("me_id")));
+	public String Register(HttpServletRequest request, Model model) throws Exception {
+		int checkID = accountService.checkMemId(Integer.parseInt(request.getParameter("me_id")));
 		
 		if(checkID == 1) {
 			model.addAttribute("checkID", checkID);
@@ -101,11 +101,11 @@ public class AccountController {
 			
 		memberVO vo = new memberVO();
 		
-		vo.setMe_name((String) multiRequest.getParameter("me_id"));
-		vo.setMe_id((String) multiRequest.getParameter("me_id"));
-		vo.setMe_pwd((String) multiRequest.getParameter("me_pwd"));
-		vo.setMe_email((String) multiRequest.getParameter("me_email"));
-		vo.setMe_tel((String) multiRequest.getParameter("me_tel"));
+		vo.setMe_name((String) request.getParameter("me_name"));
+		vo.setMe_id((String) request.getParameter("me_id"));
+		vo.setMe_pwd((String) request.getParameter("me_pwd"));
+		vo.setMe_email((String) request.getParameter("me_email"));
+		vo.setMe_tel((String) request.getParameter("me_tel"));
 		
 		accountService.memJoin(vo);
 		}
@@ -124,20 +124,20 @@ public class AccountController {
 	
 	// 회원정보 수정
 	@RequestMapping(value = "/updateMem", method=RequestMethod.POST)
-	public String mem_update(MultipartHttpServletRequest multiRequest, Model model) throws Exception {
+	public String mem_update(HttpServletRequest request, Model model) throws Exception {
 		
 		memberVO vo = new memberVO();
 		
-		vo.setMe_id((String) multiRequest.getParameter("me_id"));
-		vo.setMe_id((String) multiRequest.getParameter("me_id"));
-		vo.setMe_pwd((String) multiRequest.getParameter("me_pwd"));
-		vo.setMe_email((String) multiRequest.getParameter("me_email"));
-		vo.setMe_tel((String) multiRequest.getParameter("me_tel"));
-		vo.setMe_auth((String) multiRequest.getParameter("me_auth"));
-		vo.setMe_latest_login((String) multiRequest.getParameter("me_latest_login"));
-		vo.setMe_regDate((String) multiRequest.getParameter("me_regDate"));
-		vo.setMe_id_yn((String) multiRequest.getParameter("me_id_yn"));
-		vo.setMe_delete_yn((String) multiRequest.getParameter("me_id_yn"));
+		vo.setMe_name((String) request.getParameter("me_name"));
+		vo.setMe_id((String) request.getParameter("me_id"));
+		vo.setMe_pwd((String) request.getParameter("me_pwd"));
+		vo.setMe_email((String) request.getParameter("me_email"));
+		vo.setMe_tel((String) request.getParameter("me_tel"));
+		vo.setMe_auth((String) request.getParameter("me_auth"));
+		vo.setMe_latest_login((String) request.getParameter("me_latest_login"));
+		vo.setMe_regDate((String) request.getParameter("me_regDate"));
+		vo.setMe_id_yn((String) request.getParameter("me_id_yn"));
+		vo.setMe_delete_yn((String) request.getParameter("me_id_yn"));
 		
 		int result = accountService.memUpdate(vo);
 		
@@ -159,11 +159,11 @@ public class AccountController {
 	
 	//회원 탈퇴 POST
 	@RequestMapping(value = "/deleteMem" , method=RequestMethod.POST)
-	public String deleteMemPOST(MultipartHttpServletRequest multiRequest, HttpSession session, Model model) throws Exception {
+	public String deleteMemPOST(HttpServletRequest request, HttpSession session, Model model) throws Exception {
 		memberVO vo = new memberVO();
-		vo.setMe_id((String) multiRequest.getParameter("me_id"));
-		vo.setMe_email((String) multiRequest.getParameter("me_email"));
-		vo.setMe_pwd((String) multiRequest.getParameter("me_pwd"));
+		vo.setMe_id((String) request.getParameter("me_id"));
+		vo.setMe_email((String) request.getParameter("me_email"));
+		vo.setMe_pwd((String) request.getParameter("me_pwd"));
 		
 		int result = accountService.memDelete(vo);
 		
