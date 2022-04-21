@@ -5,6 +5,23 @@
   
 <mapper namespace="com.soft.dao.MemberDAO">  
   
+  	<!-- 회원 가입 -->
+  	<insert id="register">
+  		insert
+		 into
+		tbl_member
+		(
+		 	me_email
+		 ,	me_pwd
+		 ,	me_regdate
+		)
+		values
+		(
+			#{me_email}
+		,	#{me_pwd}
+		,	now()
+		)
+  	</insert>
   	
 	
 	<!-- 로그인 확인 -->

@@ -24,8 +24,9 @@
 				return false;
 			}
 
+			
+			
 			if (me_email != "" && me_pwd != "") {
-				alert("로그인에 성공하였습니다!");
 				return "/account/login";
 			}
 		});

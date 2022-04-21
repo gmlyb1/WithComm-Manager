@@ -18,10 +18,27 @@ import com.soft.vo.memberVO;
 public class MemberController {
 
 	@Inject
-	private MemberService accountService;
+	private MemberService memberService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
+	// 회원가입 페이지 처리
+	@RequestMapping(value = "/account/register", method = RequestMethod.GET)
+	public void getRegister() throws Exception {
+
+	}
+	
+	@RequestMapping(value = "/account/register" , method = RequestMethod.POST)
+	public String postRegister(memberVO vo) throws Exception {
+		
+		memberService.register(vo);
+		
+		return null;
+		
+	}
+	
+	
+	// 로그인 페이지 처리
 	@RequestMapping(value = "/account/login" , method=RequestMethod.GET)
 	public String login() throws Exception{
 		return "/account/login";
@@ -33,7 +50,7 @@ public class MemberController {
 	public String login(memberVO vo, HttpServletRequest request, RedirectAttributes rttr) throws Exception{
 			
 		HttpSession session = request.getSession();
-		memberVO login = accountService.login(vo);
+		memberVO login = memberService.login(vo);
 		
 		if(login == null)  {
 			session.setAttribute("member", null);
@@ -43,7 +60,7 @@ public class MemberController {
 		}
 	
 		return "redirect:/home";
-	
+		
 	}
 	
 	// 로그아웃
