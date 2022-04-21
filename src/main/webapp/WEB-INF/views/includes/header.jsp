@@ -9,23 +9,42 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 	<script type="text/javascript">
+		// 세션 제어
 		var result = "${result}";
 		var resultVO = "${resultVO}";
 		var sessionID = "${resultVO.me_id}";
 		
-		if (sessionID == "" && result == "") {
-			location.href = "/account/login";
-		} else if (result == -1) {
-			alert("패스워드가 틀립니다. 다시 입력해주세요.");
-			location.href= "/account/login";
-		} else if (result == 1) {
+		if (sessionID == "" && result == ""){ 
+			location.href=	"/account/login"
+		}
 		
-		} else {
+		// 로그인 처리
+		if (result == -2) {
+			alert("이메일이 존재하지 않습니다.");
+			location.href = "/account/login";
+			
+		}else if (result == -1){
+			alert("패스워드가 틀립니다");
+			location.href=	"/account/login"
+		}else if (result ==1 ) {
+			
+		}else {
 			
 		}
-	
+		
+		
 	</script>
-    
+
+	<script type="text/javascript">
+	
+	Integer me_id = 0;
+
+	if(session.getAttribute("me_id") != null) {
+		me_id = (Integer) session.getAttribute("me_id");
+	}
+	</script>
+
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">

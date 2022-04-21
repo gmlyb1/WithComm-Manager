@@ -22,49 +22,42 @@ public class AccountDAOImpl implements AccountDAO {
 	@Override
 	public int checkMemId(int me_id) throws Exception {
 		
-		memberVO resultVO = session.selectOne(namespace + ".count");
+		memberVO resultVO = session.selectOne(namespace + ".checkID", me_id);
 		int result = 0;
 		
 		if(resultVO != null) {
 			result = 1;
 		}
-		
-		
 		return result;
 	}
 
 	// 회원가입
 	@Override
 	public void joinMem(memberVO vo) throws Exception {
-		
-		
-		int result = session.insert(namespace + ".joinMem", vo);
-		
+	
+		int result = session.insert(namespace + ".joinMem",vo);
 	}
-
+		
 	// 로그인
 	@Override
 	public List loginMem(memberVO vo) throws Exception {
 		
 		int result = -2;
 		
-		memberVO resultVO = session.selectOne(namespace+ ".loginIncludeID" , vo);
+		memberVO resultVO = session.selectOne(namespace + ".loginIncludeID",vo);
+		
 		if(resultVO != null) {
 			result = -1;
-			resultVO = session.selectOne(namespace+".loginMem",vo);
+			resultVO = session.selectOne(namespace+ ".loginMem",vo);
 			
 			if(resultVO != null) {
 				result = 1;
 			}
 		}
 		
-		System.out.println(" DAO : 로그인 결과 : " + result);
-		
 		List loginList = new ArrayList<Object>();
 		loginList.add(resultVO);
 		loginList.add(result);
-		
-		System.out.println(loginList);;
 		
 		return loginList;
 	}

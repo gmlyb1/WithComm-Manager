@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<%@ page session="true"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,8 +14,8 @@
 			var me_id = $("#me_id").val();
 			var me_pwd = $("#me_pwd").val();
 
-			if (me_id == "") {
-				alert("아이디를 입력해 주세요.");
+			if (me_email == "") {
+				alert("이메일을 입력해 주세요.");
 				return false;
 			}
 
@@ -22,7 +24,7 @@
 				return false;
 			}
 
-			if (me_id != "" && me_pwd != "") {
+			if (me_email != "" && me_pwd != "") {
 				return "/account/login";
 			}
 		});
@@ -65,9 +67,9 @@
 											<c:set value="checked" var="checked" />
 										</c:if>
 										<div class="form-group">
-											<input type="text" class="form-control form-control-user"
-												id="me_id" name="me_id" aria-describedby="emailHelp"
-												placeholder="아이디" value="${rememberCookie.getValue() }" />
+											<input type="email" class="form-control form-control-user"
+												id="me_email" name="me_email" aria-describedby="emailHelp"
+												placeholder="이메일" value="${rememberCookie.getValue() }" />
 										</div>
 										<div class="form-group">
 											<input type="password" class="form-control form-control-user"

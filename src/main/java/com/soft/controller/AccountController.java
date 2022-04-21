@@ -1,10 +1,12 @@
 package com.soft.controller;
 
+import java.io.File;
 import java.io.PrintWriter;
 import java.security.MessageDigest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import javax.inject.Inject;
 import javax.servlet.http.Cookie;
@@ -23,12 +25,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.soft.service.AccountService;
-import com.soft.vo.LoginVO;
 import com.soft.vo.memberVO;
 
 import net.sf.json.JSONObject;
@@ -73,9 +75,10 @@ public class AccountController {
 	// 로그인 액션
 	@RequestMapping(value = "/account/login" , method=RequestMethod.POST)
 	public String loginAction(memberVO vo, HttpSession session, Model model) throws Exception {
-		List loginMem = accountService.loginMem(vo);
-		memberVO resultVO = (memberVO)loginMem.get(0);
-		int result = (Integer)loginMem.get(1);
+
+		List loginList = accountService.loginMem(vo);
+		memberVO resultVO = (memberVO) loginList.get(0);
+		int result = (int)loginList.get(1);
 		
 		session.setAttribute("result", result);
 		
@@ -83,69 +86,75 @@ public class AccountController {
 			session.setAttribute("resultVO", resultVO);
 			session.setAttribute("me_id", resultVO.getMe_id());
 		}
-		
 		return "redirect:/home";
 	}
 	
-	// 회원가입 - 처리
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String Register(HttpServletRequest request, Model model) throws Exception {
-		int checkID = accountService.checkMemId(Integer.parseInt(request.getParameter("me_id")));
+	// 회원정보
+	@RequestMapping(value= "/infoMem" , method=RequestMethod.GET)
+	public String mem_infoGET(HttpSession session) throws Exception{
 		
-		if(checkID == 1) {
-			model.addAttribute("checkID", checkID);
+		int me_id = (int)session.getAttribute("me_id");
+		
+		memberVO resultVO = accountService.memInfo(me_id);
+		
+		session.setAttribute("resultVO", resultVO);
+		
+		return "/account/infoMem";
+	}
+	
+	
+	// 회원정보 수정(GET)
+	@RequestMapping(value = "/updateMem1", method=RequestMethod.POST)
+	public String mem_update() throws Exception {
+		
+		logger.info("UPDATEGET 실행");
+		
+		return "redirect:/updateMem";
+	}
+
+	// 회원정보 수정 (POST)
+	@RequestMapping(value="/updateMem2" , method=RequestMethod.POST)	
+	public String mem_updatePOST(MultipartHttpServletRequest request, Model model)throws Exception {
+		
+		String me_image = "";
+		
+		MultipartFile file = request.getFile("me_image");
+		
+		if(file.getOriginalFilename() == "") {
+			me_image = request.getParameter("default_file");
 			
-		}else{
-			model.addAttribute("checkID", checkID);
-		
+		}else {
+			String file_path = request.getSession().getServletContext().getRealPath("/resources/upload/mem_image");
 			
-		memberVO vo = new memberVO();
-		
-		vo.setMe_name((String) request.getParameter("me_name"));
-		vo.setMe_id((String) request.getParameter("me_id"));
-		vo.setMe_pwd((String) request.getParameter("me_pwd"));
-		vo.setMe_email((String) request.getParameter("me_email"));
-		vo.setMe_tel((String) request.getParameter("me_tel"));
-		
-		accountService.memJoin(vo);
+			String uuid = UUID.randomUUID().toString();
+			
+			me_image = uuid + "_" + file.getOriginalFilename();
+			
+			file.transferTo(new File(file_path + "/" + me_image));
+			
+			File f = new File(file_path + "/" + request.getParameter("default_file"));
+			if(f.exists()) {
+				f.delete();
+			}
 		}
 		
-		return "redirect:/account/register";
-	}
-	
-	// 회원정보 수정 (GET)
-	@RequestMapping(value= "/updateMem" , method=RequestMethod.GET)
-	public String mem_updateGET() throws Exception{
-		
-		
-		return "/account/updateMem";
-	}
-	
-	
-	// 회원정보 수정
-	@RequestMapping(value = "/updateMem", method=RequestMethod.POST)
-	public String mem_update(HttpServletRequest request, Model model) throws Exception {
-		
 		memberVO vo = new memberVO();
 		
-		vo.setMe_name((String) request.getParameter("me_name"));
-		vo.setMe_id((String) request.getParameter("me_id"));
-		vo.setMe_pwd((String) request.getParameter("me_pwd"));
+		vo.setMe_id(Integer.parseInt((String)request.getParameter("me_id")));
 		vo.setMe_email((String) request.getParameter("me_email"));
-		vo.setMe_tel((String) request.getParameter("me_tel"));
-		vo.setMe_auth((String) request.getParameter("me_auth"));
-		vo.setMe_latest_login((String) request.getParameter("me_latest_login"));
-		vo.setMe_regDate((String) request.getParameter("me_regDate"));
-		vo.setMe_id_yn((String) request.getParameter("me_id_yn"));
-		vo.setMe_delete_yn((String) request.getParameter("me_id_yn"));
+		vo.setMe_name((String)request.getParameter("me_name"));
+		vo.setMe_pwd((String) request.getParameter("me_pwd"));
+		vo.setMe_extension((String) request.getParameter("me_extension"));
+		vo.setMe_dept((String) request.getParameter("me_dept"));
+		vo.setMe_posi((String) request.getParameter("me_posi"));
+		vo.setMe_image(me_image);
 		
 		int result = accountService.memUpdate(vo);
-		
 		model.addAttribute("updateMem_result", result);
 		
 		return "redirect:/infoMem";
 	}
-
+	
 	
 	// 회원 탈퇴 GET
 	@RequestMapping(value = "/deleteMem", method=RequestMethod.GET)
@@ -159,19 +168,27 @@ public class AccountController {
 	
 	//회원 탈퇴 POST
 	@RequestMapping(value = "/deleteMem" , method=RequestMethod.POST)
-	public String deleteMemPOST(HttpServletRequest request, HttpSession session, Model model) throws Exception {
+	public String deleteMemPOST(MultipartHttpServletRequest request, HttpSession session, Model model) throws Exception {
+
 		memberVO vo = new memberVO();
-		vo.setMe_id((String) request.getParameter("me_id"));
-		vo.setMe_email((String) request.getParameter("me_email"));
-		vo.setMe_pwd((String) request.getParameter("me_pwd"));
+		
+		vo.setMe_id(Integer.parseInt((String) request.getParameter("em_id")));
+		vo.setMe_email((String) request.getParameter("em_email"));
+		vo.setMe_pwd((String) request.getParameter("em_pwd"));
+		vo.setMe_image((String) request.getParameter("default_file"));
 		
 		int result = accountService.memDelete(vo);
 		
+		if(result == 1) {
+			String file_path = request.getSession().getServletContext().getRealPath("resources/update/mem_Image");
+			File f = new File(file_path + "/" + request.getParameter("default_file"));
+			if(f.exists()) {
+				f.delete();
+			}
+		}
+
 		model.addAttribute("deleteMem_result", result);
-		
 		
 		return "redirect:/account/deleteMem";
 	}
-	
-	
 }
