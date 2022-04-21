@@ -28,15 +28,21 @@ public class MemberController {
 
 	}
 	
+	// 회원가입 액션
 	@RequestMapping(value = "/account/register" , method = RequestMethod.POST)
 	public String postRegister(memberVO vo) throws Exception {
-		
-		memberService.register(vo);
-		
-		return null;
-		
+		int result = memberService.idChk(vo);
+		try {
+			if(result ==1 ) {
+				return "/member/register";
+			}else if(result == 0) {
+				memberService.register(vo);
+			}
+		} catch (Exception e) {
+				throw new RuntimeException();
+		}
+		return "redirect:/home";
 	}
-	
 	
 	// 로그인 페이지 처리
 	@RequestMapping(value = "/account/login" , method=RequestMethod.GET)

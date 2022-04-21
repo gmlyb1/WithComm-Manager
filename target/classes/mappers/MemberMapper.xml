@@ -23,9 +23,27 @@
 		)
   	</insert>
   	
+  	<!-- 아이디 중복 체크 -->
+  	<select id="idChk" resultType="int">
+  		select 
+  		 count(*)
+  		from 
+  		 tbl_member
+  		where me_email = #{me_email}
+  	</select>
+  	
+  	<!-- 비밀번호 체크 -->
+  	<select id="passChk" resultType="int">
+  		select 
+  		 count(*)
+  		from 
+  		 tbl_member
+  		where me_email = #{me_email}
+  		and   me_pwd   = #{me_pwd}
+  	</select>
+  	
 	
 	<!-- 로그인 확인 -->
-	
 	<select id="login" resultType="memberVO">
 		select 
 		   *

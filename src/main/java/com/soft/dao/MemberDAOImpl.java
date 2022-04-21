@@ -27,6 +27,19 @@ public class MemberDAOImpl implements MemberDAO {
 	public memberVO login(memberVO vo) throws Exception {
 		return session.selectOne(namespace+".login",vo);
 	}
+
+	@Override
+	public int idChk(memberVO vo) throws Exception {
+		int result = session.selectOne(namespace+".idChk",vo);
+		return result;
+	}
+
+	@Override
+	public int passChk(memberVO vo) throws Exception {
+		int result = session.selectOne(namespace+".passChk",vo);
+		return result;
+	}
+
 	
 
 

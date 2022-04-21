@@ -24,6 +24,18 @@ public class MemberServiceImpl implements MemberService {
 	public memberVO login(memberVO vo) throws Exception {
 		return memberDAO.login(vo);
 	}
+
+	@Override
+	public int idChk(memberVO vo) throws Exception {
+		int result = memberDAO.idChk(vo);
+		return result;
+	}
+
+	@Override
+	public int passChk(memberVO vo) throws Exception {
+		int result = memberDAO.passChk(vo);
+		return result;
+	}
 	
 	
 }
