@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.soft.dao.MemberDAO">  
+  
+  	
+	
+	<!-- 로그인 확인 -->
+	
+	<select id="login" resultType="memberVO">
+		select 
+		   *
+		from
+		tbl_member
+		where me_email = #{me_email} and me_pwd = ${me_pwd}
+	</select>
+
+
+	
+	
+  	
+</mapper>
