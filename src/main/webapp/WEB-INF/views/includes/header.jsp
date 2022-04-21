@@ -13,6 +13,7 @@
 	$(document).ready(function() {
 		$("#logoutBtn").on("click", function() {
 			location.href="/account/logout"
+			alert("로그아웃을 완료하였습니다.");
 		})
 	})
 </script>
@@ -218,7 +219,7 @@
 										<a href="/account/register" class="btn btn-success">회원가입</a>
 									</c:if>						
 									<c:if test="${member != null }">
-										<p>${member.me_id}번 사원님 환영합니다.</p>
+										<p>${member.me_id}님 환영합니다.</p>
 										<button id="logoutBtn" type="button" class="btn btn-primary">로그아웃</button>
 									</c:if>
 									<c:if test="${msg == false}">

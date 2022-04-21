@@ -1,6 +1,7 @@
 package com.soft.vo;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 
 import org.springframework.stereotype.Component;
 
@@ -9,20 +10,20 @@ import com.google.protobuf.Timestamp;
 @Component
 public class memberVO {
 	
-	private int me_id;
+	private String me_id;
 	private String me_email;
 	private String me_pwd;
 	private String me_name;
 	private String me_dept;
 	private String me_posi;
-	private Timestamp me_regDate;
+	private Date me_regDate;
 	private String me_extension;
 	private String me_image;
 	
-	public int getMe_id() {
+	public String getMe_id() {
 		return me_id;
 	}
-	public void setMe_id(int me_id) {
+	public void setMe_id(String me_id) {
 		this.me_id = me_id;
 	}
 	public String getMe_email() {
@@ -55,10 +56,10 @@ public class memberVO {
 	public void setMe_posi(String me_posi) {
 		this.me_posi = me_posi;
 	}
-	public Timestamp getMe_regDate() {
+	public Date getMe_regDate() {
 		return me_regDate;
 	}
-	public void setMe_regDate(Timestamp me_regDate) {
+	public void setMe_regDate(Date me_regDate) {
 		this.me_regDate = me_regDate;
 	}
 	public String getMe_extension() {
@@ -80,10 +81,6 @@ public class memberVO {
 				+ ", me_dept=" + me_dept + ", me_posi=" + me_posi + ", me_regDate=" + me_regDate + ", me_extension="
 				+ me_extension + ", me_image=" + me_image + "]";
 	}
-
-	
-	
-
 	
 	
 	
