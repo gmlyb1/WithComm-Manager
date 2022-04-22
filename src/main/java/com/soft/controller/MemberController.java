@@ -82,20 +82,21 @@ public class MemberController {
 	}
 	
 	// 아이디 중복 체크
-	@ResponseBody
-	@RequestMapping(value = "/idChk" , method=RequestMethod.POST)
-	public int idChk(memberVO vo) throws Exception {
-		int result = memberService.idChk(vo);
-		return result;
-	}
-	
-	// 패스워드 체크
-	@ResponseBody
-	@RequestMapping(value ="/passChk" , method = RequestMethod.POST)
-	public int passChk(memberVO vo) throws Exception {
-		int result = memberService.passChk(vo);
-		return result;
-	}
+	/*
+	 * @ResponseBody
+	 * 
+	 * @RequestMapping(value = "/idChk" , method=RequestMethod.POST) public int
+	 * idChk(memberVO vo) throws Exception { int result = memberService.idChk(vo);
+	 * return result; }
+	 * 
+	 * // 패스워드 체크
+	 * 
+	 * @ResponseBody
+	 * 
+	 * @RequestMapping(value ="/passChk" , method = RequestMethod.POST) public int
+	 * passChk(memberVO vo) throws Exception { int result =
+	 * memberService.passChk(vo); return result; }
+	 */
 	
 	
 }

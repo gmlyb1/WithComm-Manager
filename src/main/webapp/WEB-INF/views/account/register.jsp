@@ -12,6 +12,12 @@
 		})
 
 		$("#submit").on("click", function() {
+			if ($("#me_id").val() == "") {
+				alert("닉네임을 입력하세요.");
+				$("#me_id").focus();
+				return false;
+			}
+			
 			if ($("#me_email").val() == "") {
 				alert("가입하실 이메일을 입력하세요.");
 				$("#me_email").focus();
@@ -23,24 +29,18 @@
 				$("#me_pwd").focus();
 				return false;
 			}
-
-			if ($("#me_name").val() == "") {
-				alert("이름을 입력하세요.");
-				$("#me_name").focus();
-				return false;
-			}
 			
-			var idChkVal = $("#idChk").val();
+/* 			var idChkVal = $("#idChk").val();
 			if(idChkVal == "N") {
 				alert("중복 확인 버튼을 눌러주세요");
 			} else if (idChkVal == "Y") {
 				$("#regForm").submit();
 			}
-			
+ */			
 		});
 	})
 	
-	function fn_idChk() {
+	/* function fn_idChk() {
 		$.ajax({
 			url: "/account/idChk",
 			type : "post",
@@ -56,7 +56,7 @@
 			}
 		
 		})
-	}
+	} */
 </script>
 
 <head>
@@ -99,10 +99,15 @@
 								</div>
 									<div class="form-group row">
 										<div class="col-sm-12 mb-3 mb-sm-0">
+											<input type="text" class="form-control form-control-user"
+												id="me_id" name="me_id" style="text-align: center;"
+												placeholder="닉네임">
+										</div>
+									<div class="form-group row">
+										<div class="col-sm-12 mb-3 mb-sm-0">
 											<input type="email" class="form-control form-control-user"
 												id="me_email" name="me_email" style="text-align: center;"
 												placeholder="이메일">
-											<button class="btn btn-primary" type="button" id="idChk" onclick="fn_idChk();" value="N">중복확인</button>
 										</div>
 									</div>
 									<div class="form-group row">

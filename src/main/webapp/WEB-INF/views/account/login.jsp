@@ -13,7 +13,7 @@
 		$("#LoginBtn").click(function() {
 			var me_id = $("#me_id").val();
 			var me_pwd = $("#me_pwd").val();
-
+			
 			if (me_email == "") {
 				alert("이메일을 입력해 주세요.");
 				return false;
@@ -73,13 +73,11 @@
 											<input type="password" class="form-control form-control-user"
 												id="me_pwd" name="me_pwd" placeholder="패스워드" />
 										</div>
-										<button type="submit"
-											class="btn btn-primary btn-user btn-block" id="LoginBtn">로그인</button>
+										<button type="submit" class="btn btn-primary btn-user btn-block" id="LoginBtn">로그인</button>
 										<hr>
-										<a href="/account/register"
-											class="btn btn-google btn-user btn-block">회원가입</a> <a
-											href="#" class="btn btn-facebook btn-user btn-block">아이디/비밀번호
-											찾기</a> <a href="/" class="btn btn-warning btn-user btn-block">홈페이지</a>
+										<!-- <a href="/account/register" class="btn btn-google btn-user btn-block">회원가입</a>  -->
+											<a href="#" class="btn btn-facebook btn-user btn-block">아이디/비밀번호 찾기</a> 
+											<a href="/" class="btn btn-warning btn-user btn-block">홈페이지</a>
 									</form>
 									<hr>
 								</div>

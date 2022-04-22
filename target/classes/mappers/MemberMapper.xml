@@ -11,13 +11,15 @@
 		 into
 		tbl_member
 		(
-		 	me_email
+			me_id		
+		 ,	me_email
 		 ,	me_pwd
 		 ,	me_regdate
 		)
 		values
 		(
-			#{me_email}
+			#{me_id}
+		,	#{me_email}
 		,	#{me_pwd}
 		,	now()
 		)
