@@ -223,7 +223,7 @@
 										<button id="logoutBtn" type="button" class="btn btn-primary">로그아웃</button>
 									</c:if>
 									<c:if test="${msg == false}">
-										alert("아이디와 비밀번호를 확인하세요!");
+										
 									</c:if>
 							</form>
 						</ul>

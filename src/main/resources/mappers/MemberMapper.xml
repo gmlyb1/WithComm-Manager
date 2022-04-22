@@ -49,7 +49,8 @@
 		   *
 		from
 		tbl_member
-		where me_email = #{me_email} and me_pwd = ${me_pwd}
+		where me_email = #{me_email} 
+		and me_pwd = #{me_pwd}
 	</select>
 
 

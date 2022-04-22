@@ -7,7 +7,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		$(".cancle").on("click", function() {
+		$(".cancel").on("click", function() {
 			location.href = "/account/login"
 		})
 
@@ -102,7 +102,7 @@
 											<input type="email" class="form-control form-control-user"
 												id="me_email" name="me_email" style="text-align: center;"
 												placeholder="이메일">
-											<button class="btn btn-primary" type="button" id="idChk" onclick="fn_Chk();" value="N">중복확인</button>
+											<button class="btn btn-primary" type="button" id="idChk" onclick="fn_idChk();" value="N">중복확인</button>
 										</div>
 									</div>
 									<div class="form-group row">
@@ -112,8 +112,7 @@
 												placeholder="비밀번호">
 										</div>
 									</div>
-									<button type="submit" id="submit"
-										class="btn btn-primary btn-user btn-block">회원가입</button>
+									<button type="submit" id="submit" class="btn btn-primary btn-user btn-block">회원가입</button>
 									<hr>
 									<a href="index.html" class="btn btn-google btn-user btn-block">
 										아이디/비밀번호 찾기(구현x) </a> <a href="/account/login"

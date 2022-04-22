@@ -1,14 +1,17 @@
 package com.soft.controller;
 
 import javax.inject.Inject;
+import javax.security.auth.login.AccountException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.soft.service.MemberService;
@@ -60,13 +63,13 @@ public class MemberController {
 		
 		if(login == null)  {
 			session.setAttribute("member", null);
-			rttr.addFlashAttribute("msg", false);
+			rttr.addFlashAttribute("msg", "아이디와 비밀번호를 다시 확인하세요!");
+			return "redirect:/account/login";
 		} else {
 			session.setAttribute("member", login);
+			rttr.addFlashAttribute("msg", "로그인에 성공하였습니다!");
+			return "redirect:/home";
 		}
-	
-		return "redirect:/home";
-		
 	}
 	
 	// 로그아웃
@@ -77,5 +80,22 @@ public class MemberController {
 
 		return "redirect:/account/login";
 	}
+	
+	// 아이디 중복 체크
+	@ResponseBody
+	@RequestMapping(value = "/idChk" , method=RequestMethod.POST)
+	public int idChk(memberVO vo) throws Exception {
+		int result = memberService.idChk(vo);
+		return result;
+	}
+	
+	// 패스워드 체크
+	@ResponseBody
+	@RequestMapping(value ="/passChk" , method = RequestMethod.POST)
+	public int passChk(memberVO vo) throws Exception {
+		int result = memberService.passChk(vo);
+		return result;
+	}
+	
 	
 }

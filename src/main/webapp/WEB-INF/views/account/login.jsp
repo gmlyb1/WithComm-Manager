@@ -23,9 +23,7 @@
 				alert("비밀번호를 입력해 주세요.");
 				return false;
 			}
-
-			
-			
+				
 			if (me_email != "" && me_pwd != "") {
 				return "/account/login";
 			}
