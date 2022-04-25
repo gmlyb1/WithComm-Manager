@@ -142,10 +142,11 @@
 				</a></li>
 
 				<!-- Nav Item - Tables -->
-				<li class="nav-item active"><a class="nav-link"
-					href="/board/list"> <i class="fas fa-fw fa-table"></i> <span>Tables</span></a>
+				<c:if test="${member.me_email == 'admin@admin.co.kr' }">	
+				<li class="nav-item active">
+				<a class="nav-link" href="/board/list"> <i class="fas fa-fw fa-table"></i> <span>고객 게시판</span></a>
 				</li>
-
+				</c:if>
 				<!-- Divider -->
 				<hr class="sidebar-divider d-none d-md-block">
 

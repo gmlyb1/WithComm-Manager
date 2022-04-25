@@ -13,7 +13,7 @@ $(document).ready(function() {
 </script>
 				<%@include file="../includes/header.jsp" %>
 
-                <!-- Begin Page Content -->
+                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
@@ -33,24 +33,31 @@ $(document).ready(function() {
                                     <thead>
                                         <tr>
                                             <th class="text-center">번호</th>
-                                            <th class="text-center">제목</th>
+                                            <th class="text-center">주제</th>
                                             <th class="text-center">내용</th>
                                             <th class="text-center">작성자</th>
-                                            <th class="text-center">등록일</th>
+                                            <th class="text-center">조회수</th>
+                                            <th class="text-center">작성일자</th>
                                         </tr>
-									<c:forEach var="list" items="${boardList}">
-										<tr>
-											<td class="text-center">${list.board_idx}</td>
-											<td class="text-center">${list.board_title}</td>
-											<td class="text-center">${list.board_content}</td>
-											<td class="text-center">${list.board_writer}</td>
-											<td class="text-center">${list.board_regdate}</td>
-										</tr>
-									</c:forEach>
-                                    </thead>
-                                    </tbody>
+									</thead>
+									<c:if test="${BoardList} == null"/>
+									
+									<c:forEach items="${BoardList}" var="list">                                        
+                                    
+                                        <tr>
+                                        	<td class="text-center"><c:out value="${list.board_no}"/></td>
+                                        	<td class="text-center">
+                                        		<a href="/board/readView?board_no=${list.board_no}"></a>
+                                        		<c:out value="${list.board_title}"/></td>
+                                        	<td class="text-left"><c:out value="${list.board_content}"/></td>
+                                        	<td class="text-center"><c:out value="${list.board_writer}"/></td>
+                                        	<td class="text-center"><c:out value="${list.board_count}"/></td>
+                                        	<td class="text-center"><fmt:formatDate value="${list.board_regdate}" pattern="yyyy-MM-dd"/></td>
+                                        </tr>
+                                     
+                                     </c:forEach>
+                                    
                                 </table>
-                                <a href="/board/create" class="btn btn-primary">글쓰기</a>
                             </div>
                         </div>
                     </div>
