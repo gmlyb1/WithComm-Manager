@@ -35,7 +35,7 @@ pageEncoding="UTF-8"%>
 
 <div class="row" style="margin-bottom:20px; margin-left:1px;">
 <div class="col-lg-12">
-<h1 class="page-header">등록 페이지</h1>
+<h1 class="page-header">글작성</h1>
 </div>
 </div>
 

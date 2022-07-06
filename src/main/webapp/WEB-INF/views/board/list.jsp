@@ -57,7 +57,9 @@ $(document).ready(function() {
                                      
                                      </c:forEach>
                                     
+                                </tbody>
                                 </table>
+                               <button><a href="/board/create" class="btn-btn-primary">글쓰기</a></button> 
                             </div>
                         </div>
                     </div>

@@ -12,6 +12,8 @@ public interface BoardService {
 	//게시글 목록
 	public List<boardVO> BoardList() throws Exception;
 	
+	//게시글 등록
+	
 	// 게시글 조회
 	public boardVO BoardRead(int board_no) throws Exception;
 }

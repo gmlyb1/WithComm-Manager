@@ -31,4 +31,5 @@ public class BoardServiceImpl implements BoardService {
 		return boardDAO.BoardRead(board_no);
 	}
 
+
 }

@@ -27,6 +27,7 @@
 			if (me_email != "" && me_pwd != "") {
 				return "/account/login";
 			}
+			
 		});
 	});
 </script>

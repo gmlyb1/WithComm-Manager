@@ -219,7 +219,7 @@
 										<a href="/account/login" class="btn btn-primary">로그인</a>
 									</c:if>
 									<c:if test="${member != null }">
-										<p>${member.me_id}님 환영합니다.</p>
+										<p>${member.me_name}님 환영합니다.</p>
 										<button id="logoutBtn" type="button" class="btn btn-primary">로그아웃</button>
 									</c:if>
 									<c:if test="${member.me_email == 'admin@admin.co.kr' }">						
