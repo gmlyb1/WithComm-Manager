@@ -1,20 +1,17 @@
 package com.soft.vo;
 
-import java.util.Date;
 
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 @Component
 public class boardVO {
 
-	private int board_no; // 게시글 번호
-	private String board_title; // 게시글 주제
-	private String board_content; // 게시글 내용
-	private String board_writer; // 작성자
-	private int board_count; // 조회수
-	@DateTimeFormat(pattern = "yyyy-MM-dd") 
-	private Date board_regdate; // 작성일자
+	private int board_no;
+	private String board_title;
+	private String board_content;
+	private String board_writer;
+	private int board_count;
+	private String board_regdate;
 	
 	public int getBoard_no() {
 		return board_no;
@@ -46,10 +43,10 @@ public class boardVO {
 	public void setBoard_count(int board_count) {
 		this.board_count = board_count;
 	}
-	public Date getBoard_regdate() {
+	public String getBoard_regdate() {
 		return board_regdate;
 	}
-	public void setBoard_regdate(Date board_regdate) {
+	public void setBoard_regdate(String board_regdate) {
 		this.board_regdate = board_regdate;
 	}
 	
@@ -59,6 +56,14 @@ public class boardVO {
 				+ ", board_writer=" + board_writer + ", board_count=" + board_count + ", board_regdate=" + board_regdate
 				+ "]";
 	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

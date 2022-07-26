@@ -13,6 +13,7 @@
 		(
 			me_id		
 		 ,	me_email
+		 ,  me_name
 		 ,	me_pwd
 		 ,	me_regdate
 		)
@@ -20,6 +21,7 @@
 		(
 			#{me_id}
 		,	#{me_email}
+		,   #{me_name}
 		,	#{me_pwd}
 		,	now()
 		)
@@ -55,7 +57,7 @@
 		and me_pwd = #{me_pwd}
 	</select>
 
-
+	
 	
 	
   	

@@ -14,13 +14,12 @@ public class BoardServiceImpl implements BoardService {
 
 	@Inject
 	private BoardDAO boardDAO;
-	
-	
-	@Override
-	public void BoardWrite(boardVO vo) throws Exception {
-		boardDAO.BoardWrite(vo);
-	}
 
+	@Override
+	public void insertBoard(boardVO vo) throws Exception {
+		 boardDAO.insertBoard(vo);
+	}
+	
 	@Override
 	public List<boardVO> BoardList() throws Exception {
 		return boardDAO.BoardList();

@@ -1,22 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+
+<%
+	Date nowTime = new Date();
+	SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
+%>
 
 <!DOCTYPE html>
 <html>
 
 <head>
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#logoutBtn").on("click", function() {
-			location.href="/account/logout"
 			alert("로그아웃을 완료하였습니다.");
+			location.href="/account/logout"
 		})
 	})
 </script>
+
+
 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -54,12 +62,12 @@
 				id="accordionSidebar">
 
 				<!-- Sidebar - Brand -->
-				<a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+				<a class="sidebar-brand d-flex align-items-center justify-content-center" href="../home">
 					<div class="sidebar-brand-icon rotate-n-15">
 						<i class="fas fa-laugh-wink"></i>
 					</div>
 					<div class="sidebar-brand-text mx-3">
-						SB Admin <sup>2</sup>
+						SOFT
 					</div>
 				</a>
 
@@ -219,11 +227,12 @@
 										<a href="/account/login" class="btn btn-primary">로그인</a>
 									</c:if>
 									<c:if test="${member != null }">
-										<p>${member.me_name}님 환영합니다.</p>
-										<button id="logoutBtn" type="button" class="btn btn-primary">로그아웃</button>
+										<p>${member.me_name}님 환영합니다.</p> 
+										<button id="logoutBtn" type="button" class="btn btn-primary">로그아웃</button> 
+										
 									</c:if>
 									<c:if test="${member.me_email == 'admin@admin.co.kr' }">						
-										<a href="/account/register" class="btn btn-success">계정생성하기</a>
+										<a href="/account/register" class="btn btn-success">계정생성하기</a> <br>
 									</c:if>
 									<c:if test="${msg == false}">
 										

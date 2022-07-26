@@ -40,26 +40,24 @@ $(document).ready(function() {
                                             <th class="text-center">작성일자</th>
                                         </tr>
 									</thead>
-									<c:if test="${BoardList} == null"/>
+									<c:if test="${BoardList} == null">
+											<p>작성된 계시글이 없습니다.</p>
+									</c:if>
 									
 									<c:forEach items="${BoardList}" var="list">                                        
-                                    
                                         <tr>
                                         	<td class="text-center"><c:out value="${list.board_no}"/></td>
-                                        	<td class="text-center">
-                                        		<a href="/board/readView?board_no=${list.board_no}"></a>
-                                        		<c:out value="${list.board_title}"/></td>
+                                        	<td class="text-center"><c:out value="${list.board_title}"/></td>
                                         	<td class="text-left"><c:out value="${list.board_content}"/></td>
                                         	<td class="text-center"><c:out value="${list.board_writer}"/></td>
                                         	<td class="text-center"><c:out value="${list.board_count}"/></td>
-                                        	<td class="text-center"><fmt:formatDate value="${list.board_regdate}" pattern="yyyy-MM-dd"/></td>
+                                        	<td class="text-center"><c:out value="${list.board_regdate}"/></td>
                                         </tr>
-                                     
                                      </c:forEach>
                                     
                                 </tbody>
                                 </table>
-                               <button><a href="/board/create" class="btn-btn-primary">글쓰기</a></button> 
+                               <button type="button" onclick="location.href='/board/create';" class="btn btn-success">글쓰기</button>
                             </div>
                         </div>
                     </div>

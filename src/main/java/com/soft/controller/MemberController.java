@@ -59,6 +59,7 @@ public class MemberController {
 	public String login(memberVO vo, HttpServletRequest request, RedirectAttributes rttr) throws Exception{
 			
 		HttpSession session = request.getSession();
+		session.setMaxInactiveInterval(60);
 		memberVO login = memberService.login(vo);
 		
 		if(login == null)  {
@@ -67,7 +68,7 @@ public class MemberController {
 			return "redirect:/account/login";
 		} else {
 			session.setAttribute("member", login);
-			rttr.addFlashAttribute("msg", "로그인에 성공하였습니다!");
+			rttr.addFlashAttribute("msg", "로그인에 성공하였습니다.");
 			return "redirect:/home";
 		}
 	}

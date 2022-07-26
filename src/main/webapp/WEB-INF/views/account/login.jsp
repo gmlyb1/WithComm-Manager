@@ -11,15 +11,16 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#LoginBtn").click(function() {
+			var me_email = $("#me_email").val();
 			var me_id = $("#me_id").val();
 			var me_pwd = $("#me_pwd").val();
 			
-			if (me_email == "") {
+			if (document.frm.me_email.value == "") {
 				alert("이메일을 입력해 주세요.");
 				return false;
 			}
 
-			if (me_pwd == "") {
+			if (document.frm.me_pwd.value == "") {
 				alert("비밀번호를 입력해 주세요.");
 				return false;
 			}
@@ -61,7 +62,7 @@
 									<div class="text-center">
 										<h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
 									</div>
-									<form action="/account/login" method="post">
+									<form name="frm" action="/account/login" method="post">
 										<c:if test="${not empty rememberCookie.getValue()}">
 											<c:set value="checked" var="checked" />
 										</c:if>

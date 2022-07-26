@@ -1,11 +1,9 @@
 package com.soft.vo;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Date;
 
 import org.springframework.stereotype.Component;
 
-import com.google.protobuf.Timestamp;
 
 @Component
 public class memberVO {

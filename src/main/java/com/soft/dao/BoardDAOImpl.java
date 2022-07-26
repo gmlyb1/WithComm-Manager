@@ -19,8 +19,8 @@ public class BoardDAOImpl implements BoardDAO {
 
 	// 게시글 쓰기
 	@Override
-	public void BoardWrite(boardVO vo) throws Exception {
-		session.insert(namespace+".insertBoard",vo);
+	public void insertBoard(boardVO vo) throws Exception {
+		session.insert(namespace+".insertBoard");
 	}
 
 	// 게시글 목록
@@ -34,5 +34,6 @@ public class BoardDAOImpl implements BoardDAO {
 	public boardVO BoardRead(int board_no) throws Exception {
 		return session.selectOne(namespace+".BoardRead", board_no);
 	}
+
 
 }
