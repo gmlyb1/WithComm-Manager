@@ -59,7 +59,7 @@ public class MemberController {
 	public String login(memberVO vo, HttpServletRequest request, RedirectAttributes rttr) throws Exception{
 			
 		HttpSession session = request.getSession();
-		session.setMaxInactiveInterval(60);
+		session.setMaxInactiveInterval(6000);
 		memberVO login = memberService.login(vo);
 		
 		if(login == null)  {

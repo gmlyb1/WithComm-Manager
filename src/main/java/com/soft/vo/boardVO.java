@@ -1,10 +1,11 @@
 package com.soft.vo;
 
 
+
 import org.springframework.stereotype.Component;
 
 @Component
-public class boardVO {
+public class boardVO{
 
 	private int board_no;
 	private String board_title;
@@ -56,6 +57,10 @@ public class boardVO {
 				+ ", board_writer=" + board_writer + ", board_count=" + board_count + ", board_regdate=" + board_regdate
 				+ "]";
 	}
+	
+	
+	
+	
 	
 	
 	

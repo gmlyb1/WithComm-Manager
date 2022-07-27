@@ -5,21 +5,13 @@
   
 <mapper namespace="com.soft.dao.BoardDAO">
 
+
 	<!-- 글 목록 -->
-	<select id="BoardList" resultType="boardVO">
+	<select id="BoardList" resultType="boardVO" parameterType="boardVO">
 		select
 		 *
 		from
 		 tbl_board
-	</select>
-	
-	<!-- 글 조회 -->
-	<select id="BoardRead" resultType="boardVO">
-		select
-		   *
-		from 
-		tbl_board
-		where board_no = #{board_no}
 	</select>
 	
 	<!--  글 작성 -->
@@ -46,13 +38,31 @@
 		)
 	</insert>
 
+	<!-- 게시글 조회 -->
+	<select id="BoardRead" parameterType="int" resultType="boardVO">
+		select
+		 *
+		from 
+		 tbl_board
+		where board_no = #{board_no}
+	
+	</select>
 
 
-
-
-
-
-
+	<!-- 게시글 수정 -->
+	<update id="BoardUpdate" parameterType="boardVO">
+		update tbl_board
+			set board_title = #{board_title},	
+				board_content = #{board_content}
+		where board_no = #{board_no}
+	</update>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="BoardDelete" parameterType="int">
+		delete 
+		  from tbl_board
+		where board_no = #{board_no}
+	</delete>
 
 
 

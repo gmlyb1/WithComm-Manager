@@ -4,8 +4,32 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <script type="text/javascript">
-	
+ function _onSubmit(){
+
+	if($("#board_writer").val() == ""){
+	  	alert("작성자를 입력해주세요");
+		$("#board_writer").focus();
+		return false;
+	  }
+
+	if($("#board_title").val() == ""){
+	  	alert("제목을 입력해주세요");
+		$("#board_title").focus();
+		return false;
+	  }
+
+	if($("#board_content").val() == ""){
+	  	alert("내용을 입력해주세요");
+		$("#board_content").focus();
+		return false;
+	  }
+
+	if(!confirm("등록하시겠습니까?")){
+	return false;
+	}
+} 
 </script>
 
 <%@include file="../includes/header.jsp"%>
@@ -20,7 +44,7 @@
 <div id="contAreaBox">
 <div class="panel">
 <div class="panel-body">
-<form action="/board/create" method="post" name="write" id="write">
+<form action="/board/create" method="post" name="write" id="write" onsubmit="return _onSubmit();">
 <div class="table-responsive" style="text-align:center;">
 	<table id="datatable-scroller"
 		class="table table-bordered tbl_Form">
@@ -38,7 +62,7 @@
 			</tr>
 			<tr>
 				<th class="active">제목</th>
-				<td class="form-inline"><input type="text" id="board_title"
+				<td class="form-inline"><input type="text" id="board_title" placeholder="제목을 입력해주세요."
 					name="board_title" class="form-control" style="width: 840px"/>
 				</td>
 			</tr>
@@ -46,7 +70,7 @@
 				<th class="active" >내용</th>
 				<td class="form-inline">
 				<textarea id="board_content" name="board_content" cols="100" rows="10"
-				class="form-control"></textarea></td>
+				placeholder="내용을 입력해주세요." class="form-control"></textarea></td>
 			</tr>
 		</tbody>
 	</table>

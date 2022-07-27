@@ -12,9 +12,9 @@
 		})
 
 		$("#submit").on("click", function() {
-			if ($("#me_id").val() == "") {
+			if ($("#me_name").val() == "") {
 				alert("닉네임을 입력하세요.");
-				$("#me_id").focus();
+				$("#me_name").focus();
 				return false;
 			}
 			
@@ -100,7 +100,7 @@
 									<div class="form-group row">
 										<div class="col-sm-12 mb-3 mb-sm-0">
 											<input type="text" class="form-control form-control-user"
-												id="me_id" name="me_id" style="text-align: center;"
+												id="me_name" name="me_name" style="text-align: center;"
 												placeholder="닉네임">
 										</div>
 									<div class="form-group row">

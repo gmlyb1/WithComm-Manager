@@ -1,9 +1,11 @@
 package com.soft.service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.soft.dao.BoardDAO;
@@ -17,11 +19,11 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public void insertBoard(boardVO vo) throws Exception {
-		 boardDAO.insertBoard(vo);
+		boardDAO.insertBoard(vo);
 	}
-	
+
 	@Override
-	public List<boardVO> BoardList() throws Exception {
+	public List<boardVO> BoardList(boardVO vo) throws Exception {
 		return boardDAO.BoardList();
 	}
 
@@ -29,6 +31,26 @@ public class BoardServiceImpl implements BoardService {
 	public boardVO BoardRead(int board_no) throws Exception {
 		return boardDAO.BoardRead(board_no);
 	}
+
+	@Override
+	public void BoardUpdate(boardVO vo) throws Exception {
+		boardDAO.BoardUpdate(vo);
+	}
+
+	@Override
+	public void BoardDelete(int board_no) throws Exception {
+		boardDAO.BoardDelete(board_no);
+		
+	}
+
+		
+
+
+
+
+
+
+
 
 
 }

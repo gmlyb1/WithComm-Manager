@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class memberVO {
 	
-	private String me_id;
+	private int me_id;
 	private String me_email;
 	private String me_pwd;
 	private String me_name;
@@ -18,10 +18,10 @@ public class memberVO {
 	private String me_extension;
 	private String me_image;
 	
-	public String getMe_id() {
+	public int getMe_id() {
 		return me_id;
 	}
-	public void setMe_id(String me_id) {
+	public void setMe_id(int me_id) {
 		this.me_id = me_id;
 	}
 	public String getMe_email() {
