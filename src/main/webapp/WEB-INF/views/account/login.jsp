@@ -75,9 +75,8 @@
 											<input type="password" class="form-control form-control-user"
 												id="me_pwd" name="me_pwd" placeholder="패스워드" />
 										</div>
-										<button type="submit" class="btn btn-primary btn-user btn-block" id="LoginBtn">로그인</button>
-										<hr>
-										<!-- <a href="/account/register" class="btn btn-google btn-user btn-block">회원가입</a>  -->
+											<button type="submit" class="btn btn-primary btn-user btn-block" id="LoginBtn">로그인</button>
+											<a href="/account/register" class="btn btn-google btn-user btn-block">회원가입</a>
 											<a href="#" class="btn btn-facebook btn-user btn-block">아이디/비밀번호 찾기</a> 
 											<a href="/" class="btn btn-warning btn-user btn-block">홈페이지</a>
 									</form>

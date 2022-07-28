@@ -23,7 +23,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.soft.service.BoardService;
+import com.soft.service.ReplyService;
 import com.soft.vo.boardVO;
+import com.soft.vo.replyVO;
 
 @Controller
 public class BoardController {
@@ -31,6 +33,9 @@ public class BoardController {
 	@Autowired
 	@Inject
 	private BoardService boardService;
+	
+	@Inject
+	private ReplyService replyService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
@@ -88,6 +93,9 @@ public class BoardController {
 	public String BoardRead(boardVO vo, Model model) throws Exception {
 		
 		model.addAttribute("read", boardService.BoardRead(vo.getBoard_no()));
+		
+		List<replyVO> replyList = replyService.ReadReply(vo.getBoard_no());
+		model.addAttribute("replyList", replyList);
 		
 		return "/board/read";
 	}

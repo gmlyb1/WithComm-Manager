@@ -31,7 +31,10 @@
 	<div class="card shadow mb-4">
 		<div class="card-header py-3">
 			<h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
-			<br> <span style="color: red"><strong>고객 게시판은 현재 구현중입니다. 현재 페이지는 회원만 사용 가능합니다.</strong></span>
+			<br> 
+			<c:if test="${member == null}">	
+			<span style="color: red"><strong> 현재 페이지는 회원만 이용 가능합니다.</strong></span>
+			</c:if>
 		</div>
 		<div class="card-body">
 			<div class="table-responsive">

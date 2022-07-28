@@ -33,18 +33,16 @@ public class MemberController {
 	
 	// 회원가입 액션
 	@RequestMapping(value = "/account/register" , method = RequestMethod.POST)
-	public String postRegister(memberVO vo) throws Exception {
-		int result = memberService.idChk(vo);
+	public String postRegister(memberVO vo, RedirectAttributes rttr) throws Exception {
+		
 		try {
-			if(result ==1 ) {
-				return "/member/register";
-			}else if(result == 0) {
-				memberService.register(vo);
-			}
-		} catch (Exception e) {
-				throw new RuntimeException();
+		memberService.register(vo);
+		rttr.addFlashAttribute("msg", "회원가입을 완료했습니다.");
+
+		}catch (Exception e) {
+		rttr.addFlashAttribute("msg", "회원가입에 실패했습니다.");
 		}
-		return "redirect:/home";
+				return "redirect:/home";
 	}
 	
 	// 로그인 페이지 처리
