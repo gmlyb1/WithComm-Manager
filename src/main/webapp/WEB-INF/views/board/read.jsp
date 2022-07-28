@@ -15,10 +15,9 @@
 			formObj.attr("action","/board/delete");
 			formObj.attr("method","post");
 			formObj.submit();
-		})		
+			
+		})	
 	})	
-	
-	
 </script>
 
 
@@ -34,7 +33,7 @@
 	<div id="contAreaBox">
 		<div class="panel">
 			<div class="panel-body">
-				<form role="form" method="post" name="readForm">
+				<form role="form" method="post" name="readForm" onsubmit="return _onSubmit();">
 					<input type="hidden" id="board_no" name="board_no" value="${read.board_no }"/>
 					<div class="table-responsive" style="text-align: center;">
 						<table id="datatable-scroller"

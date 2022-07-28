@@ -64,7 +64,12 @@
 		where board_no = #{board_no}
 	</delete>
 
-
+	<!-- 조회수 -->
+	<update id="BoardHit" parameterType="int">
+		update tbl_board set
+		board_count = board_count+1
+		where board_no = #{board_no}
+	</update>
 
 
 

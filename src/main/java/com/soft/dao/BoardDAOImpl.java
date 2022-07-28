@@ -45,4 +45,10 @@ public class BoardDAOImpl implements BoardDAO {
 	public void BoardDelete(int board_no) throws Exception {
 		sqlSession.delete("namespace.BoardDelete",board_no);
 	}
+
+	@Override
+	public void BoardHit(int board_no) throws Exception {
+		sqlSession.update("namespace.BoardHit",board_no);
+		
+	}
 }

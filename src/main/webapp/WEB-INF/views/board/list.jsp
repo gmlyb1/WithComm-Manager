@@ -35,29 +35,22 @@
 		</div>
 		<div class="card-body">
 			<div class="table-responsive">
-				<table class="table table-bordered" id="dataTable" width="100%"
-					cellspacing="0">
+				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 					<thead>
 						<tr>
 							<th class="text-center">번호</th>
 							<th class="text-center">주제</th>
-							<th class="text-center">내용</th>
 							<th class="text-center">작성자</th>
 							<th class="text-center">조회수</th>
 							<th class="text-center">작성일자</th>
 						</tr>
 					</thead>
 
-					<c:if test="${boardList} == null">
-										작성된 게시글이 없습니다.
-									</c:if>
-
 					<c:forEach items="${boardList}" var="list">
 						<tr>
 							<td class="text-center"><c:out value="${list.board_no}" /></td>
 							<td><a href="/board/read?board_no=${list.board_no}"><c:out
 										value="${list.board_title}" /></a></td>
-							<td class="text-left"><c:out value="${list.board_content}" /></td>
 							<td class="text-center"><c:out value="${list.board_writer}" /></td>
 							<td class="text-center"><c:out value="${list.board_count}" /></td>
 							<td class="text-center"><c:out value="${list.board_regdate}" /></td>

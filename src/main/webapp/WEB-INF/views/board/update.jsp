@@ -11,11 +11,19 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
+
 		$(".cancel_btn").on("click", function() {
 			event.preventDefault();
 			location.href = "board/list";
 		})
 	})
+	
+	function _onSubmit(){
+		if(!confirm("수정 하시겠습니까?")){
+			return false;
+		}
+	}
+	
 </script>
 
 <%@include file="../includes/header.jsp"%>
@@ -30,7 +38,7 @@
 	<div id="contAreaBox">
 		<div class="panel">
 			<div class="panel-body">
-				<form action="/board/update" role="form" method="post" name="updateForm">
+				<form action="/board/update" role="form" method="post" name="updateForm" onsubmit="return _onSubmit();">
 					<input type="hidden" name="board_no" value="${update.board_no}" readonly="readonly"/>
 					<div class="table-responsive" style="text-align: center;">
 						<table id="datatable-scroller"
