@@ -92,22 +92,41 @@ public class BoardController {
 		return "/board/read";
 	}
 	
+	@RequestMapping(value = "/board/update" , method= RequestMethod.GET)
+	public String BoardUpdateGET(boardVO vo, Model model) throws Exception
+	{
+		model.addAttribute("update", boardService.BoardRead(vo.getBoard_no()));
+		return "/board/update";
+	}
 	
 	//게시글 수정
-	@RequestMapping(value = "/board/update", method=RequestMethod.POST)
-	public String BoardUpdate(boardVO vo) throws Exception
+	@RequestMapping(value = "/board/update", method= RequestMethod.POST)
+	public String BoardUpdatePOST(boardVO vo,Model model,RedirectAttributes rttr) throws Exception
 	{
-		
-		boardService.BoardUpdate(vo);
+		try {
+			boardService.BoardUpdate(vo);
+			rttr.addFlashAttribute("msg", "수정이 완료되었습니다.");
+		}catch (Exception e) {
+			rttr.addFlashAttribute("msg", "오류가 발생되었습니다.");
+		}
 		
 		return "redirect:/board/list";
 	}
 	
+	
 	//게시글 삭제
 	@RequestMapping(value = "/board/delete", method=RequestMethod.POST)
-	public String BoardDelete(boardVO vo) throws Exception
+	public String BoardDeletePOST(boardVO vo, RedirectAttributes rttr) throws Exception
 	{
+		
+		try {
 		boardService.BoardDelete(vo.getBoard_no());
+		rttr.addFlashAttribute("msg", "삭제가 완료되었습니다.");
+		
+		}catch(Exception e) {
+		rttr.addFlashAttribute("msg", "오류가 발생되었습니다.");
+		}
+		
 		
 		return "redirect:/board/list";
 	}

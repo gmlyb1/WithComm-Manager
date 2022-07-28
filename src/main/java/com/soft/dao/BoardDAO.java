@@ -1,6 +1,5 @@
 package com.soft.dao;
 
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import com.soft.vo.boardVO;
