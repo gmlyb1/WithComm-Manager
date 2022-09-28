@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 
 import com.soft.vo.boardVO;
+import com.soft.vo.replyVO;
 
 public class BoardDAOImpl implements BoardDAO {
 
@@ -51,4 +52,18 @@ public class BoardDAOImpl implements BoardDAO {
 		sqlSession.update("namespace.BoardHit",board_no);
 		
 	}
+	
+	
+	// ¥Ò±€ ∏Ò∑œ
+	@Override
+	public List<replyVO> ReadReply(int board_no) throws Exception {
+		return sqlSession.selectList("namespace.ReadReply",board_no);
+	}
+
+	//¥Ò±€ ¿€º∫
+	@Override
+	public void replyWrite(replyVO vo) throws Exception {
+		sqlSession.insert("namespace.WriteReply", vo);
+	}
+
 }

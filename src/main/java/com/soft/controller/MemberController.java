@@ -35,14 +35,20 @@ public class MemberController {
 	@RequestMapping(value = "/account/register" , method = RequestMethod.POST)
 	public String postRegister(memberVO vo, RedirectAttributes rttr) throws Exception {
 		
+		int result = memberService.idChk(vo);
 		try {
+			if(result == 1) {
+				return "/account/registe";
+			}else if(result ==0) {
+				memberService.register(vo);
+			}
 		memberService.register(vo);
 		rttr.addFlashAttribute("msg", "회원가입을 완료했습니다.");
 
 		}catch (Exception e) {
-		rttr.addFlashAttribute("msg", "회원가입에 실패했습니다.");
+			throw new RuntimeException(); 
 		}
-				return "redirect:/home";
+		return "redirect:/home";
 	}
 	
 	// 로그인 페이지 처리
@@ -80,22 +86,20 @@ public class MemberController {
 		return "redirect:/account/login";
 	}
 	
-	// 아이디 중복 체크
-	/*
-	 * @ResponseBody
-	 * 
-	 * @RequestMapping(value = "/idChk" , method=RequestMethod.POST) public int
-	 * idChk(memberVO vo) throws Exception { int result = memberService.idChk(vo);
-	 * return result; }
-	 * 
-	 * // 패스워드 체크
-	 * 
-	 * @ResponseBody
-	 * 
-	 * @RequestMapping(value ="/passChk" , method = RequestMethod.POST) public int
-	 * passChk(memberVO vo) throws Exception { int result =
-	 * memberService.passChk(vo); return result; }
-	 */
+	// 패스워드 체크
+	@ResponseBody
+	@RequestMapping(value = "/account/passChk" , method = RequestMethod.POST) 
+	public int passChk(memberVO vo) throws Exception {
+		int result = memberService.passChk(vo);
+		return result;
+	}
 	
+	// 아이디 중복 체크
+	@ResponseBody
+	@RequestMapping(value = "/account/idChk" , method=RequestMethod.POST) 
+	public int idChk(memberVO vo) throws Exception {
+		int result = memberService.idChk(vo);
+		return result;
+	}
 	
 }

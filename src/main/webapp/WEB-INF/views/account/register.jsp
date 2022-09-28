@@ -30,33 +30,32 @@
 				return false;
 			}
 			
-/* 			var idChkVal = $("#idChk").val();
-			if(idChkVal == "N") {
-				alert("중복 확인 버튼을 눌러주세요");
-			} else if (idChkVal == "Y") {
-				$("#regForm").submit();
-			}
- */			
+			
 		});
+		
+		
 	})
-	
-	/* function fn_idChk() {
+</script>
+
+<script type="text/javascript">
+	function fn_idChk() {
 		$.ajax({
-			url: "/account/idChk",
+			url : "/account/idChk",
 			type : "post",
-			dataType :"json",
+			dataType : "json",
 			data : {"me_email" : $("#me_email").val()},
 			success : function(data) {
-				if(data ==1) {
+				if(data == 1) {
 					alert("중복된 아이디입니다.");
-				}else if(data ==0) {
+					location.href="/account/register"; // 404페이지로 돌아가지 않고 다시 회원가입 페이지로 돌아간다.
+				}else if(data == 0) {
 					$("#idChk").attr("value","Y");
-					alert("사용가능한 아이디입니다.");
+					alert("사용 가능한 아이디입니다.");
+					location.href="/account/register"; // 404페이지로 돌아가지 않고 다시 회원가입 페이지로 돌아간다.
 				}
 			}
-		
 		})
-	} */
+	}
 </script>
 
 <head>
@@ -95,7 +94,7 @@
 						<div class="col-lg-7">
 							<div class="p-5">
 								<div class="text-center">
-									<h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+									<h1 class="h4 text-gray-900 mb-4"><strong>회원가입 페이지</strong></h1>
 								</div>
 									<div class="form-group row">
 										<div class="col-sm-12 mb-3 mb-sm-0">
@@ -107,7 +106,8 @@
 										<div class="col-sm-12 mb-3 mb-sm-0">
 											<input type="email" class="form-control form-control-user"
 												id="me_email" name="me_email" style="text-align: center;"
-												placeholder="이메일">
+												placeholder="이메일"/>
+											<button class="btn btn-success" id="idChk" onclick="return fn_idChk();" value="N">중복확인</button>
 										</div>
 									</div>
 									<div class="form-group row">
@@ -119,11 +119,9 @@
 									</div>
 									<button type="submit" id="submit" class="btn btn-primary btn-user btn-block">회원가입</button>
 									<hr>
-									<a href="index.html" class="btn btn-google btn-user btn-block">
-										아이디/비밀번호 찾기(구현x) </a> <a href="/account/login"
-										class="btn btn-facebook btn-user btn-block"> 로그인 </a> <a
-										href="/home" class="btn btn-warning btn-user btn-block">
-										홈페이지 </a>
+									<a href="index.html" class="btn btn-google btn-user btn-block"> 아이디/비밀번호 찾기(구현x) </a>
+									<a href="/account/login" class="btn btn-facebook btn-user btn-block"> 로그인 </a> 
+									<a href="/account/login" class="btn btn-warning btn-user btn-block" name="home"> 홈페이지 </a>
 								<hr>
 							</div>
 						</div>

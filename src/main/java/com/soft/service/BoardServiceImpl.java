@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.soft.dao.BoardDAO;
 import com.soft.vo.boardVO;
+import com.soft.vo.replyVO;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -52,14 +53,15 @@ public class BoardServiceImpl implements BoardService {
 		
 	}
 
-		
-
-
-
-
-
-
-
-
-
+	// ¥Ò±€ ∏Ò∑œ
+	@Override
+	public List<replyVO> ReadReply(int board_no) throws Exception {
+		return boardDAO.ReadReply(board_no);
+	}
+	
+	// ¥Ò±€ ¿€º∫
+	@Override
+	public void replyWrite(replyVO vo) throws Exception {
+		boardDAO.replyWrite(vo);
+	}
 }

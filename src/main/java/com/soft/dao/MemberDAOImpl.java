@@ -12,10 +12,10 @@ public class MemberDAOImpl implements MemberDAO {
 	private SqlSession sqlSession;
 
 	private static final String namespace = "com.soft.dao.MemberDAO";
-	
+
 	@Override
 	public void register(memberVO vo) throws Exception {
-		sqlSession.insert("namespace.register",vo);
+		sqlSession.insert("namespace.register", vo);
 	}
 
 	@Override
@@ -23,12 +23,16 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.selectOne("namespace.login", vo);
 	}
 
-	/*
-	 * @Override public int idChk(memberVO vo) throws Exception { return sqlSession;
-	 * }
-	 * 
-	 * @Override public int passChk(memberVO vo) throws Exception { return
-	 * sqlSession; }
-	 */
-	
+	@Override
+	public int idChk(memberVO vo) throws Exception {
+		int result = sqlSession.selectOne("namespace.passChk",vo);
+		return result;
+	}
+
+	@Override
+	public int passChk(memberVO vo) throws Exception {
+		int result = sqlSession.selectOne("namespace.idChk",vo);
+		return result;
+	}
+
 }

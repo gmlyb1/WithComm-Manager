@@ -23,7 +23,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.soft.service.BoardService;
-import com.soft.service.ReplyService;
 import com.soft.vo.boardVO;
 import com.soft.vo.replyVO;
 
@@ -35,7 +34,6 @@ public class BoardController {
 	private BoardService boardService;
 	
 	@Inject
-	private ReplyService replyService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
@@ -94,7 +92,7 @@ public class BoardController {
 		
 		model.addAttribute("read", boardService.BoardRead(vo.getBoard_no()));
 		
-		List<replyVO> replyList = replyService.ReadReply(vo.getBoard_no());
+		List<replyVO> replyList = boardService.ReadReply(vo.getBoard_no());
 		model.addAttribute("replyList", replyList);
 		
 		return "/board/read";
@@ -138,4 +136,34 @@ public class BoardController {
 		
 		return "redirect:/board/list";
 	}
+	
+	// 게시글 등록 (GET)
+		@RequestMapping(value = "/board/replyWrite", method= RequestMethod.GET)
+		public void replyWrite() {
+		}
+	
+	// 댓글작성
+		@RequestMapping(value ="/board/replyWrite" , method= RequestMethod.POST)
+		public String replyWrite(replyVO vo, RedirectAttributes rttr) throws Exception
+		{
+			try {
+			
+			boardService.replyWrite(vo);
+			
+			rttr.addFlashAttribute("board_no",vo.getBoard_no());
+			rttr.addFlashAttribute("msg", "댓글작성을 완료하였습니다.");
+			
+			}catch (Exception e) {
+			rttr.addFlashAttribute("msg", "댓글작성에 실패하였습니다.");
+			}
+			return "redirect:/board/read";
+		}
+	
+	
+	
+	
+	
+	
+	
+	
 }

@@ -25,13 +25,20 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.login(vo);
 	}
 
-	/*
-	 * @Override public int idChk(memberVO vo) throws Exception { int result =
-	 * memberDAO.idChk(vo); return result; }
-	 * 
-	 * @Override public int passChk(memberVO vo) throws Exception { int result =
-	 * memberDAO.passChk(vo); return result; }
-	 */
+	
+	@Override
+	public int idChk(memberVO vo) throws Exception {
+		  int result = memberDAO.idChk(vo);
+		  return result; 
+
+	}
+	  
+	  @Override
+	  public int passChk(memberVO vo) throws Exception { 
+		  int result =  memberDAO.passChk(vo); 
+		  return result;
+	}
+	 
 	
 	
 }

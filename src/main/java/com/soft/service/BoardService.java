@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import com.soft.vo.boardVO;
+import com.soft.vo.replyVO;
 
 public interface BoardService {
 
@@ -22,4 +23,9 @@ public interface BoardService {
 	// 게시글 삭제
 	public void BoardDelete(int board_no) throws Exception;
 	
+	// 댓글 목록
+	public List<replyVO> ReadReply(int board_no) throws Exception;
+
+	// 댓글 작성
+	public void replyWrite(replyVO vo) throws Exception;
 }

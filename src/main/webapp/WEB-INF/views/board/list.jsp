@@ -33,11 +33,12 @@
 			<h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
 			<br> 
 			<c:if test="${member == null}">	
-			<span style="color: red"><strong> 현재 페이지는 회원만 이용 가능합니다.</strong></span>
+			<span style="color: red"><strong> 현재 페이지의 글쓰기,수정,삭제는 회원만 이용 가능합니다.</strong></span>
 			</c:if>
 		</div>
 		<div class="card-body">
 			<div class="table-responsive">
+			
 				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 					<thead>
 						<tr>
@@ -62,7 +63,7 @@
 
 					</tbody>
 				</table>
-				<c:if test="${member != null}">	
+				<c:if test="${member != null}">  
 				<button type="button" onclick="location.href='/board/create';" class="btn btn-success">글쓰기</button>
 				</c:if>
 			</div>

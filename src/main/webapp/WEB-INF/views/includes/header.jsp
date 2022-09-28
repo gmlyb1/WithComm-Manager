@@ -139,7 +139,7 @@
 								Password</a>
 							<div class="collapse-divider"></div>
 							<h6 class="collapse-header">Other Pages:</h6>
-							<a class="collapse-item" href="404.html">404 Page</a> <a
+							<a class="collapse-item" href="/error/404.jsp">404 Page</a> <a
 								class="collapse-item" href="blank.html">Blank Page</a>
 						</div>
 					</div></li>
@@ -229,10 +229,13 @@
 									<c:if test="${member != null }">
 										<p>${member.me_name}님 환영합니다.</p> 
 										<button id="logoutBtn" type="button" class="btn btn-primary">로그아웃</button> 
-										
+										<button type="button" class="btn btn-danger" onclick="location.href='/account/delete';">회원탈퇴</button>
 									</c:if>
 									<c:if test="${member.me_email == 'admin@admin.co.kr' }">						
-										<a href="/account/register" class="btn btn-success">계정생성하기</a> <br>
+										<a href="/account/register" class="btn btn-success">계정관리</a> <br>
+									</c:if>
+									<c:if test="${member.me_email != 'admin@admin.co.kr' } || ${member != null }">
+										<a href="#" class="btn btn-success">장바구니</a>
 									</c:if>
 									<c:if test="${msg == false}">
 										

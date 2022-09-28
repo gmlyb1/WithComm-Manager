@@ -3,6 +3,7 @@ package com.soft.dao;
 import java.util.List;
 
 import com.soft.vo.boardVO;
+import com.soft.vo.replyVO;
 
 public interface BoardDAO {
 
@@ -24,4 +25,10 @@ public interface BoardDAO {
 	
 	// 게시글 조회수
 	public void BoardHit(int board_no) throws Exception;
+	
+	// 댓글 목록
+	public List<replyVO> ReadReply(int board_no) throws Exception;
+	
+	// 댓글 작성
+	public void replyWrite(replyVO vo) throws Exception;
 }

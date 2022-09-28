@@ -6,34 +6,42 @@
 
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		var formObj = $("form[name='readForm']")
-
-		//삭제
-		$("#delete_btn").on("click", function() {
-			formObj.attr("action", "/board/delete");
-			formObj.attr("method", "post");
-			formObj.submit();
-
-		})
-		
-		  // 댓글작성
-		$("#reply_Write_Btn").on("click",function() {
-			var formObj = $("form[name='replyForm']");
-			formObj.attr("action","/replyWrite");
-			formObj.attr("method","post");
-			formObj.submit();
-		}) 
-	})
-</script>
-
-
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var formObj = $("form[name='readForm']")
+	
+			//삭제
+			$("#delete_btn").on("click", function() {
+				formObj.attr("action", "/board/delete");
+				formObj.attr("method", "post");
+				formObj.submit();
+				});
+			})
+	</script>
+	
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var formObj = $("form[name='replyForm']")
+			$(".replyWriteBtn").on("click", function(){
+				  var formObj = $("form[name='replyForm']");
+				  formObj.attr("action", "/board/WriteReply");
+				  formObj.attr("method","post");
+				  formObj.submit();
+				});
+			})	
+	</script>
 
 
 <div class="row" style="margin-bottom: 20px; margin-left: 1px;">
+		<c:if test="${member == null}">	
+			<span style="color: red" class="text-center"><strong> 현재 페이지의 글쓰기,수정,삭제는 회원만 이용 가능합니다.</strong></span>
+		</c:if>
+		
+		<c:if test="${member != null}">	
+		<span style="color: blue" class="text-center"><strong> 댓글작성은 관리자만 가능합니다.</strong></span>
+		</c:if>
 	<div class="col-lg-12">
-		<h1 class="page-header">상세 페이지</h1>
+		<h1 class="page-header text-center">상세 페이지</h1>
 	</div>
 </div>
 
@@ -41,8 +49,7 @@
 	<div id="contAreaBox">
 		<div class="panel">
 			<div class="panel-body">
-				<form role="form" method="post" name="readForm"
-					onsubmit="return _onSubmit();">
+				<form role="form" method="post" name="readForm">
 					<input type="hidden" id="board_no" name="board_no"
 						value="${read.board_no }" />
 					<div class="table-responsive" style="text-align: center;">
@@ -54,18 +61,22 @@
 								<col width="" />
 							</colgroup>
 							<tbody>
-								<tr>
-									<th class="active">작성자</th>
-									<td>${read.board_writer}</td>
-								</tr>
-								<tr>
-									<th class="active">제목</th>
-									<td>${read.board_title}</td>
-								</tr>
-								<tr>
-									<th class="active">내용</th>
-									<td>${read.board_content}</td>
-								</tr>
+								<hr>
+								<div class="mb-3">
+									<label class="form-label">작성자</label>
+									<p class="h6">${read.board_writer}</p>
+								</div>
+								<hr>
+								<div class="mb-3">
+									<label class="form-label">제목</label>
+									<p class="h6">${read.board_title}</p>
+								</div>
+								<hr>
+								<div class="mb-3">
+									<label class="form-label">내용</label>
+									<textarea class="form-control" rows="10" style="resize:none; background-color:white;" readonly>${read.board_content}</textarea>
+								</div>
+								<hr>
 							</tbody>
 						</table>
 					</div>
@@ -101,21 +112,27 @@
 						<!-- 댓글끝 -->
 						<c:if test="${member != null}">	
 						<br>	<hr> 
+						
 						<!-- 댓글작성 -->
 						<form name="replyForm" method="post">
-							<input type="hidden" id="reply.board_no" name="reply.board_no" value="${reply.board_no}"/>
-						
-							<div>
+							<input type="hidden" id="reply.board_no" name="reply.board_no" value="${read.board_no}"/>
+							<input type="hidden" id="page" name="page" value="${scri.page}"> 
+						  	<input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}"> 
+						  	<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}"> 
+						  	<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}"> 
 							
-								<label for="reply_writer">댓글 작성자:</label><input type="text" id="reply_writer" name="reply_writer" value="${member.me_name}" disabled/>
-								<br/>
-								<label for="reply_content">댓글 내용:</label><input type="text" id="reply_content" name="reply_content"/>
-							
-							</div>
-							<div>
-								<button type="submit" class="btn btn-success" id="reply_Write_Btn">작성</button>
-							</div>
-							
+					<%-- 		<div class="d-flax align-items-center">
+								<p>
+									작성자 : ${replyList.reply_writer}
+								</p>
+								<p>
+									<textarea class="form-control" rows="3" cols="155" name="reply_writer" id="reply_writer" placeholder="댓글을 남겨주세요" style="resize:none;"></textarea>
+								</p>
+								<input type="hidden" name="reply_no" value="${reply.no}">
+								<p>
+									<button type="button" class="replyWriteBtn" style="margin: 55px 0 0 10px;">작성</button>
+								</p>
+							</div> --%>
 						</form>
 						</c:if>
 						<!-- 댓글작성 끝-->
