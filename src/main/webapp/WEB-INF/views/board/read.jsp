@@ -38,7 +38,8 @@
 		</c:if>
 		
 		<c:if test="${member != null}">	
-		<span style="color: blue" class="text-center"><strong> 댓글작성은 관리자만 가능합니다.</strong></span>
+		<span style="color: blue
+		" class="text-center"><strong> 댓글작성은 관리자만 가능합니다.</strong></span>
 		</c:if>
 	<div class="col-lg-12">
 		<h1 class="page-header text-center">상세 페이지</h1>
