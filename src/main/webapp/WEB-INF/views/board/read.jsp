@@ -121,8 +121,7 @@
 						  	<input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}"> 
 						  	<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}"> 
 						  	<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}"> 
-							
-					<%-- 		<div class="d-flax align-items-center">
+			<%-- <%-- 				<div class="d-flax align-items-center">
 								<p>
 									작성자 : ${replyList.reply_writer}
 								</p>
@@ -133,7 +132,7 @@
 								<p>
 									<button type="button" class="replyWriteBtn" style="margin: 55px 0 0 10px;">작성</button>
 								</p>
-							</div> --%>
+							</div> --%> --%>
 						</form>
 						</c:if>
 						<!-- 댓글작성 끝-->

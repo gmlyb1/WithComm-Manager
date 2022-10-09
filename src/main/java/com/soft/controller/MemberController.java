@@ -75,6 +75,8 @@ public class MemberController {
 			rttr.addFlashAttribute("msg", "로그인에 성공하였습니다.");
 			return "redirect:/home";
 		}
+		
+		
 	}
 	
 	// 로그아웃

@@ -102,13 +102,14 @@
 												id="me_name" name="me_name" style="text-align: center;"
 												placeholder="닉네임">
 										</div>
+									</div>
 									<div class="form-group row">
 										<div class="col-sm-12 mb-3 mb-sm-0">
 											<input type="email" class="form-control form-control-user"
 												id="me_email" name="me_email" style="text-align: center;"
 												placeholder="이메일"/>
 											<button class="btn btn-success" id="idChk" onclick="return fn_idChk();" value="N">중복확인</button>
-										</div>
+										</div> <br>
 									</div>
 									<div class="form-group row">
 										<div class="col-sm-8 mb-3 mb-sm-0">
@@ -116,10 +117,9 @@
 												id="me_pwd" name="me_pwd" style="text-align: center;"
 												placeholder="비밀번호">
 										</div>
-									</div>
+									</div> <br>
 									<button type="submit" id="submit" class="btn btn-primary btn-user btn-block">회원가입</button>
-									<hr>
-									<a href="index.html" class="btn btn-google btn-user btn-block"> 아이디/비밀번호 찾기(구현x) </a>
+									<!-- <a href="index.html" class="btn btn-google btn-user btn-block"> 아이디/비밀번호 찾기(구현x) </a> -->
 									<a href="/account/login" class="btn btn-facebook btn-user btn-block"> 로그인 </a> 
 									<a href="/account/login" class="btn btn-warning btn-user btn-block" name="home"> 홈페이지 </a>
 								<hr>

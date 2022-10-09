@@ -37,15 +37,17 @@ public class HomeController {
 		
 		Map<String, ?> inputFlashMap = RequestContextUtils.getInputFlashMap(request);
 		
-		if(null != inputFlashMap) {
+		if(null != inputFlashMap || session == null) {
 			model.addAttribute("msg", (String) inputFlashMap.get("msg"));
 		}
 		
 		
-		
 		return "/home";
 		
+		 
+		
+	
 	}
 	
-	
 }
+	
