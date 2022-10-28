@@ -20,4 +20,14 @@ public interface MemberDAO {
 	// 아이디 중복 체크
 	public int idChk(memberVO vo) throws Exception;
 	
+	// 프로필
+	public memberVO memberInfoSearch(memberVO mVO)throws Exception;
+	
+	// 프로필 수정
+	public void memberUpdate(memberVO mVO) throws Exception;
+	public void memberPasswordUpdate(memberVO mVO)throws Exception;
+	
+	// 회원 관리
+	public List<memberVO> memberManage(memberVO mVO)throws Exception;
+	
 }

@@ -14,13 +14,17 @@
 		 tbl_board
 	</select>
 	
+	<update id="replyCount" parameterType="int">
+	update tbl_baord set board_reply_hit = board_reply_hit + #{amount} where board_no = #{board_no}
+	</update>
+	
 	<!--  글 작성 -->
 	<insert id="insertBoard">
   		insert
 		 into
 		tbl_board
 		(
-			board_no		
+			board_no	
 		 ,	board_title
 		 ,  board_content
 		 ,	board_writer
@@ -37,6 +41,8 @@
 		,	#{board_regdate}
 		)
 	</insert>
+	
+	
 
 	<!-- 게시글 조회 -->
 	<select id="BoardRead" parameterType="int" resultType="boardVO">
@@ -100,6 +106,84 @@
 		   ,#{reply_writer}
 		)   
 	</insert>
+	
+	<insert id="insertFile">
+		insert into tbl_file
+		(
+			file_no
+		,	bno
+		,	org_file_name
+		,	stored_file_name
+		,	regdate
+		,	del_gb	
+		)
+		values
+		(
+			#{file_no}
+		,	#{bno}
+		,	#{org_file_name}
+		,	#{stored_file_name}
+		,	#{regdate}
+		,	#{del_gb}
+		
+		)
+	</insert>
+	
+	<!-- <insert id="insertLog" parameterType="LogVO">
+		insert into tbl_log (LOGNO,MEMBER_ID,BNO,RNO,QUESTIONID,CATEGORI)
+	values
+	((SELECT NVL(MAX(LOGNO),0)+1 FROM TBL_LOG), #{memberId} , #{bno} , #{rno}, #{questionId}, #{categori})
+	</insert>
+	
+	<delete id="deleteLog" parameterType="LogVO">
+	delete from tbl_log where memberId = #{memberId} and bno = #{bno} and categori = #{categori}
+	</delete>
+	
+	<delete id="deleteReplyLog" parameterType="logVO">
+	delete from tbl_log where memberId = #{memberId} and rno = #{rno} and categori = #{categori}
+	</delete>  	
+	
+	
+	
+	<select id="memberLog" resultMap="LogVO">
+	select 
+		a.bno
+	,	a.rno
+	,	a.memberId
+	,	a.questionId
+	,	a.categori
+	,	a.logdate
+	,	b.board_no
+	,	b.board_title
+	,	b.board_writer
+	,	c.reply_writer
+	,	c.reply_no
+	from tbl_log a
+		left outer join tbl_board b on a.bno = b.board_no
+		left outer join tbl_reply c on a.rno = c.reply_no
+		where a.memberId = #{memberId} orderby a.logdate desc
+	</select>
+	
+	<select id="memberWrite" resultMap="boardVO">
+	select
+		board_no
+	,	board_title
+	,	board_writer
+	,	board_regdate
+	from tbl_board where board_wirter = #{board_writer} order by board_regdate desc
+	</select>
+	
+	<select id="memberReply" resultMap="replyVO">
+		select
+			a.reply_no
+		,	a.reply_regdate
+		,	b.board_no
+		,	b.board_title
+		,	b.board_writer
+		from tbl_reply a left outer join tbl_board b
+		on a.board_no = b.board_no
+		where a.reply_writer = #{memberId} order by a.reply_regdate desc
+	</select> -->
 
 	 <!-- 게시판 검색 -->
 	<!-- <select id="BoardListPage" resultType="boardVO" parameterType="SearchCriteria">

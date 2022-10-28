@@ -12,11 +12,4 @@ public interface ItemService {
 	
 	public void itemInsert(ItemVO itemVO, MultipartHttpServletRequest request);
 
-	public void itemMainImg();
-
-
-	public void itemSubImg();
-
-
-	public void itemMainFile();
 }

@@ -56,9 +56,48 @@
 		where me_email = #{me_email} 
 		and me_pwd = #{me_pwd}
 	</select>
-
 	
+	<select id="memberInfoSearch" parameterType="memberVO" resultType="memberVO">
+	<![CDATA[
+		select
+		 *
+		from 
+			tbl_member
+		where 
+			me_id = #{me_id}
+	]]>
+	</select>
 	
+	<update id="memberPasswordUpdate" parameterType="memberVO">
+		UPDATE
+			tbl_member
+		SET
+			me_name = #{me_name}
+		,	me_id = #{me_id}	
+		,	me_pwd = #{me_pwd}
+		,	me_email = #{me_email}
+		where
+			me_id = #{me_id}
+	</update>
 	
-  	
+	<update id="memberUpdate" parameterType="memberVO">
+		UPDATE
+			tbl_member
+		SET
+			me_name = #{me_name}
+		,	me_id = #{me_id}
+		,	me_email = #{me_email}
+		where
+			me_id = #{me_id}
+	</update>
+	
+	<!-- 회원관리 -->
+	<select id="memberManage" resultType="memberVO" parameterType="memberVO">
+	select * from tbl_member
+	</select>
+	
+	<!-- <select id="memberInfo" resultMap="memberVO">
+	select * from tbl_member where me_id = #{me_id}
+	</select> -->
+	
 </mapper>

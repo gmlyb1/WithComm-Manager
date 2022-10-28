@@ -1,5 +1,8 @@
 package com.soft.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.inject.Inject;
 import javax.security.auth.login.AccountException;
 import javax.servlet.http.HttpServletRequest;
@@ -9,10 +12,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.soft.service.MemberService;
 import com.soft.vo.memberVO;
@@ -38,7 +43,7 @@ public class MemberController {
 		int result = memberService.idChk(vo);
 		try {
 			if(result == 1) {
-				return "/account/registe";
+				return "/account/register";
 			}else if(result ==0) {
 				memberService.register(vo);
 			}
@@ -104,4 +109,61 @@ public class MemberController {
 		return result;
 	}
 	
+	// 프로필 목록
+	@RequestMapping(value = "/account/profile" , method=RequestMethod.GET)
+	public void ProfileGET() throws Exception {
+	}
+	
+	// 프로필 목록 post
+	@RequestMapping(value = "/account/profile", method=RequestMethod.POST)
+	public String ProfilePOST(HttpServletRequest request, Model model,HttpSession session,memberVO mVO) throws Exception {
+		
+		try {
+			
+			memberVO memberVO = (memberVO) session.getAttribute("memberVO");
+			
+			mVO.setMe_id(memberVO.getMe_id());
+			memberVO memberSearch = memberService.memberInfoSearch(mVO);
+			
+			model.addAttribute("mVO", memberSearch);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+			model.addAttribute("msg", "오류가 발생되었습니다.");
+		}
+		
+		return "/account/profile";
+	}
+	
+	@RequestMapping(value ="/account/profile_action", method=RequestMethod.POST) 
+	public String profile_action(HttpServletRequest request, RedirectAttributes redirectAttributes, Model model, HttpSession session,memberVO mVO) {
+			
+		try {
+			memberService.memberUpdate(mVO);
+			redirectAttributes.addFlashAttribute("msg", "수정 하였습니다.");
+			
+		}catch (Exception e) {
+			System.out.println(e.toString());
+			redirectAttributes.addFlashAttribute("msg", "오류가 발생되었습니다.");
+		}
+		
+		return "redirect:/account/profile";
+	}
+	
+	// 회원관리
+	@RequestMapping(value = "/account/manage", method=RequestMethod.GET)
+	public String memberList(@ModelAttribute("mVO") memberVO mVO, HttpServletRequest request, Model model) throws Exception {
+
+		Map<String, ?>inputFlashMap = RequestContextUtils.getInputFlashMap(request);
+		
+		if(null != inputFlashMap) {
+			model.addAttribute("msg", (String)inputFlashMap.get("msg"));
+		}
+		
+		List<memberVO> memberList = memberService.memberManage(mVO);
+		
+		model.addAttribute("memberList", memberList);
+		
+		return "/account/manage";
+	}
+
 }

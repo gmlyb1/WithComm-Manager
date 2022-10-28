@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
@@ -160,7 +161,25 @@ public class BoardController {
 		}
 	
 	
-	
+	// 게시판 로그
+//	@RequestMapping(value= "/board/myPage" , method=RequestMethod.GET) 
+//	public String myPageGET(String select, String memberId, Model model) throws Exception {
+//		logger.info("select"+select);
+//		model.addAttribute("info",boardService.memberInfo(memberId));
+//		model.addAttribute("memberId", memberId);
+//		
+//		if(select.equals("log")) {
+//			model.addAttribute("log", boardService.memberLog(memberId));
+//		}else if(select.equals("write")) {
+//			model.addAttribute("write",boardService.memberWrite(memberId));
+//		}else if(select.equals("scrap")) {
+//			model.addAttribute("scrap",boardService.memberScrap(memberId));
+//		}else if(select.equals("reply")) {
+//			model.addAttribute("reply",boardService.memberReply(memberId));
+//		}
+//		
+//		return "/board/myPage";
+//	}
 	
 	
 	

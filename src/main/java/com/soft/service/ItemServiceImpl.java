@@ -28,45 +28,28 @@ public class ItemServiceImpl implements ItemService {
 	@Transactional
 	@Override
 	public void itemInsert(ItemVO itemVO,MultipartHttpServletRequest request) {
-		itemDAO.itemInsert(itemVO,request);
-		this.itemDAO.itemInsert(itemVO, request);
-		
-		Map<String, Object> itemMainImg = this.fileUtils.itemMainImg(itemVO,request);
-		this.itemDAO.itemMainImg();
-		this.itemDAO.itemSubImg();
-		
-		Map<String, Object> itemSubImg = this.fileUtils.itemSubImg(itemVO, request);
-		this.itemDAO.itemSubImg();
-		this.itemDAO.itemMainFile();
-		
-		
-		for(int i = 0; i < (itemVO.getItem_option()).length; i++) {
-			String itemOptionContent = itemVO.getItem_option()[i];
-			int itemOptionVol = itemVO.getItem_vol()[1];
-			Map<String, Object> map = new HashMap<>();
-			map.put("item_option", itemOptionContent);
-			map.put("item_no", Integer.valueOf(itemVO.getItem_no()));
-			map.put("item_vol", Integer.valueOf(itemOptionVol));
-			this.itemDAO.itemOptionInsert(map);
-		}
+//		itemDAO.itemInsert(itemVO,request);
+//		this.itemDAO.itemInsert(itemVO, request);
+//		
+//		Map<String, Object> itemMainImg = this.fileUtils.itemMainImg(itemVO,request);
+//		this.itemDAO.itemMainImg();
+//		this.itemDAO.itemSubImg();
+//		
+//		Map<String, Object> itemSubImg = this.fileUtils.itemSubImg(itemVO, request);
+//		this.itemDAO.itemSubImg();
+//		this.itemDAO.itemMainFile();
+//		
+//		
+//		for(int i = 0; i < (itemVO.getItem_option()).length; i++) {
+//			String itemOptionContent = itemVO.getItem_option()[i];
+//			int itemOptionVol = itemVO.getItem_vol()[1];
+//			Map<String, Object> map = new HashMap<>();
+//			map.put("item_option", itemOptionContent);
+//			map.put("item_no", Integer.valueOf(itemVO.getItem_no()));
+//			map.put("item_vol", Integer.valueOf(itemOptionVol));
+//			this.itemDAO.itemOptionInsert(map);
+//		}
 	}
 
-	@Override
-	public void itemMainImg() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void itemSubImg() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void itemMainFile() {
-		// TODO Auto-generated method stub
-		
-	}	
 	
 }

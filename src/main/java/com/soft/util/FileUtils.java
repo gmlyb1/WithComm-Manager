@@ -22,12 +22,11 @@ public class FileUtils {
 	
 	private static final String filePath = "C:\\mp\\file\\"; // 파일이 저장될 위치
 	
-	public List<Map<String, Object>> parseInsertFileInfo(boardVO bVO, MultipartHttpServletRequest request) throws Exception {
-		
-		Iterator<String> iterator = request.getFileNames();
+	public List<Map<String,  Object>> parseInsertFileInfo(boardVO bVO, MultipartHttpServletRequest mpRequest) throws Exception {
+		Iterator<String> iterator = mpRequest.getFileNames();
 		
 		MultipartFile multipartFile = null;
-		String originalFileName = null;
+		String originalFilename = null;
 		String originalFileExtension = null;
 		String storedFileName = null;
 		
@@ -42,36 +41,27 @@ public class FileUtils {
 		}
 		
 		while(iterator.hasNext()) {
-			multipartFile = request.getFile(iterator.next());
+			multipartFile = mpRequest.getFile(iterator.next());
 			if(multipartFile.isEmpty() == false) {
-				originalFileName = multipartFile.getOriginalFilename();
-				originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+				originalFilename = multipartFile.getOriginalFilename();
+				originalFileExtension = originalFilename.substring(originalFilename.lastIndexOf("."));
 				storedFileName = getRandomString() + originalFileExtension;
 				
 				file = new File(filePath + storedFileName);
 				multipartFile.transferTo(file);
-				listMap = new HashMap<String,Object>();
-				listMap.put("BNO", bno);
-				listMap.put("ORG_FILE_NAME", originalFileName);
-				listMap.put("STORED_FILE_NAME", storedFileName);
-				listMap.put("FILE_SIZE", multipartFile.getSize());
-				
+		
+				listMap = new HashMap<String, Object>();
+				listMap.put("BNO",bno);
+				listMap.put("ORG_FILE_NAME",originalFilename);
+				listMap.put("STORED_FILE_NAME",storedFileName);
+				listMap.put("FILE_SIZE",multipartFile.getSize());
+				list.add(listMap);
 			}
 		}
-			return list;
+		return list;
 	}
 	
 	public static String getRandomString() {
-		return UUID.randomUUID().toString().replaceAll("-","");
-	}
-
-	public Map<String, Object> itemMainImg(ItemVO itemVO, MultipartHttpServletRequest request) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Map<String, Object> itemSubImg(ItemVO itemVO, MultipartHttpServletRequest request) {
-		// TODO Auto-generated method stub
-		return null;
+		return UUID.randomUUID().toString().replaceAll("-", "");
 	}
 }

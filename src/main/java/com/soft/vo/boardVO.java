@@ -1,7 +1,5 @@
 package com.soft.vo;
 
-
-
 import org.springframework.stereotype.Component;
 
 @Component
@@ -13,6 +11,8 @@ public class boardVO{
 	private String board_writer;
 	private int board_count;
 	private String board_regdate;
+	private int board_hit;
+	private int board_reply_hit;
 	
 	public int getBoard_no() {
 		return board_no;
@@ -50,25 +50,25 @@ public class boardVO{
 	public void setBoard_regdate(String board_regdate) {
 		this.board_regdate = board_regdate;
 	}
+	public int getBoard_hit() {
+		return board_hit;
+	}
+	public void setBoard_hit(int board_hit) {
+		this.board_hit = board_hit;
+	}
+	public int getBoard_reply_hit() {
+		return board_reply_hit;
+	}
+	public void setBoard_reply_hit(int board_reply_hit) {
+		this.board_reply_hit = board_reply_hit;
+	}
 	
 	@Override
 	public String toString() {
 		return "boardVO [board_no=" + board_no + ", board_title=" + board_title + ", board_content=" + board_content
 				+ ", board_writer=" + board_writer + ", board_count=" + board_count + ", board_regdate=" + board_regdate
-				+ "]";
+				+ ", board_hit=" + board_hit + ", board_reply_hit=" + board_reply_hit + "]";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

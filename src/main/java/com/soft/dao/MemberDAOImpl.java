@@ -1,5 +1,7 @@
 package com.soft.dao;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -34,5 +36,26 @@ public class MemberDAOImpl implements MemberDAO {
 		int result = sqlSession.selectOne("namespace.idChk",vo);
 		return result;
 	}
+
+	@Override
+	public memberVO memberInfoSearch(memberVO mVO) throws Exception {
+		return sqlSession.selectOne("namespace.memberInfoSearch",mVO);
+	}
+
+	@Override
+	public void memberUpdate(memberVO mVO) throws Exception {
+			sqlSession.update("namespace.memberUpdate",mVO);
+	}
+
+	@Override
+	public void memberPasswordUpdate(memberVO mVO) throws Exception {
+			sqlSession.update("namespace.memberPassword",mVO);
+	}
+
+	@Override
+	public List<memberVO> memberManage(memberVO mVO) throws Exception{
+		return sqlSession.selectList("namespace.memberManage",mVO );
+	}
+
 
 }

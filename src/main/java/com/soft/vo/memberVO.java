@@ -12,12 +12,12 @@ public class memberVO {
 	private String me_email;
 	private String me_pwd;
 	private String me_name;
+	private String me_grade;
 	private String me_dept;
 	private String me_posi;
 	private Date me_regDate;
 	private String me_extension;
 	private String me_image;
-	
 	public int getMe_id() {
 		return me_id;
 	}
@@ -41,6 +41,12 @@ public class memberVO {
 	}
 	public void setMe_name(String me_name) {
 		this.me_name = me_name;
+	}
+	public String getMe_grade() {
+		return me_grade;
+	}
+	public void setMe_grade(String me_grade) {
+		this.me_grade = me_grade;
 	}
 	public String getMe_dept() {
 		return me_dept;
@@ -76,9 +82,10 @@ public class memberVO {
 	@Override
 	public String toString() {
 		return "memberVO [me_id=" + me_id + ", me_email=" + me_email + ", me_pwd=" + me_pwd + ", me_name=" + me_name
-				+ ", me_dept=" + me_dept + ", me_posi=" + me_posi + ", me_regDate=" + me_regDate + ", me_extension="
-				+ me_extension + ", me_image=" + me_image + "]";
+				+ ", me_grade=" + me_grade + ", me_dept=" + me_dept + ", me_posi=" + me_posi + ", me_regDate="
+				+ me_regDate + ", me_extension=" + me_extension + ", me_image=" + me_image + "]";
 	}
+	
 	
 	
 	

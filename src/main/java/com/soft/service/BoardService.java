@@ -3,6 +3,8 @@ package com.soft.service;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 import com.soft.vo.boardVO;
 import com.soft.vo.replyVO;
 
@@ -28,4 +30,21 @@ public interface BoardService {
 
 	// ´ñ±Û ÀÛ¼º
 	public void replyWrite(replyVO vo) throws Exception;
+
+	//´ñ±Û¼ö
+//	public void replyCount(int board_no,int amount) throws Exception;
+	
+	
+	
+	// board log
+//	public Object memberInfo(String memberId);
+//
+//	public Object memberLog(String memberId);
+//
+//	public Object memberWrite(String memberId);
+//
+//	public Object memberScrap(String memberId);
+//
+//	public Object memberReply(String memberId);
+	
 }
