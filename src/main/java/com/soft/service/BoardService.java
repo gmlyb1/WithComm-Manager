@@ -1,9 +1,7 @@
 package com.soft.service;
 
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.soft.vo.boardVO;
 import com.soft.vo.replyVO;

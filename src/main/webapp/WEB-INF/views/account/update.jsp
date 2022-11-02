@@ -6,29 +6,11 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <script type="text/javascript">
-	function _onsubmit() {
-		if ($("#me_email").val() == "") {
-			alert("이메일 입력해주세요");
-			$("#me_email").focus();
-			return false;
-		}
-
-		if ($("#me_pwd").val() == "") {
-			alert("제목을 입력해주세요");
-			$("#me_pwd").focus();
-			return false;
-		}
-
-		if ($("#me_pwd2").val() == "") {
-			alert("비밀번호를 한번 더 입력해 주세요");
-			$("#me_pwd2").focus();
-			return false;
-		}
-
-		if (!confirm("회원 정보를 변경 하시겠습니까?")) {
-			return false;
-		}
+function _onSubmit(){
+	if(!confirm("수정 하시겠습니까?")){
+		return false;
 	}
+}
 </script>
 <!-- Custom fonts for this template-->
 <link href="/resources/vendor/fontawesome-free/css/all.min.css"
@@ -41,7 +23,7 @@
 <link href="/resources/css/sb-admin-2.min.css" rel="stylesheet">
 <%@include file="../includes/header.jsp"%>
 
-<form method="post">
+<form action="/account/update" role="form" method="post" name="updateForm" onsubmit="return _onSubmit();">
 	<div class="container">
 		<div class="card o-hidden border-0 shadow-lg my-5">
 			<div class="card-body p-0">
@@ -50,7 +32,7 @@
 						<div class="col-lg-7">
 							<div class="p-5">
 								<div class="text-center">
-									<h1 class="h4 text-gray-900 mb-4">프로필</h1>
+									<h1 class="h4 text-gray-900 mb-4">프로필 수정 페이지</h1>
 								</div>
 							</div>
 
@@ -68,7 +50,7 @@
 									<div class="col-sm-12 mb-3 mb-sm-0">
 										닉네임:<input type="text" class="form-control form-control-user"
 											id="me_name" name="me_name" style="text-align: center;"
-											value="${member.me_name}" placeholder="닉네임" disabled>
+											value="${member.me_name}" placeholder="닉네임">
 									</div>
 								</div>
 								<div class="form-group row">
@@ -83,18 +65,18 @@
 									<div class="col-sm-12 mb-3 mb-sm-0">
 										<input type="password" class="form-control form-control-user"
 											id="me_pwd" name="me_pwd" style="text-align: center;"
-											placeholder="비밀번호" disabled>
+											placeholder="비밀번호">
 									</div>
 								</div>
 								<div class="form-group row">
 									<div class="col-sm-12 mb-3 mb-sm-0">
 										<input type="password" class="form-control form-control-user"
 											id="me_pwd2" name="me_pwd2" style="text-align: center;"
-											placeholder="비밀번호 확인" disabled>
+											placeholder="비밀번호 확인">
 									</div>
 								</div>
-								<a href="/account/update" class="btn btn-primary" onsubmit="return _onSubmit();">
-									수정하기</a>
+								<button class="btn btn-primary" onsubmit="return _onSubmit();">
+									수정하기</button>
 								<br>
 								<button type="button" class="btn btn-danger"
 									onclick="location.href='/account/delete';">회원탈퇴</button>

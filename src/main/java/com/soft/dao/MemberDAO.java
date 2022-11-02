@@ -25,7 +25,6 @@ public interface MemberDAO {
 	
 	// 프로필 수정
 	public void memberUpdate(memberVO mVO) throws Exception;
-	public void memberPasswordUpdate(memberVO mVO)throws Exception;
 	
 	// 회원 관리
 	public List<memberVO> memberManage(memberVO mVO)throws Exception;

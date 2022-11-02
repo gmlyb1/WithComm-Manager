@@ -35,6 +35,9 @@ public class HomeController {
 	@Inject
 	private MemberService memberService;
 	
+	@Autowired
+	@Inject
+	private BoardService boardService;
 	
 	@RequestMapping(value = "home", method = RequestMethod.GET)
 	public String home(Locale locale, HttpServletRequest request,Model model, HttpSession session) throws Exception {

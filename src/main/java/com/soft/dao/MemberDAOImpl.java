@@ -48,11 +48,6 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public void memberPasswordUpdate(memberVO mVO) throws Exception {
-			sqlSession.update("namespace.memberPassword",mVO);
-	}
-
-	@Override
 	public List<memberVO> memberManage(memberVO mVO) throws Exception{
 		return sqlSession.selectList("namespace.memberManage",mVO );
 	}

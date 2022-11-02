@@ -1,6 +1,7 @@
 package com.soft.vo;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class replyVO {
 	
@@ -9,7 +10,7 @@ public class replyVO {
 	private String reply_content;
 	private String reply_writer;
 	private Date reply_regdate;
-	
+
 	public int getBoard_no() {
 		return board_no;
 	}
@@ -46,6 +47,8 @@ public class replyVO {
 		return "replyVO [board_no=" + board_no + ", reply_no=" + reply_no + ", reply_content=" + reply_content
 				+ ", reply_writer=" + reply_writer + ", reply_regdate=" + reply_regdate + "]";
 	}
+	
+	
 	
 
 }

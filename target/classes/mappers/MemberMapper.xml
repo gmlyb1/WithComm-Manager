@@ -68,25 +68,13 @@
 	]]>
 	</select>
 	
-	<update id="memberPasswordUpdate" parameterType="memberVO">
-		UPDATE
-			tbl_member
-		SET
-			me_name = #{me_name}
-		,	me_id = #{me_id}	
-		,	me_pwd = #{me_pwd}
-		,	me_email = #{me_email}
-		where
-			me_id = #{me_id}
-	</update>
-	
 	<update id="memberUpdate" parameterType="memberVO">
 		UPDATE
 			tbl_member
 		SET
 			me_name = #{me_name}
-		,	me_id = #{me_id}
 		,	me_email = #{me_email}
+		,	me_pwd = #{me_pwd}
 		where
 			me_id = #{me_id}
 	</update>

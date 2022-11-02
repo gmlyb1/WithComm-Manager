@@ -111,31 +111,25 @@ public class MemberController {
 	
 	// 프로필 목록
 	@RequestMapping(value = "/account/profile" , method=RequestMethod.GET)
-	public void ProfileGET() throws Exception {
-	}
-	
-	// 프로필 목록 post
-	@RequestMapping(value = "/account/profile", method=RequestMethod.POST)
-	public String ProfilePOST(HttpServletRequest request, Model model,HttpSession session,memberVO mVO) throws Exception {
+	public String ProfileGET(HttpServletRequest request, Model model,HttpSession session,memberVO mVO) throws Exception {
 		
-		try {
-			
-			memberVO memberVO = (memberVO) session.getAttribute("memberVO");
-			
-			mVO.setMe_id(memberVO.getMe_id());
-			memberVO memberSearch = memberService.memberInfoSearch(mVO);
-			
-			model.addAttribute("mVO", memberSearch);
-		} catch (Exception e) {
-			System.out.println(e.toString());
-			model.addAttribute("msg", "오류가 발생되었습니다.");
-		}
+		List<memberVO> memberList = memberService.memberManage(mVO);
+		
+		model.addAttribute("memberList", memberList);
 		
 		return "/account/profile";
 	}
 	
-	@RequestMapping(value ="/account/profile_action", method=RequestMethod.POST) 
-	public String profile_action(HttpServletRequest request, RedirectAttributes redirectAttributes, Model model, HttpSession session,memberVO mVO) {
+	@RequestMapping(value = "/account/update", method=RequestMethod.GET)
+	public String profileUpdateGET(memberVO mvo, Model model) throws Exception 
+	{	
+		model.addAttribute("update", memberService.memberManage(mvo));
+		
+		return "/account/update";
+	}
+	
+	@RequestMapping(value ="/account/update", method=RequestMethod.POST) 
+	public String profileUpdatePOST(HttpServletRequest request, RedirectAttributes redirectAttributes, Model model, HttpSession session,memberVO mVO) {
 			
 		try {
 			memberService.memberUpdate(mVO);

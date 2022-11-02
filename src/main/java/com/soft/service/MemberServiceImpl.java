@@ -31,7 +31,6 @@ public class MemberServiceImpl implements MemberService {
 	public int idChk(memberVO vo) throws Exception {
 		  int result = memberDAO.idChk(vo);
 		  return result; 
-
 	}
 	  
 	  @Override
@@ -47,22 +46,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void memberUpdate(memberVO mVO) throws Exception{
-		if(!StringUtils.isNullOrEmpty(mVO.getMe_pwd())) {
-			try {
-				String enpassword = encryptPassword(mVO.getMe_pwd());
-				mVO.setMe_pwd(enpassword);
-				memberDAO.memberUpdate(mVO);
-			}catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-		}
 		memberDAO.memberUpdate(mVO);
-	}
-
-	private String encryptPassword(String me_pwd) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

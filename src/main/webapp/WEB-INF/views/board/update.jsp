@@ -14,7 +14,7 @@
 
 		$(".cancel_btn").on("click", function() {
 			event.preventDefault();
-			location.href = "board/list";
+			location.href = "/board/list";
 		})
 	})
 	

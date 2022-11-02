@@ -57,7 +57,7 @@ $(document).ready(function(){
 							<fmt:formatDate value="${memberList.me_regDate}" pattern="yy-MM-dd HH:mm" />
 							</td>
 							<td class="text-center">
-								<a href="/account/profile" class="btn btn-success">수정</a>
+								<a href="/account/profile" class="btn btn-success">프로필 확인</a>
 								<a class="btn btn-danger">삭제</a>
 							</td>
 						</tr>

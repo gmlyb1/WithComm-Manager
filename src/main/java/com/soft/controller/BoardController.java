@@ -24,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.soft.service.BoardService;
+import com.soft.service.ReplyService;
 import com.soft.vo.boardVO;
 import com.soft.vo.replyVO;
 
@@ -35,23 +36,26 @@ public class BoardController {
 	private BoardService boardService;
 	
 	@Inject
+	private ReplyService replyService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
 	//게시판 목록
 	@RequestMapping(value = "/board/list", method=RequestMethod.GET)
-	public String BoardList(@ModelAttribute("vo") boardVO vo,HttpServletRequest request,Model model) throws Exception 
+	public String BoardList(@ModelAttribute("vo") boardVO vo,replyVO rvo,HttpServletRequest request,Model model) throws Exception 
 	{
 		Map<String, ?> inputFlashMap = RequestContextUtils.getInputFlashMap(request);
 		
 		if(null != inputFlashMap) {
 			model.addAttribute("msg", (String)inputFlashMap.get("msg"));
 		}
-		
-		
+		//게시물 목록
 		List<boardVO> boardList = boardService.BoardList(vo);
-		
 		model.addAttribute("boardList", boardList);
+		
+		//댓글목록
+//		List<replyVO> replyList = replyService.replyList(rvo);
+//		model.addAttribute("replyList", replyList);
 		
 		return "/board/list";
 	}
@@ -89,11 +93,16 @@ public class BoardController {
 
 	// 게시글 조회
 	@RequestMapping(value = "/board/read", method=RequestMethod.GET)
-	public String BoardRead(boardVO vo, Model model) throws Exception {
+	public String BoardRead(@RequestParam("board_no") int board_no,boardVO vo, Model model) throws Exception {
+		
 		
 		model.addAttribute("read", boardService.BoardRead(vo.getBoard_no()));
 		
-		List<replyVO> replyList = boardService.ReadReply(vo.getBoard_no());
+//		List<replyVO> replyList = boardService.ReadReply(vo.getBoard_no());
+//		model.addAttribute("replyList", replyList);
+		
+		List<replyVO> replyList = null;
+		replyList = replyService.replyList(board_no);
 		model.addAttribute("replyList", replyList);
 		
 		return "/board/read";
