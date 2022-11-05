@@ -12,6 +12,7 @@ import com.soft.service.ReplyService;
 import com.soft.vo.replyVO;
 
 @Controller
+@RequestMapping("/reply/*")
 public class ReplyController {
 
 	@Inject
@@ -21,7 +22,7 @@ public class ReplyController {
 	
 	
 	// ¥Ò±€ ¿€º∫
-	@RequestMapping(value = "/reply/write", method=RequestMethod.POST)
+	@RequestMapping(value = "/write", method=RequestMethod.POST)
 	public String postWrite(replyVO vo) throws Exception {
 		
 		 replyService.replyWrite(vo);

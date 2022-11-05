@@ -29,6 +29,7 @@ import com.soft.vo.boardVO;
 import com.soft.vo.replyVO;
 
 @Controller
+@RequestMapping("/board/*")
 public class BoardController {
 
 	@Autowired
@@ -41,7 +42,7 @@ public class BoardController {
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
 	//게시판 목록
-	@RequestMapping(value = "/board/list", method=RequestMethod.GET)
+	@RequestMapping(value = "/list", method=RequestMethod.GET)
 	public String BoardList(@ModelAttribute("vo") boardVO vo,replyVO rvo,HttpServletRequest request,Model model) throws Exception 
 	{
 		Map<String, ?> inputFlashMap = RequestContextUtils.getInputFlashMap(request);
@@ -61,12 +62,12 @@ public class BoardController {
 	}
 	
 	// 게시글 등록 (GET)
-	@RequestMapping(value = "/board/create", method= RequestMethod.GET)
+	@RequestMapping(value = "/create", method= RequestMethod.GET)
 	public void insertBoardGET() {
 	}
 	
 	// 게시글 등록 (POST)
-	@RequestMapping(value= "/board/create" , method = RequestMethod.POST)
+	@RequestMapping(value= "/create" , method = RequestMethod.POST)
 	public String insertBoardPOST(@ModelAttribute("vo") boardVO vo,HttpServletRequest request ,RedirectAttributes redirect) throws Exception 
 	{
 		
@@ -92,23 +93,25 @@ public class BoardController {
 }
 
 	// 게시글 조회
-	@RequestMapping(value = "/board/read", method=RequestMethod.GET)
+	@RequestMapping(value = "/read", method=RequestMethod.GET)
 	public String BoardRead(@RequestParam("board_no") int board_no,boardVO vo, Model model) throws Exception {
 		
 		
 		model.addAttribute("read", boardService.BoardRead(vo.getBoard_no()));
 		
+		List<replyVO> replyList = boardService.ReadReply(vo.getBoard_no());
+		
 //		List<replyVO> replyList = boardService.ReadReply(vo.getBoard_no());
 //		model.addAttribute("replyList", replyList);
 		
-		List<replyVO> replyList = null;
-		replyList = replyService.replyList(board_no);
+//		List<replyVO> replyList = null;
+//		replyList = replyService.replyList(board_no);
 		model.addAttribute("replyList", replyList);
 		
 		return "/board/read";
 	}
 	
-	@RequestMapping(value = "/board/update" , method= RequestMethod.GET)
+	@RequestMapping(value = "/update" , method= RequestMethod.GET)
 	public String BoardUpdateGET(boardVO vo, Model model) throws Exception
 	{
 		model.addAttribute("update", boardService.BoardRead(vo.getBoard_no()));
@@ -116,7 +119,7 @@ public class BoardController {
 	}
 	
 	//게시글 수정
-	@RequestMapping(value = "/board/update", method= RequestMethod.POST)
+	@RequestMapping(value = "/update", method= RequestMethod.POST)
 	public String BoardUpdatePOST(boardVO vo,Model model,RedirectAttributes rttr) throws Exception
 	{
 		try {
@@ -131,7 +134,7 @@ public class BoardController {
 	
 	
 	//게시글 삭제
-	@RequestMapping(value = "/board/delete", method=RequestMethod.POST)
+	@RequestMapping(value = "/delete", method=RequestMethod.POST)
 	public String BoardDeletePOST(boardVO vo, RedirectAttributes rttr) throws Exception
 	{
 		
@@ -148,12 +151,12 @@ public class BoardController {
 	}
 	
 	// 게시글 등록 (GET)
-		@RequestMapping(value = "/board/replyWrite", method= RequestMethod.GET)
+		@RequestMapping(value = "/replyWrite", method= RequestMethod.GET)
 		public void replyWrite() {
 		}
 	
 	// 댓글작성
-		@RequestMapping(value ="/board/replyWrite" , method= RequestMethod.POST)
+		@RequestMapping(value ="/replyWrite" , method= RequestMethod.POST)
 		public String replyWrite(replyVO vo, RedirectAttributes rttr) throws Exception
 		{
 			try {

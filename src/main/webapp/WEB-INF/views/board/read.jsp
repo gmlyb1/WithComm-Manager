@@ -115,7 +115,10 @@
 									<tr>
 										<td style="width: 60%; height: 50px;"><pre
 												style="font-family: arial;">${replyList.reply_content}</pre>
-										</td>
+											<p>
+												<a class="btn btn-primary" href="">수정</a> /
+												 <a class="btn btn-danger" href="">삭제</a>
+											</p></td>
 										<td style="width: 35%; text-align: right;"><fmt:formatDate
 												value="${replyList.reply_regdate}" pattern="yy-MM-dd HH:mm" /></td>
 										<td style="width: 5%;">&nbsp;</td>
@@ -129,21 +132,29 @@
 
 
 				<!-- 댓글 작성 시작 -->
-				<div>
-					<form method="post" action="/reply/write">
-						<p>
-							<label>댓글 작성자:</label> <input type="text" name="reply_writer" value="${member.me_name}[${member.me_grade}]">
-						</p>
-						<p>
-							댓글 내용:<textarea class="form-control" rows="3" cols="155" placeholder="댓글을 남겨주세요." name="reply_content"></textarea>
-						</p>
-						<p>
-							<input type="hidden" name="reply.board_no"
-								value="${read.board_no}">
-							<button type="submit" class="btn btn-success" style="margin:55px 0 0 10px;">댓글 작성</button>
-						</p>
-					</form>
-				</div>
+				<c:if test="${member.me_grade == '최고관리자' }">
+					<div>
+						<form method="post" action="/reply/write">
+							<p>
+								<label>댓글 작성자:</label> <input type="text" name="reply_writer"
+									value="${member.me_name}[${member.me_grade}]" readonly>
+							</p>
+							<p>
+								댓글 내용:
+								<textarea class="form-control" rows="3" cols="155"
+									placeholder="댓글을 남겨주세요." name="reply_content"></textarea>
+							</p>
+
+
+							<p>
+								<input type="hidden" name="reply.board_no"
+									value="${read.board_no}">
+								<button type="submit" class="btn btn-success"
+									style="margin: 55px 0 0 10px;">댓글 작성</button>
+							</p>
+						</form>
+					</div>
+				</c:if>
 				<!-- 댓글 작성 끝 -->
 			</div>
 		</div>

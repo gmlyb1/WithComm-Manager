@@ -4,20 +4,21 @@ import java.util.Date;
 
 import org.springframework.stereotype.Component;
 
-
 @Component
 public class memberVO {
-	
+
 	private int me_id;
 	private String me_email;
 	private String me_pwd;
 	private String me_name;
 	private String me_grade;
-	private String me_dept;
-	private String me_posi;
 	private Date me_regDate;
-	private String me_extension;
 	private String me_image;
+	private String me_addr1;
+	private String me_addr2;
+	private String me_addr3;
+	private int verify;
+	
 	public int getMe_id() {
 		return me_id;
 	}
@@ -48,29 +49,11 @@ public class memberVO {
 	public void setMe_grade(String me_grade) {
 		this.me_grade = me_grade;
 	}
-	public String getMe_dept() {
-		return me_dept;
-	}
-	public void setMe_dept(String me_dept) {
-		this.me_dept = me_dept;
-	}
-	public String getMe_posi() {
-		return me_posi;
-	}
-	public void setMe_posi(String me_posi) {
-		this.me_posi = me_posi;
-	}
 	public Date getMe_regDate() {
 		return me_regDate;
 	}
 	public void setMe_regDate(Date me_regDate) {
 		this.me_regDate = me_regDate;
-	}
-	public String getMe_extension() {
-		return me_extension;
-	}
-	public void setMe_extension(String me_extension) {
-		this.me_extension = me_extension;
 	}
 	public String getMe_image() {
 		return me_image;
@@ -78,15 +61,39 @@ public class memberVO {
 	public void setMe_image(String me_image) {
 		this.me_image = me_image;
 	}
+	public String getMe_addr1() {
+		return me_addr1;
+	}
+	public void setMe_addr1(String me_addr1) {
+		this.me_addr1 = me_addr1;
+	}
+	public String getMe_addr2() {
+		return me_addr2;
+	}
+	public void setMe_addr2(String me_addr2) {
+		this.me_addr2 = me_addr2;
+	}
+	public String getMe_addr3() {
+		return me_addr3;
+	}
+	public void setMe_addr3(String me_addr3) {
+		this.me_addr3 = me_addr3;
+	}
+	
+	public int getVerify() {
+		return verify;
+	}
+	public void setVerify(int verify) {
+		this.verify = verify;
+	}
 	
 	@Override
 	public String toString() {
 		return "memberVO [me_id=" + me_id + ", me_email=" + me_email + ", me_pwd=" + me_pwd + ", me_name=" + me_name
-				+ ", me_grade=" + me_grade + ", me_dept=" + me_dept + ", me_posi=" + me_posi + ", me_regDate="
-				+ me_regDate + ", me_extension=" + me_extension + ", me_image=" + me_image + "]";
+				+ ", me_grade=" + me_grade + ", me_regDate=" + me_regDate + ", me_image=" + me_image + ", me_addr1="
+				+ me_addr1 + ", me_addr2=" + me_addr2 + ", me_addr3=" + me_addr3 + ", verify=" + verify + "]";
 	}
-	
-	
+
 	
 	
 }

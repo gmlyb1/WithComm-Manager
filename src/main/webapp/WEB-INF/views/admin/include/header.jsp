@@ -65,11 +65,11 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 			<!-- Sidebar - Brand -->
 			<a
 				class="sidebar-brand d-flex align-items-center justify-content-center"
-				href="../home">
+				href="/admin/index">
 				<div class="sidebar-brand-icon rotate-n-15">
 					<i class="fas fa-laugh-wink"></i>
 				</div>
-				<div class="sidebar-brand-text mx-3">SOFT</div>
+				<div class="sidebar-brand-text mx-3">SOFT 관리자</div>
 			</a>
 
 			<!-- Divider -->
@@ -263,6 +263,11 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 										<a class="dropdown-item" href="/admin/index"> <i
 											class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
 											관리자 화면
+										</a> 
+										
+										<a class="dropdown-item" href="../home"> <i
+											class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+											일반 화면
 										</a> 
 										</c:if>
 										<a class="dropdown-item" href="#"> <i

@@ -115,7 +115,7 @@
 										<div class="col-sm-8 mb-3 mb-sm-0">
 											<input type="password" class="form-control form-control-user"
 												id="me_pwd" name="me_pwd" style="text-align: center;"
-												placeholder="비밀번호">
+												placeholder="비밀번호" required="required">
 										</div>
 									</div> <br>
 									<button type="submit" id="submit" class="btn btn-primary btn-user btn-block">회원가입</button>

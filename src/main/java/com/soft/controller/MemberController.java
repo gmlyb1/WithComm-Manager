@@ -10,6 +10,9 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,21 +26,25 @@ import com.soft.service.MemberService;
 import com.soft.vo.memberVO;
 
 @Controller
+@RequestMapping("/account/*")
 public class MemberController {
 
 	@Inject
 	private MemberService memberService;
 	
+//	@Autowired(required = false)
+//	BCryptPasswordEncoder passEncoder;
+	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	// 회원가입 페이지 처리
-	@RequestMapping(value = "/account/register", method = RequestMethod.GET)
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public void getRegister() throws Exception {
 
 	}
 	
 	// 회원가입 액션
-	@RequestMapping(value = "/account/register" , method = RequestMethod.POST)
+	@RequestMapping(value = "/register" , method = RequestMethod.POST)
 	public String postRegister(memberVO vo, RedirectAttributes rttr) throws Exception {
 		
 		int result = memberService.idChk(vo);
@@ -57,16 +64,20 @@ public class MemberController {
 	}
 	
 	// 로그인 페이지 처리
-	@RequestMapping(value = "/account/login" , method=RequestMethod.GET)
+	@RequestMapping(value = "/login" , method=RequestMethod.GET)
 	public String login() throws Exception{
 		return "/account/login";
 	}
 	
 	
 	// 로그인 
-	@RequestMapping(value ="/account/login" , method=RequestMethod.POST)
+	@RequestMapping(value ="/login" , method=RequestMethod.POST)
 	public String login(memberVO vo, HttpServletRequest request, RedirectAttributes rttr) throws Exception{
 			
+//		String inputPass = vo.getMe_pwd();
+//		String pass = passEncoder.encode(inputPass);
+//		vo.setMe_pwd(pass);
+		
 		HttpSession session = request.getSession();
 		session.setMaxInactiveInterval(6000);
 		memberVO login = memberService.login(vo);
@@ -85,7 +96,7 @@ public class MemberController {
 	}
 	
 	// 로그아웃
-	@RequestMapping(value = "/account/logout", method = RequestMethod.GET)
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) throws Exception {
 		
 		session.invalidate();
@@ -95,7 +106,7 @@ public class MemberController {
 	
 	// 패스워드 체크
 	@ResponseBody
-	@RequestMapping(value = "/account/passChk" , method = RequestMethod.POST) 
+	@RequestMapping(value = "/passChk" , method = RequestMethod.POST) 
 	public int passChk(memberVO vo) throws Exception {
 		int result = memberService.passChk(vo);
 		return result;
@@ -103,14 +114,14 @@ public class MemberController {
 	
 	// 아이디 중복 체크
 	@ResponseBody
-	@RequestMapping(value = "/account/idChk" , method=RequestMethod.POST) 
+	@RequestMapping(value = "/idChk" , method=RequestMethod.POST) 
 	public int idChk(memberVO vo) throws Exception {
 		int result = memberService.idChk(vo);
 		return result;
 	}
 	
 	// 프로필 목록
-	@RequestMapping(value = "/account/profile" , method=RequestMethod.GET)
+	@RequestMapping(value = "/profile" , method=RequestMethod.GET)
 	public String ProfileGET(HttpServletRequest request, Model model,HttpSession session,memberVO mVO) throws Exception {
 		
 		List<memberVO> memberList = memberService.memberManage(mVO);
@@ -120,7 +131,7 @@ public class MemberController {
 		return "/account/profile";
 	}
 	
-	@RequestMapping(value = "/account/update", method=RequestMethod.GET)
+	@RequestMapping(value = "/update", method=RequestMethod.GET)
 	public String profileUpdateGET(memberVO mvo, Model model) throws Exception 
 	{	
 		model.addAttribute("update", memberService.memberManage(mvo));
@@ -128,7 +139,7 @@ public class MemberController {
 		return "/account/update";
 	}
 	
-	@RequestMapping(value ="/account/update", method=RequestMethod.POST) 
+	@RequestMapping(value ="/update", method=RequestMethod.POST) 
 	public String profileUpdatePOST(HttpServletRequest request, RedirectAttributes redirectAttributes, Model model, HttpSession session,memberVO mVO) {
 			
 		try {
@@ -144,7 +155,7 @@ public class MemberController {
 	}
 	
 	// 회원관리
-	@RequestMapping(value = "/account/manage", method=RequestMethod.GET)
+	@RequestMapping(value = "/manage", method=RequestMethod.GET)
 	public String memberList(@ModelAttribute("mVO") memberVO mVO, HttpServletRequest request, Model model) throws Exception {
 
 		Map<String, ?>inputFlashMap = RequestContextUtils.getInputFlashMap(request);

@@ -21,4 +21,20 @@
 		<property name="maxInMemorySize" value="100000000" /> 
 	</bean> 
 	
+	<!-- <bean id="loginCheckInterceptor" class="com.soft.handler.LoginCheckInterceptor"/>
+	<bean id="UrlHandlerMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="interceptors">
+			<list>
+				<ref bean="loginCheckInterceptor"/>
+			</list>
+		</property>
+		
+		<property name="alwaysUseFullPath" value="true"/>
+		<property name="mappings">
+		<props>
+			<prop key="/account/login">menuManagementController</prop>
+		</props>
+		</property>
+	</bean> -->
+	
 </beans>
