@@ -15,13 +15,18 @@ public class AdminInterceptor extends HandlerInterceptorAdapter{
 		HttpSession session = request.getSession();
 		memberVO member = (memberVO)session.getAttribute("member");
 		
+//		if(member.getMe_grade() != "최고관리자") {
+//			response.sendRedirect("/account/login");
+//			return false;
+//		}
+	
+//		if(member.getMe_grade() != "최고관리자") {
+//			response.sendRedirect("/");
+//			return false;
+//		}
+		
 		if(member == null) {
 			response.sendRedirect("/account/login");
-			return false;
-		}
-		
-		if(member == null || member.getMe_grade() != "최고관리자") {
-			response.sendRedirect("/");
 			return false;
 		}
 		

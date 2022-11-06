@@ -76,25 +76,36 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 			<hr class="sidebar-divider my-0">
 
 			<!-- Nav Item - Dashboard -->
-			<li class="nav-item"><a class="nav-link" href="/home"> <i
+			<!-- <li class="nav-item"><a class="nav-link" href="/home"> <i
 					class="fas fa-fw fa-tachometer-alt"></i> <span>Dashboard</span>
-			</a></li>
+			</a></li> -->
 
 			<!-- Divider -->
-			<hr class="sidebar-divider">
+			<!-- <hr class="sidebar-divider"> -->
 
 			<!-- Heading -->
-			<div class="sidebar-heading">Interface</div>
+			<div class="sidebar-heading">관리</div>
 			<!-- Nav Item - Tables -->
 			<c:if test="${member != null}">
 				<li class="nav-item active"><a class="nav-link"
-					href="/board/list"> <i class="fas fa-fw fa-table"></i> <span>고객
-							게시판</span></a></li>
+					href="#"> <i class="fas fa-fw fa-table"></i> <span>상품 등록</span></a></li>
 			</c:if>
 
 			<c:if test="${member != null}">
 				<li class="nav-item active"><a class="nav-link"
-					href="/item/list"> <i class="fas fa-fw fa-table"></i> <span>상품</span></a>
+					href="#"> <i class="fas fa-fw fa-table"></i> <span>상품 목록</span></a>
+				</li>
+			</c:if>
+			
+			<c:if test="${member != null}">
+				<li class="nav-item active"><a class="nav-link"
+					href="#"> <i class="fas fa-fw fa-table"></i> <span>상품 소감</span></a>
+				</li>
+			</c:if>
+			
+			<c:if test="${member != null}">
+				<li class="nav-item active"><a class="nav-link"
+					href="#"> <i class="fas fa-fw fa-table"></i> <span>유저 목록</span></a>
 				</li>
 			</c:if>
 
@@ -134,10 +145,10 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 			</li>
 
 			<!-- Divider -->
-			<hr class="sidebar-divider">
+			<!-- <hr class="sidebar-divider"> -->
 
 			<!-- Heading -->
-			<div class="sidebar-heading">Addons</div>
+			<!-- <div class="sidebar-heading">Addons</div> -->
 
 			<!-- Nav Item - Pages Collapse Menu -->
 			<!-- <li class="nav-item"><a class="nav-link collapsed" href="#"

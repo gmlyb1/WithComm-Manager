@@ -23,10 +23,13 @@
 	
 	<context:component-scan base-package="com.soft.controller"/>
 	
+	<!-- GET방식의 도메인 입력으로 페이지 접근을 금지시킨다. 접근 경로가 추가 될때마다 이곳에 경로를 추가한다. -->
 	<beans:bean id="AdminInterceptor" class="com.soft.interceptor.AdminInterceptor"></beans:bean>
 		<interceptors>
 			<interceptor>
 					<mapping path="/admin/**"/>
+					<mapping path="/board/**"/>
+					<mapping path="/*"/>
 					<beans:ref bean="AdminInterceptor"/>
 			</interceptor>
 		</interceptors>

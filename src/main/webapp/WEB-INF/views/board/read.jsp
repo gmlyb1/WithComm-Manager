@@ -84,7 +84,7 @@
 						</table>
 					</div>
 					<div style="margin-left: 1px;">
-						<c:if test="${member != null }">
+						<c:if test="${member.me_name == read.board_writer}">
 							<button type="button" class="btn btn-success"
 								onclick="location.href='/board/update?board_no=${read.board_no}';">수정</button>
 							<button type="submit" class="btn btn-danger" id="delete_btn">삭제</button>
