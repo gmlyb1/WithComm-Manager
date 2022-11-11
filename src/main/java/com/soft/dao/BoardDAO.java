@@ -20,6 +20,9 @@ public interface BoardDAO {
 	
 	// 게시글 목록
 	public List<boardVO> BoardList() throws Exception;
+
+	// 메인에 뿌릴 글 목록
+	public List<boardVO> HomeBoardList() throws Exception;
 	
 	// 게시글 조회
 	public boardVO BoardRead(int board_no) throws Exception;

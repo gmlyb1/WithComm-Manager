@@ -52,5 +52,10 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.selectList("namespace.memberManage",mVO );
 	}
 
+	@Override
+	public void memberDelete(int me_id) throws Exception {
+		sqlSession.delete("namespace.memberDelete", me_id);
+	}
+
 
 }

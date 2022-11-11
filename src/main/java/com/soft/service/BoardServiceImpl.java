@@ -46,6 +46,13 @@ public class BoardServiceImpl implements BoardService {
 		return boardDAO.BoardList();
 	}
 
+	//메인 페이지 글 목록
+	@Override
+	public List<boardVO> HomeBoardList(boardVO vo) throws Exception {
+		return boardDAO.HomeBoardList();
+	}
+	
+	
 	// 게시글 조회+조회수
 	@Transactional(isolation = Isolation.READ_COMMITTED)
 	@Override
@@ -82,6 +89,7 @@ public class BoardServiceImpl implements BoardService {
 	public List<replyVO> ReadReply(int board_no) throws Exception {
 		return boardDAO.ReadReply(board_no);
 	}
+
 	
 
 //	@Transactional(isolation =  Isolation.READ_COMMITTED)

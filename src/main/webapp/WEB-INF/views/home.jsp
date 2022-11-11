@@ -129,7 +129,7 @@
 				<!-- Card Header - Dropdown -->
 				<div
 					class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-					<h6 class="m-0 font-weight-bold text-primary">고객 게시판 (비로그인 상태는 서비스를 이용하실수 없습니다.)</h6>
+					<h6 class="m-0 font-weight-bold text-primary">고객 게시판-상위 5개(비로그인 상태는 서비스를 이용하실수 없습니다.)</h6>
 					<div class="dropdown no-arrow">
 						<a class="dropdown-toggle" href="#" role="button"
 							id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
@@ -164,7 +164,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${boardList}" var="list">
+								<c:forEach items="${HomeBoardList}" var="list">
 									<tr>
 										<td class="text-center"><c:out value="${list.board_no}" /></td>
 										<td><a href="/board/read?board_no=${list.board_no}"><c:out

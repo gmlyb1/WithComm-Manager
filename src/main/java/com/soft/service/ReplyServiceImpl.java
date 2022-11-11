@@ -40,4 +40,9 @@ public class ReplyServiceImpl implements ReplyService{
 		replyDAO.replyDelete(vo);
 	}
 
+	@Override
+	public void boardReplyCount(int board_no) throws Exception {
+		replyDAO.boardReplyCount(board_no);
+	}
+
 }

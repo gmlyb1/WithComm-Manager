@@ -38,6 +38,11 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.selectList("namespace.BoardList");
 	}
 	
+	@Override
+	public List<boardVO> HomeBoardList() throws Exception {
+		return sqlSession.selectList("namespace.HomeBoardList");
+	}
+	
 	//±€¿–±‚
 	@Override
 	public boardVO BoardRead(int board_no) throws Exception {
@@ -81,6 +86,8 @@ public class BoardDAOImpl implements BoardDAO {
 	public void insertLog(LogVO logVO) {
 		sqlSession.insert("namespace.insertLog",logVO);
 	}
+
+	
 
 //	@Override
 //	public void replyCount(int board_no, int amount) throws Exception {

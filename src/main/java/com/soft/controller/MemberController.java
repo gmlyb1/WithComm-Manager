@@ -154,6 +154,30 @@ public class MemberController {
 		return "redirect:/account/profile";
 	}
 	
+	// 회원 탈퇴(어드민)
+	@RequestMapping(value = "/delete" ,method=RequestMethod.POST)
+	public String memberDeletePOST(memberVO vo,RedirectAttributes rttr) throws Exception{
+		
+		try {
+			memberService.memberDelete(vo.getMe_id());
+			rttr.addFlashAttribute("msg", "회원 삭제가 완료되었습니다.");
+		} catch (Exception e) {
+			rttr.addFlashAttribute("msg", "오류가 발생 되었습니다.");
+		}
+		
+		return "redirect:/account/manage";
+	}
+	
+	@RequestMapping(value="/delete" ,method=RequestMethod.GET)
+	public void memberDeleteGET() throws Exception{
+		
+	}
+	
+//	@RequestMapping(value="/delete", method=RequestMethod.GET)
+//	public void memberDeleteGET() throws Exception{
+//		
+//	}
+	
 	// 회원관리
 	@RequestMapping(value = "/manage", method=RequestMethod.GET)
 	public String memberList(@ModelAttribute("mVO") memberVO mVO, HttpServletRequest request, Model model) throws Exception {

@@ -84,6 +84,13 @@
 	select * from tbl_member
 	</select>
 	
+	<!-- 회원탈퇴 -->
+	<delete id="memberDelete" parameterType="int">
+		delete
+		 from tbl_member
+		where me_id = #{me_id}
+	</delete>
+	
 	<!-- <select id="memberInfo" resultMap="memberVO">
 	select * from tbl_member where me_id = #{me_id}
 	</select> -->

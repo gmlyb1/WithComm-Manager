@@ -14,6 +14,9 @@ public interface BoardService {
 	// 게시글 목록
 	public List<boardVO> BoardList(boardVO vo) throws Exception;
 	
+	// 메인페이지 게시글 목록
+	public List<boardVO> HomeBoardList(boardVO vo) throws Exception;
+	
 	// 게시글 조회
 	public boardVO BoardRead(int board_no) throws Exception;
 	

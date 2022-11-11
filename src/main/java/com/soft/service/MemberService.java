@@ -30,5 +30,8 @@ public interface MemberService {
 	// È¸¿ø°ü¸®
 	public List<memberVO> memberManage(memberVO mVO)throws Exception;
 	
+	//È¸¿ø Å»Åð(¾îµå¹Î)
+	public void memberDelete(int me_id) throws Exception;
+	
 	
 }

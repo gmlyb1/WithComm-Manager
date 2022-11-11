@@ -38,12 +38,16 @@
 				현재 페이지의 글쓰기,수정,삭제는 회원만 이용 가능합니다.</strong></span>
 	</c:if>
 
-	<c:if test="${member != null}">
+	<%-- <c:if test="${member != null}">
+		<span style="color: blue" class="text-center"><strong>
+				댓글작성은 관리자만 가능합니다.</strong></span>
+	</c:if> --%>
+	<div class="col-lg-12">
+		<h1 class="page-header text-center">상세 페이지</h1>
+		<c:if test="${member != null}">
 		<span style="color: blue" class="text-center"><strong>
 				댓글작성은 관리자만 가능합니다.</strong></span>
 	</c:if>
-	<div class="col-lg-12">
-		<h1 class="page-header text-center">상세 페이지</h1>
 	</div>
 </div>
 
@@ -54,35 +58,39 @@
 				<form role="form" method="post" name="readForm">
 					<input type="hidden" id="board_no" name="board_no"
 						value="${read.board_no }" />
-					<div class="table-responsive" style="text-align: center;">
-						<table id="datatable-scroller"
-							class="table table-bordered tbl_Form">
-							<caption></caption>
-							<colgroup>
-								<col width="250px" />
-								<col width="" />
-							</colgroup>
-							<tbody>
-								<hr>
-								<div class="mb-3">
-									<label class="form-label">작성자</label>
-									<p class="h6">${read.board_writer}</p>
-								</div>
-								<hr>
-								<div class="mb-3">
-									<label class="form-label">제목</label>
-									<p class="h6">${read.board_title}</p>
-								</div>
-								<hr>
-								<div class="mb-3">
-									<label class="form-label">내용</label>
-									<textarea class="form-control" rows="10"
-										style="resize: none; background-color: white;" readonly>${read.board_content}</textarea>
-								</div>
-								<hr>
-							</tbody>
-						</table>
+						<!-- 게시판 글보기  -->
+					<div class="container">
+						<div class="row">
+							<table class="table table-striped" style="text-align:center; border: 1px solid #dddddd">
+								<thead>
+									<tr>
+										<th colspan="2" style="background-color: #eeeeee; text-align:center;">게시판 글 보기</th>
+									</tr>
+								</thead>
+								
+								<tbody>
+									<tr>
+										<td style="width: 20%">글 제목</td>
+										<td colspan="2">${read.board_title}</td>
+									</tr>
+									<tr>
+										<td>작성자</td>
+										<td colspan="2">${read.board_writer}</td>
+									</tr>
+									<tr>
+										<td>작성일자</td>
+										<td colspan="2">${read.board_regdate}</td>
+									</tr>
+									<tr>
+										<td>내용</td>
+										<td colspan="2" style="height:200px; text-align:left;">${read.board_content}</td>
+									</tr>
+								
+								</tbody>							
+							</table>						
+						</div>					
 					</div>
+						<!-- 게시판 글보기  -->
 					<div style="margin-left: 1px;">
 						<c:if test="${member.me_name == read.board_writer}">
 							<button type="button" class="btn btn-success"

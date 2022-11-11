@@ -20,4 +20,7 @@ public interface ReplyService {
 	
 	// 댓글 삭제
 	public void replyDelete(replyVO vo)throws Exception;
+	
+	// 댓글 개수 바인딩
+	public void boardReplyCount(int board_no) throws Exception;
 }

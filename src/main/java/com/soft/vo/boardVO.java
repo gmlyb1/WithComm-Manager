@@ -14,6 +14,16 @@ public class boardVO{
 	private int board_hit;
 	private int board_reply_hit;
 	
+	//Á¶È¸¼ö °¹¼ö
+		private int reply_count;
+	
+	public int getReply_count() {
+			return reply_count;
+		}
+	public void setReply_count(int reply_count) {
+		this.reply_count = reply_count;
+	}
+	
 	public int getBoard_no() {
 		return board_no;
 	}
@@ -67,8 +77,10 @@ public class boardVO{
 	public String toString() {
 		return "boardVO [board_no=" + board_no + ", board_title=" + board_title + ", board_content=" + board_content
 				+ ", board_writer=" + board_writer + ", board_count=" + board_count + ", board_regdate=" + board_regdate
-				+ ", board_hit=" + board_hit + ", board_reply_hit=" + board_reply_hit + "]";
+				+ ", board_hit=" + board_hit + ", board_reply_hit=" + board_reply_hit + ", reply_count=" + reply_count
+				+ "]";
 	}
+	
 	
 	
 	

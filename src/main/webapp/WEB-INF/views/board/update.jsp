@@ -62,8 +62,8 @@
 								</tr>
 								<tr>
 									<td class="form-inline"><label for="board_content">내용:</label>
-									<textarea id="board_content" name="board_content" cols="100"
-											rows="10"><c:out value="${update.board_content}" /></textarea>
+									<textarea id="board_content" name="board_content" cols="130"
+											rows="20"><c:out value="${update.board_content}" /></textarea>
 								</tr>
 							</tbody>
 						</table>

@@ -243,9 +243,9 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 								<li><a class="nav-item dropdown no-arrow" href="#"
 									id="userDropdown" role="button" data-toggle="dropdown"
 									aria-haspopup="true" aria-expanded="false"> <span
-										class="mr-2 d-none d-lg-inline text-gray-600 small"><strong>${member.me_name}</strong></span>
-										<img class="img-profile rounded-circle"
-										src="img/undraw_profile.svg">
+										class="mr-2 d-none d-lg-inline text-gray-600 small"><strong>${member.me_name}[${member.me_grade}]</strong></span>
+										<!-- <img class="img-profile rounded-circle"
+										src="../img/undraw_profile.svg"> -->
 								</a> <!-- Dropdown - User Information -->
 									<div
 										class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

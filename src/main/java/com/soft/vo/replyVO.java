@@ -4,7 +4,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 public class replyVO {
-	
+
 	private int board_no;
 	private int reply_no;
 	private String reply_content;
@@ -50,5 +50,5 @@ public class replyVO {
 	
 	
 	
-
+	
 }

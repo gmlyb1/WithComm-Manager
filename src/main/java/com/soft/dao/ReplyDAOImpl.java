@@ -39,6 +39,11 @@ public class ReplyDAOImpl implements ReplyDAO{
 		sqlSession.delete("namespace.replyDelete", vo);
 	}
 
+	@Override
+	public void boardReplyCount(int board_no) throws Exception {
+		sqlSession.selectOne("namespace.boardReplyCount", board_no);
+	}
+
 	
 	
 	
