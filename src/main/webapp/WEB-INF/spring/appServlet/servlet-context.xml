@@ -25,12 +25,15 @@
 	
 	<!-- GET방식의 도메인 입력으로 페이지 접근을 금지시킨다. 접근 경로가 추가 될때마다 이곳에 경로를 추가한다. -->
 	<beans:bean id="AdminInterceptor" class="com.soft.interceptor.AdminInterceptor"></beans:bean>
-		<interceptors>
-			<interceptor>
-					<mapping path="/admin/**"/>
-					<mapping path="/board/**"/>
-					<mapping path="/*"/>
-					<beans:ref bean="AdminInterceptor"/>
-			</interceptor>
-		</interceptors>
-</beans:beans>
+		<!-- 인터셉터 적용 -->
+    <interceptors>
+        <interceptor>
+            <mapping path="/account/login"></mapping>
+            <beans:bean id="loginIntreceptor" class="com.soft.interceptor.LoginInterceptor"></beans:bean>
+        </interceptor>
+        <interceptor>
+            <mapping path="/admin/**"></mapping>
+            <beans:bean id="AdminIntreceptor" class="com.soft.interceptor.AdminInterceptor"></beans:bean>
+        </interceptor>
+    </interceptors>
+	</beans:beans>

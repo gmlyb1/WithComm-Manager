@@ -100,10 +100,6 @@ public class BoardController {
 		model.addAttribute("read", boardService.BoardRead(vo.getBoard_no()));
 		
 		List<replyVO> replyList = boardService.ReadReply(vo.getBoard_no());
-		
-//		List<replyVO> replyList = boardService.ReadReply(vo.getBoard_no());
-//		model.addAttribute("replyList", replyList);
-		
 //		List<replyVO> replyList = null;
 //		replyList = replyService.replyList(board_no);
 		model.addAttribute("replyList", replyList);

@@ -21,8 +21,8 @@
 	</select>
 
 	<insert id="replyWrite" parameterType="com.soft.vo.replyVO">
-		insert into tbl_reply(board_no, reply_writer, reply_content,reply_regdate)
-			value(#{board_no},#{reply_writer},#{reply_content},CURRENT_TIMESTAMP)	
+		insert into tbl_reply(reply_no ,board_no,reply_writer, reply_content,reply_regdate)
+			value(#{reply_no},#{board_no},#{reply_writer},#{reply_content},CURRENT_TIMESTAMP)	
 	</insert>
 
 	<update id="replyModify" parameterType="replyVO">

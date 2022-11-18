@@ -7,23 +7,18 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.soft.vo.memberVO;
-
-public class AdminInterceptor implements HandlerInterceptor{
+public class LoginInterceptor implements HandlerInterceptor{
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		
-		HttpSession session =request.getSession();
+		System.out.println("LoginInterceptor preHandler Àû¿ë");
 		
-		memberVO lvo = (memberVO)session.getAttribute("member");
+		HttpSession session = request.getSession();
 		
-		if(lvo == null || lvo.getAdminCk() == 0) {
-			response.sendRedirect("/home");
-			
-		return false;
-	}
+		session.invalidate();
+		
 		return true;
 	}
 
@@ -41,4 +36,5 @@ public class AdminInterceptor implements HandlerInterceptor{
 		
 	}
 
+	
 }

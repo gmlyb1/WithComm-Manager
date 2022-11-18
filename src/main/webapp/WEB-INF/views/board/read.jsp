@@ -56,8 +56,8 @@
 		<div class="panel">
 			<div class="panel-body">
 				<form role="form" method="post" name="readForm">
-					<input type="hidden" id="board_no" name="board_no"
-						value="${read.board_no }" />
+					<input type="hidden" id="board_no" name="board_no" value="${read.board_no}" />
+						<%-- <input type="hidden" id="reply_no" name="reply_no" value="${replyList.board_no}"> --%>
 						<!-- 게시판 글보기  -->
 					<div class="container">
 						<div class="row">
@@ -153,10 +153,9 @@
 									placeholder="댓글을 남겨주세요." name="reply_content"></textarea>
 							</p>
 
-
 							<p>
-								<input type="hidden" name="reply.board_no"
-									value="${read.board_no}">
+								<input type="hidden" name="reply.board_no" value="${read.board_no}">
+								<%-- <input type="hidden" id="reply_no" name="reply_no" value="${replyList.board_no}"> --%>
 								<button type="submit" class="btn btn-success"
 									style="margin: 55px 0 0 10px;">댓글 작성</button>
 							</p>

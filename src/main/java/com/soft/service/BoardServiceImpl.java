@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.soft.dao.BoardDAO;
-import com.soft.util.FileUtils;
 import com.soft.vo.LogVO;
 import com.soft.vo.boardVO;
 import com.soft.vo.replyVO;
@@ -24,8 +23,6 @@ public class BoardServiceImpl implements BoardService {
 	@Inject
 	private BoardDAO boardDAO;
 	
-	@Inject
-	private FileUtils fileUtils;
 
 	// 게시글 작성
 	@Override
@@ -92,36 +89,5 @@ public class BoardServiceImpl implements BoardService {
 
 	
 
-//	@Transactional(isolation =  Isolation.READ_COMMITTED)
-//	@Override
-//	public void replyCount(int amount,int board_no) throws Exception {
-//		boardDAO.replyCount(amount,board_no);
-//		
-//	}
-
-//	@Override
-//	public Object memberInfo(String memberId) {
-//		return boardDAO.memberInfo(memberId);
-//	}
-//
-//	@Override
-//	public Object memberLog(String memberId) {
-//		return boardDAO.memberLog(memberId);
-//	}
-//
-//	@Override
-//	public Object memberWrite(String memberId) {
-//		return boardDAO.memberWrite(memberId);
-//	}
-//
-//	@Override
-//	public Object memberScrap(String memberId) {
-//		return boardDAO.memberScrap(memberId);
-//	}
-//
-//	@Override
-//	public Object memberReply(String memberId) {
-//		return boardDAO.memberReply(memberId);
-//	}
 
 }
