@@ -39,62 +39,199 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>SB Admin 2 - Login</title>
-<!-- Custom fonts for this template-->
-<link href="/resources/vendor/fontawesome-free/css/all.min.css"
-	rel="stylesheet" type="text/css">
-<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-<!-- Custom styles for this template-->
-<link href="/resources/css/sb-admin-2.min.css" rel="stylesheet">
+<title>Login</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/51db22a717.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
 </head>
-<body class="bg-gradient-primary">
-	<div class="container">
-		<!-- Outer Row -->
-		<div class="row justify-content-center">
-			<div class="col-xl-10 col-lg-12 col-md-9">
-				<div class="card o-hidden border-0 shadow-lg my-5">
-					<div class="card-body p-0">
-						<!-- Nested Row within Card Body -->
-						<div class="row">
-							<div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
-							<div class="col-lg-6">
-								<div class="p-5">
-									<div class="text-center">
-										<h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
-									</div>
-									<form name="frm" action="/account/login" method="post">
-										<c:if test="${not empty rememberCookie.getValue()}">
-											<c:set value="checked" var="checked" />
-										</c:if>
-										<div class="form-group">
-											<input type="email" class="form-control form-control-user"
-												id="me_email" name="me_email" aria-describedby="emailHelp"
-												placeholder="이메일" value="${rememberCookie.getValue() }" />
-										</div>
-										<div class="form-group">
-											<input type="password" class="form-control form-control-user"
-												id="me_pwd" name="me_pwd" placeholder="패스워드" />
-										</div>
-											<button type="submit" class="btn btn-primary btn-user btn-block" id="LoginBtn">로그인</button>
-											<a href="/account/register" class="btn btn-google btn-user btn-block">회원가입</a>
-											<a href="#" class="btn btn-facebook btn-user btn-block">아이디/비밀번호 찾기</a> 
-											<a href="/" class="btn btn-warning btn-user btn-block">홈페이지</a>
-									</form>
-									<hr>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Bootstrap core JavaScript-->
-	<script src="/resources/vendor/jquery/jquery.min.js"></script>
-	<script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-	<!-- Core plugin JavaScript-->
-	<script src="/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
-	<!-- Custom scripts for all pages-->
-	<script src="/resources/js/sb-admin-2.min.js"></script>
+<body>
+<form name="frm" action="/account/login" method="post">
+    <div class="page-container">
+        <div class="login-form-container shadow">
+            <div class="login-form-right-side">
+                <div class="top-logo-wrap">
+                    
+                </div>
+                <h1>SOFT</h1>
+                <p>In computer security, logging in is the process by which an individual gains access to a computer system by identifying and authenticating themselves.</p>
+            </div>
+            <div class="login-form-left-side">
+                <div class="login-top-wrap">
+                    <span>Don't have an account?</span>
+                    <button class="create-account-btn shadow-light">Create Profile</button>
+                </div>
+                <div class="login-input-container">
+                    <div class="login-input-wrap input-id">
+                        <i class="far fa-envelope"></i>
+                        <input placeholder="Email" type="text" id="me_email" name="me_email">
+                    </div>
+                    <div class="login-input-wrap input-password">
+                        <i class="fas fa-key"></i>
+                        <input placeholder="Password"  type="password" id="me_pwd" name="me_pwd">
+                    </div>
+                </div>
+                <div class="login-btn-wrap">
+                    <button class="login-btn" type="submit">Login</button>
+                    <a href="#" >Forgot password?</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 </body>
 </html>
+
+<style type="text/css">
+:root{
+
+
+}
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Alata', sans-serif;
+}
+
+.page-container{
+    width: 100vw;
+    height: 100vh;
+    background: #eff0f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.shadow{
+    -webkit-box-shadow: 27px 43px 43px -26px rgba(89,89,89,0.39);
+    -moz-box-shadow: 27px 43px 43px -26px rgba(89,89,89,0.39);
+    box-shadow: 27px 43px 43px -26px rgba(89,89,89,0.39);
+}/*
+.shadow-light{
+    -webkit-box-shadow: 45px 45px 104px -33px rgba(38,38,38,0.92);
+    -moz-box-shadow: 45px 45px 104px -33px rgba(38,38,38,0.92);
+    box-shadow: 45px 45px 104px -33px rgba(38,38,38,0.92);
+
+}*/
+.login-form-container{
+ 
+    background:#f5f5f5 ;
+    width:860px;
+    height: 540px;
+    display: flex;
+    flex-direction: row;
+    box-shadow: 10px black;
+    border-radius: 10px;
+
+}
+.login-form-right-side{
+    width: 50%; 
+    border-radius: 10px 0px 0px 10px;
+    padding:75px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-image: 
+  radial-gradient(ellipse farthest-corner at 0 140%, #5d9dff 0%, #2178ff 70%, #3585ff 70%);
+}
+.login-form-right-side h1{
+    color: white;
+    width:100%;
+    text-align: right;
+    opacity: 0.9;
+
+}
+.login-form-right-side p{
+    padding-top: 50px;
+    font-size:12px;
+    text-align: right;
+    opacity: 0.8;
+}
+.login-form-left-side{
+    width: 50%;
+    border-radius: 0px 10px 10px 0px;
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+    padding:40px;
+    background: rgb(255,255,255);
+background: linear-gradient(287deg, rgba(255,255,255,1) 0%, rgba(243,244,244,1) 0%, rgba(255,255,255,1) 100%);
+}
+.login-form-left-side .login-top-wrap{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width:100%;
+}
+.login-form-left-side .login-top-wrap span{
+    color: gray;
+    font-size: 11px;
+    padding-right:20px;
+
+}
+.login-form-left-side .login-top-wrap .create-account-btn {
+    background: white;
+    border:  0;
+    width:85px;
+    height: 35px;
+    font-size: 11px;
+    color: #2178ff;
+    border-radius: 3px;
+
+}
+.login-input-container{
+    padding-top:120px;
+    width:300px;
+}
+.login-input-container .login-input-wrap{
+    width:300px;
+    height: 45px;
+    margin-top: 20px;
+    border-radius: 2px;
+    border-bottom: solid 2px #2178ff;
+   
+}
+.login-input-container .login-input-wrap i{
+    color: #2178ff;
+    line-height: 45px;
+}
+
+.login-input-container .login-input-wrap input{
+    background: none;
+   
+    border: none;
+    line-height: 45px;
+    padding-left:10px;
+    width:267px;
+}
+.login-input-container .login-input-wrap input:focus{
+    outline: none;
+}
+.login-btn-wrap{
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;;
+}
+.login-btn-wrap .login-btn{
+    width:95px;
+    height:35px;
+    color:white;
+    border: 0;
+    border-radius: 4px;
+
+    background: rgb(105,163,255);
+background: linear-gradient(162deg, rgba(105,163,255,1) 0%, rgba(43,125,254,1) 50%, rgba(43,125,254,1) 100%);
+}
+.login-btn-wrap a{
+    margin-top:10px;
+    text-decoration: none;
+    font-size: 11px;
+    color: gray;
+
+}
+
+</style>
