@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.soft.dao.BoardDAO;
+import com.soft.util.FileUtils;
 import com.soft.vo.LogVO;
 import com.soft.vo.boardVO;
 import com.soft.vo.replyVO;
@@ -21,20 +22,22 @@ import com.soft.vo.replyVO;
 public class BoardServiceImpl implements BoardService {
 
 	@Inject
+	private FileUtils fileUtils;
+	
+	@Inject
 	private BoardDAO boardDAO;
 	
 
 	// 게시글 작성
 	@Override
-	public void insertBoard(boardVO vo) throws Exception {
+	public void insertBoard(boardVO vo,MultipartHttpServletRequest mpRequest) throws Exception {
 		boardDAO.insertBoard(vo);
 		
-		// 활동로그
-//		LogVO logVO = new LogVO();
-//		logVO.setBno(vo.getBoard_no());
-//		logVO.setMemberId(vo.getBoard_writer());
-//		logVO.setCategori(1);
-//		boardDAO.insertLog(logVO);
+		List<Map<String, Object>> list = fileUtils.parseInsertFileInfo(vo, mpRequest);
+		int size = list.size();
+		for(int i=0; i<size; i++) {
+			boardDAO.insertFile(list.get(i));
+		}
 	}
 
 	// 게시글 목록
@@ -70,8 +73,21 @@ public class BoardServiceImpl implements BoardService {
 	
 	// 게시글 수정
 	@Override
-	public void BoardUpdate(boardVO vo) throws Exception {
+	public void BoardUpdate(boardVO vo,String[] files, String[] fileNames, MultipartHttpServletRequest mpRequest) throws Exception {
 		boardDAO.BoardUpdate(vo);
+		
+		List<Map<String, Object>> list = fileUtils.parseUpdateFileInfo(vo, files, fileNames, mpRequest);
+		Map<String, Object> tempMap = null;
+		int size = list.size();
+		for(int i=0; i<size; i++) {
+			tempMap = list.get(i);
+			if(tempMap.get("IS_NEW").equals("Y")) {
+				boardDAO.insertFile(tempMap);
+			}else {
+				boardDAO.updateFile(tempMap);
+			}
+		}
+	
 	}
 
 	// 게시글 삭제
@@ -86,6 +102,26 @@ public class BoardServiceImpl implements BoardService {
 	public List<replyVO> ReadReply(int board_no) throws Exception {
 		return boardDAO.ReadReply(board_no);
 	}
+
+	@Override
+	public boardVO movePage(int board_no) throws Exception {
+		return boardDAO.movePage(board_no);
+	}
+
+//	@Override
+//	public List<Map<String, Object>> selectFileList(int bno) throws Exception {
+//		return boardDAO.selectFileList(bno);
+//	}
+
+	@Override
+	public Map<String, Object> selectFileInfo(Map<String, Object> map) throws Exception {
+		return boardDAO.selectFileInfo(map);
+	}
+
+//	@Override
+//	public void updateFile(Map<String, Object> map) throws Exception {
+//		boardDAO.updateFile(map);
+//	}
 
 	
 

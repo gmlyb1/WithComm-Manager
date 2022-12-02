@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,8 +33,6 @@ public class MemberController {
 	@Inject
 	private MemberService memberService;
 	
-//	@Autowired(required = false)
-//	BCryptPasswordEncoder passEncoder;
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
@@ -69,10 +68,6 @@ public class MemberController {
 	@RequestMapping(value ="/login" , method=RequestMethod.POST)
 	public String login(memberVO vo, HttpServletRequest request, RedirectAttributes rttr) throws Exception{
 			
-//		String inputPass = vo.getMe_pwd();
-//		String pass = passEncoder.encode(inputPass);
-//		vo.setMe_pwd(pass);
-		
 		HttpSession session = request.getSession();
 		session.setMaxInactiveInterval(6000);
 		memberVO login = memberService.login(vo);
@@ -134,19 +129,25 @@ public class MemberController {
 		return "/account/update";
 	}
 	
+	@RequestMapping(value="/pwCheck" , method=RequestMethod.POST)
+	@ResponseBody
+	public int pwCheck(memberVO memberVO) throws Exception {
+		String me_pwd = memberService.pwCheck(memberVO.getMe_email());
+		if(memberVO == null || !BCrypt.checkpw(memberVO.getMe_pwd(), me_pwd)) {
+		return 0;
+	}
+	return 1;
+}
+	
 	@RequestMapping(value ="/update", method=RequestMethod.POST) 
-	public String profileUpdatePOST(HttpServletRequest request, RedirectAttributes redirectAttributes, Model model, HttpSession session,memberVO mVO) {
-			
-		try {
-			memberService.memberUpdate(mVO);
-			redirectAttributes.addFlashAttribute("msg", "수정 하였습니다.");
-			
-		}catch (Exception e) {
-			System.out.println(e.toString());
-			redirectAttributes.addFlashAttribute("msg", "오류가 발생되었습니다.");
-		}
+	public String profileUpdatePOST(String me_email,String me_pwd1,HttpServletRequest request, RedirectAttributes rttr, Model model, HttpSession session,memberVO mVO) throws Exception {
+		String hashedPw = BCrypt.hashpw(me_pwd1, BCrypt.gensalt());
+		memberService.memberUpdate(me_email, hashedPw);
+		session.invalidate();
+		rttr.addFlashAttribute("msg", "정보 수정이 완료되었습니다. 다시 로그인해주세요");
 		
-		return "redirect:/account/profile";
+		
+		return "redirect:/account/login";
 	}
 	
 	// 회원 탈퇴(어드민)

@@ -17,14 +17,45 @@
 			location.href = "/board/list";
 		})
 	})
-	
-	function _onSubmit(){
-		if(!confirm("수정 하시겠습니까?")){
+
+	function _onSubmit() {
+		if (!confirm("수정 하시겠습니까?")) {
 			return false;
 		}
 	}
-	
 </script>
+<script type="text/javascript">
+	function fn_addFile() {
+		var fileIndex = 1;
+		$("#fileAdd_btn")
+				.on(
+						"click",
+						function() {
+							$("#fileIndex")
+									.append(
+											"<div><input type='file' style='float:left;' name='file_"
+													+ (fileIndex++)
+													+ "'>"
+													+ "</button>"
+													+ "<button type='button' style='float:right;' id='fileDelBtn'>"
+													+ "삭제" + "</button></div>");
+						});
+		$(document).on("click", "#fileDelBtn", function() {
+			$(this).parent().remove();
+
+		});
+	}
+	var fileNoArry = new Array();
+	var fileNameArry = new Array();
+	function fn_del(value, name) {
+
+		fileNoArry.push(value);
+		fileNameArry.push(name);
+		$("#fileNoDel").attr("value", fileNoArry);
+		$("#fileNameDel").attr("value", fileNameArry);
+	}
+</script>
+
 
 <%@include file="../includes/header.jsp"%>
 
@@ -38,8 +69,12 @@
 	<div id="contAreaBox">
 		<div class="panel">
 			<div class="panel-body">
-				<form action="/board/update" role="form" method="post" name="updateForm" onsubmit="return _onSubmit();">
-					<input type="hidden" name="board_no" value="${update.board_no}" readonly="readonly"/>
+				<form action="/board/update" role="form" method="post"
+					name="updateForm" onsubmit="return _onSubmit();">
+					<input type="hidden" name="board_no" value="${update.board_no}"
+						readonly="readonly" /> <input type="hidden" id="fileNoDel"
+						name="fileNoDel[]" value=""> <input type="hidden"
+						id="fileNameDel" name="fileNameDel[]" value="">
 					<div class="table-responsive" style="text-align: center;">
 						<table id="datatable-scroller"
 							class="table table-bordered tbl_Form">
@@ -52,7 +87,7 @@
 								<tr>
 									<td class="form-inline"><label for="board_writer">작성자:</label><input
 										type="text" id="board_writer" name="board_writer"
-										style="width: 200px" value="${update.board_writer}" disabled/>
+										style="width: 200px" value="${update.board_writer}" disabled />
 									</td>
 								</tr>
 								<tr>
@@ -62,16 +97,43 @@
 								</tr>
 								<tr>
 									<td class="form-inline"><label for="board_content">내용:</label>
-									<textarea id="board_content" name="board_content" cols="130"
+										<textarea id="board_content" name="board_content" cols="130"
 											rows="20"><c:out value="${update.board_content}" /></textarea>
 								</tr>
 							</tbody>
 						</table>
 					</div>
-					<div style="margin-left: 1px;">
-						<button type="submit" class="btn btn-primary">수정</button>
-						<a href="/board/list" class="btn btn-danger">취소</a>
-					</div>
+					<!-- 첨부파일 -->
+					<td id="fileIndex"><c:forEach var="file" items="${file}"
+							varStatus="var">
+							<div>
+								<input type="hidden" id="FILE_NO" name="FILE_NO_${var.index}"
+									value="${file.FILE_NO }"> <input type="hidden"
+									id="FILE_NAME" name="FILE_NAME" value="FILE_NO_${var.index}">
+								<a href="#" id="fileName" onclick="return false;">${file.ORG_FILE_NAME}</a>(${file.FILE_SIZE}kb)
+								<button id="fileDel"
+									onclick="fn_del('${file.FILE_NO}','FILE_NO_${var.index}');"
+									type="button">삭제</button>
+								<br>
+							</div>
+						</c:forEach></td>
+					</tr>
+
+					</tbody>
+					</table>
+			</div>
+			<div style="margin-left: 1px;">
+				<button type="button" id="update_btn" class="btn btn-primary">수정</button>
+				<button type="button" id="cancel_btn" class="btn btn-primary">취소</button>
+				<button type="button" id="fileAdd_btn" class="btn btn-primary">파일추가</button>
+
+				<!-- 첨부파일 -->
+
+
+				<div style="margin-left: 1px;">
+					<button type="submit" class="btn btn-primary">수정</button>
+					<a href="/board/list" class="btn btn-danger">취소</a>
+				</div>
 				</form>
 			</div>
 		</div>

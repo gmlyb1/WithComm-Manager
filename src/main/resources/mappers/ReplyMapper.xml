@@ -6,14 +6,15 @@
 <mapper namespace="com.soft.dao.ReplyDAO">
 
 	<select id="replyList" parameterType="int" resultType="replyVO">
-		select
-			reply_no
-		,	board_no
-		,	reply_writer
-		,	reply_content
-		,	reply_regdate
-		from tbl_reply
-			where board_no = #{board_no}
+		select 
+		    a.board_no
+		,   b.reply_no
+		,   b.reply_writer
+		,   b.reply_content
+		,	b.reply_regdate 
+		from soft.tbl_board a inner join soft.tbl_reply b 
+		on a.board_no = b.board_no 
+		where b.board_no = #{board_no};
 	</select>
 
 	<select id="boardReplyCount" parameterType="int" resultType="replyVO">

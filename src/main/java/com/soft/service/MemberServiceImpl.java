@@ -45,10 +45,15 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void memberUpdate(memberVO mVO) throws Exception{
-		memberDAO.memberUpdate(mVO);
+	public void memberUpdate(String me_email,String hashedPw) throws Exception{
+		memberDAO.memberUpdate(me_email,hashedPw);
 	}
-
+	@Override
+	public String pwCheck(String me_email) throws Exception {
+		return memberDAO.pwCheck(me_email);
+	}
+	
+	
 	@Override
 	public List<memberVO> memberManage(memberVO mVO)throws Exception {
 		return memberDAO.memberManage(mVO);
@@ -58,6 +63,8 @@ public class MemberServiceImpl implements MemberService {
 	public void memberDelete(int me_id) throws Exception {
 		memberDAO.memberDelete(me_id);
 	}
+
+	
 
 	
 	

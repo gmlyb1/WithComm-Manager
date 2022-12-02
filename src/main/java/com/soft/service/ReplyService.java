@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import com.soft.dao.ReplyDAO;
+import com.soft.vo.boardVO;
 import com.soft.vo.replyVO;
 
 public interface ReplyService {

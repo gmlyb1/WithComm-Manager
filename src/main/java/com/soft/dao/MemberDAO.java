@@ -23,8 +23,10 @@ public interface MemberDAO {
 	// 프로필
 	public memberVO memberInfoSearch(memberVO mVO)throws Exception;
 	
-	// 프로필 수정
-	public void memberUpdate(memberVO mVO) throws Exception;
+	
+	// 프로필 수정(비밀번호만)
+	public void memberUpdate(String me_email,String hashedPw) throws Exception;
+	public String pwCheck(String me_email) throws Exception;
 	
 	// 회원 관리
 	public List<memberVO> memberManage(memberVO mVO)throws Exception;

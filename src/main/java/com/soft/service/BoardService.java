@@ -1,7 +1,9 @@
 package com.soft.service;
 
 import java.util.List;
+import java.util.Map;
 
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.soft.vo.boardVO;
 import com.soft.vo.replyVO;
@@ -9,7 +11,7 @@ import com.soft.vo.replyVO;
 public interface BoardService {
 
 	// 게시글 작성
-	public void insertBoard(boardVO vo) throws Exception;
+	public void insertBoard(boardVO vo,MultipartHttpServletRequest mpRequest) throws Exception;
 	
 	// 게시글 목록
 	public List<boardVO> BoardList(boardVO vo) throws Exception;
@@ -21,7 +23,7 @@ public interface BoardService {
 	public boardVO BoardRead(int board_no) throws Exception;
 	
 	// 게시글 수정
-	public void BoardUpdate(boardVO vo) throws Exception;
+	public void BoardUpdate(boardVO vo,String[] files, String[] fileNames, MultipartHttpServletRequest mpRequest) throws Exception;
 	
 	// 게시글 삭제
 	public void BoardDelete(int board_no) throws Exception;
@@ -35,17 +37,15 @@ public interface BoardService {
 	//댓글수
 //	public void replyCount(int board_no,int amount) throws Exception;
 	
+	// 이전글,다음글
+	public boardVO movePage(int board_no) throws Exception;
 	
+	// 첨부파일 조회
+//	public List<Map<String, Object>> selectFileList(int bno) throws Exception;
 	
-	// board log
-//	public Object memberInfo(String memberId);
-//
-//	public Object memberLog(String memberId);
-//
-//	public Object memberWrite(String memberId);
-//
-//	public Object memberScrap(String memberId);
-//
-//	public Object memberReply(String memberId);
-	
+	// 첨부파일 다운로드
+	public Map<String, Object> selectFileInfo(Map<String, Object> map) throws Exception;
+
+	// 첨부파일 수정
+//	public void updateFile(Map<String, Object> map) throws Exception;
 }

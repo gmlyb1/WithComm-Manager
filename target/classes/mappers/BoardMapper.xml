@@ -82,15 +82,17 @@
 	</update>
 	
 	
-	<!-- 댓글 조회 -->
+	<!-- 댓글 개수 -->
 	<select id="ReadReply" resultType="replyVO">
-		select
-		   reply_no
-		  ,reply_content
-		  ,reply_writer
-		  ,reply_regdate
-		 from tbl_reply
-		 where board_no = #{board_no}
+		select 
+		    a.board_no
+		,   b.reply_no
+		,   b.reply_writer
+		,   b.reply_content
+		,	b.reply_regdate 
+		from soft.tbl_board a inner join soft.tbl_reply b 
+		on a.board_no = b.board_no 
+		where a.board_no = #{board_no};
 	</select>
 
 	<!-- 댓글 작성 -->
@@ -133,95 +135,46 @@
 		)
 	</insert>
 	
-	<!-- <insert id="insertLog" parameterType="LogVO">
-		insert into tbl_log (LOGNO,MEMBER_ID,BNO,RNO,QUESTIONID,CATEGORI)
-	values
-	((SELECT NVL(MAX(LOGNO),0)+1 FROM TBL_LOG), #{memberId} , #{bno} , #{rno}, #{questionId}, #{categori})
-	</insert>
-	
-	<delete id="deleteLog" parameterType="LogVO">
-	delete from tbl_log where memberId = #{memberId} and bno = #{bno} and categori = #{categori}
-	</delete>
-	
-	<delete id="deleteReplyLog" parameterType="logVO">
-	delete from tbl_log where memberId = #{memberId} and rno = #{rno} and categori = #{categori}
-	</delete>  	
-	
-	
-	
-	<select id="memberLog" resultMap="LogVO">
-	select 
-		a.bno
-	,	a.rno
-	,	a.memberId
-	,	a.questionId
-	,	a.categori
-	,	a.logdate
-	,	b.board_no
-	,	b.board_title
-	,	b.board_writer
-	,	c.reply_writer
-	,	c.reply_no
-	from tbl_log a
-		left outer join tbl_board b on a.bno = b.board_no
-		left outer join tbl_reply c on a.rno = c.reply_no
-		where a.memberId = #{memberId} orderby a.logdate desc
-	</select>
-	
-	<select id="memberWrite" resultMap="boardVO">
-	select
-		board_no
-	,	board_title
-	,	board_writer
-	,	board_regdate
-	from tbl_board where board_wirter = #{board_writer} order by board_regdate desc
-	</select>
-	
-	<select id="memberReply" resultMap="replyVO">
-		select
-			a.reply_no
-		,	a.reply_regdate
-		,	b.board_no
-		,	b.board_title
-		,	b.board_writer
-		from tbl_reply a left outer join tbl_board b
-		on a.board_no = b.board_no
-		where a.reply_writer = #{memberId} order by a.reply_regdate desc
+	<!-- <select id="selectFileList" parameterType="int" resultType="hashMap">
+		SELECT
+			FILE_NO
+		,	ORG_FILE_NAME
+		,	ROUND(FILE_SIZE/1024,1) AS FILE_SIZE
+		,FROM TBL_FILE
+		WHERE BNO = #{bno}
+		AND DEL_GB = 'N'
+		ORDER BY FILE_NO ASC
 	</select> -->
-
-	 <!-- 게시판 검색 -->
-	<!-- <select id="BoardListPage" resultType="boardVO" parameterType="SearchCriteria">
-		select 
-			board_no
-		   ,board_content
-		   ,board_writer
-		   ,board_regdate
-		 from
-			(
-			 select 
-			 	board_no
-			   ,board_title
-			   ,board_content
-			   ,board_writer
-			   ,board_regdate
-			   ,ROW_NUMBER() OVER(ORDER BY BOARD_NO DESC) AS RNUM
-			  from tbl_board
-			   where 1=1
-			   <include refid="search"></include>	 
-				) MP
-			  WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
-			  order by board_no desc
+	
+	<select id="selectFileInfo" parameterType="hashMap" resultType="hashMap">
+		SELECT
+			STORED_FILE_NAME
+		,	ORG_FILE_NAME
+		FROM TBL_FILE
+		WHERE FILE_NO = #{FILE_NO}
 	</select>
 	
-	<sql id="search">
-		<if test="searchType != null">
-			<if test="searchType == 't'.toString()">and board_title like '%' || #{keyword} || '%'</if>
-			<if test="searchType == 'c'.toString()">and board_content like '%' || #{keyword} || '%'</if>
-			<if test="searchType == 'w'.toString()">and board_writer like '%' || #{keyword} || '%'</if>
-			<if test="searchType == 'tc'.toString()">and (board_title like '%' || #{keyword} || '%') or (board_content like '%' || #{keyword} || '%')</if>
-		</if>
-	</sql> -->
-
+	<update id="updateFile" parameterType="hashMap">
+		UPDATE TBL_FILE SET
+		DEL_DB = 'Y'
+		WHERE FILE_NO = #{FILE_NO}
+	</update>
+	
+	<select id="movePage" parameterType="int" resultType="boardVO">
+		select * from
+	(select
+		BOARD_NO,
+		lead(board_no,1,9999) OVER(order by board_no) as next,
+		LAG(BOARD_NO,1,9999) OVER(order by BOARD_NO) as last,
+		BOARD_TITLE,
+		LEAD(BOARD_TITLE,1,9999) OVER(order by BOARD_TITLE) as NEXTTITLE,
+		LAG(BOARD_TITLE,1,9999) over(order by BOARD_TITLE) as LASTTITLE
+		from TBL_BOARD
+		where BOARD_NO = #{board_no}
+		order by BOARD_NO desc
+		)TBL_BOARD
+		
+	</select>
 
 
 </mapper>  

@@ -27,10 +27,10 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 	
 	//첨부파일
-//	@Override
-//	public void insertFile(Map<String, Object> map) throws Exception {
-//			sqlSession.insert("namespace.insertFile",map);
-//	}
+	@Override
+	public void insertFile(Map<String, Object> map) throws Exception {
+			sqlSession.insert("namespace.insertFile",map);
+	}
 	
 	//글목록
 	@Override
@@ -87,33 +87,26 @@ public class BoardDAOImpl implements BoardDAO {
 		sqlSession.insert("namespace.insertLog",logVO);
 	}
 
-	
+	@Override
+	public boardVO movePage(int board_no) throws Exception {
+		return sqlSession.selectOne("namespace.movePage", board_no);
+	}
 
 //	@Override
-//	public void replyCount(int board_no, int amount) throws Exception {
-//		Map<String, Object> paramMap = new HashMap<>();
-//		paramMap.put("board_no", board_no);
-//		paramMap.put("amount", amount);
-//		
-//		sqlSession.update("namespace.replyCount",paramMap);
+//	public List<Map<String, Object>> selectFileList(int bno) throws Exception {
+//		return sqlSession.selectOne("namespace.selectFileList",bno);
 //	}
 
-	/*
-	 * @Override public Object memberInfo(String memberId) { return
-	 * sqlSession.selectOne("namespace.memberInfo",memberId); }
-	 * 
-	 * @Override public Object memberLog(String memberId) { return
-	 * sqlSession.selectOne("namespace.memberLog",memberId); }
-	 * 
-	 * @Override public Object memberWrite(String memberId) { return
-	 * sqlSession.selectOne("namespace.memberWrite",memberId); }
-	 * 
-	 * @Override public Object memberScrap(String memberId) { return
-	 * sqlSession.selectOne("namespace.memberScrap",memberId); }
-	 * 
-	 * @Override public Object memberReply(String memberId) { return
-	 * sqlSession.selectOne("namespace.memberReply",memberId); }
-	 */
+	@Override
+	public Map<String, Object> selectFileInfo(Map<String, Object>map) throws Exception {
+		return sqlSession.selectOne("namespace.selectFileInfo", map);
+	}
+
+	@Override
+	public void updateFile(Map<String, Object> map) throws Exception {
+		sqlSession.update("namespace.updateFile",map);
+	}
+
 
 
 	

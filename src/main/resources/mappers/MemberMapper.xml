@@ -68,17 +68,18 @@
 	]]>
 	</select>
 	
+	<!-- 비밀번호만 변경 -->
 	<update id="memberUpdate" parameterType="memberVO">
-		UPDATE
-			tbl_member
-		SET
-			me_name = #{me_name}
-		,	me_email = #{me_email}
-		,	me_pwd = #{me_pwd}
-		where
-			me_id = #{me_id}
+		UPDATE TBL_MEMBER
+			SET 
+			ME_PWD = #{me_pwd} where me_email = #{me_email}
 	</update>
 	
+	<select id="pwCheck" resultType="String">
+	 select me_pwd from tbl_member where me_email = #{me_email}
+	</select>
+	
+	<!-- 비밀번호만 변경 -->
 	<!-- 회원관리 -->
 	<select id="memberManage" resultType="memberVO" parameterType="memberVO">
 	select * from tbl_member
@@ -90,9 +91,5 @@
 		 from tbl_member
 		where me_id = #{me_id}
 	</delete>
-	
-	<!-- <select id="memberInfo" resultMap="memberVO">
-	select * from tbl_member where me_id = #{me_id}
-	</select> -->
 	
 </mapper>

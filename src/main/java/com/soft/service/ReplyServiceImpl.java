@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.soft.dao.BoardDAO;
 import com.soft.dao.ReplyDAO;
+import com.soft.vo.boardVO;
 import com.soft.vo.replyVO;
 
 @Service

@@ -60,7 +60,7 @@
 							<tr>
 								<td class="text-center"><c:out value="${list.board_no}" /></td>
 								<td><a href="/board/read?board_no=${list.board_no}"><c:out
-											value="${list.board_title}" /></a><strong>(${list.reply_count})</strong></td>
+											value="${list.board_title}" /></a></td>
 								<td class="text-center"><c:out value="${list.board_writer}" /></td>
 								<td class="text-center"><c:out value="${list.board_count}" /></td>
 								<td class="text-center"><c:out

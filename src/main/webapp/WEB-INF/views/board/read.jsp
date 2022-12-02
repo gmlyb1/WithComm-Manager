@@ -30,6 +30,16 @@
 		});
 	})
 </script>
+<script type="text/javascript">
+	function fn_fileDown(fileNo){
+		var formObj = $("form[name='readForm']");
+		$("#FILE_NO").attr("value",fileNo);
+		formObj.attr("action","/board/fileDown");
+		formObj.submit();
+	}
+
+</script>
+
 
 
 <div class="row" style="margin-bottom: 20px; margin-left: 1px;">
@@ -45,9 +55,9 @@
 	<div class="col-lg-12">
 		<h1 class="page-header text-center">상세 페이지</h1>
 		<c:if test="${member != null}">
-		<span style="color: blue" class="text-center"><strong>
-				댓글작성은 관리자만 가능합니다.</strong></span>
-	</c:if>
+			<span style="color: blue" class="text-center"><strong>
+					댓글작성은 관리자만 가능합니다.</strong></span>
+		</c:if>
 	</div>
 </div>
 
@@ -56,18 +66,23 @@
 		<div class="panel">
 			<div class="panel-body">
 				<form role="form" method="post" name="readForm">
-					<input type="hidden" id="board_no" name="board_no" value="${read.board_no}" />
-						<%-- <input type="hidden" id="reply_no" name="reply_no" value="${replyList.board_no}"> --%>
-						<!-- 게시판 글보기  -->
+				<input type="hidden" id="FILE_NO" name="FILE_NO" value="">
+					<input type="hidden" id="board_no" name="board_no"
+						value="${read.board_no}" />
+					<%-- <input type="hidden" id="reply_no" name="reply_no" value="${replyList.board_no}"> --%>
+					<!-- 게시판 글보기  -->
 					<div class="container">
 						<div class="row">
-							<table class="table table-striped" style="text-align:center; border: 1px solid #dddddd">
+							<table class="table table-striped"
+								style="text-align: center; border: 1px solid #dddddd">
 								<thead>
 									<tr>
-										<th colspan="2" style="background-color: #eeeeee; text-align:center;">게시판 글 보기</th>
+										<th colspan="2"
+											style="background-color: #eeeeee; text-align: center;">게시판
+											글 보기</th>
 									</tr>
 								</thead>
-								
+
 								<tbody>
 									<tr>
 										<td style="width: 20%">글 제목</td>
@@ -83,14 +98,14 @@
 									</tr>
 									<tr>
 										<td>내용</td>
-										<td colspan="2" style="height:200px; text-align:left;">${read.board_content}</td>
+										<td colspan="2" style="height: 200px; text-align: left;">${read.board_content}</td>
 									</tr>
-								
-								</tbody>							
-							</table>						
-						</div>					
+
+								</tbody>
+							</table>
+						</div>
 					</div>
-						<!-- 게시판 글보기  -->
+					<!-- 게시판 글보기  -->
 					<div style="margin-left: 1px;">
 						<c:if test="${member.me_name == read.board_writer}">
 							<button type="button" class="btn btn-success"
@@ -104,9 +119,16 @@
 					</div>
 				</form>
 				<!-- 게시판 끝 -->
-
+				
+				<!-- 첨부파일 -->
+				<span>파일 목록</span>
+					<div class="form-group" style="border: 1px solid #dbdbdb;">
+						<c:forEach var="file" items="${file}">
+							<a href="#" onclick="fn_fileDown('${file.FILE_NO}'); return false;">${file.ORG_FILE_NAME}</a>(${file.FILE_SIZE}kb)<br>
+						</c:forEach>
+					</div>
+				
 				<!-- 댓글 시작 -->
-
 				<div class="mb-3" style="height: 270px; OVERFLOW-Y: auto;">
 					<table class="table table-striped">
 						<c:choose>
@@ -124,8 +146,8 @@
 										<td style="width: 60%; height: 50px;"><pre
 												style="font-family: arial;">${replyList.reply_content}</pre>
 											<p>
-												<a class="btn btn-primary" href="">수정</a> /
-												 <a class="btn btn-danger" href="">삭제</a>
+												<a class="btn btn-primary" href="">수정</a> / <a
+													class="btn btn-danger" href="">삭제</a>
 											</p></td>
 										<td style="width: 35%; text-align: right;"><fmt:formatDate
 												value="${replyList.reply_regdate}" pattern="yy-MM-dd HH:mm" /></td>
@@ -143,6 +165,8 @@
 				<c:if test="${member.me_grade == '최고관리자' }">
 					<div>
 						<form method="post" action="/reply/write">
+						<input type="hidden" name="board_no" value="${read.board_no}">
+							<%-- <input type="hidden" id="reply_no" name="reply_no" value="${replyList.board_no}"> --%>
 							<p>
 								<label>댓글 작성자:</label> <input type="text" name="reply_writer"
 									value="${member.me_name}[${member.me_grade}]" readonly>
@@ -154,8 +178,7 @@
 							</p>
 
 							<p>
-								<input type="hidden" name="reply.board_no" value="${read.board_no}">
-								<%-- <input type="hidden" id="reply_no" name="reply_no" value="${replyList.board_no}"> --%>
+								
 								<button type="submit" class="btn btn-success"
 									style="margin: 55px 0 0 10px;">댓글 작성</button>
 							</p>
@@ -163,6 +186,40 @@
 					</div>
 				</c:if>
 				<!-- 댓글 작성 끝 -->
+				<div class="my-3 p-3 bg-white rounded shadow-sm">
+					<c:choose>
+						<c:when test="${move.next != 9999}">
+
+							<button type="button" class="btn btn-warning mr-3 mb-3"
+								onclick="location.href='/board/read?board_no=${move.next}'">
+								<span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>다음글
+							</button>
+							<a href="/board/read?board_no=${move.next}" style="color: black">
+								${move.nexttitle} </a>
+						</c:when>
+
+						<c:when test="${move.next == 9999}">
+							<button type="button" class="btn btn-warning mr-3 mb-3" disabled>다음글이
+								없습니다</button>
+						</c:when>
+					</c:choose>
+					<br />
+					<c:choose>
+						<c:when test="${move.last != 9999}">
+							<button type="button" class="btn btn-info mr-3 "
+								onclick="location.href='/board/read?board_no=${move.last}'">
+								<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>이전글
+							</button>
+							<a href="/board/read?board_no=${move.last}" style="color: black">
+								${move.lasttitle} </a>
+						</c:when>
+
+						<c:when test="${move.last == 9999}">
+							<button type="button" class="btn btn-info mr-3" disabled>이전글이
+								없습니다</button>
+						</c:when>
+					</c:choose>
+				</div>
 			</div>
 		</div>
 	</div>

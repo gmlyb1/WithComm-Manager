@@ -8,11 +8,9 @@
 	</welcome-file-list>
 	
 	<!-- 세션 기본값 10초 -->
-	<web-app>
 		<session-config>
 				<session-timeout>10</session-timeout>
 		</session-config>
-	</web-app>
 	
 	<!-- 에러페이지 이동시 해당 템플릿으로 이동 -->
 	<error-page>

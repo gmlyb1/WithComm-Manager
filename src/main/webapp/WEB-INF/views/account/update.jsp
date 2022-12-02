@@ -6,11 +6,50 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <script type="text/javascript">
-function _onSubmit(){
-	if(!confirm("수정 하시겠습니까?")){
-		return false;
-	}
-}
+$(document).ready(function(){
+	
+	$("#pwUpdate").on("click", function(){
+		if($("#me_pwd").val==""){
+			alert("현재 비밀번호를 입력해주세요");
+			$("#me_pwd").focus();
+			return false
+		}
+		if($("#me_pwd1").val==""){
+			alert("변경비밀번호을를 입력해주세요");
+			$("#me_pwd1").focus();
+			return false
+		}
+		if($("#me_pwd2").val==""){
+			alert("변경비밀번호를 입력해주세요");
+			$("#me_pwd2").focus();
+			return false
+		}
+		if ($("#me_pwd").val() != $("#me_pwd2").val()) {
+			alert("변경비밀번호가 일치하지 않습니다.");
+			$("#me_pwd2").focus();
+			 
+		
+		$.ajax({
+			url : "/account/pwCheck",
+			type : "POST",
+			dataType : "json",
+			data : $("#pwUpdateForm").serializeArray(),
+			success: function(data){
+				
+				if(data==0){
+					alert("패스워드가 틀렸습니다.");
+					return;
+				}else{
+					if(confirm("변경하시겠습니까?")){
+						$("#pwUpdateForm").submit();
+					}
+					
+				}
+			}
+		})
+		
+	});
+})
 </script>
 <!-- Custom fonts for this template-->
 <link href="/resources/vendor/fontawesome-free/css/all.min.css"
@@ -23,73 +62,26 @@ function _onSubmit(){
 <link href="/resources/css/sb-admin-2.min.css" rel="stylesheet">
 <%@include file="../includes/header.jsp"%>
 
-<form action="/account/update" role="form" method="post" name="updateForm" onsubmit="return _onSubmit();">
-	<div class="container">
-		<div class="card o-hidden border-0 shadow-lg my-5">
-			<div class="card-body p-0">
-				<div class="row">
-					<div class="col-lg-5 d-none d-lg-block be-register-image">
-						<div class="col-lg-7">
-							<div class="p-5">
-								<div class="text-center">
-									<h1 class="h4 text-gray-900 mb-4">프로필 수정 페이지</h1>
-								</div>
-							</div>
-
-							<form class="user">
-								<div class="form-group row">
-									<div class="col-sm-12 mb-3 mb-sm-0">
-										계정아이디:<input type="text"
-											class="form-control form-control-user" id="me_email"
-											name="me_email" style="text-align: center;"
-											value="${member.me_email}" placeholder="아이디" disabled>
-									</div>
-								</div>
-
-								<div class="form-group row">
-									<div class="col-sm-12 mb-3 mb-sm-0">
-										닉네임:<input type="text" class="form-control form-control-user"
-											id="me_name" name="me_name" style="text-align: center;"
-											value="${member.me_name}" placeholder="닉네임">
-									</div>
-								</div>
-								<div class="form-group row">
-									<div class="col-sm-12 mb-3 mb-sm-0">
-										회원등급: <input type="text"
-											class="form-control form-control-user" id="me_grade"
-											name="me_grade" style="text-align: center;"
-											value="${member.me_grade}" placeholder="회원등급" disabled>
-									</div>
-								</div>
-								<div class="form-group row">
-									<div class="col-sm-12 mb-3 mb-sm-0">
-										<input type="password" class="form-control form-control-user"
-											id="me_pwd" name="me_pwd" style="text-align: center;"
-											placeholder="비밀번호">
-									</div>
-								</div>
-								<div class="form-group row">
-									<div class="col-sm-12 mb-3 mb-sm-0">
-										<input type="password" class="form-control form-control-user"
-											id="me_pwd2" name="me_pwd2" style="text-align: center;"
-											placeholder="비밀번호 확인">
-									</div>
-								</div>
-								<button class="btn btn-primary" onsubmit="return _onSubmit();">
-									수정하기</button>
-								<br>
-								<button type="button" class="btn btn-danger"
-									onclick="location.href='/account/delete';">회원탈퇴</button>
-								<br> <a href="/home" class="btn btn-warning"> 메인페이지로 이동
-								</a>
-							</form>
-							<hr>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	<form action="/account/update" method="post" id="pwUpdateForm" name="pwUpdateForm">
+                       <input type="hidden" id="me_email" name="me_email" value="${member.me_email}">
+    <div class="col-sm-8 col-sm-offset-2">
+        <div class="panel panel-default panel-margin-10">
+            <div class="panel-body panel-body-content text-center">
+                <p class="lead">변경하실 비밀번호를 입력해 주세요.</p>
+                <div class="form-group">
+                    <input type="password" name="me_pwd" id="me_pwd" class="form-control form-control-inline text-center" placeholder="현재 비밀번호" />
+                </div>
+                <div class="form-group">
+                    <input type="password" name="me_pwd1" class="form-control form-control-inline text-center" placeholder="새 비밀번호" />
+                </div>
+                <div class="form-group">
+                    <input type="password" name="me_pwd2" class="form-control form-control-inline text-center" placeholder="새 비밀번호 확인" />
+                </div>
+                <button type="button" id="pwUpdate" name="pwUpdate" class="btn btn-primary">비밀번호 변경</button> <a href="/account/profile" class="btn btn-default">취소</a>
+            </div>
+        </div>
+    </div>
+    </form>
 
 	<script src="/resources/vendor/jquery/jquery.min.js"></script>
 	<script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -99,8 +91,5 @@ function _onSubmit(){
 
 	<!-- Custom scripts for all pages-->
 	<script src="/resources/js/sb-admin-2.min.js"></script>
-
-
-</form>
 
 <%@include file="../includes/footer.jsp"%>

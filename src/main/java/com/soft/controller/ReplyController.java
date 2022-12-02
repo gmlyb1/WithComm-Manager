@@ -28,6 +28,8 @@ public class ReplyController {
 		
 		 replyService.replyWrite(vo);
 		
+//		 System.out.println("result Param :" + bvo.getBoard_no() );
+		 
 		return "redirect:/board/read?board_no="+bvo.getBoard_no();
 	}
 	// ´ñ±Û ¼öÁ¤

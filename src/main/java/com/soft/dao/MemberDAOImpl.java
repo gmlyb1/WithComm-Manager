@@ -1,6 +1,8 @@
 package com.soft.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -43,10 +45,19 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public void memberUpdate(memberVO mVO) throws Exception {
-			sqlSession.update("namespace.memberUpdate",mVO);
+	public void memberUpdate(String me_email,String hashedPw) throws Exception {
+		Map<String, Object>map = new HashMap<String,Object>();	
+		map.put("me_email", me_email);
+		map.put("me_pwd", hashedPw);
+		
+		sqlSession.update("namespace.memberUpdate",map);
 	}
-
+	@Override
+	public String pwCheck(String me_email) throws Exception {
+		return sqlSession.selectOne("namespace.pwCheck", me_email);
+	}
+	
+	
 	@Override
 	public List<memberVO> memberManage(memberVO mVO) throws Exception{
 		return sqlSession.selectList("namespace.memberManage",mVO );
@@ -56,6 +67,8 @@ public class MemberDAOImpl implements MemberDAO {
 	public void memberDelete(int me_id) throws Exception {
 		sqlSession.delete("namespace.memberDelete", me_id);
 	}
+
+	
 
 
 }

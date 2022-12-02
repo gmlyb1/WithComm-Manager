@@ -14,16 +14,11 @@ public class boardVO{
 	private int board_hit;
 	private int board_reply_hit;
 	
-	//조회수 갯수
-		private int reply_count;
-	
-	public int getReply_count() {
-			return reply_count;
-		}
-	public void setReply_count(int reply_count) {
-		this.reply_count = reply_count;
-	}
-	
+	// 이전글, 다음글
+	private int next;
+	private int last;
+	private String nexttitle;
+	private String lasttitle;
 	public int getBoard_no() {
 		return board_no;
 	}
@@ -72,14 +67,38 @@ public class boardVO{
 	public void setBoard_reply_hit(int board_reply_hit) {
 		this.board_reply_hit = board_reply_hit;
 	}
-	
+	public int getNext() {
+		return next;
+	}
+	public void setNext(int next) {
+		this.next = next;
+	}
+	public int getLast() {
+		return last;
+	}
+	public void setLast(int last) {
+		this.last = last;
+	}
+	public String getNexttitle() {
+		return nexttitle;
+	}
+	public void setNexttitle(String nexttitle) {
+		this.nexttitle = nexttitle;
+	}
+	public String getLasttitle() {
+		return lasttitle;
+	}
+	public void setLasttitle(String lasttitle) {
+		this.lasttitle = lasttitle;
+	}
 	@Override
 	public String toString() {
 		return "boardVO [board_no=" + board_no + ", board_title=" + board_title + ", board_content=" + board_content
 				+ ", board_writer=" + board_writer + ", board_count=" + board_count + ", board_regdate=" + board_regdate
-				+ ", board_hit=" + board_hit + ", board_reply_hit=" + board_reply_hit + ", reply_count=" + reply_count
-				+ "]";
+				+ ", board_hit=" + board_hit + ", board_reply_hit=" + board_reply_hit + ", next=" + next + ", last="
+				+ last + ", nexttitle=" + nexttitle + ", lasttitle=" + lasttitle + "]";
 	}
+	
 	
 	
 	

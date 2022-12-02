@@ -25,8 +25,9 @@ public interface MemberService {
 	public memberVO memberInfoSearch(memberVO mVO)throws Exception;
 	
 	// 프로필 수정
-	public void memberUpdate(memberVO mVO) throws Exception;
-
+	public void memberUpdate(String me_email,String hashedPw) throws Exception;
+	public String pwCheck(String me_email) throws Exception;
+	
 	// 회원관리
 	public List<memberVO> memberManage(memberVO mVO)throws Exception;
 	

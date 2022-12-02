@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.soft.vo.boardVO;
 import com.soft.vo.replyVO;
 
 public class ReplyDAOImpl implements ReplyDAO{

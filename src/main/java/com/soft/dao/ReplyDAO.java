@@ -2,6 +2,7 @@ package com.soft.dao;
 
 import java.util.List;
 
+import com.soft.vo.boardVO;
 import com.soft.vo.replyVO;
 
 public interface ReplyDAO {

@@ -60,9 +60,22 @@
 			<version>1.10</version>
 		</dependency>
 
-		<!-- lombok -->
-		<!-- <dependency> <groupId>org.projectlombok</groupId> <artifactId>lombok</artifactId> 
-			<version>1.18.22</version> <scope>provided</scope> </dependency> -->
+		<!-- 첨부파일 START -->
+		<!-- MultipartHttpServletRequset -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.0.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+
+		<!-- 첨부파일 END -->
+
 
 		<!-- AspectJ -->
 		<dependency>
@@ -215,20 +228,20 @@
 			<artifactId>spring-security-core</artifactId>
 			<version>5.0.8.RELEASE</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
 			<version>5.0.8.RELEASE</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
 			<version>5.0.8.RELEASE</version>
 		</dependency>
-		
-		
+
+
 		<!-- Spring Security -->
 
 		<!-- 첨부파일 START -->
