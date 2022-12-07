@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.soft.vo.LogVO;
 import com.soft.vo.boardVO;
 import com.soft.vo.replyVO;
 
@@ -43,7 +42,7 @@ public interface BoardDAO {
 	public void replyWrite(replyVO vo) throws Exception;
 
 	// 활동 로그
-	public void insertLog(LogVO logVO);
+//	public void insertLog(LogVO logVO);
 	
 	// 이전글,다음글
 	public boardVO movePage(int board_no) throws Exception;

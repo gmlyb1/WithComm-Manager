@@ -9,7 +9,6 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.soft.vo.LogVO;
 import com.soft.vo.boardVO;
 import com.soft.vo.replyVO;
 
@@ -82,10 +81,10 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 	
 	//활동로그
-	@Override
-	public void insertLog(LogVO logVO) {
-		sqlSession.insert("namespace.insertLog",logVO);
-	}
+//	@Override
+//	public void insertLog(LogVO logVO) {
+//		sqlSession.insert("namespace.insertLog",logVO);
+//	}
 
 	@Override
 	public boardVO movePage(int board_no) throws Exception {

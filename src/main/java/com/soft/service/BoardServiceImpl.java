@@ -14,7 +14,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.soft.dao.BoardDAO;
 import com.soft.util.FileUtils;
-import com.soft.vo.LogVO;
 import com.soft.vo.boardVO;
 import com.soft.vo.replyVO;
 
