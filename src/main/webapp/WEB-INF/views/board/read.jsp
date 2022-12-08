@@ -154,8 +154,10 @@
 										<td style="width: 60%; height: 50px;"><pre
 												style="font-family: arial;">${replyList.reply_content}</pre>
 											<p>
-												<a class="btn btn-primary" href="">수정</a> /
+											 <c:if test="${member.me_grade == '최고관리자' }">
+												<!-- <a class="btn btn-primary" href="">수정</a> / -->
 												<a class="btn btn-danger" href="javascript:remove_replyNo(${replyList.reply_no},${replyList.board_no});">삭제</a>
+											</c:if>
 											</p></td>
 										<td style="width: 35%; text-align: right;"><fmt:formatDate
 												value="${replyList.reply_regdate}" pattern="yy-MM-dd HH:mm" /></td>
@@ -170,7 +172,7 @@
 
 
 				<!-- 댓글 작성 시작 -->
-				<c:if test="${member.me_grade == '최고관리자' }">
+				 <c:if test="${member.me_grade == '최고관리자' }"> 
 					<div>
 						<form method="post" action="/reply/write">
 						<input type="hidden" name="board_no" value="${read.board_no}">

@@ -19,7 +19,7 @@ public class memberVO {
 	private String me_addr3;
 	private int verify;
 	private int adminCk;
-	
+	private String state;
 	public int getMe_id() {
 		return me_id;
 	}
@@ -92,14 +92,20 @@ public class memberVO {
 	public void setAdminCk(int adminCk) {
 		this.adminCk = adminCk;
 	}
-	
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
 	@Override
 	public String toString() {
 		return "memberVO [me_id=" + me_id + ", me_email=" + me_email + ", me_pwd=" + me_pwd + ", me_name=" + me_name
 				+ ", me_grade=" + me_grade + ", me_regDate=" + me_regDate + ", me_image=" + me_image + ", me_addr1="
 				+ me_addr1 + ", me_addr2=" + me_addr2 + ", me_addr3=" + me_addr3 + ", verify=" + verify + ", adminCk="
-				+ adminCk + "]";
+				+ adminCk + ", state=" + state + "]";
 	}
+	
 	
 	
 	

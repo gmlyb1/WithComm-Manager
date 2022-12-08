@@ -107,7 +107,7 @@ public class BoardController {
 		// 이전글 다음글
 		model.addAttribute("move", boardService.movePage(vo.getBoard_no()));
 		
-		System.out.println(vo.getBoard_no());
+//		System.out.println(vo.getBoard_no());
 		
 		return "/board/read";
 	}

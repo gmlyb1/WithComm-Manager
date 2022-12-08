@@ -47,7 +47,7 @@ public class MemberController {
 	public String postRegister(memberVO vo, RedirectAttributes rttr) throws Exception {
 		
 		try {
-			memberService.register(vo);
+			memberService.register(vo);	
 			rttr.addFlashAttribute("msg", "회원가입이 완료되었습니다.");
 		}catch (Exception e) {
 			rttr.addFlashAttribute("msg", "오류가 발생하였습니다.");
@@ -81,6 +81,7 @@ public class MemberController {
 			rttr.addFlashAttribute("msg", "로그인에 성공하였습니다.");
 			return "redirect:/home";
 		}
+		
 		
 		
 	}

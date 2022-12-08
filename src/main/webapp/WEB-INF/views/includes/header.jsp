@@ -87,18 +87,18 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 			<div class="sidebar-heading">Interface</div>
 			<!-- Nav Item - Tables -->
 			<c:if test="${member != null}">
-				<li class="nav-item active"><a class="nav-link"
-					href="/board/list"> <i class="fas fa-fw fa-table"></i> <span>고객
-							게시판</span></a></li>
+				<li class="nav-item active">
+				<a class="nav-link" href="#"> <i class="fas fa-fw fa-table"></i> <span>공지사항 관리</span></a></li>
+				<li class="nav-item active">
+				<a class="nav-link" href="/board/list"> <i class="fas fa-fw fa-table"></i> <span>
+							게시판 관리</span></a></li>
+				
 			</c:if>
-
 			<c:if test="${member != null}">
-				<li class="nav-item active"><a class="nav-link"
-					href="/item/list"> <i class="fas fa-fw fa-table"></i> <span>상품</span></a>
+			<li class="nav-item active"><a class="nav-link"
+					href="#"> <i class="fas fa-fw fa-table"></i> <span>상품관리</span></a>
 				</li>
 			</c:if>
-
-
 			<!-- Nav Item - Pages Collapse Menu -->
 			<!-- <li class="nav-item"><a class="nav-link collapsed" href="#"
 					data-toggle="collapse" data-target="#collapseTwo"
