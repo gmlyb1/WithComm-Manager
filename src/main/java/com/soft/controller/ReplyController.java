@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.soft.service.ReplyService;
 import com.soft.vo.boardVO;
@@ -35,4 +36,12 @@ public class ReplyController {
 	// ´ñ±Û ¼öÁ¤
 	
 	// ´ñ±Û »èÁ¦
+	@RequestMapping(value="/delete" , method=RequestMethod.GET)
+	public String removeReply(@RequestParam("reply_no")int reply_no, @RequestParam("board_no")int board_no, boardVO bvo, replyVO rvo) throws Exception 
+	{
+		
+		replyService.replyDelete(reply_no);
+		
+		return "redirect:/board/read?board_no="+bvo.getBoard_no();
+	}
 }

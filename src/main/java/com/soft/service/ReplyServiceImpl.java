@@ -37,8 +37,8 @@ public class ReplyServiceImpl implements ReplyService{
 
 	// ¥Ò±€ªË¡¶
 	@Override
-	public void replyDelete(replyVO vo) throws Exception {
-		replyDAO.replyDelete(vo);
+	public void replyDelete(int reply_no) throws Exception {
+		replyDAO.replyDelete(reply_no);
 	}
 
 	@Override

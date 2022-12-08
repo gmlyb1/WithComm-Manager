@@ -36,8 +36,8 @@ public class ReplyDAOImpl implements ReplyDAO{
 
 	// ¥Ò±€ ªË¡¶
 	@Override
-	public void replyDelete(replyVO vo) throws Exception {
-		sqlSession.delete("namespace.replyDelete", vo);
+	public void replyDelete(int reply_no) throws Exception {
+		sqlSession.delete("namespace.replyDelete", reply_no);
 	}
 
 	@Override

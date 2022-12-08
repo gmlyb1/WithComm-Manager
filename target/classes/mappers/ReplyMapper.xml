@@ -34,9 +34,8 @@
 		and	board_no = #{board_no}
 	</update>
 	
-	<delete id="replyDelete" parameterType="replyVO">
+	<delete id="replyDelete">
 		delete from tbl_reply
 		where reply_no = #{reply_no}
-		and board_no = #{board_no}
 	</delete>
 </mapper>  
