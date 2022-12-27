@@ -61,11 +61,10 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	// ¥Ò±€ ¿€º∫
-	@Transactional
+	@Transactional(isolation = Isolation.READ_COMMITTED)
 	@Override
 	public void replyWrite(replyVO vo) throws Exception {
 		boardDAO.replyWrite(vo);
-		
 //		boardDAO.replyCount(vo.getBoard_no(), 1);
 	}
 

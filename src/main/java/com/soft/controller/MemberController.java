@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.security.auth.login.AccountException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -66,7 +67,7 @@ public class MemberController {
 	
 	// 로그인 
 	@RequestMapping(value ="/login" , method=RequestMethod.POST)
-	public String login(memberVO vo, HttpServletRequest request, RedirectAttributes rttr) throws Exception{
+	public String login(HttpServletResponse response,memberVO vo, HttpServletRequest request, RedirectAttributes rttr) throws Exception{
 			
 		HttpSession session = request.getSession();
 		session.setMaxInactiveInterval(6000);
@@ -75,13 +76,13 @@ public class MemberController {
 		if(login == null)  {
 			session.setAttribute("member", null);
 			rttr.addFlashAttribute("msg", "아이디와 비밀번호를 다시 확인하세요!");
+			logger.info("로그인 계정 :"+vo);
 			return "redirect:/account/login";
 		} else {
 			session.setAttribute("member", login);
 			rttr.addFlashAttribute("msg", "로그인에 성공하였습니다.");
 			return "redirect:/home";
 		}
-		
 		
 		
 	}

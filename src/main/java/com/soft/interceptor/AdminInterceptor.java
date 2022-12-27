@@ -19,8 +19,8 @@ public class AdminInterceptor implements HandlerInterceptor{
 		
 		memberVO lvo = (memberVO)session.getAttribute("member");
 		
-		if(lvo == null || lvo.getAdminCk() == 0) {
-			response.sendRedirect("/home");
+		if(lvo.getAdminCk() != 1 || session == null) {
+			response.sendRedirect("/account/login");
 			
 		return false;
 	}
@@ -30,7 +30,7 @@ public class AdminInterceptor implements HandlerInterceptor{
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		// TODO Auto-generated method stub
+		
 		
 	}
 

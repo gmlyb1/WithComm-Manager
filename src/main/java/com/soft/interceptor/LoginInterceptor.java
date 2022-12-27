@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.soft.vo.memberVO;
+
 public class LoginInterceptor implements HandlerInterceptor{
 
 	@Override
@@ -14,8 +16,15 @@ public class LoginInterceptor implements HandlerInterceptor{
 			throws Exception {
 		
 		//System.out.println("LoginInterceptor preHandler Àû¿ë");
+		memberVO login = new memberVO();
+		
 		
 		HttpSession session = request.getSession();
+		
+		if(login == null) {
+			response.sendRedirect("/account/login");
+			return false;
+		}
 		
 		session.invalidate();
 		

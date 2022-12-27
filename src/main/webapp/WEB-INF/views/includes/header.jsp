@@ -88,7 +88,7 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 			<!-- Nav Item - Tables -->
 			<c:if test="${member != null}">
 				<li class="nav-item active">
-				<a class="nav-link" href="#"> <i class="fas fa-fw fa-table"></i> <span>공지사항 관리</span></a></li>
+				<a class="nav-link" href="/notice/list"> <i class="fas fa-fw fa-table"></i> <span>공지사항 관리</span></a></li>
 				<li class="nav-item active">
 				<a class="nav-link" href="/board/list"> <i class="fas fa-fw fa-table"></i> <span>
 							게시판 관리</span></a></li>
@@ -96,7 +96,7 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 			</c:if>
 			<c:if test="${member != null}">
 			<li class="nav-item active"><a class="nav-link"
-					href="#"> <i class="fas fa-fw fa-table"></i> <span>상품관리</span></a>
+					href="/item/manage"> <i class="fas fa-fw fa-table"></i> <span>상품 관리</span></a>
 				</li>
 			</c:if>
 			<!-- Nav Item - Pages Collapse Menu -->

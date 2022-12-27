@@ -152,8 +152,9 @@
 					<div class="chart-area">
 						<%-- <canvas id="myAreaChart"></canvas> --%>
 						<c:if test="${member != null}">
-						<table class="table table-bordered" id="dataTable" width="100%"
-							cellspacing="0">
+						<table class="table table-bordered" >
+					<!-- 	id="dataTable" width="100%"
+							cellspacing="0" -->
 							<thead>
 								<tr>
 									<th class="text-center">번호</th>
@@ -239,7 +240,7 @@
 				<div class="card-header py-3">
 					<h6 class="m-0 font-weight-bold text-primary">Projects</h6>
 				</div>
-				<div class="card-body">
+				<!-- <div class="card-body">
 					<h4 class="small font-weight-bold">
 						Server Migration <span class="float-right">20%</span>
 					</h4>
@@ -279,7 +280,8 @@
 							style="width: 100%" aria-valuenow="100" aria-valuemin="0"
 							aria-valuemax="100"></div>
 					</div>
-				</div>
+				</div> -->
+				werwer
 			</div>
 
 			<!-- Color System -->

@@ -32,6 +32,15 @@
 		});
 	});
 </script>
+<script type="text/javascript">
+$(document).ready(function() {
+	var msg = "${msg}"
+
+	if (msg != "") {
+		alert(msg);
+	}
+});
+</script>
 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">

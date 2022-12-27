@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -43,14 +44,16 @@ public class HomeController {
 	private BoardService boardService;
 	
 	@RequestMapping(value = "home", method = RequestMethod.GET)
-	public String home(@ModelAttribute("vo")boardVO vo,Locale locale, HttpServletRequest request,Model model, HttpSession session) throws Exception {
+	public String home(HttpServletResponse response,@ModelAttribute("vo")boardVO vo,Locale locale, HttpServletRequest request,Model model, HttpSession session, memberVO mvo) throws Exception {
 
 		memberVO memberVO = (memberVO) session.getAttribute("memberVO");
 		
 		if(memberVO != null) {
 			
 			memberVO.setMe_id(memberVO.getMe_id());
+			
 		}
+		
 		memberVO memberSearch = memberService.memberInfoSearch(memberVO);
 
 		model.addAttribute("memberVO", memberSearch);
