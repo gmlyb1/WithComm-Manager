@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 
 import com.soft.vo.NoticeVO;
+import com.soft.vo.boardVO;
 
 
 public class NoticeDAOImpl implements NoticeDAO {
@@ -47,7 +48,17 @@ public class NoticeDAOImpl implements NoticeDAO {
 			
 	}
 
+	@Override
+	public NoticeVO lastNoticeList(int notice_no) throws Exception {
+		
+		return sqlSession.selectOne("namespace.lastBoardList", notice_no);
+	}
 
+	@Override
+	public NoticeVO nextNoticeList(int notice_no) throws Exception {
+		
+		return sqlSession.selectOne("namespace.nextBoardList", notice_no);
+	}
 
 	
 	

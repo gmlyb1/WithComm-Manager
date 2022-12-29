@@ -135,45 +135,6 @@
 		)
 	</insert>
 	
-	<!-- <select id="selectFileList" parameterType="int" resultType="hashMap">
-		SELECT
-			FILE_NO
-		,	ORG_FILE_NAME
-		,	ROUND(FILE_SIZE/1024,1) AS FILE_SIZE
-		,FROM TBL_FILE
-		WHERE BNO = #{bno}
-		AND DEL_GB = 'N'
-		ORDER BY FILE_NO ASC
-	</select> -->
-	
-	<select id="selectFileInfo" parameterType="hashMap" resultType="hashMap">
-		SELECT
-			STORED_FILE_NAME
-		,	ORG_FILE_NAME
-		FROM TBL_FILE
-		WHERE FILE_NO = #{FILE_NO}
-	</select>
-	
-	<update id="updateFile" parameterType="hashMap">
-		UPDATE TBL_FILE SET
-		DEL_DB = 'Y'
-		WHERE FILE_NO = #{FILE_NO}
-	</update>
-	
-	<!-- <select id="movePage" parameterType="int" resultType="boardVO">
-		select * from
-	(select
-		board_no,
-		lead(board_no,1,board_no+1) OVER(order by board_no) as next,
-		LAG(board_no,1,board_no-1) OVER(order by board_no) as last,
-		board_title,
-		LEAD(board_title,1,board_title) OVER(order by board_title) as nexttitle,
-		LAG(board_title,1,board_title) over(order by board_title) as lasttitle
-		from tbl_board
-		where board_no = #{board_no}
-		order by board_no desc
-		)tbl_board
-	</select> -->
 	
 	<select id="lastBoardList" parameterType="int" resultType="boardVO">
 	 <![CDATA[
@@ -182,7 +143,7 @@
 	,   board_title 
 	FROM tbl_board 
 		WHERE board_no < #{board_no}  
-	ORDER BY board_no DESC LIMIT 1;
+	ORDER BY board_no DESC LIMIT 1
 	]]>
 	</select>
 	
@@ -193,7 +154,7 @@
 	,   board_title 
 	FROM tbl_board 
 		WHERE board_no > #{board_no}  
-	ORDER BY board_no DESC LIMIT 1;
+	ORDER BY board_no LIMIT 1
 	]]>
 	</select>
 	

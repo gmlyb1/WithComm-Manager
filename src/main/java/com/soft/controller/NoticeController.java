@@ -80,9 +80,11 @@ public class NoticeController {
 				
 				model.addAttribute("read", noticeService.NoticeRead(vo.getNotice_no()));
 				
+				// 이전 글
+				model.addAttribute("lastNoticeList", noticeService.lastNoticeList(notice_no));
 				
-				// 이전글 다음글
-//				model.addAttribute("move", boardService.movePage(vo.getBoard_no()));
+				// 다음 글
+				model.addAttribute("nextNoticeList", noticeService.nextNoticeList(notice_no));
 				
 				
 				return "/notice/read";

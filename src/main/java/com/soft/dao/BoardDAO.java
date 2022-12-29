@@ -11,10 +11,10 @@ import com.soft.vo.replyVO;
 public interface BoardDAO {
 
 	// 이전글
-	public boardVO lastBoardList(int board_no) throws Exception;
+	public boardVO lastBoardList(int notice_no) throws Exception;
 	
 	// 다음글
-	public boardVO nextBoardList(int board_no) throws Exception;
+	public boardVO nextBoardList(int notice_no) throws Exception;
 	
 	// 게시글 작성
 	public void insertBoard(boardVO vo) throws Exception;

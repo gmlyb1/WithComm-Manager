@@ -7,6 +7,12 @@ import com.soft.vo.NoticeVO;
 
 public interface NoticeDAO {
 
+	// 이전글
+	public NoticeVO lastNoticeList(int notice_no) throws Exception;
+		
+	// 다음글
+	public NoticeVO nextNoticeList(int notice_no) throws Exception;
+	
 	// 공지사항 작성
 	public void insertNotice(NoticeVO vo) throws Exception;
 	
