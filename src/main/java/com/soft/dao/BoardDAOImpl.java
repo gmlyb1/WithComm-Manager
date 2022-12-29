@@ -79,31 +79,17 @@ public class BoardDAOImpl implements BoardDAO {
 	public void replyWrite(replyVO vo) throws Exception {
 		sqlSession.insert("namespace.WriteReply", vo);
 	}
-	
-	//활동로그
-//	@Override
-//	public void insertLog(LogVO logVO) {
-//		sqlSession.insert("namespace.insertLog",logVO);
-//	}
 
 	@Override
-	public boardVO movePage(int board_no) throws Exception {
-		return sqlSession.selectOne("namespace.movePage", board_no);
-	}
-
-//	@Override
-//	public List<Map<String, Object>> selectFileList(int bno) throws Exception {
-//		return sqlSession.selectOne("namespace.selectFileList",bno);
-//	}
-
-	@Override
-	public Map<String, Object> selectFileInfo(Map<String, Object>map) throws Exception {
-		return sqlSession.selectOne("namespace.selectFileInfo", map);
+	public boardVO lastBoardList(int board_no) throws Exception {
+		
+		return sqlSession.selectOne("namespace.lastBoardList", board_no);
 	}
 
 	@Override
-	public void updateFile(Map<String, Object> map) throws Exception {
-		sqlSession.update("namespace.updateFile",map);
+	public boardVO nextBoardList(int board_no) throws Exception {
+		
+		return sqlSession.selectOne("namespace.nextBoardList", board_no);
 	}
 
 

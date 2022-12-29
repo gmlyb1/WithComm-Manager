@@ -10,8 +10,14 @@ import com.soft.vo.replyVO;
 
 public interface BoardService {
 
+	// 이전글
+	public boardVO lastBoardList(int board_no) throws Exception;
+	
+	// 다음글
+	public boardVO nextBoardList(int board_no) throws Exception;
+	
 	// 게시글 작성
-	public void insertBoard(boardVO vo,MultipartHttpServletRequest mpRequest) throws Exception;
+	public void insertBoard(boardVO vo) throws Exception;
 	
 	// 게시글 목록
 	public List<boardVO> BoardList(boardVO vo) throws Exception;
@@ -23,7 +29,7 @@ public interface BoardService {
 	public boardVO BoardRead(int board_no) throws Exception;
 	
 	// 게시글 수정
-	public void BoardUpdate(boardVO vo,String[] files, String[] fileNames, MultipartHttpServletRequest mpRequest) throws Exception;
+	public void BoardUpdate(boardVO vo) throws Exception;
 	
 	// 게시글 삭제
 	public void BoardDelete(int board_no) throws Exception;
@@ -37,15 +43,4 @@ public interface BoardService {
 	//댓글수
 //	public void replyCount(int board_no,int amount) throws Exception;
 	
-	// 이전글,다음글
-	public boardVO movePage(int board_no) throws Exception;
-	
-	// 첨부파일 조회
-//	public List<Map<String, Object>> selectFileList(int bno) throws Exception;
-	
-	// 첨부파일 다운로드
-	public Map<String, Object> selectFileInfo(Map<String, Object> map) throws Exception;
-
-	// 첨부파일 수정
-//	public void updateFile(Map<String, Object> map) throws Exception;
 }

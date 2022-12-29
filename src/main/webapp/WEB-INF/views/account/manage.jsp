@@ -55,6 +55,7 @@ $(document).ready(function() {
 								<th class="text-center">비밀번호</th>
 								<th class="text-center">닉네임</th>
 								<th class="text-center">회원등급</th>
+								<th class="text-center">회원상태</th>
 								<th class="text-center">회원가입일자</th>
 								<th class="text-center">비고</th>
 							</tr>
@@ -67,6 +68,7 @@ $(document).ready(function() {
 								<td class="text-center">${memberList.me_pwd}</td>
 								<td class="text-center">${memberList.me_name}</td>
 								<td class="text-center">${memberList.me_grade}</td>
+								<td class="text-center">${memberList.me_state}</td>
 								<td class="text-center"><fmt:formatDate
 										value="${memberList.me_regDate}" pattern="yy-MM-dd HH:mm" />
 								</td>

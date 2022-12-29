@@ -260,10 +260,10 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 											회원관리
 										</a> 
 										
-										<a class="dropdown-item" href="/admin/index"> <i
+										<!-- <a class="dropdown-item" href="/admin/index"> <i
 											class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
 											관리자 화면
-										</a> 
+										</a>  -->
 										</c:if>
 										<a class="dropdown-item" href="#"> <i
 											class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>

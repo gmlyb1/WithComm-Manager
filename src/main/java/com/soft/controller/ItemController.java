@@ -30,12 +30,7 @@ public class ItemController {
 	@RequestMapping(value = "/itemInsert" , method=RequestMethod.POST)
 	public String ItemInsert(RedirectAttributes rttr,ItemVO itemVO, MultipartHttpServletRequest mpRequest) throws Exception 
 	{
-		try {
 			itemService.itemInsert(itemVO, mpRequest);
-			rttr.addFlashAttribute("msg", "상품등록에 성공하였습니다.");
-		} catch (Exception e) {
-			rttr.addFlashAttribute("msg", "상품등록 처리중에 에러가 발생하였습니다.");
-		}
 		System.out.println(itemVO);
 		
 		return "/item/itemInsert";

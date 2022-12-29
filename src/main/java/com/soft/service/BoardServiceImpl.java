@@ -29,14 +29,8 @@ public class BoardServiceImpl implements BoardService {
 
 	// 게시글 작성
 	@Override
-	public void insertBoard(boardVO vo,MultipartHttpServletRequest mpRequest) throws Exception {
+	public void insertBoard(boardVO vo) throws Exception {
 		boardDAO.insertBoard(vo);
-		
-		List<Map<String, Object>> list = fileUtils.parseInsertFileInfo(vo, mpRequest);
-		int size = list.size();
-		for(int i=0; i<size; i++) {
-			boardDAO.insertFile(list.get(i));
-		}
 	}
 
 	// 게시글 목록
@@ -71,23 +65,11 @@ public class BoardServiceImpl implements BoardService {
 	
 	// 게시글 수정
 	@Override
-	public void BoardUpdate(boardVO vo,String[] files, String[] fileNames, MultipartHttpServletRequest mpRequest) throws Exception {
+	public void BoardUpdate(boardVO vo) throws Exception {
 		boardDAO.BoardUpdate(vo);
 		
-		List<Map<String, Object>> list = fileUtils.parseUpdateFileInfo(vo, files, fileNames, mpRequest);
-		Map<String, Object> tempMap = null;
-		int size = list.size();
-		for(int i=0; i<size; i++) {
-			tempMap = list.get(i);
-			if(tempMap.get("IS_NEW").equals("Y")) {
-				boardDAO.insertFile(tempMap);
-			}else {
-				boardDAO.updateFile(tempMap);
-			}
-		}
-	
 	}
-
+	
 	// 게시글 삭제
 	@Override
 	public void BoardDelete(int board_no) throws Exception {
@@ -102,24 +84,16 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public boardVO movePage(int board_no) throws Exception {
-		return boardDAO.movePage(board_no);
-	}
+	public boardVO lastBoardList(int board_no) throws Exception {
 
-//	@Override
-//	public List<Map<String, Object>> selectFileList(int bno) throws Exception {
-//		return boardDAO.selectFileList(bno);
-//	}
+		return boardDAO.lastBoardList(board_no);
+	}
 
 	@Override
-	public Map<String, Object> selectFileInfo(Map<String, Object> map) throws Exception {
-		return boardDAO.selectFileInfo(map);
-	}
+	public boardVO nextBoardList(int board_no) throws Exception {
 
-//	@Override
-//	public void updateFile(Map<String, Object> map) throws Exception {
-//		boardDAO.updateFile(map);
-//	}
+		return boardDAO.nextBoardList(board_no);
+	}
 
 	
 

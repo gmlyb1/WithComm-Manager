@@ -71,7 +71,7 @@ public class BoardController {
 	
 	// 게시글 등록 (POST)
 	@RequestMapping(value= "/create" , method = RequestMethod.POST)
-	public String insertBoardPOST(@ModelAttribute("vo") boardVO vo,HttpServletRequest request ,RedirectAttributes redirect,MultipartHttpServletRequest mpRequest) throws Exception 
+	public String insertBoardPOST(@ModelAttribute("vo") boardVO vo,HttpServletRequest request ,RedirectAttributes redirect) throws Exception 
 	{
 		
 	try {
@@ -82,9 +82,10 @@ public class BoardController {
 		String time1 = format1.format(time);
 		vo.setBoard_regdate(time1);
 		
-		boardService.insertBoard(vo,mpRequest);
+		boardService.insertBoard(vo);
 		
 		redirect.addFlashAttribute("redirect", vo.getBoard_no());
+	
 		redirect.addFlashAttribute("msg", "등록이 완료되었습니다.");
 		
 	} catch (Exception e) {
@@ -101,11 +102,14 @@ public class BoardController {
 		
 		model.addAttribute("read", boardService.BoardRead(vo.getBoard_no()));
 		
+		// 이전 글
+		model.addAttribute("lastBoardList", boardService.lastBoardList(board_no));
+		
+		// 다음 글
+		model.addAttribute("nextBoardList", boardService.nextBoardList(board_no));
 		
 		List<replyVO> replyList = replyService.replyList(vo.getBoard_no());
 		model.addAttribute("replyList", replyList);
-		// 이전글 다음글
-		model.addAttribute("move", boardService.movePage(vo.getBoard_no()));
 		
 //		System.out.println(vo.getBoard_no());
 		
@@ -125,10 +129,10 @@ public class BoardController {
 	
 	//게시글 수정
 	@RequestMapping(value = "/update", method= RequestMethod.POST)
-	public String BoardUpdatePOST(@RequestParam(value="fileNoDel[]")String[] files, @RequestParam(value="fileNameDel[]")String[] fileNames,MultipartHttpServletRequest mpRequest,boardVO vo,Model model,RedirectAttributes rttr) throws Exception
+	public String BoardUpdatePOST(boardVO vo,Model model,RedirectAttributes rttr) throws Exception
 	{
 		try {
-			boardService.BoardUpdate(vo,files,fileNames,mpRequest);
+			boardService.BoardUpdate(vo);
 			rttr.addFlashAttribute("msg", "수정이 완료되었습니다.");
 		}catch (Exception e) {
 			rttr.addFlashAttribute("msg", "오류가 발생되었습니다.");
@@ -177,23 +181,6 @@ public class BoardController {
 			return "redirect:/board/read";
 		}
 	
-	//첨부파일관련
-	@RequestMapping(value="/fileDown")
-	public void fileDown(@RequestParam Map<String, Object> map, HttpServletResponse response)throws Exception
-	{
-		Map<String, Object> resultMap = boardService.selectFileInfo(map);
-		String storedFileName = (String)resultMap.get("STORED_FILE_NAME");
-		String originalFileName = (String)resultMap.get("ORG_FILE_NAME");
-		
-		byte fileByte[] = org.apache.commons.io.FileUtils.readFileToByteArray(new File("C:\\Users\\lee\\git\\SOFT\\src\\main\\webapp\\WEB-INF\\fileUpload"));
-		
-		response.setContentType("application/octet-stream");
-		response.setContentLength(fileByte.length);
-		response.setHeader("Content-Disposition",  "attachment; fileName=\""+URLEncoder.encode(originalFileName, "UTF-8")+"\";");
-		response.getOutputStream().write(fileByte);
-		response.getOutputStream().flush();
-		response.getOutputStream().close();
-	}
 	
 	
 	

@@ -150,14 +150,14 @@
 											placeholder="내용을 입력해주세요." class="form-control"></textarea></td>
 								</tr>
 								
-								<tr>
+								<!-- <tr>
 									<td id="fileIndex">
 									<input type="file" name="file" />
 								<div>  
 			 						<button id="fileAdd_btn" class="btn btn-primary" type="button">파일추가+</button>
 								</div>
 									</td>
-								</tr>
+								</tr> -->
 
 							</tbody>
 						</table>

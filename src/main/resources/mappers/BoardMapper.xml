@@ -160,21 +160,43 @@
 		WHERE FILE_NO = #{FILE_NO}
 	</update>
 	
-	<select id="movePage" parameterType="int" resultType="boardVO">
+	<!-- <select id="movePage" parameterType="int" resultType="boardVO">
 		select * from
 	(select
-		BOARD_NO,
-		lead(board_no,1,9999) OVER(order by board_no) as next,
-		LAG(BOARD_NO,1,9999) OVER(order by BOARD_NO) as last,
-		BOARD_TITLE,
-		LEAD(BOARD_TITLE,1,9999) OVER(order by BOARD_TITLE) as NEXTTITLE,
-		LAG(BOARD_TITLE,1,9999) over(order by BOARD_TITLE) as LASTTITLE
-		from TBL_BOARD
-		where BOARD_NO = #{board_no}
-		order by BOARD_NO desc
-		)TBL_BOARD
-		
+		board_no,
+		lead(board_no,1,board_no+1) OVER(order by board_no) as next,
+		LAG(board_no,1,board_no-1) OVER(order by board_no) as last,
+		board_title,
+		LEAD(board_title,1,board_title) OVER(order by board_title) as nexttitle,
+		LAG(board_title,1,board_title) over(order by board_title) as lasttitle
+		from tbl_board
+		where board_no = #{board_no}
+		order by board_no desc
+		)tbl_board
+	</select> -->
+	
+	<select id="lastBoardList" parameterType="int" resultType="boardVO">
+	 <![CDATA[
+	SELECT 
+		board_no
+	,   board_title 
+	FROM tbl_board 
+		WHERE board_no < #{board_no}  
+	ORDER BY board_no DESC LIMIT 1;
+	]]>
 	</select>
+	
+	<select id="nextBoardList" parameterType="int" resultType="boardVO">
+	 <![CDATA[
+	SELECT 
+		board_no
+	,   board_title 
+	FROM tbl_board 
+		WHERE board_no > #{board_no}  
+	ORDER BY board_no DESC LIMIT 1;
+	]]>
+	</select>
+	
 
 
 </mapper>  

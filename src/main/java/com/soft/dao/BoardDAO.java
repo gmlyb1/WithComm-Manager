@@ -10,6 +10,11 @@ import com.soft.vo.replyVO;
 
 public interface BoardDAO {
 
+	// 이전글
+	public boardVO lastBoardList(int board_no) throws Exception;
+	
+	// 다음글
+	public boardVO nextBoardList(int board_no) throws Exception;
 	
 	// 게시글 작성
 	public void insertBoard(boardVO vo) throws Exception;
@@ -40,20 +45,8 @@ public interface BoardDAO {
 	
 	// 댓글 작성
 	public void replyWrite(replyVO vo) throws Exception;
-
-	// 활동 로그
-//	public void insertLog(LogVO logVO);
 	
-	// 이전글,다음글
-	public boardVO movePage(int board_no) throws Exception;
 	
-	// 첨부파일 조회
-//	public List<Map<String, Object>> selectFileList(int bno) throws Exception;
 	
-	// 첨부파일 다운로드
-	public Map<String, Object> selectFileInfo(Map<String, Object> map) throws Exception;
-	
-	// 첨부파일 수정
-	public void updateFile(Map<String, Object> map) throws Exception;
 
 }
