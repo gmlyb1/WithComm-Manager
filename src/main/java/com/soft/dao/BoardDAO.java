@@ -47,6 +47,5 @@ public interface BoardDAO {
 	public void replyWrite(replyVO vo) throws Exception;
 	
 	
-	
 
 }

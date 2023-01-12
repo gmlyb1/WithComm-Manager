@@ -13,6 +13,12 @@
 		 tbl_notice
 	</select>
 
+	<!-- 메인페이지 바인딩  -->
+	<select id="HomeNoticeList" resultType="noticeVO" parameterType="noticeVO">
+		select * 
+		from tbl_notice LIMIT 5
+	</select>
+	
 	<!--  글 작성 -->
 	<insert id="insertNotice">
   		insert

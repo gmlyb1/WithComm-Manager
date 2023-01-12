@@ -80,7 +80,7 @@ $(document).ready(function() {
                     </div>
                 </div>
                 <div class="login-btn-wrap">
-                    <button class="login-btn" type="submit">Login</button>
+                    <button class="login-btn" id="login-btn" type="submit">Login</button>
                     <a href="#" >Forgot password?</a>
                 </div>
             </div>
@@ -223,8 +223,12 @@ background: linear-gradient(287deg, rgba(255,255,255,1) 0%, rgba(243,244,244,1) 
     margin-top: 40px;
     display: flex;
     flex-direction: column;
-    align-items: center;;
+    align-items: center;
 }
+
+#login-btn:hover {
+}
+
 .login-btn-wrap .login-btn{
     width:95px;
     height:35px;

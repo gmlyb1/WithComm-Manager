@@ -45,16 +45,9 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public void memberUpdate(String me_email,String hashedPw) throws Exception {
-		Map<String, Object>map = new HashMap<String,Object>();	
-		map.put("me_email", me_email);
-		map.put("me_pwd", hashedPw);
+	public void memberUpdate(String me_id) throws Exception {
 		
-		sqlSession.update("namespace.memberUpdate",map);
-	}
-	@Override
-	public String pwCheck(String me_email) throws Exception {
-		return sqlSession.selectOne("namespace.pwCheck", me_email);
+		sqlSession.update("namespace.memberUpdate",me_id);
 	}
 	
 	
@@ -66,6 +59,11 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public void memberDelete(int me_id) throws Exception {
 		sqlSession.delete("namespace.memberDelete", me_id);
+	}
+
+	@Override
+	public void updateImg(String memberImg, String me_id) {
+		sqlSession.update("namespace.updateImg", me_id);
 	}
 
 	

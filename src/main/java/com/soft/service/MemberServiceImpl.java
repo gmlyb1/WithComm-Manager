@@ -45,12 +45,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void memberUpdate(String me_email,String hashedPw) throws Exception{
-		memberDAO.memberUpdate(me_email,hashedPw);
-	}
-	@Override
-	public String pwCheck(String me_email) throws Exception {
-		return memberDAO.pwCheck(me_email);
+	public void memberUpdate(String me_id) throws Exception{
+		memberDAO.memberUpdate(me_id);
 	}
 	
 	
@@ -62,6 +58,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void memberDelete(int me_id) throws Exception {
 		memberDAO.memberDelete(me_id);
+	}
+
+	@Override
+	public void updateImg(String memberImg, String me_id) {
+		memberDAO.updateImg(memberImg, me_id);
 	}
 
 	

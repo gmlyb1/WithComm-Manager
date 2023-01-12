@@ -2,9 +2,18 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
+<%@include file="../includes/header.jsp"%>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="/resources/vendor/jquery/jquery.min.js"></script>
+	<script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+	<!-- Core plugin JavaScript-->
+	<script src="/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+	<!-- Custom scripts for all pages-->
+	<script src="/resources/js/sb-admin-2.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	
@@ -60,7 +69,7 @@ $(document).ready(function(){
 
 <!-- Custom styles for this template-->
 <link href="/resources/css/sb-admin-2.min.css" rel="stylesheet">
-<%@include file="../includes/header.jsp"%>
+
 
 	<form action="/account/update" method="post" id="pwUpdateForm" name="pwUpdateForm">
                        <input type="hidden" id="me_email" name="me_email" value="${member.me_email}">
@@ -77,19 +86,11 @@ $(document).ready(function(){
                 <div class="form-group">
                     <input type="password" name="me_pwd2" class="form-control form-control-inline text-center" placeholder="새 비밀번호 확인" />
                 </div>
-                <button type="button" id="pwUpdate" name="pwUpdate" class="btn btn-primary">비밀번호 변경</button> <a href="/account/profile" class="btn btn-default">취소</a>
+                <button type="button" id="pwUpdate" name="pwUpdate" class="btn btn-primary">비밀번호 변경</button>
+                 <a href="/account/profile" class="btn btn-danger">취소</a>
             </div>
         </div>
     </div>
     </form>
-
-	<script src="/resources/vendor/jquery/jquery.min.js"></script>
-	<script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-	<!-- Core plugin JavaScript-->
-	<script src="/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-	<!-- Custom scripts for all pages-->
-	<script src="/resources/js/sb-admin-2.min.js"></script>
 
 <%@include file="../includes/footer.jsp"%>

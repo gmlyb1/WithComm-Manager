@@ -21,10 +21,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.soft.service.MemberService;
+import com.soft.util.FileUtils;
 import com.soft.vo.memberVO;
 
 @Controller
@@ -34,6 +36,8 @@ public class MemberController {
 	@Inject
 	private MemberService memberService;
 	
+	@Autowired
+	private FileUtils fileUtils;
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
@@ -78,6 +82,11 @@ public class MemberController {
 			rttr.addFlashAttribute("msg", "아이디와 비밀번호를 다시 확인하세요!");
 			logger.info("로그인 계정 :"+vo);
 			return "redirect:/account/login";
+		
+		} else if(login.getAdminCk() == 0) {
+			rttr.addFlashAttribute("msg", "권한이 없는 계정입니다. 관리자에게 문의해 주세요.");
+			return "redirect:/account/login";
+			
 		} else {
 			session.setAttribute("member", login);
 			rttr.addFlashAttribute("msg", "로그인에 성공하였습니다.");
@@ -124,27 +133,25 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/update", method=RequestMethod.GET)
-	public String profileUpdateGET(memberVO mvo, Model model) throws Exception 
+	public String profileUpdateGET(memberVO mvo, Model model,RedirectAttributes rttr) throws Exception 
 	{	
 		model.addAttribute("update", memberService.memberManage(mvo));
+		
+		try {
+			memberService.memberManage(mvo);
+			rttr.addFlashAttribute("msg", "회원정보 변경이 완료되었습니다.");
+		} catch (Exception e) {
+			rttr.addFlashAttribute("msg", "오류가 발생하였습니다.");
+		}
+		
 		
 		return "/account/update";
 	}
 	
-	@RequestMapping(value="/pwCheck" , method=RequestMethod.POST)
-	@ResponseBody
-	public int pwCheck(memberVO memberVO) throws Exception {
-		String me_pwd = memberService.pwCheck(memberVO.getMe_email());
-		if(memberVO == null || !BCrypt.checkpw(memberVO.getMe_pwd(), me_pwd)) {
-		return 0;
-	}
-	return 1;
-}
 	
 	@RequestMapping(value ="/update", method=RequestMethod.POST) 
-	public String profileUpdatePOST(String me_email,String me_pwd1,HttpServletRequest request, RedirectAttributes rttr, Model model, HttpSession session,memberVO mVO) throws Exception {
-		String hashedPw = BCrypt.hashpw(me_pwd1, BCrypt.gensalt());
-		memberService.memberUpdate(me_email, hashedPw);
+	public String profileUpdatePOST(String me_id,HttpServletRequest request, RedirectAttributes rttr, Model model, HttpSession session,memberVO mVO) throws Exception {
+		memberService.memberUpdate(me_id);
 		session.invalidate();
 		rttr.addFlashAttribute("msg", "정보 수정이 완료되었습니다. 다시 로그인해주세요");
 		
@@ -154,16 +161,16 @@ public class MemberController {
 	
 	// 회원 탈퇴(어드민)
 	@RequestMapping(value = "/delete" ,method=RequestMethod.POST)
-	public String memberDeletePOST(memberVO vo,RedirectAttributes rttr) throws Exception{
+	public String memberDeletePOST(memberVO vo,RedirectAttributes rttr,int me_id) throws Exception{
 		
 		try {
-			memberService.memberDelete(vo.getMe_id());
+			memberService.memberDelete(me_id);
 			rttr.addFlashAttribute("msg", "회원 삭제가 완료되었습니다.");
 		} catch (Exception e) {
 			rttr.addFlashAttribute("msg", "오류가 발생 되었습니다.");
 		}
 		
-		return "redirect:/account/manage";
+		return "/account/delete";
 	}
 	
 	@RequestMapping(value="/delete" ,method=RequestMethod.GET)
@@ -171,10 +178,6 @@ public class MemberController {
 		
 	}
 	
-//	@RequestMapping(value="/delete", method=RequestMethod.GET)
-//	public void memberDeleteGET() throws Exception{
-//		
-//	}
 	
 	// 회원관리
 	@RequestMapping(value = "/manage", method=RequestMethod.GET)
@@ -191,6 +194,34 @@ public class MemberController {
 		model.addAttribute("memberList", memberList);
 		
 		return "/account/manage";
+	}
+	@RequestMapping(value="/updateImg" ,method=RequestMethod.GET)
+	public void updateImgGET()
+	{
+		
+	}
+	
+	
+	@RequestMapping(value="/updateImg" , method=RequestMethod.POST)
+	public String updateImg(RedirectAttributes rttr,MultipartHttpServletRequest mpRequest, HttpSession session, String me_id) throws Exception
+	{
+		String memberImg = fileUtils.updateImg(mpRequest);
+		
+		memberVO mvo = (memberVO) session.getAttribute("login");
+		
+		try {
+			memberService.updateImg(memberImg,me_id);
+			mvo.setMe_image(memberImg);
+			session.setAttribute("login", mvo);
+			rttr.addFlashAttribute("msg", "이미지 변경이 완료되었습니다.");
+		} catch (Exception e) {
+			rttr.addFlashAttribute("msg", "이미지 변경중 에러가 발생하였습니다.");
+		}
+
+		
+		
+		
+		return "/home";
 	}
 
 }

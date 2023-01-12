@@ -66,30 +66,28 @@
 		where 
 			me_id = #{me_id}
 	]]>
-	</select>
+	</select> 
 	
 	<!-- 비밀번호만 변경 -->
 	<update id="memberUpdate" parameterType="memberVO">
-		UPDATE TBL_MEMBER
-			SET 
-			ME_PWD = #{me_pwd} where me_email = #{me_email}
+			update tbl_member
+			set
+			me_pwd = #{me_pwd} 
+			where me_id = #{me_id}
 	</update>
 	
-	<select id="pwCheck" resultType="String">
-	 select me_pwd from tbl_member where me_email = #{me_email}
-	</select>
 	
-	<!-- 비밀번호만 변경 -->
 	<!-- 회원관리 -->
 	<select id="memberManage" resultType="memberVO" parameterType="memberVO">
 	select * from tbl_member
 	</select>
 	
 	<!-- 회원탈퇴 -->
-	<delete id="memberDelete" parameterType="int">
-		delete
-		 from tbl_member
-		where me_id = #{me_id}
+	<delete id="memberDelete" parameterType = "int">
+		delete from tbl_member where me_id = #{me_id}
 	</delete>
 	
+	<update id="updateImg">
+		update tbl_member set member_img = #{memberImg} where me_id = #{me_id}
+	</update>
 </mapper>

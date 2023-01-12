@@ -14,10 +14,6 @@ public class memberVO {
 	private String me_grade;
 	private Date me_regDate;
 	private String me_image;
-	private String me_addr1;
-	private String me_addr2;
-	private String me_addr3;
-	private int verify;
 	private int adminCk;
 	private String me_state;
 	public int getMe_id() {
@@ -62,30 +58,6 @@ public class memberVO {
 	public void setMe_image(String me_image) {
 		this.me_image = me_image;
 	}
-	public String getMe_addr1() {
-		return me_addr1;
-	}
-	public void setMe_addr1(String me_addr1) {
-		this.me_addr1 = me_addr1;
-	}
-	public String getMe_addr2() {
-		return me_addr2;
-	}
-	public void setMe_addr2(String me_addr2) {
-		this.me_addr2 = me_addr2;
-	}
-	public String getMe_addr3() {
-		return me_addr3;
-	}
-	public void setMe_addr3(String me_addr3) {
-		this.me_addr3 = me_addr3;
-	}
-	public int getVerify() {
-		return verify;
-	}
-	public void setVerify(int verify) {
-		this.verify = verify;
-	}
 	public int getAdminCk() {
 		return adminCk;
 	}
@@ -101,8 +73,7 @@ public class memberVO {
 	@Override
 	public String toString() {
 		return "memberVO [me_id=" + me_id + ", me_email=" + me_email + ", me_pwd=" + me_pwd + ", me_name=" + me_name
-				+ ", me_grade=" + me_grade + ", me_regDate=" + me_regDate + ", me_image=" + me_image + ", me_addr1="
-				+ me_addr1 + ", me_addr2=" + me_addr2 + ", me_addr3=" + me_addr3 + ", verify=" + verify + ", adminCk="
+				+ ", me_grade=" + me_grade + ", me_regDate=" + me_regDate + ", me_image=" + me_image + ", adminCk="
 				+ adminCk + ", me_state=" + me_state + "]";
 	}
 	

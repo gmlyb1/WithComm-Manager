@@ -60,6 +60,11 @@ public class NoticeServiceImpl implements NoticeService {
 		return noticeDAO.nextNoticeList(notice_no);
 	}
 
+	@Override
+	public List<NoticeVO> HomeNoticeList() throws Exception {
+		return noticeDAO.HomeNoticeList();
+	}
+
 	
 
 }

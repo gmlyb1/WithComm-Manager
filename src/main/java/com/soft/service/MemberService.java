@@ -25,14 +25,16 @@ public interface MemberService {
 	public memberVO memberInfoSearch(memberVO mVO)throws Exception;
 	
 	// 프로필 수정
-	public void memberUpdate(String me_email,String hashedPw) throws Exception;
-	public String pwCheck(String me_email) throws Exception;
+	public void memberUpdate(String me_id) throws Exception;
 	
 	// 회원관리
 	public List<memberVO> memberManage(memberVO mVO)throws Exception;
 	
 	//회원 탈퇴(어드민)
 	public void memberDelete(int me_id) throws Exception;
+
+	// 이미지 설정
+	public void updateImg(String memberImg, String me_id);
 	
 	
 }

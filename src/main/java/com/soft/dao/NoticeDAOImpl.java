@@ -60,6 +60,11 @@ public class NoticeDAOImpl implements NoticeDAO {
 		return sqlSession.selectOne("namespace.nextBoardList", notice_no);
 	}
 
+	@Override
+	public List<NoticeVO> HomeNoticeList() throws Exception {
+		return sqlSession.selectList("namespace.HomeNoticeList");
+	}
+
 	
 	
 

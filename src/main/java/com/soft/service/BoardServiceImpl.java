@@ -94,8 +94,4 @@ public class BoardServiceImpl implements BoardService {
 
 		return boardDAO.nextBoardList(board_no);
 	}
-
-	
-
-
 }

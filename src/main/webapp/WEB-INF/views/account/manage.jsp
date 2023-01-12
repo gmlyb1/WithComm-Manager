@@ -15,7 +15,7 @@ $(document).ready(function(){
 });
 </script>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 $(document).ready(function() {
 	var formObj = $("form[name='manageForm']")
 
@@ -26,7 +26,7 @@ $(document).ready(function() {
 		formObj.submit();
 	});
 })
-</script>
+</script> -->
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -40,7 +40,7 @@ $(document).ready(function() {
 			<h6 class="m-0 font-weight-bold text-primary">회원 관리 페이지(계정 ,
 				비밀번호 , 닉네임 , 회원등급 , 회원가입일자 , 수정과 삭제 가능)</h6>
 			<br> <span style="color: red"><strong> 현재 페이지는
-					슈퍼 관리자와 관리자 등급만 조회 가능합니다.</strong></span>
+					슈퍼 관리자와 관리자 등급만 조회 가능합니다. (관리자 여부 0 = 관리자 x , 1 = 관리자)</strong></span>
 
 		</div>
 		<div class="card-body">
@@ -52,10 +52,9 @@ $(document).ready(function() {
 							<tr>
 								<th class="text-center">번호</th>
 								<th class="text-center">계정</th>
-								<th class="text-center">비밀번호</th>
 								<th class="text-center">닉네임</th>
-								<th class="text-center">회원등급</th>
 								<th class="text-center">회원상태</th>
+								<th class="text-center">관리자 여부</th>
 								<th class="text-center">회원가입일자</th>
 								<th class="text-center">비고</th>
 							</tr>
@@ -65,17 +64,18 @@ $(document).ready(function() {
 							<tr>
 								<td class="text-center">${memberList.me_id}</td>
 								<td class="text-center">${memberList.me_email}</td>
-								<td class="text-center">${memberList.me_pwd}</td>
 								<td class="text-center">${memberList.me_name}</td>
-								<td class="text-center">${memberList.me_grade}</td>
 								<td class="text-center">${memberList.me_state}</td>
+								<td class="text-center">${memberList.adminCk}</td>
 								<td class="text-center"><fmt:formatDate
 										value="${memberList.me_regDate}" pattern="yy-MM-dd HH:mm" />
 								</td>
-								<td class="text-center"><a href="/account/profile"
-									class="btn btn-success">프로필 확인</a>
-									<button type="submit" class="btn btn-danger" id="delete_btn">회원
-										삭제</button></td>
+								<td class="text-center">
+								<a href="/account/profile?me_id=${memberList.me_id}" class="btn btn-success">프로필 확인</a>
+								<!-- <button type="submit" class="btn btn-danger" id="delete_btn">회원 삭제</button> -->
+								<a href="#" class="btn btn-primary">비밀번호 변경</a>
+								</td>
+									
 							</tr>
 						</c:forEach>
 						</tbody>

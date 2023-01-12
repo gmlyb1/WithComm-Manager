@@ -87,17 +87,18 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 			<div class="sidebar-heading">Interface</div>
 			<!-- Nav Item - Tables -->
 			<c:if test="${member != null}">
-				<li class="nav-item active">
-				<a class="nav-link" href="/notice/list"> <i class="fas fa-fw fa-table"></i> <span>공지사항 관리</span></a></li>
-				<li class="nav-item active">
-				<a class="nav-link" href="/board/list"> <i class="fas fa-fw fa-table"></i> <span>
+				<li class="nav-item active"><a class="nav-link"
+					href="/notice/list"> <i class="fas fa-fw fa-table"></i> <span>공지사항
+							관리</span></a></li>
+				<li class="nav-item active"><a class="nav-link"
+					href="/board/list"> <i class="fas fa-fw fa-table"></i> <span>
 							게시판 관리</span></a></li>
-				
+
 			</c:if>
 			<c:if test="${member != null}">
-			<li class="nav-item active"><a class="nav-link"
-					href="/item/manage"> <i class="fas fa-fw fa-table"></i> <span>상품 관리</span></a>
-				</li>
+				<li class="nav-item active"><a class="nav-link"
+					href="/item/manage"> <i class="fas fa-fw fa-table"></i> <span>상품
+							관리</span></a></li>
 			</c:if>
 			<!-- Nav Item - Pages Collapse Menu -->
 			<!-- <li class="nav-item"><a class="nav-link collapsed" href="#"
@@ -240,10 +241,17 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 								<a href="/account/login" class="btn btn-primary">로그인</a>
 							</c:if>
 							<c:if test="${member != null }">
+								<a
+									href="/board/mypageView?select=log&memberId=${list.memberVO.memberId}"
+									style="color: black"> <img
+									src="/image/${list.memberVO.me_image}"
+									style="max-width: 25px; height: 25px;"> <c:out
+										value="${list.memberVO.me_name}" />
+								</a>
 								<li><a class="nav-item dropdown no-arrow" href="#"
 									id="userDropdown" role="button" data-toggle="dropdown"
 									aria-haspopup="true" aria-expanded="false"> <span
-										class="mr-2 d-none d-lg-inline text-gray-600 small"><strong>${member.me_name}[${member.me_grade}]</strong></span>
+										class="mr-2 d-none d-lg-inline text-gray-600 small"><strong>${member.me_name}</strong></span>
 										<!-- <img class="img-profile rounded-circle"
 										src="../img/undraw_profile.svg"> -->
 								</a> <!-- Dropdown - User Information -->
@@ -251,27 +259,25 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 										class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
 										aria-labelledby="userDropdown">
 										<a class="dropdown-item" href="/account/profile"> <i
-											class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-											프로필
+											class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> 프로필
 										</a>
-										<c:if test="${member.me_grade == '최고관리자'|| member.me_grade =='관리자' }">
-										<a class="dropdown-item" href="/account/manage"> <i
-											class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-											회원관리
-										</a> 
-										
-										<!-- <a class="dropdown-item" href="/admin/index"> <i
+										<a class="dropdown-item" href="/account/updateImg"> <i
+											class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> 이미지변경
+										</a>
+										<c:if test="${member.adminCk == 1}">
+											<a class="dropdown-item" href="/account/manage"> <i
+												class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i> 회원관리
+											</a>
+											
+											<!-- <a class="dropdown-item" href="/admin/index"> <i
 											class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
 											관리자 화면
 										</a>  -->
 										</c:if>
 										<a class="dropdown-item" href="#"> <i
-											class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-											설정
-										</a>
-										 <a class="dropdown-item" href="#"> <i
-											class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-											활동 로그
+											class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i> 설정
+										</a> <a class="dropdown-item" href="#"> <i
+											class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i> 활동 로그
 										</a>
 										<div class="dropdown-divider"></div>
 									</div></li>

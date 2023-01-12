@@ -20,7 +20,7 @@ public class AdminInterceptor implements HandlerInterceptor{
 		memberVO lvo = (memberVO)session.getAttribute("member");
 		
 		if(lvo.getAdminCk() != 1 || session == null) {
-			response.sendRedirect("/account/login");
+			response.sendRedirect("/error/403error");
 			
 		return false;
 	}

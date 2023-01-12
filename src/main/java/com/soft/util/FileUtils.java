@@ -16,7 +16,7 @@ import com.soft.vo.boardVO;
 
 @Component
 public class FileUtils {
-	private static final String filePath = "C:\\Users\\lee\\git\\SOFT\\src\\main\\webapp\\WEB-INF\\fileUpload";
+	private static final String filePath = "/webapp/resources/img";
 
 	public List<Map<String, Object>> parseInsertFileInfo(boardVO vo, MultipartHttpServletRequest mpRequest) throws Exception
 	{
@@ -94,6 +94,35 @@ public class FileUtils {
 		return list; 
 	}
 	
+	public String updateImg(MultipartHttpServletRequest mpRequest) throws Exception
+	{
+		Iterator<String> iterator = mpRequest.getFileNames();
+		MultipartFile multipartFile = null;
+		String originalFileName = null;
+		String originalFileExtension = null;
+		String storedFileName = null;
+		
+		String memberImg = "";
+		
+		File file = new File(filePath);
+		if(file.exists() == false) {
+			file.mkdirs();
+		}
+		
+		while(iterator.hasNext())
+		{
+			multipartFile = mpRequest.getFile(iterator.next());
+			if(multipartFile.isEmpty() == false) {
+				originalFileName = multipartFile.getOriginalFilename();
+				originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+				storedFileName = getRandomString() + originalFileExtension;
+				file = new File(filePath + storedFileName);
+				multipartFile.transferTo(file);
+				memberImg = storedFileName;
+			}
+		}
+		return memberImg;
+	}
 	
 	public static String getRandomString() {
 		return UUID.randomUUID().toString().replaceAll("-", "");

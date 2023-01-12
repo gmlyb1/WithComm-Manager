@@ -40,7 +40,5 @@ public interface BoardService {
 	// ´ñ±Û ÀÛ¼º
 	public void replyWrite(replyVO vo) throws Exception;
 
-	//´ñ±Û¼ö
-//	public void replyCount(int board_no,int amount) throws Exception;
 	
 }

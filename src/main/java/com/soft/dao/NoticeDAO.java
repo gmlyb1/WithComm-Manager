@@ -30,4 +30,7 @@ public interface NoticeDAO {
 	
 	// 공지사항 조회수
 	public void NoticeHit(int notice_no) throws Exception;
+	
+	// 홈 공지사항
+	public List<NoticeVO> HomeNoticeList() throws Exception;
 }

@@ -24,6 +24,8 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.soft.service.BoardService;
 import com.soft.service.MemberService;
+import com.soft.service.NoticeService;
+import com.soft.vo.NoticeVO;
 import com.soft.vo.boardVO;
 import com.soft.vo.memberVO;
 
@@ -43,6 +45,10 @@ public class HomeController {
 	@Inject
 	private BoardService boardService;
 	
+	@Autowired
+	@Inject
+	private NoticeService noticeService;
+	
 	@RequestMapping(value = "home", method = RequestMethod.GET)
 	public String home(HttpServletResponse response,@ModelAttribute("vo")boardVO vo,Locale locale, HttpServletRequest request,Model model, HttpSession session, memberVO mvo) throws Exception {
 
@@ -61,6 +67,9 @@ public class HomeController {
 		
 		List<boardVO> HomeBoardList = boardService.HomeBoardList(vo);
 		model.addAttribute("HomeBoardList", HomeBoardList);
+		
+		List<NoticeVO> HomeNoticeList = noticeService.HomeNoticeList();
+		model.addAttribute("HomeNoticeList", HomeNoticeList);
 		
 		Map<String, ?> inputFlashMap = RequestContextUtils.getInputFlashMap(request);
 		

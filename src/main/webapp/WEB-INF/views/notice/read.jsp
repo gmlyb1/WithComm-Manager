@@ -129,12 +129,12 @@
 				<!-- 게시판 끝 -->
 				
 				<!-- 첨부파일 -->
-				<span>파일 목록</span>
+				<%-- <span>파일 목록</span>
 					<div class="form-group" style="border: 1px solid #dbdbdb;">
 						<c:forEach var="file" items="${file}">
 							<a href="#" onclick="fn_fileDown('${file.FILE_NO}'); return false;">${file.ORG_FILE_NAME}</a>(${file.FILE_SIZE}kb)<br>
 						</c:forEach>
-					</div>
+					</div> --%>
 				
 				<!-- 댓글 작성 끝 -->
 				<div class="my-3 p-3 bg-white rounded shadow-sm">
