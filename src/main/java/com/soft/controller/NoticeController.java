@@ -44,12 +44,12 @@ public class NoticeController {
 		return "/notice/list";
 	}
 	
-	// °Ô½Ã±Û µî·Ï (GET)
+	// ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ (GET)
 			@RequestMapping(value = "/create", method= RequestMethod.GET)
 			public void insertNoticeGET() {
 			}
 			
-			// °Ô½Ã±Û µî·Ï (POST)
+			// ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ (POST)
 			@RequestMapping(value= "/create" , method = RequestMethod.POST)
 			public String insertNoticePOST(@ModelAttribute("vo") NoticeVO vo,HttpServletRequest request ,RedirectAttributes redirect) throws Exception 
 			{
@@ -65,10 +65,10 @@ public class NoticeController {
 				noticeService.insertNotice(vo);
 				
 				redirect.addFlashAttribute("redirect", vo.getNotice_no());
-				redirect.addFlashAttribute("msg", "µî·ÏÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.");
+				redirect.addFlashAttribute("msg", "ê¸€ ì‘ì„±ì„ ì™„ë£Œí•˜ì˜€ìŠµë‹ˆë‹¤.");
 				
 			} catch (Exception e) {
-					redirect.addFlashAttribute("msg", "¿À·ù°¡ ¹ß»ıµÇ¾ú½À´Ï´Ù");
+					redirect.addFlashAttribute("msg", "ì˜¤ë¥˜ê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤." + e);
 			}
 				
 				return "redirect:/notice/list";
@@ -80,10 +80,10 @@ public class NoticeController {
 				
 				model.addAttribute("read", noticeService.NoticeRead(vo.getNotice_no()));
 				
-				// ÀÌÀü ±Û
+				// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 				model.addAttribute("lastNoticeList", noticeService.lastNoticeList(notice_no));
 				
-				// ´ÙÀ½ ±Û
+				// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 				model.addAttribute("nextNoticeList", noticeService.nextNoticeList(notice_no));
 				
 				
@@ -102,31 +102,31 @@ public class NoticeController {
 				return "/notice/update";
 			}
 			
-			//°Ô½Ã±Û ¼öÁ¤
+			//ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½
 			@RequestMapping(value = "/update", method= RequestMethod.POST)
 			public String NoticeUpdatePOST(NoticeVO vo,Model model,RedirectAttributes rttr) throws Exception
 			{
 				try {
 					noticeService.NoticeUpdate(vo);
-					rttr.addFlashAttribute("msg", "¼öÁ¤ÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.");
+					rttr.addFlashAttribute("msg", "ê¸€ ìˆ˜ì •ì„ ì™„ë£Œí•˜ì˜€ìŠµë‹ˆë‹¤.");
 				}catch (Exception e) {
-					rttr.addFlashAttribute("msg", "¿À·ù°¡ ¹ß»ıµÇ¾ú½À´Ï´Ù.");
+					rttr.addFlashAttribute("msg", "ì˜¤ë¥˜ê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤." + e);
 				}
 				
 				return "redirect:/notice/list";
 			}
 			
-			//°Ô½Ã±Û »èÁ¦
+			//ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½
 			@RequestMapping(value = "/delete", method=RequestMethod.POST)
 			public String NoticeDeletePOST(NoticeVO vo, RedirectAttributes rttr) throws Exception
 			{
 				
 				try {
 					noticeService.NoticeDelete(vo.getNotice_no());
-				rttr.addFlashAttribute("msg", "»èÁ¦°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù.");
+				rttr.addFlashAttribute("msg", "ì‚­ì œë¥¼ ì™„ë£Œí•˜ì˜€ìŠµë‹ˆë‹¤.");
 				
 				}catch(Exception e) {
-				rttr.addFlashAttribute("msg", "¿À·ù°¡ ¹ß»ıµÇ¾ú½À´Ï´Ù.");
+				rttr.addFlashAttribute("msg", "ì˜¤ë¥˜ê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤." + e);
 				}
 				
 				

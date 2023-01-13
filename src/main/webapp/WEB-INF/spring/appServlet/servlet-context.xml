@@ -50,7 +50,7 @@
 			<mapping path="/board/**"></mapping>
 			<mapping path="/notice/**"></mapping>
 			<mapping path="/account/manage"></mapping>
-			<mapping path="/item/**"></mapping>
+			<!-- <mapping path="/item/**"></mapping> -->
 			
 			<beans:bean id="AdminIntreceptor"
 				class="com.soft.interceptor.AdminInterceptor"></beans:bean>

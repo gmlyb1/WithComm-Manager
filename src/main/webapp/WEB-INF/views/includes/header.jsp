@@ -23,6 +23,14 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 			location.href = "/account/logout"
 		})
 	})
+</script> 
+<script type="text/javascript">
+	$(document).ready(function() {
+		var msg = "${msg}";
+		if (msg != "") {
+			alert(msg);
+		}
+	});
 </script>
 
 
@@ -97,7 +105,7 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 			</c:if>
 			<c:if test="${member != null}">
 				<li class="nav-item active"><a class="nav-link"
-					href="/item/manage"> <i class="fas fa-fw fa-table"></i> <span>상품
+					href="/item/index"> <i class="fas fa-fw fa-table"></i> <span>상품
 							관리</span></a></li>
 			</c:if>
 			<!-- Nav Item - Pages Collapse Menu -->
@@ -282,13 +290,13 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 										<div class="dropdown-divider"></div>
 									</div></li>
 								<button id="logoutBtn" type="button" class="btn btn-primary">로그아웃</button>
-								<button type="button" class="btn btn-danger"
-									onclick="location.href='/account/delete';">회원탈퇴</button>
+								<!-- <button type="button" class="btn btn-danger"
+									onclick="location.href='/account/delete';">회원탈퇴</button> -->
 							</c:if>
-							<c:if test="${member.me_email == 'admin@admin.co.kr' }">
+							<%-- <c:if test="${member.me_email == 'admin@admin.co.kr' }">
 								<a href="/account/register" class="btn btn-success">회원가입</a>
 								<br>
-							</c:if>
+							</c:if> --%>
 							<!-- Nav Item - User Information -->
 							<%-- <c:if test="${member != null }">
 						<li>

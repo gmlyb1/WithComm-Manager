@@ -44,7 +44,7 @@ public class BoardController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
-	//°Ô½ÃÆÇ ¸ñ·Ï
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	@RequestMapping(value = "/list", method=RequestMethod.GET)
 	public String BoardList(@ModelAttribute("vo") boardVO vo,replyVO rvo,HttpServletRequest request,Model model) throws Exception 
 	{
@@ -53,23 +53,23 @@ public class BoardController {
 		if(null != inputFlashMap) {
 			model.addAttribute("msg", (String)inputFlashMap.get("msg"));
 		}
-		//°Ô½Ã¹° ¸ñ·Ï
+		//ï¿½Ô½Ã¹ï¿½ ï¿½ï¿½ï¿½
 		List<boardVO> boardList = boardService.BoardList(vo);
 		model.addAttribute("boardList", boardList);
 		
-		//´ñ±Û¸ñ·Ï
+		//ï¿½ï¿½Û¸ï¿½ï¿½
 //		List<replyVO> replyList = replyService.replyList(rvo);
 //		model.addAttribute("replyList", replyList);
 		
 		return "/board/list";
 	}
 	
-	// °Ô½Ã±Û µî·Ï (GET)
+	// ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ (GET)
 	@RequestMapping(value = "/create", method= RequestMethod.GET)
 	public void insertBoardGET() {
 	}
 	
-	// °Ô½Ã±Û µî·Ï (POST)
+	// ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ (POST)
 	@RequestMapping(value= "/create" , method = RequestMethod.POST)
 	public String insertBoardPOST(@ModelAttribute("vo") boardVO vo,HttpServletRequest request ,RedirectAttributes redirect) throws Exception 
 	{
@@ -86,26 +86,26 @@ public class BoardController {
 		
 		redirect.addFlashAttribute("redirect", vo.getBoard_no());
 	
-		redirect.addFlashAttribute("msg", "µî·ÏÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.");
+		redirect.addFlashAttribute("msg", "ê¸€ì“°ê¸°ë¥¼ ì™„ë£Œí•˜ì˜€ìŠµë‹ˆë‹¤.");
 		
 	} catch (Exception e) {
-			redirect.addFlashAttribute("msg", "¿À·ù°¡ ¹ß»ıµÇ¾ú½À´Ï´Ù");
+			redirect.addFlashAttribute("msg", "ì˜¤ë¥˜ê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤." + e);
 	}
 		
 		return "redirect:/board/list";
 }
 
-	// °Ô½Ã±Û Á¶È¸
+	// ï¿½Ô½Ã±ï¿½ ï¿½ï¿½È¸
 	@RequestMapping(value = "/read", method=RequestMethod.GET)
 	public String BoardRead(@RequestParam("board_no") int board_no,boardVO vo, Model model) throws Exception {
 		
 		
 		model.addAttribute("read", boardService.BoardRead(vo.getBoard_no()));
 		
-		// ÀÌÀü ±Û
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 		model.addAttribute("lastBoardList", boardService.lastBoardList(board_no));
 		
-		// ´ÙÀ½ ±Û
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 		model.addAttribute("nextBoardList", boardService.nextBoardList(board_no));
 		
 		List<replyVO> replyList = replyService.replyList(vo.getBoard_no());
@@ -127,44 +127,44 @@ public class BoardController {
 		return "/board/update";
 	}
 	
-	//°Ô½Ã±Û ¼öÁ¤
+	//ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping(value = "/update", method= RequestMethod.POST)
 	public String BoardUpdatePOST(boardVO vo,Model model,RedirectAttributes rttr) throws Exception
 	{
 		try {
 			boardService.BoardUpdate(vo);
-			rttr.addFlashAttribute("msg", "¼öÁ¤ÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.");
+			rttr.addFlashAttribute("msg", "ê¸€ ìˆ˜ì •ì„ ì™„ë£Œí•˜ì˜€ìŠµë‹ˆë‹¤.");
 		}catch (Exception e) {
-			rttr.addFlashAttribute("msg", "¿À·ù°¡ ¹ß»ıµÇ¾ú½À´Ï´Ù.");
+			rttr.addFlashAttribute("msg", "ì˜¤ë¥˜ê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤." + e);
 		}
 		
 		return "redirect:/board/list";
 	}
 	
 	
-	//°Ô½Ã±Û »èÁ¦
+	//ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping(value = "/delete", method=RequestMethod.POST)
 	public String BoardDeletePOST(boardVO vo, RedirectAttributes rttr) throws Exception
 	{
 		
 		try {
 		boardService.BoardDelete(vo.getBoard_no());
-		rttr.addFlashAttribute("msg", "»èÁ¦°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù.");
+		rttr.addFlashAttribute("msg", "ê¸€ ì‚­ì œë¥¼ ì™„ë£Œí•˜ì˜€ìŠµë‹ˆë‹¤.");
 		
 		}catch(Exception e) {
-		rttr.addFlashAttribute("msg", "¿À·ù°¡ ¹ß»ıµÇ¾ú½À´Ï´Ù.");
+		rttr.addFlashAttribute("msg", "ì˜¤ë¥˜ê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤." + e);
 		}
 		
 		
 		return "redirect:/board/list";
 	}
 	
-	// °Ô½Ã±Û µî·Ï (GET)
+	// ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ (GET)
 		@RequestMapping(value = "/replyWrite", method= RequestMethod.GET)
 		public void replyWrite() {
 		}
 	
-	// ´ñ±ÛÀÛ¼º
+	// ï¿½ï¿½ï¿½ï¿½Û¼ï¿½
 		@RequestMapping(value ="/replyWrite" , method= RequestMethod.POST)
 		public String replyWrite(replyVO vo, RedirectAttributes rttr) throws Exception
 		{
@@ -173,10 +173,10 @@ public class BoardController {
 			boardService.replyWrite(vo);
 			
 			rttr.addFlashAttribute("board_no",vo.getBoard_no());
-			rttr.addFlashAttribute("msg", "´ñ±ÛÀÛ¼ºÀ» ¿Ï·áÇÏ¿´½À´Ï´Ù.");
+			rttr.addFlashAttribute("msg", "ëŒ“ê¸€ì‘ì„±ì„ ì™„ë£Œí•˜ì˜€ìŠµë‹ˆë‹¤.");
 			
 			}catch (Exception e) {
-			rttr.addFlashAttribute("msg", "´ñ±ÛÀÛ¼º¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù.");
+			rttr.addFlashAttribute("msg", "ì˜¤ë¥˜ê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤." + e);
 			}
 			return "redirect:/board/read";
 		}

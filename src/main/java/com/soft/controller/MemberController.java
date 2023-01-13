@@ -41,35 +41,35 @@ public class MemberController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
-	// È¸¿ø°¡ÀÔ ÆäÀÌÁö Ã³¸®
+	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public void getRegister() throws Exception {
 
 	}
 	
-	// È¸¿ø°¡ÀÔ ¾×¼Ç
+	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½
 	@RequestMapping(value = "/register" , method = RequestMethod.POST)
 	public String postRegister(memberVO vo, RedirectAttributes rttr) throws Exception {
 		
 		try {
 			memberService.register(vo);	
-			rttr.addFlashAttribute("msg", "È¸¿ø°¡ÀÔÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.");
+			rttr.addFlashAttribute("msg", "íšŒì›ê°€ì…ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.");
 		}catch (Exception e) {
-			rttr.addFlashAttribute("msg", "¿À·ù°¡ ¹ß»ıÇÏ¿´½À´Ï´Ù.");
+			rttr.addFlashAttribute("msg", "ì˜¤ë¥˜ê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤.");
 		}
 		
 		
 		return null;
 	}
 	
-	// ·Î±×ÀÎ ÆäÀÌÁö Ã³¸®
+	// ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
 	@RequestMapping(value = "/login" , method=RequestMethod.GET)
 	public String login() throws Exception{
 		return "/account/login";
 	}
 	
 	
-	// ·Î±×ÀÎ 
+	// ï¿½Î±ï¿½ï¿½ï¿½ 
 	@RequestMapping(value ="/login" , method=RequestMethod.POST)
 	public String login(HttpServletResponse response,memberVO vo, HttpServletRequest request, RedirectAttributes rttr) throws Exception{
 			
@@ -79,33 +79,33 @@ public class MemberController {
 		
 		if(login == null)  {
 			session.setAttribute("member", null);
-			rttr.addFlashAttribute("msg", "¾ÆÀÌµğ¿Í ºñ¹Ğ¹øÈ£¸¦ ´Ù½Ã È®ÀÎÇÏ¼¼¿ä!");
-			logger.info("·Î±×ÀÎ °èÁ¤ :"+vo);
+			rttr.addFlashAttribute("msg", "ì•„ì´ë”” í˜¹ì€ ë¹„ë°€ë²ˆí˜¸ë¥¼ í•œë²ˆ ë” í™•ì¸í•˜ì—¬ ì£¼ì‹­ì‹œìš”.");
+			logger.info("ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ :"+vo);
 			return "redirect:/account/login";
 		
 		} else if(login.getAdminCk() == 0) {
-			rttr.addFlashAttribute("msg", "±ÇÇÑÀÌ ¾ø´Â °èÁ¤ÀÔ´Ï´Ù. °ü¸®ÀÚ¿¡°Ô ¹®ÀÇÇØ ÁÖ¼¼¿ä.");
+			rttr.addFlashAttribute("msg", "ê¶Œí•œì´ ì—†ìŠµë‹ˆë‹¤. ê´€ë¦¬ìì—ê²Œ ë¬¸ì˜í•´ ì£¼ì„¸ìš”.");
 			return "redirect:/account/login";
 			
 		} else {
 			session.setAttribute("member", login);
-			rttr.addFlashAttribute("msg", "·Î±×ÀÎ¿¡ ¼º°øÇÏ¿´½À´Ï´Ù.");
+			rttr.addFlashAttribute("msg", "ë¡œê·¸ì¸ì„ ì™„ë£Œí•˜ì˜€ìŠµë‹ˆë‹¤.");
 			return "redirect:/home";
 		}
 		
 		
 	}
 	
-	// ·Î±×¾Æ¿ô
+	// ï¿½Î±×¾Æ¿ï¿½
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logout(HttpSession session) throws Exception {
+	public String logout(HttpSession session,RedirectAttributes rttr) throws Exception {
 		
-		session.invalidate();
+			session.invalidate();
 
 		return "redirect:/account/login";
 	}
 	
-	// ÆĞ½º¿öµå Ã¼Å©
+	// ï¿½Ğ½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å©
 	@ResponseBody
 	@RequestMapping(value = "/passChk" , method = RequestMethod.POST) 
 	public int passChk(memberVO vo) throws Exception {
@@ -113,7 +113,7 @@ public class MemberController {
 		return result;
 	}
 	
-	// ¾ÆÀÌµğ Áßº¹ Ã¼Å©
+	// ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ßºï¿½ Ã¼Å©
 	@ResponseBody
 	@RequestMapping(value = "/idChk" , method=RequestMethod.POST) 
 	public int idChk(memberVO vo) throws Exception {
@@ -121,7 +121,7 @@ public class MemberController {
 		return result;
 	}
 	
-	// ÇÁ·ÎÇÊ ¸ñ·Ï
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	@RequestMapping(value = "/profile" , method=RequestMethod.GET)
 	public String ProfileGET(HttpServletRequest request, Model model,HttpSession session,memberVO mVO) throws Exception {
 		
@@ -139,9 +139,9 @@ public class MemberController {
 		
 		try {
 			memberService.memberManage(mvo);
-			rttr.addFlashAttribute("msg", "È¸¿øÁ¤º¸ º¯°æÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.");
+			rttr.addFlashAttribute("msg", "í”„ë¡œí•„ ìˆ˜ì •ì„ ì™„ë£Œí•˜ì˜€ìŠµë‹ˆë‹¤.");
 		} catch (Exception e) {
-			rttr.addFlashAttribute("msg", "¿À·ù°¡ ¹ß»ıÇÏ¿´½À´Ï´Ù.");
+			rttr.addFlashAttribute("msg", "ì˜¤ë¥˜ê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤." + e);
 		}
 		
 		
@@ -153,21 +153,21 @@ public class MemberController {
 	public String profileUpdatePOST(String me_id,HttpServletRequest request, RedirectAttributes rttr, Model model, HttpSession session,memberVO mVO) throws Exception {
 		memberService.memberUpdate(me_id);
 		session.invalidate();
-		rttr.addFlashAttribute("msg", "Á¤º¸ ¼öÁ¤ÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù. ´Ù½Ã ·Î±×ÀÎÇØÁÖ¼¼¿ä");
+		rttr.addFlashAttribute("msg", "í”„ë¡œí•„ ìˆ˜ì •ì„ ì™„ë£Œí•˜ì˜€ìŠµë‹ˆë‹¤.");
 		
 		
 		return "redirect:/account/login";
 	}
 	
-	// È¸¿ø Å»Åğ(¾îµå¹Î)
+	// È¸ï¿½ï¿½ Å»ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)
 	@RequestMapping(value = "/delete" ,method=RequestMethod.POST)
 	public String memberDeletePOST(memberVO vo,RedirectAttributes rttr,int me_id) throws Exception{
 		
 		try {
 			memberService.memberDelete(me_id);
-			rttr.addFlashAttribute("msg", "È¸¿ø »èÁ¦°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù.");
+			rttr.addFlashAttribute("msg", "í”„ë¡œí•„ ì‚­ì œì„ ì™„ë£Œí•˜ì˜€ìŠµë‹ˆë‹¤..");
 		} catch (Exception e) {
-			rttr.addFlashAttribute("msg", "¿À·ù°¡ ¹ß»ı µÇ¾ú½À´Ï´Ù.");
+			rttr.addFlashAttribute("msg", "ì˜¤ë¥˜ê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤." + e);
 		}
 		
 		return "/account/delete";
@@ -179,7 +179,7 @@ public class MemberController {
 	}
 	
 	
-	// È¸¿ø°ü¸®
+	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping(value = "/manage", method=RequestMethod.GET)
 	public String memberList(@ModelAttribute("mVO") memberVO mVO, HttpServletRequest request, Model model) throws Exception {
 
@@ -213,9 +213,9 @@ public class MemberController {
 			memberService.updateImg(memberImg,me_id);
 			mvo.setMe_image(memberImg);
 			session.setAttribute("login", mvo);
-			rttr.addFlashAttribute("msg", "ÀÌ¹ÌÁö º¯°æÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.");
+			rttr.addFlashAttribute("msg", "ì´ë¯¸ì§€ ë³€ê²½ì„ ì™„ë£Œí•˜ì˜€ìŠµë‹ˆë‹¤.");
 		} catch (Exception e) {
-			rttr.addFlashAttribute("msg", "ÀÌ¹ÌÁö º¯°æÁß ¿¡·¯°¡ ¹ß»ıÇÏ¿´½À´Ï´Ù.");
+			rttr.addFlashAttribute("msg", "ì˜¤ë¥˜ê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤." + e);
 		}
 
 		

@@ -17,20 +17,18 @@ public class ItemController {
 	@Autowired
 	private ItemService itemService;
 	
-	@RequestMapping(value = "/manage" , method=RequestMethod.GET)
+	@RequestMapping(value = "/index" , method=RequestMethod.GET)
 	public void ItemMain() {
 	}
 	
-	@RequestMapping(value ="/itemInsert" , method=RequestMethod.GET)
-	public void ItemInsertPOST() {
+	@RequestMapping(value ="/goods/register" , method=RequestMethod.GET)
+	public void ItemRegisterGET() {
 		
 	}
 	
-	
-	@RequestMapping(value = "/itemInsert" , method=RequestMethod.POST)
-	public String ItemInsert(RedirectAttributes rttr,ItemVO itemVO, MultipartHttpServletRequest mpRequest) throws Exception 
+	@RequestMapping(value = "/goods/register" , method=RequestMethod.POST)
+	public String ItemRegisterPOST(RedirectAttributes rttr,ItemVO itemVO, MultipartHttpServletRequest mpRequest) throws Exception 
 	{
-			itemService.itemInsert(itemVO, mpRequest);
 		System.out.println(itemVO);
 		
 		return "/item/itemInsert";
