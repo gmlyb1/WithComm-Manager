@@ -66,6 +66,12 @@ public class MemberDAOImpl implements MemberDAO {
 		sqlSession.update("namespace.updateImg", me_id);
 	}
 
+	@Override
+	public int selectManage(memberVO vo) throws Exception {
+		return sqlSession.update("namespace.selectManage", vo);
+	}
+
+
 	
 
 

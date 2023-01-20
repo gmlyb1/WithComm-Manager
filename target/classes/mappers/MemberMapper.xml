@@ -90,4 +90,10 @@
 	<update id="updateImg">
 		update tbl_member set member_img = #{memberImg} where me_id = #{me_id}
 	</update>
+	
+	<!-- 관리자 지정 -->
+	<update id="selectManage">
+	update tbl_member set adminCk = 1 where me_id = #{me_id}
+	
+	</update>
 </mapper>

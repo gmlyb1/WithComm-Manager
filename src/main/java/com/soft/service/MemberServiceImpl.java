@@ -65,6 +65,11 @@ public class MemberServiceImpl implements MemberService {
 		memberDAO.updateImg(memberImg, me_id);
 	}
 
+	@Override
+	public int selectManage(memberVO vo) throws Exception {
+		return memberDAO.selectManage(vo);
+	}
+
 	
 
 	

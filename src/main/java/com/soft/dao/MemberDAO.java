@@ -8,31 +8,34 @@ import com.soft.vo.memberVO;
 public interface MemberDAO {
 
 
-	// È¸¿ø°¡ÀÔ
+	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public void register(memberVO vo) throws Exception;
 	
-	// ·Î±×ÀÎ
+	// ï¿½Î±ï¿½ï¿½ï¿½
 	public memberVO login(memberVO vo) throws Exception;
 	
-	// ºñ¹Ğ¹øÈ£ Ã¼Å©
+	// ï¿½ï¿½Ğ¹ï¿½È£ Ã¼Å©
 	public int passChk(memberVO vo) throws Exception;
 
-	// ¾ÆÀÌµğ Áßº¹ Ã¼Å©
+	// ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ßºï¿½ Ã¼Å©
 	public int idChk(memberVO vo) throws Exception;
 	
-	// ÇÁ·ÎÇÊ
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public memberVO memberInfoSearch(memberVO mVO)throws Exception;
 	
 	
-	// ÇÁ·ÎÇÊ ¼öÁ¤(ºñ¹Ğ¹øÈ£¸¸)
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½Ğ¹ï¿½È£ï¿½ï¿½)
 	public void memberUpdate(String me_id) throws Exception;
 	
-	// È¸¿ø °ü¸®
+	// È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public List<memberVO> memberManage(memberVO mVO)throws Exception;
 	
-	//È¸¿ø Å»Åğ(¾îµå¹Î)
+	//È¸ï¿½ï¿½ Å»ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)
 	public void memberDelete(int me_id) throws Exception;
 	
-	// ÀÌ¹ÌÁö ¼³Á¤
+	// ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void updateImg(String memberImg, String me_id);
+	
+	// ê´€ë¦¬ì ì§€ì •
+	public int selectManage(memberVO vo) throws Exception;
 }

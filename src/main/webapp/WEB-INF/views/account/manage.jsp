@@ -15,6 +15,21 @@ $(document).ready(function(){
 });
 </script>
 
+<script type="text/javascript">
+$(document).ready(function() {
+
+	$(".cancel_btn").on("click", function() {
+		event.preventDefault();
+		location.href = "/board/list";
+	})
+})
+
+function _onSubmit() {
+	if (!confirm("수정 하시겠습니까?")) {
+		return false;
+	}
+}
+</script>
 <!-- <script type="text/javascript">
 $(document).ready(function() {
 	var formObj = $("form[name='manageForm']")
@@ -45,7 +60,7 @@ $(document).ready(function() {
 		</div>
 		<div class="card-body">
 			<div class="table-responsive">
-				<form role="form" method="post" name="manageForm" action="/account/delete">
+				<!-- <form role="form" method="post" name="manageForm" action="/account/delete"> -->
 					<table class="table table-bordered" id="dataTable" width="100%"
 						cellspacing="0">
 						<thead>
@@ -53,19 +68,18 @@ $(document).ready(function() {
 								<th class="text-center">번호</th>
 								<th class="text-center">계정</th>
 								<th class="text-center">닉네임</th>
-								<th class="text-center">회원상태</th>
 								<th class="text-center">관리자 여부</th>
 								<th class="text-center">회원가입일자</th>
 								<th class="text-center">비고</th>
 							</tr>
 						</thead>
+					<!-- </form> -->
 
 						<c:forEach items="${memberList}" var="memberList">
 							<tr>
 								<td class="text-center">${memberList.me_id}</td>
 								<td class="text-center">${memberList.me_email}</td>
 								<td class="text-center">${memberList.me_name}</td>
-								<td class="text-center">${memberList.me_state}</td>
 								<td class="text-center">${memberList.adminCk}</td>
 								<td class="text-center"><fmt:formatDate
 										value="${memberList.me_regDate}" pattern="yy-MM-dd HH:mm" />
@@ -74,13 +88,14 @@ $(document).ready(function() {
 								<a href="/account/profile?me_id=${memberList.me_id}" class="btn btn-success">프로필 확인</a>
 								<!-- <button type="submit" class="btn btn-danger" id="delete_btn">회원 삭제</button> -->
 								<a href="#" class="btn btn-primary">비밀번호 변경</a>
+								<a href="/account/selectManage" class="btn btn-secondary">관리자 지정</a>
 								</td>
 									
 							</tr>
 						</c:forEach>
 						</tbody>
 					</table>
-				</form>
+				<!-- </form> -->
 			</div>
 		</div>
 	</div>

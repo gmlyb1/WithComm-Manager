@@ -223,5 +223,19 @@ public class MemberController {
 		
 		return "/home";
 	}
+	
+	// 관리자 지정
+	@RequestMapping(value="/selectManage" , method=RequestMethod.GET)
+	public String selectManager(memberVO vo,RedirectAttributes rttr) throws Exception {
+		
+		try {
+			memberService.selectManage(vo);
+			rttr.addFlashAttribute("msg", "관리자 지정이 완료되었습니다.");
+		} catch (Exception e) {
+			rttr.addFlashAttribute("msg", "오류가 발생했습니다.");
+			e.printStackTrace();
+		}
+		return "redirect:/account/manage";
+	}
 
 }
