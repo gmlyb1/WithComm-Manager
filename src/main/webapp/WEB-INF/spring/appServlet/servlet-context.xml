@@ -49,6 +49,7 @@
 			<mapping path="/home"></mapping>
 			<mapping path="/board/**"></mapping>
 			<mapping path="/notice/**"></mapping>
+			<mapping path="/inquiry/**"></mapping>
 			<mapping path="/account/manage"></mapping>
 			<!-- <mapping path="/item/**"></mapping> -->
 			

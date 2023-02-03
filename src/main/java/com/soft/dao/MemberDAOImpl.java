@@ -71,6 +71,11 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.update("namespace.selectManage", vo);
 	}
 
+	@Override
+	public void insertAccount(memberVO vo) throws Exception {
+		sqlSession.insert("namespace.insertAccount", vo);
+	}
+
 
 	
 

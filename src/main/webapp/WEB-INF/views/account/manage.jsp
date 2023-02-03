@@ -58,12 +58,15 @@ $(document).ready(function() {
 					슈퍼 관리자와 관리자 등급만 조회 가능합니다. (관리자 여부 0 = 관리자 x , 1 = 관리자)</strong></span>
 
 		</div>
+		<form action="/account/selectManage" method="post">
 		<div class="card-body">
 			<div class="table-responsive">
 				<!-- <form role="form" method="post" name="manageForm" action="/account/delete"> -->
 					<table class="table table-bordered" id="dataTable" width="100%"
-						cellspacing="0">
+						cellspacing="0">	
 						<thead>
+						<a href="/account/create" class="btn btn-success">회원등록</a>
+					
 							<tr>
 								<th class="text-center">번호</th>
 								<th class="text-center">계정</th>
@@ -82,19 +85,16 @@ $(document).ready(function() {
 								<td class="text-center">${memberList.me_name}</td>
 								<td class="text-center">${memberList.adminCk}</td>
 								<td class="text-center"><fmt:formatDate
-										value="${memberList.me_regDate}" pattern="yy-MM-dd HH:mm" />
+										value="${memberList.me_regDate}" pattern="yyyy-MM-dd" />
 								</td>
 								<td class="text-center">
-								<a href="/account/profile?me_id=${memberList.me_id}" class="btn btn-success">프로필 확인</a>
-								<!-- <button type="submit" class="btn btn-danger" id="delete_btn">회원 삭제</button> -->
-								<a href="#" class="btn btn-primary">비밀번호 변경</a>
-								<a href="/account/selectManage" class="btn btn-secondary">관리자 지정</a>
+									<button type="submit" class="btn btn-secondary">관리자 지정</button>
 								</td>
-									
 							</tr>
 						</c:forEach>
 						</tbody>
 					</table>
+			</form>
 				<!-- </form> -->
 			</div>
 		</div>

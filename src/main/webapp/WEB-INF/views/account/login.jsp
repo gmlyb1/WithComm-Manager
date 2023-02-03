@@ -79,6 +79,13 @@ $(document).ready(function() {
                         <input placeholder="Password"  type="password" id="me_pwd" name="me_pwd">
                     </div>
                 </div>
+                 <div class="form-group">
+                   <div class="custom-control custom-checkbox small">
+                      <label>
+                       <input type="checkbox" name="useCookie"> 로그인유지
+                      </label>
+                   </div>
+           		</div>
                 <div class="login-btn-wrap">
                     <button class="login-btn" id="login-btn" type="submit">Login</button>
                     <a href="#" >Forgot password?</a>

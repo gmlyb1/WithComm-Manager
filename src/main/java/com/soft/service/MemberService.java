@@ -38,5 +38,7 @@ public interface MemberService {
 	
 	// 관리자 지정
 	public int selectManage(memberVO vo) throws Exception;
+	
+	public void insertAccount(memberVO vo) throws Exception;
 
 }

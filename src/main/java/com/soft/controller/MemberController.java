@@ -224,8 +224,13 @@ public class MemberController {
 		return "/home";
 	}
 	
+	@RequestMapping(value="/selectManage", method=RequestMethod.GET)
+	public void selectManagerGET() {
+		
+	}
+	
 	// 관리자 지정
-	@RequestMapping(value="/selectManage" , method=RequestMethod.GET)
+	@RequestMapping(value="/selectManage" , method=RequestMethod.POST)
 	public String selectManager(memberVO vo,RedirectAttributes rttr) throws Exception {
 		
 		try {
@@ -237,5 +242,29 @@ public class MemberController {
 		}
 		return "redirect:/account/manage";
 	}
+	
+	@RequestMapping(value="/create",method=RequestMethod.GET)
+	public String AccountCreateGET(RedirectAttributes rttr,Model model, memberVO vo) {
+		
+		try {
+			memberService.insertAccount(vo);
+			rttr.addFlashAttribute("msg", "회원등록이 완료되었습니다.");
+		} catch (Exception e) {
+			rttr.addFlashAttribute("msg", "오류가 발생했습니다."+e);
+		}
+		
+		return "/account/create";
+	}
+	
+	/*
+	 * @RequestMapping(value="/create",method=RequestMethod.POST) public String
+	 * AccountCreatePOST() {
+	 * 
+	 * try { memberService.insertAccount(vo); rttr.addFlashAttribute("msg",
+	 * "회원등록이 완료되었습니다."); } catch (Exception e) { rttr.addFlashAttribute("msg",
+	 * "오류가 발생했습니다."+e); }
+	 * 
+	 * return "redirect:/account/create"; }
+	 */
 
 }

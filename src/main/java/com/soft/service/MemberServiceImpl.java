@@ -70,6 +70,11 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.selectManage(vo);
 	}
 
+	@Override
+	public void insertAccount(memberVO vo) throws Exception {
+		memberDAO.insertAccount(vo);
+	}
+
 	
 
 	
