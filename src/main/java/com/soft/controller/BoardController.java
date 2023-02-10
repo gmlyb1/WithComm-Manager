@@ -44,7 +44,6 @@ public class BoardController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
-	//�Խ��� ���
 	@RequestMapping(value = "/list", method=RequestMethod.GET)
 	public String BoardList(@ModelAttribute("vo") boardVO vo,replyVO rvo,HttpServletRequest request,Model model) throws Exception 
 	{
@@ -53,34 +52,30 @@ public class BoardController {
 		if(null != inputFlashMap) {
 			model.addAttribute("msg", (String)inputFlashMap.get("msg"));
 		}
-		//�Խù� ���
 		List<boardVO> boardList = boardService.BoardList(vo);
 		model.addAttribute("boardList", boardList);
 		
-		//��۸��
 //		List<replyVO> replyList = replyService.replyList(rvo);
 //		model.addAttribute("replyList", replyList);
 		
 		return "/board/list";
 	}
 	
-	// �Խñ� ��� (GET)
 	@RequestMapping(value = "/create", method= RequestMethod.GET)
 	public void insertBoardGET() {
 	}
 	
-	// �Խñ� ��� (POST)
 	@RequestMapping(value= "/create" , method = RequestMethod.POST)
 	public String insertBoardPOST(@ModelAttribute("vo") boardVO vo,HttpServletRequest request ,RedirectAttributes redirect) throws Exception 
 	{
 		
 	try {
-		SimpleDateFormat format1= new SimpleDateFormat("yyyy-MM-dd");
-		
-		Date time = new Date();
-		
-		String time1 = format1.format(time);
-		vo.setBoard_regdate(time1);
+//		SimpleDateFormat format1= new SimpleDateFormat("yyyy-MM-dd");
+//		
+//		Date time = new Date();
+//		
+//		String time1 = format1.format(time);
+//		vo.setBoard_regdate(time1);
 		
 		boardService.insertBoard(vo);
 		

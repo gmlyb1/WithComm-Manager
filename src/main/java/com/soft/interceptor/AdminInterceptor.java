@@ -23,6 +23,9 @@ public class AdminInterceptor implements HandlerInterceptor{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		
+	 response.setCharacterEncoding("UTF-8");
+	 response.setContentType("text/html; charset=UTF-8");
+	
 		HttpSession session =request.getSession();
 		PrintWriter out = response.getWriter();
 		memberVO lvo = (memberVO)session.getAttribute("member");
@@ -39,25 +42,7 @@ public class AdminInterceptor implements HandlerInterceptor{
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		HttpSession httpSession = request.getSession();
-		ModelMap modelMap = modelAndView.getModelMap();
-		Object memberVO = modelMap.get("member");
 		
-		if(memberVO != null) {
-			logger.info("new login success");
-			httpSession.setAttribute("login", memberVO);
-			if(request.getParameter("userCookie") != null ) {
-				logger.info("remember me");
-				Cookie loginCookie = new Cookie("loginCookie", httpSession.getId());
-				loginCookie.setPath("/");
-				loginCookie.setMaxAge(60*60*24*7);
-				response.addCookie(loginCookie);
-			}
-			
-			Object destination = httpSession.getAttribute("destination");
-			Object URL = httpSession.getAttribute("URL");
-			response.sendRedirect(destination != null? (String) destination : (String) URL);
-		}
 		
 	}
 

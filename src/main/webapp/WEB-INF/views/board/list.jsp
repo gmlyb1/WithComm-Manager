@@ -12,7 +12,7 @@
 <div class="container-fluid">
 
 	<!-- Page Heading -->
-	<h1 class="h3 mb-2 text-gray-800">고객 게시판</h1>
+	<h1 class="h3 mb-2 text-gray-800">자유 게시판</h1>
 	<p class="mb-4">
 		<a><strong>저희 소프트홈페이지의 고객 게시판을 찾아 주셔서 감사합니다.</strong></a>
 	</p>
@@ -54,11 +54,11 @@
 								<td class="text-center"><c:out value="${list.board_no}" /></td>
 								<td><a href="/board/read?board_no=${list.board_no}"><c:out
 											value="${list.board_title}" /></a>
-											<strong>[${list.board_reply_hit}]</strong>
+											
 								</td>
 								<td class="text-center"><c:out value="${list.board_writer}" /></td>
 								<td class="text-center"><c:out value="${list.board_count}" /></td>
-								<td class="text-center"><c:out
+								<td class="text-center"><fmt:formatDate pattern="yyyy-MM-dd hh:mm"
 										value="${list.board_regdate}" /></td>
 							</tr>
 						</c:forEach>

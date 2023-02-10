@@ -14,7 +14,7 @@
 			var me_email = $("#me_email").val();
 			var me_id = $("#me_id").val();
 			var me_pwd = $("#me_pwd").val();
-			
+
 			if (document.frm.me_email.value == "") {
 				alert("이메일을 입력해 주세요.");
 				return false;
@@ -24,22 +24,44 @@
 				alert("비밀번호를 입력해 주세요.");
 				return false;
 			}
-				
+
 			if (me_email != "" && me_pwd != "") {
 				return "/account/login";
 			}
-			
+
 		});
 	});
 </script>
 <script type="text/javascript">
-$(document).ready(function() {
-	var msg = "${msg}"
+	$(document).ready(function() {
+		var msg = "${msg}"
 
-	if (msg != "") {
-		alert(msg);
-	}
-});
+		if (msg != "") {
+			alert(msg);
+		}
+	});
+</script>
+<script type="text/javascript">
+const signup = document.getElementById("sign-up");
+signin = document.getElementById("sign-in");
+loginin = document.getElementById("login-in");
+loginup = document.getElementById("login-up");
+
+signup.addEventListener("click", () => {
+    loginin.classList.remove("block");
+    loginup.classList.remove("none");
+
+    loginin.classList.add("none");
+    loginup.classList.add("block");
+})
+
+signin.addEventListener("click", () => {
+    loginin.classList.remove("none");
+    loginup.classList.remove("block");
+
+    loginin.classList.add("block");
+    loginup.classList.add("none");
+})
 </script>
 
 <meta charset="utf-8">
@@ -49,209 +71,272 @@ $(document).ready(function() {
 <meta name="description" content="">
 <meta name="author" content="">
 <title>Login</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://kit.fontawesome.com/51db22a717.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="https://kit.fontawesome.com/51db22a717.js"
+	crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css2?family=Alata&display=swap"
+	rel="stylesheet">
+<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css'
+	rel='stylesheet'>
 </head>
 <body>
-<form name="frm" action="/account/login" method="post">
-    <div class="page-container">
-        <div class="login-form-container shadow">
-            <div class="login-form-right-side">
-                <div class="top-logo-wrap">
-                    
-                </div>
-                <h1>SOFT</h1>
-                <p>In computer security, logging in is the process by which an individual gains access to a computer system by identifying and authenticating themselves.</p>
-            </div>
-            <div class="login-form-left-side">
-                <div class="login-top-wrap">
-                    <span>Don't have an account?</span>
-                    <button class="create-account-btn shadow-light">Create Profile</button>
-                </div>
-                <div class="login-input-container">
-                    <div class="login-input-wrap input-id">
-                        <i class="far fa-envelope"></i>
-                        <input placeholder="Email" type="text" id="me_email" name="me_email">
-                    </div>
-                    <div class="login-input-wrap input-password">
-                        <i class="fas fa-key"></i>
-                        <input placeholder="Password"  type="password" id="me_pwd" name="me_pwd">
-                    </div>
-                </div>
-                 <div class="form-group">
-                   <div class="custom-control custom-checkbox small">
-                      <label>
-                       <input type="checkbox" name="useCookie"> 로그인유지
-                      </label>
-                   </div>
-           		</div>
-                <div class="login-btn-wrap">
-                    <button class="login-btn" id="login-btn" type="submit">Login</button>
-                    <a href="#" >Forgot password?</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
-</body>
-</html>
+	<form name="frm" action="/account/login" method="post">
+		<div class="login">
+			<div class="login__content">
+				<div class="login__img">
+					<img
+						src="https://image.freepik.com/free-vector/code-typing-concept-illustration_114360-3581.jpg"
+						alt="user login">
+				</div>
+				<div class="login__forms">
+					<!--         login form -->
+					<h1 class="login__title">WithComm 관리자</h1>
+					<div class="login__box">
+						<i class='bx bx-user login__icon'></i> <input type="email"
+							placeholder="아이디" id="me_email" name="me_email" class="login__input">
+					</div>
+					<div class="login__box">
+						<i class='bx bx-lock login__icon'></i> <input type="password"
+							placeholder="패스워드" id="me_pwd" name="me_pwd" class="login__input">
+					</div>
+					<a href="#" class="login__forgot">Forgot Password? </a> 
+					<button type="submit" class="login__button" id="login-btn" name="login-btn">Sign In</button>
+
+					<!-- <div>
+						<span class="login__account login__account--account">Don't
+							Have an Account?</span> <span
+							class="login__signin login__signin--signup" id="sign-up">Sign
+							Up</span>
+					</div> -->
+
+					<!--         create account form -->
+					<!-- <form action="" class="login__create none" id="login-up">
+          <h1 class="login__title">Create Account</h1>
+          <div class="login__box">
+            <i class='bx bx-user login__icon'></i>
+            <input type="text" placeholder="Username" class="login__input">
+          </div>
+          
+          <div class="login__box">
+            <i class='bx bx-at login__icon'></i>
+            <input type="text" placeholder="Email" class="login__input">
+          </div>
+          
+          <div class="login__box">
+            <i class='bx bx-lock login__icon'></i>
+            <input type="text" placeholder="Password" class="login__input">
+          </div>
+          
+          <a href="#" class="login__button">Sign Up</a>
+          
+          <div>
+            <span class="login__account login__account--account">Already have an Account?</span>
+            <span class="login__signup login__signup--signup" id="sign-in">Sign In</span>
+          </div>
+          
+          <div class="login__social">
+             <a href="#" class="login__social--icon"><i class='bx bxl-facebook'></i></a>
+             <a href="#" class="login__social--icon"><i class='bx bxl-twitter'></i></a>
+             <a href="#" class="login__social--icon"><i class='bx bxl-google'></i></a>
+             <a href="#" class="login__social--icon"><i class='bx bxl-github'></i></a>
+          </div> -->
+
+				</div>
+			</div>
+		</div>
+	</form>
 
 <style type="text/css">
-:root{
-
-
-}
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: 'Alata', sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap");
+*, ::before, ::after {
+  box-sizing: border-box;
 }
 
-.page-container{
-    width: 100vw;
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
+  font-size: 0.938rem;
+  color: #23004d;
+}
+
+h1 {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.login {
+  display: grid;
+  grid-template-columns: 100%;
+  height: 100vh;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+.login__content {
+  display: grid;
+}
+.login__img {
+  justify-self: center;
+}
+.login__img img {
+  width: 310px;
+  margin-top: 1.5rem;
+}
+.login__forms {
+  position: relative;
+  height: 368px;
+}
+.login__register, .login__create {
+  position: absolute;
+  bottom: 1rem;
+  width: 100%;
+  background-color: #f2f2f2;
+  padding: 2rem 1rem;
+  border-radius: 1rem;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(35, 0, 77, 0.2);
+  animation-duration: 0.4s;
+  animation-name: animateLogin;
+}
+.login__title {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+.login__box {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: 0.5rem;
+  padding: 1.125rem 1rem;
+  background-color: #fff;
+  margin-top: 1rem;
+  border-radius: 0.5rem;
+}
+.login__icon {
+  font-size: 1.5rem;
+  color: #4AD395;
+}
+.login__input {
+  border: none;
+  outline: none;
+  font-size: 0.938rem;
+  font-weight: 700;
+  color: #23004d;
+  width: 100%;
+}
+.login__input::placeholder {
+  font-size: 0.938rem;
+  font-family: "Open Sans", sans-serif;
+  color: #a49eac;
+}
+.login__forgot {
+  display: block;
+  width: max-content;
+  margin-left: auto;
+  margin-top: 0.5rem;
+  font-size: 0.813rem;
+  font-weight: 600;
+  color: #a49eac;
+}
+.login__button {
+  display: block;
+  padding: 1rem;
+  margin: 2rem 0;
+  background-color: #4AD395;
+  color: #fff;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 0.5rem;
+  transition: 0.3s;
+}
+.login__button:hover {
+  background-color: #65bf97;
+}
+.login__account, .login__signin, .login__signup {
+  font-weight: 600;
+  font-size: 0.813rem;
+}
+.login__account--account, .login__signin--account, .login__signup--account {
+  color: #23004d;
+}
+.login__account--signin, .login__account--signup, .login__signin--signin, .login__signin--signup, .login__signup--signin, .login__signup--signup {
+  color: #4AD395;
+  cursor: pointer;
+}
+.login__social {
+  margin-top: 2rem;
+}
+.login__social--icon {
+  font-size: 1.5rem;
+  color: #23004d;
+  margin: 0 1rem;
+}
+
+.block {
+  display: block;
+}
+
+.none {
+  display: none;
+}
+
+@keyframes animateLogin {
+  0% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.1, 1.1);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+@media screen and (min-width: 576px) {
+  .login__forms {
+    width: 348px;
+    justify-self: center;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .login {
     height: 100vh;
-    background: #eff0f2;
-    display: flex;
+    overflow: hidden;
+  }
+  .login__content {
+    grid-template-columns: repeat(2, max-content);
     justify-content: center;
     align-items: center;
-
-}
-.shadow{
-    -webkit-box-shadow: 27px 43px 43px -26px rgba(89,89,89,0.39);
-    -moz-box-shadow: 27px 43px 43px -26px rgba(89,89,89,0.39);
-    box-shadow: 27px 43px 43px -26px rgba(89,89,89,0.39);
-}/*
-.shadow-light{
-    -webkit-box-shadow: 45px 45px 104px -33px rgba(38,38,38,0.92);
-    -moz-box-shadow: 45px 45px 104px -33px rgba(38,38,38,0.92);
-    box-shadow: 45px 45px 104px -33px rgba(38,38,38,0.92);
-
-}*/
-.login-form-container{
- 
-    background:#f5f5f5 ;
-    width:860px;
-    height: 540px;
+    margin-left: 10rem;
+  }
+  .login__img {
     display: flex;
-    flex-direction: row;
-    box-shadow: 10px black;
-    border-radius: 10px;
-
+    width: 600px;
+    height: 588px;
+    background-color: #fff;
+    border-radius: 1rem;
+    padding-left: 1rem;
+  }
+  .login__img img {
+    width: 80%;
+    margin-top: 0;
+  }
+  .login__register, .login__create {
+    left: -11rem;
+  }
+  .login__register {
+    bottom: -2rem;
+  }
+  .login__create {
+    bottom: -5.5rem;
+  }
 }
-.login-form-right-side{
-    width: 50%; 
-    border-radius: 10px 0px 0px 10px;
-    padding:75px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    background-image: 
-  radial-gradient(ellipse farthest-corner at 0 140%, #5d9dff 0%, #2178ff 70%, #3585ff 70%);
-}
-.login-form-right-side h1{
-    color: white;
-    width:100%;
-    text-align: right;
-    opacity: 0.9;
-
-}
-.login-form-right-side p{
-    padding-top: 50px;
-    font-size:12px;
-    text-align: right;
-    opacity: 0.8;
-}
-.login-form-left-side{
-    width: 50%;
-    border-radius: 0px 10px 10px 0px;
-    display: flex;
-
-    flex-direction: column;
-    align-items: center;
-    padding:40px;
-    background: rgb(255,255,255);
-background: linear-gradient(287deg, rgba(255,255,255,1) 0%, rgba(243,244,244,1) 0%, rgba(255,255,255,1) 100%);
-}
-.login-form-left-side .login-top-wrap{
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    width:100%;
-}
-.login-form-left-side .login-top-wrap span{
-    color: gray;
-    font-size: 11px;
-    padding-right:20px;
-
-}
-.login-form-left-side .login-top-wrap .create-account-btn {
-    background: white;
-    border:  0;
-    width:85px;
-    height: 35px;
-    font-size: 11px;
-    color: #2178ff;
-    border-radius: 3px;
-
-}
-.login-input-container{
-    padding-top:120px;
-    width:300px;
-}
-.login-input-container .login-input-wrap{
-    width:300px;
-    height: 45px;
-    margin-top: 20px;
-    border-radius: 2px;
-    border-bottom: solid 2px #2178ff;
-   
-}
-.login-input-container .login-input-wrap i{
-    color: #2178ff;
-    line-height: 45px;
-}
-
-.login-input-container .login-input-wrap input{
-    background: none;
-   
-    border: none;
-    line-height: 45px;
-    padding-left:10px;
-    width:267px;
-}
-.login-input-container .login-input-wrap input:focus{
-    outline: none;
-}
-.login-btn-wrap{
-    margin-top: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#login-btn:hover {
-}
-
-.login-btn-wrap .login-btn{
-    width:95px;
-    height:35px;
-    color:white;
-    border: 0;
-    border-radius: 4px;
-
-    background: rgb(105,163,255);
-background: linear-gradient(162deg, rgba(105,163,255,1) 0%, rgba(43,125,254,1) 50%, rgba(43,125,254,1) 100%);
-}
-.login-btn-wrap a{
-    margin-top:10px;
-    text-decoration: none;
-    font-size: 11px;
-    color: gray;
-
-}
-
 </style>
