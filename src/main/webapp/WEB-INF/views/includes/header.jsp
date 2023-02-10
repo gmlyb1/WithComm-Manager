@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.Date"%>
 <%@ page import="java.text.SimpleDateFormat"%>
-<%@ page session="true"%>
 
 <%
 Date nowTime = new Date();
@@ -36,9 +35,10 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 
 
 
-<meta charset="UTF-8"> <!-- 추가할부분 -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 추가할부분 -->
-<meta http-equiv="X-UA-Compatible" content="ie=edge"> <!-- 추가할부분 -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
 
@@ -77,15 +77,15 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 				<div class="sidebar-brand-icon rotate-n-15">
 					<i class="fas fa-laugh-wink"></i>
 				</div>
-				<div class="sidebar-brand-text mx-3">WithComm</div>
+				<div class="sidebar-brand-text mx-3">SOFT</div>
 			</a>
 
 			<!-- Divider -->
 			<hr class="sidebar-divider my-0">
 
 			<!-- Nav Item - Dashboard -->
-			<li class="nav-item"><a class="nav-link" href="/account/manage"> <i
-					class="fas fa-fw fa-tachometer-alt"></i> <span>회원관리</span>
+			<li class="nav-item"><a class="nav-link" href="/home"> <i
+					class="fas fa-fw fa-tachometer-alt"></i> <span>Dashboard</span>
 			</a></li>
 
 			<!-- Divider -->

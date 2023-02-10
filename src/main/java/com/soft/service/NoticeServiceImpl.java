@@ -65,11 +65,6 @@ public class NoticeServiceImpl implements NoticeService {
 		return noticeDAO.HomeNoticeList();
 	}
 
-	@Override
-	public List<NoticeVO> selectNoticeImportant(NoticeVO vo) throws Exception {
-		return noticeDAO.selectNoticeImportant(vo);
-	}
-
 	
 
 }

@@ -65,11 +65,6 @@ public class NoticeDAOImpl implements NoticeDAO {
 		return sqlSession.selectList("namespace.HomeNoticeList");
 	}
 
-	@Override
-	public List<NoticeVO> selectNoticeImportant(NoticeVO vo) throws Exception {
-		return sqlSession.selectList("namespace.selectNoticeImportant", vo);
-	}
-
 	
 	
 

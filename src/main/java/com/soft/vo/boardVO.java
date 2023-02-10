@@ -1,7 +1,5 @@
 package com.soft.vo;
 
-import java.sql.Timestamp;
-
 import org.springframework.stereotype.Component;
 
 @Component
@@ -12,7 +10,7 @@ public class boardVO{
 	private String board_content;
 	private String board_writer;
 	private int board_count;
-	private Timestamp board_regdate;
+	private String board_regdate;
 	private int reply_cnt;
 	public int getBoard_no() {
 		return board_no;
@@ -44,10 +42,10 @@ public class boardVO{
 	public void setBoard_count(int board_count) {
 		this.board_count = board_count;
 	}
-	public Timestamp getBoard_regdate() {
+	public String getBoard_regdate() {
 		return board_regdate;
 	}
-	public void setBoard_regdate(Timestamp board_regdate) {
+	public void setBoard_regdate(String board_regdate) {
 		this.board_regdate = board_regdate;
 	}
 	public int getReply_cnt() {
@@ -62,7 +60,6 @@ public class boardVO{
 				+ ", board_writer=" + board_writer + ", board_count=" + board_count + ", board_regdate=" + board_regdate
 				+ ", reply_cnt=" + reply_cnt + "]";
 	}
-
 	
 	
 	

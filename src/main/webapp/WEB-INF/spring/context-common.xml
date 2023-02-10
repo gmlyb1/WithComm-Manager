@@ -22,7 +22,6 @@
 	</bean> 
 	
 	<bean id="loginCheckInterceptor" class="com.soft.handler.LoginCheckInterceptor"/>
-	<bean id="VisitCountDAO" class="com.soft.dao.VisitCountDAO">
 	<!-- <bean id="UrlHandlerMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="interceptors">
 			<list>
@@ -35,7 +34,7 @@
 		<props>
 			<prop key="/account/login">menuManagementController</prop>
 		</props>
-		</property>-->
-	</bean> 
+		</property>
+	</bean> -->
 	
 </beans>
