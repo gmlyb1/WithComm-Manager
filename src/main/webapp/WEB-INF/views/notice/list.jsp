@@ -49,6 +49,20 @@
 						</tr>
 					</thead>
 					<tbody>
+					<c:forEach items="${FixedList}" var="FixedList">
+								<tr>
+									<td class="text-center"><c:out value="" /><strong>[공지]</strong></td>
+									<td><strong><a
+											href="/notice/read?notice_no=${FixedList.notice_no}"><c:out
+													value="${FixedList.notice_title}" /></a></strong></td>
+									<td class="text-center"><strong><c:out
+												value="${FixedList.notice_writer}" /></strong></td>
+									<td class="text-center"><strong><c:out
+												value="${FixedList.notice_count}" /></strong></td>
+									<td class="text-center"><strong><c:out
+												value="${FixedList.notice_regdate}" /></strong></td>
+								</tr>
+							</c:forEach>
 						<c:forEach items="${noticeList}" var="list">
 							<tr>
 								<td class="text-center"><c:out value="${list.notice_no}" /></td>
@@ -56,7 +70,7 @@
 											value="${list.notice_title}" /></a></td>
 								<td class="text-center"><c:out value="${list.notice_writer}" /></td>
 								<td class="text-center"><c:out value="${list.notice_count}" /></td>
-								<td class="text-center"><c:out
+								<td class="text-center"><fmt:formatDate pattern="yyyy-MM-dd hh:mm"
 										value="${list.notice_regdate}" /></td>
 							</tr>
 						</c:forEach>

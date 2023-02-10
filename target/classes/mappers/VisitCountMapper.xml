@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.soft.dao.VisitCountDAO">  
+
+	<insert id="insertVisitor" parameterType="VisitCountVO">
+		INSERT INTO TBL_VISIT
+		(
+			VISIT_ID
+		,	VISIT_IP
+		,	VISIT_TIME
+		,	VISIT_REFER
+		,	VISIT_AGENT
+		)
+		VALUES
+		(
+			#{VISIT_ID},
+			#{VISIT_IP},
+			SYSDATETIME,
+			<if test="visit_refer != null and visit_refer !=''">
+			#{visit_refer},
+			</if>
+			#{VISIT_AGENT}
+		)
+	</insert>
+
+
+
+</mapper>

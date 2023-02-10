@@ -40,6 +40,7 @@ public class NoticeController {
 		
 		List<NoticeVO> noticeList = noticeService.NoticeList();
 		model.addAttribute("noticeList", noticeList);
+		model.addAttribute("FixedList", noticeService.selectNoticeImportant(vo));
 		
 		return "/notice/list";
 	}
@@ -49,18 +50,18 @@ public class NoticeController {
 			public void insertNoticeGET() {
 			}
 			
-			// �Խñ� ��� (POST)
+			// 글쓰기 (POST)
 			@RequestMapping(value= "/create" , method = RequestMethod.POST)
 			public String insertNoticePOST(@ModelAttribute("vo") NoticeVO vo,HttpServletRequest request ,RedirectAttributes redirect) throws Exception 
 			{
 				
 			try {
-				SimpleDateFormat format1= new SimpleDateFormat("yyyy-MM-dd");
-				
-				Date time = new Date();
-				
-				String time1 = format1.format(time);
-				vo.setNotice_regdate(time1);
+//				SimpleDateFormat format1= new SimpleDateFormat("yyyy-MM-dd");
+//				
+//				Date time = new Date();
+//				
+//				String time1 = format1.format(time);
+//				vo.setNotice_regdate(time1);
 				
 				noticeService.insertNotice(vo);
 				

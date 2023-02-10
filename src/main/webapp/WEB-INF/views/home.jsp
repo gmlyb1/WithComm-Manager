@@ -1,6 +1,9 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="java.util.Date"%>
+<%@ page import="java.text.SimpleDateFormat"%>
 <%@ page session="true"%>
 
 <script
@@ -160,12 +163,12 @@
 									<tr>
 										<td class="text-center"><c:out value="${list.board_no}" /></td>
 										<td><a href="/board/read?board_no=${list.board_no}"><c:out
-													value="${list.board_title}" /></a><strong>(${list.board_reply_hit})</strong></td>
+													value="${list.board_title}" /></a></td>
 										<td class="text-center"><c:out
 												value="${list.board_writer}" /></td>
 										<td class="text-center"><c:out
 												value="${list.board_count}" /></td>
-										<td class="text-center"><c:out
+										<td class="text-center"><fmt:formatDate pattern="yyyy-MM-dd hh:mm" 
 												value="${list.board_regdate}" /></td>
 									</tr>
 								</c:forEach>
@@ -274,7 +277,7 @@
 												value="${nlist.notice_writer}" /></td>
 										<td class="text-center"><c:out
 												value="${nlist.notice_count}" /></td>
-										<td class="text-center"><c:out
+										<td class="text-center"><fmt:formatDate pattern="yyyy-MM-dd hh:mm" 
 												value="${nlist.notice_regdate}" /></td>
 									</tr>
 								</c:forEach>
