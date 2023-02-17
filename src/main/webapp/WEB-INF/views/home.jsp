@@ -33,7 +33,7 @@
 						<div class="col mr-2">
 							<div
 								class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-								오늘 방문자수</div>
+								금일 자유게시판 글 수</div>
 							<div class="h5 mb-0 font-weight-bold text-gray-800">1명</div>
 						</div>
 						<div class="col-auto">
@@ -52,7 +52,7 @@
 						<div class="col mr-2">
 							<div
 								class="text-xs font-weight-bold text-success text-uppercase mb-1">
-								이번달 방문자수</div>
+								금월 자유게시판 글 수</div>
 							<div class="h5 mb-0 font-weight-bold text-gray-800">215,000명</div>
 						</div>
 						<div class="col-auto">
@@ -123,7 +123,7 @@
 				<!-- Card Header - Dropdown -->
 				<div
 					class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-					<h6 class="m-0 font-weight-bold text-primary">고객 게시판-상위 5개(비로그인 상태는 서비스를 이용하실수 없습니다.)</h6>
+					<h6 class="m-0 font-weight-bold text-primary">공지사항 -상위 5개(비로그인 상태는 서비스를 이용하실수 없습니다.)</h6>
 					<div class="dropdown no-arrow">
 						<a class="dropdown-toggle" href="#" role="button"
 							id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
@@ -141,14 +141,11 @@
 						</div>
 					</div>
 				</div>
-				<!-- Card Body -->
+				<!-- Card Body 공지사항-->
 				<div class="card-body">
 					<div class="chart-area">
-						<%-- <canvas id="myAreaChart"></canvas> --%>
 						<c:if test="${member != null}">
 						<table class="table table-bordered" >
-					<!-- 	id="dataTable" width="100%"
-							cellspacing="0" -->
 							<thead>
 								<tr>
 									<th class="text-center">번호</th>
@@ -159,17 +156,17 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${HomeBoardList}" var="list">
+								<c:forEach items="${HomeNoticeList}" var="nlist">
 									<tr>
-										<td class="text-center"><c:out value="${list.board_no}" /></td>
-										<td><a href="/board/read?board_no=${list.board_no}"><c:out
-													value="${list.board_title}" /></a></td>
+										<td class="text-center"><c:out value="${nlist.notice_no}" /></td>
+										<td><a href="/notice/read?notice_no=${nlist.notice_no}"><c:out
+													value="${nlist.notice_title}" /></a><strong></strong></td>
 										<td class="text-center"><c:out
-												value="${list.board_writer}" /></td>
+												value="${nlist.notice_writer}" /></td>
 										<td class="text-center"><c:out
-												value="${list.board_count}" /></td>
+												value="${nlist.notice_count}" /></td>
 										<td class="text-center"><fmt:formatDate pattern="yyyy-MM-dd hh:mm" 
-												value="${list.board_regdate}" /></td>
+												value="${nlist.notice_regdate}" /></td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -186,7 +183,7 @@
 				<!-- Card Header - Dropdown -->
 				<div
 					class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-					<h6 class="m-0 font-weight-bold text-primary">1:1 문의 리스트</h6>
+					<h6 class="m-0 font-weight-bold text-primary">멤버 리스트</h6>
 					<div class="dropdown no-arrow">
 						<a class="dropdown-toggle" href="#" role="button"
 							id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
@@ -232,7 +229,7 @@
 				<!-- Card Header - Dropdown -->
 				<div
 					class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-					<h6 class="m-0 font-weight-bold text-primary">공지사항 -상위 5개(비로그인 상태는 서비스를 이용하실수 없습니다.)</h6>
+					<h6 class="m-0 font-weight-bold text-primary">자유 게시판 -상위 5개(비로그인 상태는 서비스를 이용하실수 없습니다.)</h6>
 					<div class="dropdown no-arrow">
 						<a class="dropdown-toggle" href="#" role="button"
 							id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
@@ -250,14 +247,12 @@
 						</div>
 					</div>
 				</div>
-				<!-- Card Body -->
+				<!-- Card Body 자유게시판-->
 				<div class="card-body">
 					<div class="chart-area">
 						<%-- <canvas id="myAreaChart"></canvas> --%>
 						<c:if test="${member != null}">
-						<table class="table table-bordered" >
-					<!-- 	id="dataTable" width="100%"
-							cellspacing="0" -->
+							<table class="table table-bordered" >
 							<thead>
 								<tr>
 									<th class="text-center">번호</th>
@@ -268,17 +263,17 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${HomeNoticeList}" var="nlist">
+								<c:forEach items="${HomeBoardList}" var="list">
 									<tr>
-										<td class="text-center"><c:out value="${nlist.notice_no}" /></td>
-										<td><a href="/notice/read?notice_no=${nlist.notice_no}"><c:out
-													value="${nlist.notice_title}" /></a><strong></strong></td>
+										<td class="text-center"><c:out value="${list.board_no}" /></td>
+										<td><a href="/board/read?board_no=${list.board_no}"><c:out
+													value="${list.board_title}" /></a></td>
 										<td class="text-center"><c:out
-												value="${nlist.notice_writer}" /></td>
+												value="${list.board_writer}" /></td>
 										<td class="text-center"><c:out
-												value="${nlist.notice_count}" /></td>
+												value="${list.board_count}" /></td>
 										<td class="text-center"><fmt:formatDate pattern="yyyy-MM-dd hh:mm" 
-												value="${nlist.notice_regdate}" /></td>
+												value="${list.board_regdate}" /></td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -295,7 +290,7 @@
 				<!-- Card Header - Dropdown -->
 				<div
 					class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-					<h6 class="m-0 font-weight-bold text-primary">멤버 리스트</h6>
+					<h6 class="m-0 font-weight-bold text-primary">운영자 리스트</h6>
 					<div class="dropdown no-arrow">
 						<a class="dropdown-toggle" href="#" role="button"
 							id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
