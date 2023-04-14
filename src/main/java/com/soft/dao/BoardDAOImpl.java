@@ -19,19 +19,19 @@ public class BoardDAOImpl implements BoardDAO {
 	
 	private static final String namespace = "com.soft.dao.BoardDAO";
 
-	//±Û¾²±â
+	//ï¿½Û¾ï¿½ï¿½ï¿½
 	@Override
 	public void insertBoard(boardVO vo) throws Exception {
 			sqlSession.insert("namespace.insertBoard", vo);
 	}
 	
-	//Ã·ºÎÆÄÀÏ
+	//Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@Override
 	public void insertFile(Map<String, Object> map) throws Exception {
 			sqlSession.insert("namespace.insertFile",map);
 	}
 	
-	//±Û¸ñ·Ï
+	//ï¿½Û¸ï¿½ï¿½
 	@Override
 	public List<boardVO> BoardList() throws Exception {
 		return sqlSession.selectList("namespace.BoardList");
@@ -42,20 +42,20 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.selectList("namespace.HomeBoardList");
 	}
 	
-	//±ÛÀÐ±â
+	//ï¿½ï¿½ï¿½Ð±ï¿½
 	@Override
 	public boardVO BoardRead(int board_no) throws Exception {
 		return sqlSession.selectOne("namespace.BoardRead", board_no);
 	}
 	
-	// °Ô½Ã±Û ¼öÁ¤
+	// ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@Override	
 	public void BoardUpdate(boardVO vo) throws Exception {
 		sqlSession.update("namespace.BoardUpdate",vo);
 	}
 	
 	
-	// °Ô½Ã±Û »èÁ¦
+	// ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@Override
 	public void BoardDelete(int board_no) throws Exception {
 		sqlSession.delete("namespace.BoardDelete",board_no);
@@ -68,13 +68,11 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 	
 	
-	// ´ñ±Û ¸ñ·Ï
 	@Override
 	public List<replyVO> ReadReply(int board_no) throws Exception {
 		return sqlSession.selectList("namespace.ReadReply",board_no);
 	}
 
-	//´ñ±Û ÀÛ¼º
 	@Override
 	public void replyWrite(replyVO vo) throws Exception {
 		sqlSession.insert("namespace.WriteReply", vo);
@@ -90,6 +88,11 @@ public class BoardDAOImpl implements BoardDAO {
 	public boardVO nextBoardList(int board_no) throws Exception {
 		
 		return sqlSession.selectOne("namespace.nextBoardList", board_no);
+	}
+
+	@Override
+	public boardVO boardCnt(boardVO vo) throws Exception {
+		return sqlSession.selectOne("namespace.boardCnt",vo);
 	}
 
 

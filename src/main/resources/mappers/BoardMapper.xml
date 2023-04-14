@@ -18,10 +18,6 @@
 		from tbl_board LIMIT 5
 	</select>
 	
-	<!-- <update id="replyCount" parameterType="int">
-	update tbl_baord set board_reply_hit = board_reply_hit + #{amount} where board_no = #{board_no}
-	</update> -->
-	
 	<!--  글 작성 -->
 	<insert id="insertBoard">
   		insert
@@ -42,7 +38,7 @@
 		,   #{board_content}
 		,	#{board_writer}
 		,	#{board_count}
-		,	#{board_regdate}
+		,	CURRENT_TIMESTAMP()
 		)
 	</insert>
 	
@@ -62,7 +58,8 @@
 	<update id="BoardUpdate" parameterType="boardVO">
 		update tbl_board
 			set board_title = #{board_title},	
-				board_content = #{board_content}
+				board_content = #{board_content},
+				board_updateDate = CURRENT_TIMESTAMP()
 		where board_no = #{board_no}
 	</update>
 	
@@ -157,6 +154,14 @@
 	]]>
 	</select>
 	
-
+	<select id="boardCnt" parameterType="boardVO" resultType="boardVO">
+	 <![CDATA[
+	SELECT 
+	    COUNT(CASE WHEN board_regdate >= DATE_FORMAT(NOW(), '%Y-%m-01') AND board_regdate < DATE_FORMAT(DATE_ADD(NOW(), INTERVAL 1 MONTH), '%Y-%m-01') THEN board_no END) AS dayCnt,
+	    COUNT(CASE WHEN board_regdate >= DATE(NOW()) AND board_regdate < DATE_ADD(DATE(NOW()), INTERVAL 1 DAY) THEN board_no END) AS monthCnt,
+	    COUNT(CASE WHEN YEAR(board_regdate) = YEAR(NOW()) AND board_regdate < DATE_ADD(DATE_FORMAT(NOW(), '%Y-01-01'), INTERVAL 1 YEAR) THEN board_no END) AS yearCnt
+	FROM tbl_board;
+	]]>
+	</select>
 
 </mapper>

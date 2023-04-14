@@ -60,6 +60,7 @@ public class HomeController {
 			
 		}
 		
+		
 		memberVO memberSearch = memberService.memberInfoSearch(memberVO);
 
 		model.addAttribute("memberVO", memberSearch);
@@ -70,6 +71,13 @@ public class HomeController {
 		
 		List<NoticeVO> HomeNoticeList = noticeService.HomeNoticeList();
 		model.addAttribute("HomeNoticeList", HomeNoticeList);
+		
+		boardVO boardCnts = boardService.boardCnt(vo);
+		model.addAttribute("boardCnt", boardCnts);
+		
+//		model.addAttribute("boardCnt", boardCnt);
+//		System.out.println("오늘 게시글 수 :" + "boardCnt");
+		
 		
 		Map<String, ?> inputFlashMap = RequestContextUtils.getInputFlashMap(request);
 		
