@@ -91,8 +91,8 @@
 						<div class="col mr-2">
 							<div
 								class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-								오늘 1:1문의건수</div>
-							<div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+								전체 게시판 글 수 </div>
+							<div class="h5 mb-0 font-weight-bold text-gray-800">${boardCnt.allCnt}개</div>
 						</div>
 						<div class="col-auto">
 							<i class="fas fa-comments fa-2x text-gray-300"></i>
