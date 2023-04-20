@@ -7,41 +7,62 @@
 
 <%@include file="../includes/header.jsp"%>
 <script type="text/javascript">
-$(document).ready(function(){
-	var msg = "${msg}";
-	if(msg != "") {
-		alert(msg)
-	}
-});
-</script>
+	$(document).ready(function() {
+		//관리자 지정
+		$(".admin-button").click(function() {
+			var memberId = $(this).data("member-id");
+			var adminCk = $(this).data("admin-ck");
 
-<script type="text/javascript">
-$(document).ready(function() {
+			if (confirm("관리자로 지정하시겠습니까?")) {
+				$.ajax({
+					url : "/account/selectManager",
+					type : "POST",
+					data : {
+						me_id : memberId,
+						adminCk : 1
+					},
+					success : function(data) {
+						// 요청이 성공적으로 처리되면, 처리할 코드 작성
+						alert("요청이 성공적으로 처리되었습니다.");
+						console.log(data);
+						location.reload();
+					},
+					error : function(error) {
+						console.log(error);
+						alert("요청 처리 중 오류가 발생하였습니다."+error);
+					}
+				});
+			}
+		});
+		
+		// 회원 승인 처리
+		$("#approveBtn").click(function() {
+			var memberId = $(this).data("member-id");
+			var state = $(this).data("state");
 
-	$(".cancel_btn").on("click", function() {
-		event.preventDefault();
-		location.href = "/board/list";
-	})
-})
-
-function _onSubmit() {
-	if (!confirm("수정 하시겠습니까?")) {
-		return false;
-	}
-}
-</script>
-<!-- <script type="text/javascript">
-$(document).ready(function() {
-	var formObj = $("form[name='manageForm']")
-
-	//삭제
-	$("#delete_btn").on("click", function() {
-		formObj.attr("action", "/account/delete");
-		formObj.attr("method", "post");
-		formObj.submit();
+			if (confirm("회원가입된 회원을 승인 하시겠습니까?")) {
+				$.ajax({
+					url : "/account/approvalChk",
+					type : "POST",
+					data : {
+						me_id : memberId,
+						state : "일반회원"
+					},
+					success : function(data) {
+						alert("승인이 성공적으로 처리되었습니다.");
+						console.log(data);
+						location.reload();
+					},
+					error : function(error) {
+						console.log(error);
+						alert("요청 처리 중 오류가 발생하였습니다."+error);
+					}
+				});
+			}
+		});
+		
 	});
-})
-</script> -->
+</script>
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -58,44 +79,41 @@ $(document).ready(function() {
 					슈퍼 관리자와 관리자 등급만 조회 가능합니다. (관리자 여부 0 = 관리자 x , 1 = 관리자)</strong></span>
 
 		</div>
-		<form action="/account/selectManage" method="post">
 		<div class="card-body">
 			<div class="table-responsive">
-				<!-- <form role="form" method="post" name="manageForm" action="/account/delete"> -->
-					<table class="table table-bordered" id="dataTable" width="100%"
-						cellspacing="0">	
-						<thead>
-						<a href="/account/create" class="btn btn-success">회원등록</a>
-					
+				<table class="table table-bordered" id="dataTable" width="100%"
+					cellspacing="0">
+					<thead>
+						<tr>
+							<th class="text-center">번호</th>
+							<th class="text-center">계정</th>
+							<th class="text-center">닉네임</th>
+							<th class="text-center">상태</th>
+							<th class="text-center">관리자 여부</th>
+							<th class="text-center">회원가입일자</th>
+							<th class="text-center">비고</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${memberList}" var="member">
 							<tr>
-								<th class="text-center">번호</th>
-								<th class="text-center">계정</th>
-								<th class="text-center">닉네임</th>
-								<th class="text-center">관리자 여부</th>
-								<th class="text-center">회원가입일자</th>
-								<th class="text-center">비고</th>
-							</tr>
-						</thead>
-					<!-- </form> -->
-
-						<c:forEach items="${memberList}" var="memberList">
-							<tr>
-								<td class="text-center">${memberList.me_id}</td>
-								<td class="text-center">${memberList.me_email}</td>
-								<td class="text-center">${memberList.me_name}</td>
-								<td class="text-center">${memberList.adminCk}</td>
+								<td class="text-center">${member.me_id}</td>
+								<td class="text-center">${member.me_email}</td>
+								<td class="text-center">${member.me_name}</td>
+								<td class="text-center">${member.state}</td>
+								<td class="text-center">${member.adminCk}</td>
 								<td class="text-center"><fmt:formatDate
-										value="${memberList.me_regDate}" pattern="yyyy-MM-dd" />
-								</td>
+										value="${member.me_regDate}" pattern="yyyy-MM-dd" /></td>
 								<td class="text-center">
-									<button type="submit" class="btn btn-secondary">관리자 지정</button>
-								</td>
+								<c:if test="${member.adminCk != '1' }">
+										<button type="button" class="btn btn-secondary admin-button" data-member-id="${member.me_id}" data-admin-ck="${member.adminCk}">관리자 지정</button>
+									</c:if> <c:if test="${member.state == '대기중' }">
+										<button type="button" class="btn btn-success" id="approveBtn" data-member-id="${member.me_id}" data-state="${member.state}">승인</button>
+									</c:if></td>
 							</tr>
 						</c:forEach>
-						</tbody>
-					</table>
-			</form>
-				<!-- </form> -->
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>

@@ -67,8 +67,13 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public int selectManage(memberVO vo) throws Exception {
-		return sqlSession.update("namespace.selectManage", vo);
+	public void selectManage(memberVO mvo) throws Exception {
+		sqlSession.update("namespace.selectManage", mvo);
+	}
+
+	@Override
+	public void approvalChk(memberVO mvo) throws Exception {
+		sqlSession.update("namespace.approvalChk", mvo);
 	}
 
 	@Override
@@ -76,7 +81,10 @@ public class MemberDAOImpl implements MemberDAO {
 		sqlSession.insert("namespace.insertAccount", vo);
 	}
 
-
+	@Override
+	public int memberChoice(memberVO vo) throws Exception {
+		return sqlSession.update("namespace.memberChoice",vo);
+	}
 	
 
 

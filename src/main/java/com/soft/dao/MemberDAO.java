@@ -27,8 +27,12 @@ public interface MemberDAO {
 	public void updateImg(String memberImg, String me_id);
 	
 	// 관리자 지정
-	public int selectManage(memberVO vo) throws Exception;
+	public void selectManage(memberVO mvo) throws Exception;
+	
+	public void approvalChk(memberVO mvo) throws Exception;
 	
 	// 관리자 회원등록
 	public void insertAccount(memberVO vo) throws Exception;
+	
+	public int memberChoice(memberVO vo) throws Exception;
 }

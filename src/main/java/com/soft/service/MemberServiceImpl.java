@@ -66,13 +66,25 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int selectManage(memberVO vo) throws Exception {
-		return memberDAO.selectManage(vo);
+	public void selectManage(memberVO mvo) throws Exception {
+		 memberDAO.selectManage(mvo);
 	}
+	
+	
 
 	@Override
 	public void insertAccount(memberVO vo) throws Exception {
 		memberDAO.insertAccount(vo);
+	}
+
+	@Override
+	public int memberChoice(memberVO vo) throws Exception {
+		return memberDAO.memberChoice(vo);
+	}
+
+	@Override
+	public void approvalChk(memberVO mvo) throws Exception {
+		memberDAO.approvalChk(mvo);
 	}
 
 	

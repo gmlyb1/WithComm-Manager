@@ -41,19 +41,20 @@ public class MemberController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
-	// ȸ������ ������ ó��
+	// 관리자 페이지 호출 메서드
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public void getRegister() throws Exception {
 
 	}
-	
-	// ȸ������ �׼�
+
+	// 회원가입 - 관리자 페이지에서는 쓰이지 않음
 	@RequestMapping(value = "/register" , method = RequestMethod.POST)
 	public String postRegister(memberVO vo, RedirectAttributes rttr) throws Exception {
 		
 		try {
 			memberService.register(vo);	
-			rttr.addFlashAttribute("msg", "회원가입이 완료되었습니다.");
+			memberService.memberChoice(vo);
+			rttr.addFlashAttribute("msg", "회원가입이 완료되었습니다. 관리자의 권한 부여가 필요합니다.");
 		}catch (Exception e) {
 			rttr.addFlashAttribute("msg", "오류가 발생하였습니다.");
 		}
@@ -62,14 +63,14 @@ public class MemberController {
 		return null;
 	}
 	
-	// �α��� ������ ó��
+	// 로그인 페이지 get
 	@RequestMapping(value = "/login" , method=RequestMethod.GET)
 	public String login() throws Exception{
 		return "/account/login";
 	}
 	
 	
-	// �α��� 
+	// 로그인 처리
 	@RequestMapping(value ="/login" , method=RequestMethod.POST)
 	public String login(HttpServletResponse response,memberVO vo, HttpServletRequest request, RedirectAttributes rttr) throws Exception{
 			
@@ -77,10 +78,11 @@ public class MemberController {
 		session.setMaxInactiveInterval(6000);
 		memberVO login = memberService.login(vo);
 		
+		
+		
 		if(login == null)  {
 			session.setAttribute("member", null);
 			rttr.addFlashAttribute("msg", "아이디 혹은 비밀번호를 한번 더 확인하여 주십시요.");
-			logger.info("�α��� ���� :"+vo);
 			return "redirect:/account/login";
 		
 		} else if(login.getAdminCk() == 0) {
@@ -96,7 +98,6 @@ public class MemberController {
 		
 	}
 	
-	// �α׾ƿ�
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session,RedirectAttributes rttr) throws Exception {
 		
@@ -105,7 +106,6 @@ public class MemberController {
 		return "redirect:/account/login";
 	}
 	
-	// �н����� üũ
 	@ResponseBody
 	@RequestMapping(value = "/passChk" , method = RequestMethod.POST) 
 	public int passChk(memberVO vo) throws Exception {
@@ -113,7 +113,6 @@ public class MemberController {
 		return result;
 	}
 	
-	// ���̵� �ߺ� üũ
 	@ResponseBody
 	@RequestMapping(value = "/idChk" , method=RequestMethod.POST) 
 	public int idChk(memberVO vo) throws Exception {
@@ -121,7 +120,6 @@ public class MemberController {
 		return result;
 	}
 	
-	// ������ ���
 	@RequestMapping(value = "/profile" , method=RequestMethod.GET)
 	public String ProfileGET(HttpServletRequest request, Model model,HttpSession session,memberVO mVO) throws Exception {
 		
@@ -178,68 +176,42 @@ public class MemberController {
 		
 	}
 	
-	
-	// ȸ������
-	@RequestMapping(value = "/manage", method=RequestMethod.GET)
-	public String memberList(@ModelAttribute("mVO") memberVO mVO, HttpServletRequest request, Model model) throws Exception {
-
-		Map<String, ?>inputFlashMap = RequestContextUtils.getInputFlashMap(request);
-		
-		if(null != inputFlashMap) {
-			model.addAttribute("msg", (String)inputFlashMap.get("msg"));
-		}
+	@RequestMapping(value = "/manage", method=RequestMethod.GET) 
+	public String getManagePage(memberVO mVO, HttpServletRequest request, Model model) throws Exception {
 		
 		List<memberVO> memberList = memberService.memberManage(mVO);
-		
 		model.addAttribute("memberList", memberList);
 		
 		return "/account/manage";
 	}
-	@RequestMapping(value="/updateImg" ,method=RequestMethod.GET)
-	public void updateImgGET()
+	
+	//관리자지정
+	@RequestMapping(value="/selectManager", method=RequestMethod.POST)
+	public String selectManager(memberVO mVO, HttpServletRequest request, Model model,RedirectAttributes rttr) throws Exception 
 	{
-		
-	}
-	
-	
-	@RequestMapping(value="/updateImg" , method=RequestMethod.POST)
-	public String updateImg(RedirectAttributes rttr,MultipartHttpServletRequest mpRequest, HttpSession session, String me_id) throws Exception
-	{
-		String memberImg = fileUtils.updateImg(mpRequest);
-		
-		memberVO mvo = (memberVO) session.getAttribute("login");
-		
+		logger.debug("mVO : {} " , mVO);
 		try {
-			memberService.updateImg(memberImg,me_id);
-			mvo.setMe_image(memberImg);
-			session.setAttribute("login", mvo);
-			rttr.addFlashAttribute("msg", "이미지 변경을 완료하였습니다.");
+			memberService.selectManage(mVO);
 		} catch (Exception e) {
-			rttr.addFlashAttribute("msg", "오류가 발생하였습니다." + e);
-		}
-
-		
-		
-		
-		return "/home";
-	}
-	
-	@RequestMapping(value="/selectManage", method=RequestMethod.GET)
-	public void selectManagerGET() {
-		
-	}
-	
-	// 관리자 지정
-	@RequestMapping(value="/selectManage" , method=RequestMethod.POST)
-	public String selectManager(memberVO vo,RedirectAttributes rttr) throws Exception {
-		
-		try {
-			memberService.selectManage(vo);
-			rttr.addFlashAttribute("msg", "관리자 지정이 완료되었습니다.");
-		} catch (Exception e) {
-			rttr.addFlashAttribute("msg", "오류가 발생했습니다.");
 			e.printStackTrace();
 		}
+
+
+			
+		return "redirect:/account/manage";
+	}
+
+	//회원 승인 처리
+	@RequestMapping(value="/approvalChk", method=RequestMethod.POST)
+	public String approvalChk(memberVO mVO, HttpServletRequest request, Model model,RedirectAttributes rttr) throws Exception 
+	{
+		logger.debug("mVO : {} " , mVO);
+		try {
+			memberService.approvalChk(mVO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		return "redirect:/account/manage";
 	}
 	
@@ -256,15 +228,5 @@ public class MemberController {
 		return "/account/create";
 	}
 	
-	/*
-	 * @RequestMapping(value="/create",method=RequestMethod.POST) public String
-	 * AccountCreatePOST() {
-	 * 
-	 * try { memberService.insertAccount(vo); rttr.addFlashAttribute("msg",
-	 * "회원등록이 완료되었습니다."); } catch (Exception e) { rttr.addFlashAttribute("msg",
-	 * "오류가 발생했습니다."+e); }
-	 * 
-	 * return "redirect:/account/create"; }
-	 */
 
 }
