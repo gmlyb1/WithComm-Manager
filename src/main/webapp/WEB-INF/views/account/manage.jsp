@@ -36,10 +36,11 @@
 		});
 		
 		// 회원 승인 처리
-		$("#approveBtn").click(function() {
+		$(".approveBtn").click(function() {
 			var memberId = $(this).data("member-id");
 			var state = $(this).data("state");
-
+			
+			
 			if (confirm("회원가입된 회원을 승인 하시겠습니까?")) {
 				$.ajax({
 					url : "/account/approvalChk",
@@ -105,11 +106,13 @@
 								<td class="text-center"><fmt:formatDate
 										value="${member.me_regDate}" pattern="yyyy-MM-dd" /></td>
 								<td class="text-center">
-								<c:if test="${member.adminCk != '1' }">
+									<c:if test="${member.state == '승인대기중' }">
+										<button type="button" class="btn btn-success approveBtn" data-member-id="${member.me_id}" data-state="${member.state}">가입승인</button>
+									</c:if>
+									<c:if test="${member.adminCk != '1' }">
 										<button type="button" class="btn btn-secondary admin-button" data-member-id="${member.me_id}" data-admin-ck="${member.adminCk}">관리자 지정</button>
-									</c:if> <c:if test="${member.state == '대기중' }">
-										<button type="button" class="btn btn-success" id="approveBtn" data-member-id="${member.me_id}" data-state="${member.state}">승인</button>
-									</c:if></td>
+									</c:if> 
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
