@@ -83,8 +83,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void approvalChk(memberVO mvo) throws Exception {
-		memberDAO.approvalChk(mvo);
+	public void stateChk(memberVO mvo) throws Exception {
+		memberDAO.stateChk(mvo);
 	}
 
 	

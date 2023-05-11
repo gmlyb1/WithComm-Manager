@@ -201,13 +201,13 @@ public class MemberController {
 		return "redirect:/account/manage";
 	}
 
-	//회원 승인 처리
-	@RequestMapping(value="/approvalChk", method=RequestMethod.POST)
-	public String approvalChk(memberVO mVO, HttpServletRequest request, Model model,RedirectAttributes rttr) throws Exception 
+	//회원 상태 처리
+	@RequestMapping(value="/state", method=RequestMethod.POST)
+	public String stateChk(memberVO mVO, HttpServletRequest request, Model model,RedirectAttributes rttr) throws Exception 
 	{
 		logger.debug("mVO : {} " , mVO);
 		try {
-			memberService.approvalChk(mVO);
+			memberService.stateChk(mVO);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

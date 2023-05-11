@@ -72,8 +72,8 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public void approvalChk(memberVO mvo) throws Exception {
-		sqlSession.update("namespace.approvalChk", mvo);
+	public void stateChk(memberVO mvo) throws Exception {
+		sqlSession.update("namespace.stateChk", mvo);
 	}
 
 	@Override

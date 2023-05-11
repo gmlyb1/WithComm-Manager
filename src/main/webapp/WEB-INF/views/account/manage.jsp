@@ -12,6 +12,7 @@
 		$(".admin-button").click(function() {
 			var memberId = $(this).data("member-id");
 			var adminCk = $(this).data("admin-ck");
+			var state = $(this).data("state");
 
 			if (confirm("관리자로 지정하시겠습니까?")) {
 				$.ajax({
@@ -19,7 +20,8 @@
 					type : "POST",
 					data : {
 						me_id : memberId,
-						adminCk : 1
+						adminCk : 1,
+						state : "관리자"
 					},
 					success : function(data) {
 						// 요청이 성공적으로 처리되면, 처리할 코드 작성
@@ -51,6 +53,33 @@
 					},
 					success : function(data) {
 						alert("승인이 성공적으로 처리되었습니다.");
+						console.log(data);
+						location.reload();
+					},
+					error : function(error) {
+						console.log(error);
+						alert("요청 처리 중 오류가 발생하였습니다."+error);
+					}
+				});
+			}
+		});
+
+		// 회원 활동 중지 처리
+		$(".notApproveBtn").click(function() {
+			var memberId = $(this).data("member-id");
+			var state = $(this).data("state");
+			
+			
+			if (confirm("회원의 활동을 중지 하시겠습니까?")) {
+				$.ajax({
+					url : "/account/state",
+					type : "POST",
+					data : {
+						me_id : memberId,
+						state : "활동중지"
+					},
+					success : function(data) {
+						alert("해당 회원은 활동 중지 처리되었습니다.");
 						console.log(data);
 						location.reload();
 					},
@@ -110,8 +139,11 @@
 										<button type="button" class="btn btn-success approveBtn" data-member-id="${member.me_id}" data-state="${member.state}">가입승인</button>
 									</c:if>
 									<c:if test="${member.adminCk != '1' }">
-										<button type="button" class="btn btn-secondary admin-button" data-member-id="${member.me_id}" data-admin-ck="${member.adminCk}">관리자 지정</button>
+										<button type="button" class="btn btn-secondary admin-button" data-member-id="${member.me_id}" data-admin-ck="${member.adminCk}" data-state="${member.state}">관리자 지정</button>
 									</c:if> 
+									<c:if test="${member.state == '일반회원' || (member.adminCk != '1' && member.state != '활동중지')}">
+									<button type="button" class="btn btn-danger notApproveBtn" data-member-id="${member.me_id}" data-admin-ck="${member.adminCk}">활동중지</button>
+									</c:if>
 								</td>
 							</tr>
 						</c:forEach>

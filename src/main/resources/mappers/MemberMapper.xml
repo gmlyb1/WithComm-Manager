@@ -94,10 +94,10 @@
 	
 	<!-- 관리자 지정 -->
 	<update id="selectManage" parameterType="memberVO">
-	update tbl_member set adminCk = #{adminCk} where me_id = #{me_id}
+	update tbl_member set adminCk = #{adminCk},state = #{state} where me_id = #{me_id}
 	</update>
 	
-	<update id="approvalChk" parameterType="memberVO">
+	<update id="stateChk" parameterType="memberVO">
 	update tbl_member set state = #{state} where me_id = #{me_id}
 	</update>
 	

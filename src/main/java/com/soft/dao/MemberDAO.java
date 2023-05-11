@@ -29,7 +29,7 @@ public interface MemberDAO {
 	// 관리자 지정
 	public void selectManage(memberVO mvo) throws Exception;
 	
-	public void approvalChk(memberVO mvo) throws Exception;
+	public void stateChk(memberVO mvo) throws Exception;
 	
 	// 관리자 회원등록
 	public void insertAccount(memberVO vo) throws Exception;
