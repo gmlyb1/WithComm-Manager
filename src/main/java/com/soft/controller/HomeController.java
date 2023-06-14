@@ -75,8 +75,11 @@ public class HomeController {
 		boardVO boardCnts = boardService.boardCnt(vo);
 		model.addAttribute("boardCnt", boardCnts);
 		
-//		model.addAttribute("boardCnt", boardCnt);
-//		System.out.println("오늘 게시글 수 :" + "boardCnt");
+		List<memberVO> HomeMemberList = memberService.HomeMemberList(memberVO);
+		model.addAttribute("HomeMemberList", HomeMemberList);
+		
+		List<memberVO> HomeGmList = memberService.HomeGmList(memberVO);
+		model.addAttribute("HomeGmList", HomeGmList);
 		
 		
 		Map<String, ?> inputFlashMap = RequestContextUtils.getInputFlashMap(request);

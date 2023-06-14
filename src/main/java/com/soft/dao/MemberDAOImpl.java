@@ -85,6 +85,16 @@ public class MemberDAOImpl implements MemberDAO {
 	public int memberChoice(memberVO vo) throws Exception {
 		return sqlSession.update("namespace.memberChoice",vo);
 	}
+
+	@Override
+	public List<memberVO> HomeMemberList(memberVO vo) throws Exception {
+		return sqlSession.selectList("namespace.HomeMemberList",vo);
+	}
+
+	@Override
+	public List<memberVO> HomeGmList(memberVO vo) throws Exception {
+		return sqlSession.selectList("namespace.HomeGmList",vo);
+	}
 	
 
 

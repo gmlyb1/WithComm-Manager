@@ -122,6 +122,23 @@
 		update tbl_member set state = '대기중' where me_id = #{me_id} 
 	</update>
 	
+	<select id="HomeMemberList" parameterType="memberVO" resultType="memberVO">
+		SELECT 	
+			*
+		FROM TBL_MEMBER
+		ORDER BY ME_REGDATE DESC
+		LIMIT 7
+	</select>
+	
+	<select id="HomeGmList" parameterType="memberVO" resultType="memberVO">
+		SELECT 	
+			*
+		FROM TBL_MEMBER
+		WHERE STATE = '관리자'
+		ORDER BY ME_REGDATE DESC
+		LIMIT 7
+	</select>
+	
 	
 	
 </mapper>

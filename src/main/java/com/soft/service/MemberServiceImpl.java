@@ -87,6 +87,16 @@ public class MemberServiceImpl implements MemberService {
 		memberDAO.stateChk(mvo);
 	}
 
+	@Override
+	public List<memberVO> HomeMemberList(memberVO vo) throws Exception {
+		return memberDAO.HomeMemberList(vo);
+	}
+
+	@Override
+	public List<memberVO> HomeGmList(memberVO vo) throws Exception {
+		return memberDAO.HomeGmList(vo);
+	}
+
 	
 
 	

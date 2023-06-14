@@ -35,4 +35,9 @@ public interface MemberDAO {
 	public void insertAccount(memberVO vo) throws Exception;
 	
 	public int memberChoice(memberVO vo) throws Exception;
+	
+	// 대쉬보드 멤버리스트,운영자리스트
+	public List<memberVO> HomeMemberList(memberVO vo) throws Exception;
+	
+	public List<memberVO> HomeGmList(memberVO vo) throws Exception;
 }
