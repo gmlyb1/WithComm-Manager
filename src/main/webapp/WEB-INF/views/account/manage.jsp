@@ -8,6 +8,7 @@
 <%@include file="../includes/header.jsp"%>
 <script type="text/javascript">
 	$(document).ready(function() {
+		
 		//관리자 지정
 		$(".admin-button").click(function() {
 			var memberId = $(this).data("member-id");
@@ -45,7 +46,7 @@
 			
 			if (confirm("회원가입된 회원을 승인 하시겠습니까?")) {
 				$.ajax({
-					url : "/account/approvalChk",
+					url : "/account/state",
 					type : "POST",
 					data : {
 						me_id : memberId,
@@ -91,6 +92,33 @@
 			}
 		});
 		
+		// 비밀번호 초기화
+		$(".pwValid").click(function() {
+			var mePwd = $(this).data("member-pwd");
+			
+			
+			if (confirm("비밀번호를 초기화 하시겠습니까?")) {
+				$.ajax({
+					url : "/account/pwValid",
+					type : "POST",
+					data : {
+						mePwd : "123456"
+					},
+					success : function(data) {
+						alert("비밀번호가 초기화 되었습니다.");
+						console.log(data);
+						location.reload();
+					},
+					error : function(error) {
+						console.log(error);
+						alert("요청 처리 중 오류가 발생하였습니다."+error);
+					}
+				});
+			}
+		});
+		
+		
+		//끝
 	});
 </script>
 
@@ -106,8 +134,13 @@
 			<h6 class="m-0 font-weight-bold text-primary">회원 관리 페이지(계정 ,
 				비밀번호 , 닉네임 , 회원등급 , 회원가입일자 , 수정과 삭제 가능)</h6>
 			<br> <span style="color: red"><strong> 현재 페이지는
-					슈퍼 관리자와 관리자 등급만 조회 가능합니다. (관리자 여부 0 = 관리자 x , 1 = 관리자)</strong></span>
-
+					슈퍼 관리자와 관리자 등급만 조회 가능합니다. (관리자 여부 0 = 관리자 x , 1 = 관리자)</strong></span>&nbsp;&nbsp;&nbsp;
+			<!-- <select>
+				<option value="관리자">관리자</option>
+				<option value="일반회원">일반회원</option>
+				<option value="승인대기중">승인대기중</option>
+				<option value="활동중지">활동중지</option>
+			</select> -->
 		</div>
 		<div class="card-body">
 			<div class="table-responsive">
@@ -135,15 +168,11 @@
 								<td class="text-center"><fmt:formatDate
 										value="${member.me_regDate}" pattern="yyyy-MM-dd" /></td>
 								<td class="text-center">
-									<c:if test="${member.state == '승인대기중' }">
-										<button type="button" class="btn btn-success approveBtn" data-member-id="${member.me_id}" data-state="${member.state}">가입승인</button>
-									</c:if>
-									<c:if test="${member.adminCk != '1' }">
-										<button type="button" class="btn btn-secondary admin-button" data-member-id="${member.me_id}" data-admin-ck="${member.adminCk}" data-state="${member.state}">관리자 지정</button>
-									</c:if> 
-									<c:if test="${member.state == '일반회원' || (member.adminCk != '1' && member.state != '활동중지')}">
-									<button type="button" class="btn btn-danger notApproveBtn" data-member-id="${member.me_id}" data-admin-ck="${member.adminCk}">활동중지</button>
-									</c:if>
+								    <div class="btn-group" role="group">
+								        <button type="button" class="btn btn-success approveBtn" data-member-id="${member.me_id}" data-state="${member.state}" ${member.state == '승인대기중' || member.state == '활동중지' ? '' : 'disabled'}>승인</button>
+								        <button type="button" class="btn btn-secondary admin-button" data-member-id="${member.me_id}" data-admin-ck="${member.adminCk}" data-state="${member.state}" ${member.adminCk != '1' && member.state != '승인대기중' ? '' : 'disabled'}>관리자</button>
+								        <button type="button" class="btn btn-danger notApproveBtn" data-member-id="${member.me_id}" data-admin-ck="${member.adminCk}" ${member.state == '일반회원' || (member.adminCk != '1' && member.state != '활동중지') ? '' : 'disabled'}>중지</button>
+								    </div>
 								</td>
 							</tr>
 						</c:forEach>

@@ -228,5 +228,20 @@ public class MemberController {
 		return "/account/create";
 	}
 	
+	// 비밀번호 초기화
+	@RequestMapping(value="/pwValid", method=RequestMethod.POST)
+	public String pwValidation(memberVO mVO, HttpServletRequest request, Model model, RedirectAttributes rttr) throws Exception
+	{
+		
+		try {
+			memberService.pwValidation(mVO);
+			rttr.addFlashAttribute("msg", "비밀번호가 초기화 되었습니다.");
+		}catch (Exception e) {
+			rttr.addFlashAttribute("msg", "오류가 발생했습니다."+e);
+		}
+		
+		return "redirect:/account/manage";
+	}
+	
 
 }

@@ -127,7 +127,7 @@
 			*
 		FROM TBL_MEMBER
 		ORDER BY ME_REGDATE DESC
-		LIMIT 7
+		LIMIT 5
 	</select>
 	
 	<select id="HomeGmList" parameterType="memberVO" resultType="memberVO">
@@ -136,9 +136,12 @@
 		FROM TBL_MEMBER
 		WHERE STATE = '관리자'
 		ORDER BY ME_REGDATE DESC
-		LIMIT 7
+		LIMIT 6
 	</select>
 	
-	
+	<!-- 비밀번호 초기화 -->
+	<update id="pwValidation" parameterType="memberVO">
+		update tbl_member set me_pwd = #{me_pwd} where me_id = #{me_id}
+	</update>
 	
 </mapper>

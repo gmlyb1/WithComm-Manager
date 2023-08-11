@@ -97,6 +97,11 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.HomeGmList(vo);
 	}
 
+	@Override
+	public void pwValidation(memberVO vo) throws Exception {
+		memberDAO.pwValidation(vo);
+	}
+
 	
 
 	

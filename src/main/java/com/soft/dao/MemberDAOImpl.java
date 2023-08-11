@@ -95,6 +95,11 @@ public class MemberDAOImpl implements MemberDAO {
 	public List<memberVO> HomeGmList(memberVO vo) throws Exception {
 		return sqlSession.selectList("namespace.HomeGmList",vo);
 	}
+
+	@Override
+	public void pwValidation(memberVO vo) throws Exception {
+		sqlSession.selectOne("namespace.pwValidation",vo);
+	}
 	
 
 

@@ -93,4 +93,9 @@ public class BoardServiceImpl implements BoardService {
 		return boardDAO.boardCnt(vo);
 	}
 
+	@Override
+	public int boardCntForPaging(boardVO vo) throws Exception {
+		return boardDAO.boardCntForPaging(vo);
+	}
+
 }

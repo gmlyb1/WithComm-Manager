@@ -95,6 +95,11 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.selectOne("namespace.boardCnt",vo);
 	}
 
+	@Override
+	public int boardCntForPaging(boardVO vo) throws Exception {
+		return sqlSession.selectOne("namespace.boardCntForPaging",vo);
+	}
+
 
 
 

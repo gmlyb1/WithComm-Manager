@@ -48,7 +48,6 @@
 	}
 </script>
 <!-- Custom fonts for this template-->
-<form>
 	<div class="container">
 		<div class="card o-hidden border-0 shadow-lg my-5">
 			<div class="card-body p-0">
@@ -60,55 +59,45 @@
 									<h1 class="h4 text-gray-900 mb-4">프로필</h1>
 								</div>
 							</div>
-								<div class="form-group row">
-									<div class="col-sm-12 mb-3 mb-sm-0">
-										계정아이디:<input type="text"
-											class="form-control form-control-user" id="me_email"
-											name="me_email" style="text-align: center;"
-											value="${member.me_email}" placeholder="아이디" disabled>
-									</div>
+								<div class="form-group">
+								    <div class="col-sm-12 mb-3 mb-sm-0">
+								        <label for="me_email">계정 아이디:</label>
+								        <input type="text" class="form-control form-control-user" id="me_email" name="me_email" style="text-align: center;" value="${member.me_email}" placeholder="아이디" disabled>
+								    </div>
+								</div>
+								
+								<div class="form-group">
+								    <div class="col-sm-12 mb-3 mb-sm-0">
+								        <label for="me_name">닉네임:</label>
+								        <input type="text" class="form-control form-control-user" id="me_name" name="me_name" style="text-align: center;" value="${member.me_name}" placeholder="닉네임" disabled>
+								    </div>
+								</div>
+								
+								<div class="form-group">
+								    <div class="col-sm-12 mb-3 mb-sm-0">
+								        <label for="me_grade">회원등급:</label>
+								        <input type="text" class="form-control form-control-user" id="me_grade" name="me_grade" style="text-align: center;" value="${member.state}" disabled>
+								    </div>
+								</div>
+								
+								<div class="form-group">
+								    <div class="col-sm-12 mb-3 mb-sm-0">
+								        <label for="me_pwd">비밀번호:</label>
+								        <input type="password" class="form-control form-control-user" id="me_pwd" name="me_pwd" style="text-align: center;" placeholder="비밀번호">
+								    </div>
+								</div>
+								
+								<div class="form-group">
+								    <div class="col-sm-12 mb-3 mb-sm-0">
+								        <label for="me_pwd2">비밀번호 확인:</label>
+								        <input type="password" class="form-control form-control-user" id="me_pwd2" name="me_pwd2" style="text-align: center;" placeholder="비밀번호 확인">
+								    </div>
 								</div>
 
-								<div class="form-group row">
-									<div class="col-sm-12 mb-3 mb-sm-0">
-										닉네임:<input type="text" class="form-control form-control-user"
-											id="me_name" name="me_name" style="text-align: center;"
-											value="${member.me_name}" placeholder="닉네임" disabled>
-									</div>
-								</div>
-								<div class="form-group row">
-									<div class="col-sm-12 mb-3 mb-sm-0">
-										회원등급: <input type="text"
-											class="form-control form-control-user" id="me_grade"
-											name="me_grade" style="text-align: center;"
-											value="${member.me_grade}" placeholder="회원등급" disabled>
-									</div>
-								</div>
-								<div class="form-group row">
-									<div class="col-sm-12 mb-3 mb-sm-0">
-										<input type="password" class="form-control form-control-user"
-											id="me_pwd" name="me_pwd" style="text-align: center;"
-											placeholder="비밀번호" disabled>
-									</div>
-								</div>
-								<div class="form-group row">
-									<div class="col-sm-12 mb-3 mb-sm-0">
-										<input type="password" class="form-control form-control-user"
-											id="me_pwd2" name="me_pwd2" style="text-align: center;"
-											placeholder="비밀번호 확인" disabled>
-									</div>
-								</div>
-								<a href="/account/update" class="btn btn-primary">
-									수정하기</a>
-								<br>
-								</form>
-								<!-- 회원 탈퇴  -->
-								<form action="/account/delete" method="post">
+								<a href="/account/update" class="btn btn-primary"> 수정하기</a>
 								<button type="submit" class="btn btn-danger">회원탈퇴</button>
-								</form>	
 								<!-- 회원 탈퇴 -->
-								<br> <a href="/home" class="btn btn-warning"> 메인페이지로 이동
-								</a>
+								 <a href="/home" class="btn btn-warning"> 메인으로 </a>
 							
 							<hr>
 						</div>

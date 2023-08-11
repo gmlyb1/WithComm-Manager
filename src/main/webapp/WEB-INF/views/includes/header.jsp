@@ -23,19 +23,13 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 			alert("로그아웃을 완료하였습니다.");
 			location.href = "/account/logout"
 		})
-	})
-</script> 
-<script type="text/javascript">
-	$(document).ready(function() {
+		
 		var msg = "${msg}";
 		if (msg != "") {
 			alert(msg);
 		}
 	});
-</script>
-
-
-
+</script> 
 <meta charset="UTF-8"> <!-- 추가할부분 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 추가할부분 -->
 <meta http-equiv="X-UA-Compatible" content="ie=edge"> <!-- 추가할부분 -->
@@ -71,68 +65,54 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 			id="accordionSidebar">
 
 			<!-- Sidebar - Brand -->
-			<a
-				class="sidebar-brand d-flex align-items-center justify-content-center"
-				href="../home">
+			<a class="sidebar-brand d-flex align-items-center justify-content-center" href="../home">
 				<div class="sidebar-brand-icon rotate-n-15">
 					<i class="fas fa-laugh-wink"></i>
 				</div>
 				<div class="sidebar-brand-text mx-3">WithComm</div>
 			</a>
 
-			<!-- Divider -->
-			<hr class="sidebar-divider my-0">
-
-			<!-- Nav Item - Dashboard -->
-			<li class="nav-item"><a class="nav-link" href="/account/manage"> <i
-					class="fas fa-fw fa-tachometer-alt"></i> <span>회원관리</span>
-			</a></li>
-
-			<!-- Divider -->
-			<hr class="sidebar-divider">
 
 			<!-- Heading -->
-			<div class="sidebar-heading">Interface</div>
+		<div class="sidebar-heading">Interface</div>
 			<!-- Nav Item - Tables -->
 			<c:if test="${member != null}">
 				<li class="nav-item active"><a class="nav-link"
-					href="/account/manage"><i class="bi bi-forward"></i>
+					href="/account/manage"><i class="fa-thin fa-user"></i>
 					<span>회원 관리</span></a></li>
 				<li class="nav-item active"><a class="nav-link"
-					href="/notice/list"><i class="bi bi-forward"></i>
+					href="/notice/list"><i class="fa-thin fa-check"></i>
 					<span>공지사항 관리</span></a></li>
 				<li class="nav-item active"><a class="nav-link"
-					href="/board/list"><i class="bi bi-forward"></i>
+					href="/board/list"><i class="fa-thin fa-mug-hot"></i>
 					<span>게시판 관리</span></a></li>
 				<li class="nav-item active"><a class="nav-link"
-					href="/inquiry/list"><i class="bi bi-forward"></i>
+					href="/inquiry/list"><i class="fa-thin fa-circle-exclamation"></i>
 					<span>1:1 문의 관리</span></a></li>
-			
-
 			</c:if>
 			
 			<!-- Nav Item - Pages Collapse Menu -->
 			<!-- <li class="nav-item"><a class="nav-link collapsed" href="#"
 					data-toggle="collapse" data-target="#collapseTwo"
 					aria-expanded="true" aria-controls="collapseTwo"> <i
-						class="fas fa-fw fa-cog"></i> <span>Components</span> -->
-			</a>
-			<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
-				data-parent="#accordionSidebar">
+						class="fas fa-fw fa-cog"></i> <span>Components</span> 
+			</a>-->
+			
+			<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
 					<h6 class="collapse-header">Custom Components:</h6>
 					<a class="collapse-item" href="buttons.html">Buttons</a> <a
 						class="collapse-item" href="cards.html">Cards</a>
 				</div>
 			</div>
-			</li>
 
 			<!-- Nav Item - Utilities Collapse Menu -->
 			<!-- <li class="nav-item"><a class="nav-link collapsed" href="#"
 					data-toggle="collapse" data-target="#collapseUtilities"
 					aria-expanded="true" aria-controls="collapseUtilities"> <i
-						class="fas fa-fw fa-wrench"></i> <span>Utilities</span> -->
-			</a>
+						class="fas fa-fw fa-wrench"></i> <span>Utilities</span> 
+			</a>-->
+			
 			<div id="collapseUtilities" class="collapse"
 				aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
@@ -143,7 +123,6 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 					<a class="collapse-item" href="utilities-other.html">Other</a>
 				</div>
 			</div>
-			</li>
 
 			<!-- Divider -->
 			<hr class="sidebar-divider">
@@ -155,10 +134,10 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 			<!-- <li class="nav-item"><a class="nav-link collapsed" href="#"
 					data-toggle="collapse" data-target="#collapsePages"
 					aria-expanded="true" aria-controls="collapsePages"> <i
-						class="fas fa-fw fa-folder"></i> <span>Pages</span> -->
-			</a>
-			<div id="collapsePages" class="collapse"
-				aria-labelledby="headingPages" data-parent="#accordionSidebar">
+						class="fas fa-fw fa-folder"></i> <span>Pages</span> 
+			</a>-->
+			
+			<div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
 					<h6 class="collapse-header">Login Screens:</h6>
 					<a class="collapse-item" href="/account/login">Login</a> <a
@@ -171,7 +150,6 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 						class="collapse-item" href="blank.html">Blank Page</a>
 				</div>
 			</div>
-			</li>
 
 			<!-- Nav Item - Charts -->
 			<!-- <li class="nav-item"><a class="nav-link" href="charts.html">
@@ -224,10 +202,10 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 					</form>
 
 					<!-- Topbar Navbar -->
-					<form action="/account/login" method="post">
-						<ul class="navbar-nav ml-auto">
+				<form action="/account/login" method="post">
+					<ul class="navbar-nav ml-auto">
 							<!-- Nav Item - Search Dropdown (Visible Only XS) -->
-							<li class="nav-item dropdown no-arrow d-sm-none"><a
+						<li class="nav-item dropdown no-arrow d-sm-none"><a
 								class="nav-link dropdown-toggle" href="#" id="searchDropdown"
 								role="button" data-toggle="dropdown" aria-haspopup="true"
 								aria-expanded="false"> <i class="fas fa-search fa-fw"></i>
@@ -247,25 +225,26 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 												</button>
 											</div>
 										</div>
-								</div></li>
+								</div>
+							</li>
+							
+							
 							<c:if test="${member == null}">
 								<a href="/account/login" class="btn btn-primary">로그인</a>
 							</c:if>
+							
 							<c:if test="${member != null }">
-								<a
-									href="/board/mypageView?select=log&memberId=${list.memberVO.memberId}"
-									style="color: black"> <img
-									src="/image/${list.memberVO.me_image}"
-									style="max-width: 25px; height: 25px;"> <c:out
-										value="${list.memberVO.me_name}" />
-								</a>
-								<li><a class="nav-item dropdown no-arrow" href="#"
-									id="userDropdown" role="button" data-toggle="dropdown"
-									aria-haspopup="true" aria-expanded="false"> <span
-										class="mr-2 d-none d-lg-inline text-gray-600 small"><strong>${member.me_name}</strong></span>
-										<!-- <img class="img-profile rounded-circle"
-										src="../img/undraw_profile.svg"> -->
-								</a> <!-- Dropdown - User Information -->
+							<a href="#" style="color: black; font-size: 16px; text-decoration: none; font-weight: bold;">
+							    <c:out value="${list.memberVO.me_name}" />
+							</a>
+								<li>
+									<a class="nav-item dropdown no-arrow" href="#"
+										id="userDropdown" role="button" data-toggle="dropdown"
+										aria-haspopup="true" aria-expanded="false"> <span
+											class="mr-2 d-none d-lg-inline text-gray-600 small"><strong>${member.me_name}</strong></span>
+											<img class="img-profile rounded-circle" src="../img/undraw_profile.svg"> 
+									</a>
+								 <!-- Dropdown - User Information -->
 									<div
 										class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
 										aria-labelledby="userDropdown">
@@ -279,11 +258,6 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 											<a class="dropdown-item" href="/account/manage"> <i
 												class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i> 회원관리
 											</a>
-											
-											<!-- <a class="dropdown-item" href="/admin/index"> <i
-											class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-											관리자 화면
-										</a>  -->
 										</c:if>
 										<a class="dropdown-item" href="#"> <i
 											class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i> 설정
@@ -291,10 +265,9 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 											class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i> 활동 로그
 										</a>
 										<div class="dropdown-divider"></div>
-									</div></li>
+									</div>
+								 </li>
 								<button id="logoutBtn" type="button" class="btn btn-primary">로그아웃</button>
-								<!-- <button type="button" class="btn btn-danger"
-									onclick="location.href='/account/delete';">회원탈퇴</button> -->
 							</c:if>
 							<%-- <c:if test="${member.me_email == 'admin@admin.co.kr' }">
 								<a href="/account/register" class="btn btn-success">회원가입</a>
@@ -333,7 +306,7 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
                         </li>
                         
                        </c:if> --%>
+                      </ul>
 					</form>
-					</ul>
 				</nav>
 				<!-- End of Topbar -->

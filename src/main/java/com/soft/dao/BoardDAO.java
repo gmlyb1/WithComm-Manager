@@ -35,4 +35,6 @@ public interface BoardDAO {
 	public void replyWrite(replyVO vo) throws Exception;
 	
 	public boardVO boardCnt(boardVO vo) throws Exception;
+	
+	public int boardCntForPaging(boardVO vo) throws Exception;
 }

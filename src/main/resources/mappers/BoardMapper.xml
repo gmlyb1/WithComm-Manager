@@ -164,5 +164,9 @@
 	FROM tbl_board
 	]]>
 	</select>
+	
+	<select id="boardCntForPaging" parameterType="int" resultType="boardVO">
+		select count(*) from tbl_board
+	</select>
 
 </mapper>

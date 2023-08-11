@@ -40,4 +40,7 @@ public interface MemberDAO {
 	public List<memberVO> HomeMemberList(memberVO vo) throws Exception;
 	
 	public List<memberVO> HomeGmList(memberVO vo) throws Exception;
+	
+	// 비밀번호 초기화
+	public void pwValidation(memberVO vo) throws Exception;
 }

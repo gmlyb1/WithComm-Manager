@@ -26,6 +26,7 @@ public class boardVO{
 	private int dayCnt;
 	private int monthCnt;
 	private int yearCnt;
+	private int allCnt;
 	
 	
 }

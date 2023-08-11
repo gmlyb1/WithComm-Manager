@@ -215,23 +215,26 @@
 				<!-- Card Body -->
 
 				<div class="card-body">
-
-					<div class="chart-pie pt-4 pb-2">
-						<c:forEach items="${HomeMemberList}" var="HomeMemberList">
-							<c:out value="${HomeMemberList.me_email}" />&nbsp;&nbsp;&nbsp;<c:out
-								value="${HomeMemberList.me_name}" />
-							<br>
-						</c:forEach>
-					</div>
-
-					<div class="mt-4 text-center small">
-						<span class="mr-2"> <i class="fas fa-circle text-primary"></i>
-
-						</span> <span class="mr-2"> <i class="fas fa-circle text-success"></i>
-
-						</span> <span class="mr-2"> <i class="fas fa-circle text-info"></i>
-
-						</span>
+					<div class="chart-area">
+						<%-- <canvas id="myAreaChart"></canvas> --%>
+						<c:if test="${member != null}">
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th class="text-center">아이디</th>
+										<th class="text-center">닉네임</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${HomeMemberList}" var="HomeMemberList">
+										<tr>
+											<td class="text-center"><c:out value="${HomeMemberList.me_email}" /></td>
+											<td class="text-center"><c:out value="${HomeMemberList.me_name}" /></td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</c:if>
 					</div>
 				</div>
 
@@ -311,7 +314,7 @@
 				<!-- Card Header - Dropdown -->
 				<div
 					class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-					<h6 class="m-0 font-weight-bold text-primary">멤버 리스트</h6>
+					<h6 class="m-0 font-weight-bold text-primary">관리자 리스트</h6>
 					<div class="dropdown no-arrow">
 						<a class="dropdown-toggle" href="#" role="button"
 							id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
@@ -332,25 +335,29 @@
 				<!-- Card Body -->
 
 				<div class="card-body">
-
-					<div class="chart-pie pt-4 pb-2">
-						<c:forEach items="${HomeGmList}" var="HomeGmList">
-							<c:out value="${HomeGmList.me_email}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<c:out
-								value="${HomeGmList.me_name}" />
-							<br>
-						</c:forEach>
-					</div>
-
-					<div class="mt-4 text-center small">
-						<span class="mr-2"> <i class="fas fa-circle text-primary"></i>
-
-						</span> <span class="mr-2"> <i class="fas fa-circle text-success"></i>
-
-						</span> <span class="mr-2"> <i class="fas fa-circle text-info"></i>
-
-						</span>
+					<div class="chart-area">
+						<%-- <canvas id="myAreaChart"></canvas> --%>
+						<c:if test="${member != null}">
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th class="text-center">아이디</th>
+										<th class="text-center">닉네임</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${HomeGmList}" var="HomeGmList">
+										<tr>
+											<td class="text-center"><c:out value="${HomeGmList.me_email}" /></td>
+											<td class="text-center"><c:out value="${HomeGmList.me_name}" /></td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</c:if>
 					</div>
 				</div>
+
 
 			</div>
 		</div>

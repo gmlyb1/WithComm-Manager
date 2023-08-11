@@ -24,38 +24,6 @@
 		}
 	}
 </script>
-<script type="text/javascript">
-	function fn_addFile() {
-		var fileIndex = 1;
-		$("#fileAdd_btn")
-				.on(
-						"click",
-						function() {
-							$("#fileIndex")
-									.append(
-											"<div><input type='file' style='float:left;' name='file_"
-													+ (fileIndex++)
-													+ "'>"
-													+ "</button>"
-													+ "<button type='button' style='float:right;' id='fileDelBtn'>"
-													+ "삭제" + "</button></div>");
-						});
-		$(document).on("click", "#fileDelBtn", function() {
-			$(this).parent().remove();
-
-		});
-	}
-	var fileNoArry = new Array();
-	var fileNameArry = new Array();
-	function fn_del(value, name) {
-
-		fileNoArry.push(value);
-		fileNameArry.push(name);
-		$("#fileNoDel").attr("value", fileNoArry);
-		$("#fileNameDel").attr("value", fileNameArry);
-	}
-</script>
-
 
 <%@include file="../includes/header.jsp"%>
 
