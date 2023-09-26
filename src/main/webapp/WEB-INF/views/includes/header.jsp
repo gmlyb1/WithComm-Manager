@@ -92,11 +92,6 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 			</c:if>
 			
 			<!-- Nav Item - Pages Collapse Menu -->
-			<!-- <li class="nav-item"><a class="nav-link collapsed" href="#"
-					data-toggle="collapse" data-target="#collapseTwo"
-					aria-expanded="true" aria-controls="collapseTwo"> <i
-						class="fas fa-fw fa-cog"></i> <span>Components</span> 
-			</a>-->
 			
 			<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
@@ -107,11 +102,6 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 			</div>
 
 			<!-- Nav Item - Utilities Collapse Menu -->
-			<!-- <li class="nav-item"><a class="nav-link collapsed" href="#"
-					data-toggle="collapse" data-target="#collapseUtilities"
-					aria-expanded="true" aria-controls="collapseUtilities"> <i
-						class="fas fa-fw fa-wrench"></i> <span>Utilities</span> 
-			</a>-->
 			
 			<div id="collapseUtilities" class="collapse"
 				aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
@@ -131,11 +121,6 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 			<div class="sidebar-heading">Addons</div>
 
 			<!-- Nav Item - Pages Collapse Menu -->
-			<!-- <li class="nav-item"><a class="nav-link collapsed" href="#"
-					data-toggle="collapse" data-target="#collapsePages"
-					aria-expanded="true" aria-controls="collapsePages"> <i
-						class="fas fa-fw fa-folder"></i> <span>Pages</span> 
-			</a>-->
 			
 			<div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
@@ -152,9 +137,6 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 			</div>
 
 			<!-- Nav Item - Charts -->
-			<!-- <li class="nav-item"><a class="nav-link" href="charts.html">
-						<i class="fas fa-fw fa-chart-area"></i> <span>Charts</span>
-				</a></li> -->
 
 			<!-- Nav Item - Tables -->
 			<!-- Divider -->
@@ -238,11 +220,8 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 							    <c:out value="${list.memberVO.me_name}" />
 							</a>
 								<li>
-									<a class="nav-item dropdown no-arrow" href="#"
-										id="userDropdown" role="button" data-toggle="dropdown"
-										aria-haspopup="true" aria-expanded="false"> <span
-											class="mr-2 d-none d-lg-inline text-gray-600 small"><strong>${member.me_name}</strong></span>
-											<img class="img-profile rounded-circle" src="../img/undraw_profile.svg"> 
+									<a class="nav-item dropdown no-arrow" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+										<span class="nav-link" style="color: black;"><strong>${member.me_name}</strong>님, 환영합니다!</span>
 									</a>
 								 <!-- Dropdown - User Information -->
 									<div
@@ -267,45 +246,10 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 										<div class="dropdown-divider"></div>
 									</div>
 								 </li>
-								<button id="logoutBtn" type="button" class="btn btn-primary">로그아웃</button>
+						   <div style="display: flex; align-items: center;">
+								<button id="logoutBtn" type="button" class="btn btn-primary btn-sm">로그아웃</button>
+							</div>
 							</c:if>
-							<%-- <c:if test="${member.me_email == 'admin@admin.co.kr' }">
-								<a href="/account/register" class="btn btn-success">회원가입</a>
-								<br>
-							</c:if> --%>
-							<!-- Nav Item - User Information -->
-							<%-- <c:if test="${member != null }">
-						<li>
-                            <a class="nav-item dropdown no-arrow" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">${member.me_name}</span>
-                                <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
-                            </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
-                                <div class="dropdown-divider"></div>
-                               <!--  <Button id="logoutBtn" class="dropdown-item">
-                                    <!-- <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> 
-                                    Logout
-                                </Button> -->
-                            </div>
-                        </li>
-                        
-                       </c:if> --%>
                       </ul>
 					</form>
 				</nav>
