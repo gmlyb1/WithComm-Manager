@@ -96,7 +96,6 @@
 		$(".pwValid").click(function() {
 			var mePwd = $(this).data("member-pwd");
 			
-			
 			if (confirm("비밀번호를 초기화 하시겠습니까?")) {
 				$.ajax({
 					url : "/account/pwValid",
@@ -135,17 +134,10 @@
 				비밀번호 , 닉네임 , 회원등급 , 회원가입일자 , 수정과 삭제 가능)</h6>
 			<br> <span style="color: red"><strong> 현재 페이지는
 					슈퍼 관리자와 관리자 등급만 조회 가능합니다. (관리자 여부 0 = 관리자 x , 1 = 관리자)</strong></span>&nbsp;&nbsp;&nbsp;
-			<!-- <select>
-				<option value="관리자">관리자</option>
-				<option value="일반회원">일반회원</option>
-				<option value="승인대기중">승인대기중</option>
-				<option value="활동중지">활동중지</option>
-			</select> -->
 		</div>
 		<div class="card-body">
 			<div class="table-responsive">
-				<table class="table table-bordered" id="dataTable" width="100%"
-					cellspacing="0">
+				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 					<thead>
 						<tr>
 							<th class="text-center">번호</th>

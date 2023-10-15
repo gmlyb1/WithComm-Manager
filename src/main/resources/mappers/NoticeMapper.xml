@@ -35,7 +35,6 @@
 		 ,	notice_writer
 		 ,	notice_count
 		 ,	notice_regdate
-		 ,  notice_updateDate
 		)
 		values
 		(
@@ -44,8 +43,7 @@
 		,   #{notice_content}
 		,	#{notice_writer}
 		,	#{notice_count}
-		,	#{notice_regdate}
-		,	#{notice_updateDate}
+		,	CURRENT_TIMESTAMP()
 		)
 	</insert>
 	
@@ -64,7 +62,7 @@
 		update tbl_notice
 			set notice_title = #{notice_title},	
 				notice_content = #{notice_content}
-				notice_updateDate = #{notice_updateDate}
+				notice_updateDate = CURRENT_TIMESTAMP()
 		where notice_no = #{notice_no}
 	</update>
 	

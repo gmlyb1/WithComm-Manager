@@ -10,6 +10,11 @@ Date nowTime = new Date();
 SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 %>
 
+<%-- <%
+	HttpSession s = request.getSession();
+	s.setMaxInactiveInterval(6);
+%> --%>
+
 <!DOCTYPE html>
 <html>
 
@@ -19,17 +24,71 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+		
 		$("#logoutBtn").on("click", function() {
+			
+		if(confirm("로그아웃 하시겠습니까?")) {
 			alert("로그아웃을 완료하였습니다.");
 			location.href = "/account/logout"
-		})
-		
-		var msg = "${msg}";
-		if (msg != "") {
-			alert(msg);
 		}
-	});
+	})
+
+	var msg = "${msg}";
+	if (msg != "") {
+		alert(msg);
+	}
+	
+	var countdownElement = document.getElementById('countdown');
+    var minutesElement = document.getElementById('minutes');
+    var secondsElement = document.getElementById('seconds');
+
+    var totalSeconds = 30 * 60; // 30분을 초로 변환
+    var countdownInterval = setInterval(updateCountdown, 1000); // 1초마다 카운트다운 업데이트
+
+    function updateCountdown() {
+        var minutes = Math.floor(totalSeconds / 60);
+        var seconds = totalSeconds % 60;
+
+        // 시간을 업데이트
+        minutesElement.textContent = minutes < 10 ? '0' + minutes : minutes;
+        secondsElement.textContent = seconds < 10 ? '0' + seconds : seconds;
+
+        if (totalSeconds <= 0) {
+            clearInterval(countdownInterval); // 카운트다운 중지
+            // 원하는 동작을 수행 (예: 로그아웃)
+        	var sessionExpirationTime = 6000;
+			setTimeout(function() {
+				alert("세션이 만료되어 자동 로그아웃 됩니다.");
+				location.reload();
+			}, sessionExpirationTime);
+        } else {
+            totalSeconds--;
+        }
+    }
+});
 </script> 
+<style>
+  /* 카운트다운 스타일 */
+  #countdown {
+    font-size: 24px;
+    color: #000; /* 검은색 */
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+  }
+
+  #countdown span {
+    background-color: #f5f5f5; /* 배경색 */
+    padding: 5px;
+    border-radius: 5px;
+    margin: 0 5px;
+  }
+
+  #clock-icon {
+    font-size: 24px;
+    color: #000; /* 아이콘 색상 (검은색) */
+  }
+</style>
 <meta charset="UTF-8"> <!-- 추가할부분 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 추가할부분 -->
 <meta http-equiv="X-UA-Compatible" content="ie=edge"> <!-- 추가할부분 -->
@@ -69,7 +128,7 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 				<div class="sidebar-brand-icon rotate-n-15">
 					<i class="fas fa-laugh-wink"></i>
 				</div>
-				<div class="sidebar-brand-text mx-3">WithComm</div>
+				<div class="sidebar-brand-text mx-3">위드컴 관리자</div>
 			</a>
 
 
@@ -220,9 +279,16 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 							    <c:out value="${list.memberVO.me_name}" />
 							</a>
 								<li>
-									<a class="nav-item dropdown no-arrow" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
-										<span class="nav-link" style="color: black;"><strong>${member.me_name}</strong>님, 환영합니다!</span>
-									</a>
+									<!-- 타임아웃 -->
+									<div class="d-flex align-items-center">
+									    <strong>자동 로그아웃 <i id="clock-icon" class="fas fa-clock"></i></strong>
+									    <span id="countdown" class="mr-3">
+									        <strong><span id="minutes">30</span>:<span id="seconds">00</span></strong>
+									    </span>
+									    <a class="nav-item dropdown no-arrow" href="#" id="userDropdown" role"button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									        <span class="nav-link" style="color: black;"><strong>${member.me_name}</strong>님, 환영합니다!</span>
+									    </a>
+									</div>
 								 <!-- Dropdown - User Information -->
 									<div
 										class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -248,7 +314,7 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 								 </li>
 						   <div style="display: flex; align-items: center;">
 								<button id="logoutBtn" type="button" class="btn btn-primary btn-sm">로그아웃</button>
-							</div>
+						   </div>
 							</c:if>
                       </ul>
 					</form>

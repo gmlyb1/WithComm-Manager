@@ -5,20 +5,6 @@
   
 <mapper namespace="com.soft.dao.MemberDAO">  
   
-<!--   	<resultMap id="MemberVOResultMap" type="MemberVO">
-  		<result property="me_id" column="me_id"/>
-  		<result property="me_pwd" column="me_pwd"/>
-  		<result property="me_name" column="me_name"/>
-  		<result property="me_email" column="me_email"/>
-  		<result property="me_regdate" column="me_regdate"/>
-  		<result property="me_image" column="me_image"/>
-  	</resultMap>
-
-	<update id="keepLogin">
-		update tbl_member
-		
-		
-	</update>   -->
   
   	<!-- 회원 가입 -->
   	<insert id="register">
@@ -107,9 +93,12 @@
 	</update>
 	
 	<!-- 관리자 지정 -->
-	<update id="selectManage">
-	update tbl_member set adminCk = '1' where me_id = #{me_id}
+	<update id="selectManage" parameterType="memberVO">
+	update tbl_member set adminCk = #{adminCk},state = #{state} where me_id = #{me_id}
+	</update>
 	
+	<update id="stateChk" parameterType="memberVO">
+	update tbl_member set state = #{state} where me_id = #{me_id}
 	</update>
 	
 	<insert id="insertAccount">
@@ -128,4 +117,31 @@
 		,	#{adminCk}
 		)
 	</insert>
+	
+	<update id="memberChoice" parameterType="memberVO">
+		update tbl_member set state = '대기중' where me_id = #{me_id} 
+	</update>
+	
+	<select id="HomeMemberList" parameterType="memberVO" resultType="memberVO">
+		SELECT 	
+			*
+		FROM TBL_MEMBER
+		ORDER BY ME_REGDATE DESC
+		LIMIT 5
+	</select>
+	
+	<select id="HomeGmList" parameterType="memberVO" resultType="memberVO">
+		SELECT 	
+			*
+		FROM TBL_MEMBER
+		WHERE STATE = '관리자'
+		ORDER BY ME_REGDATE DESC
+		LIMIT 6
+	</select>
+	
+	<!-- 비밀번호 초기화 -->
+	<update id="pwValidation" parameterType="memberVO">
+		update tbl_member set me_pwd = #{me_pwd} where me_id = #{me_id}
+	</update>
+	
 </mapper>

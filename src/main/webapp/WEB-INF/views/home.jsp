@@ -9,7 +9,7 @@
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	$(document).ready(function() {
 		function displayCurrentTime() {
 			var now = new Date();
@@ -23,9 +23,7 @@
 		// 1초마다 현재 시각 업데이트
 		setInterval(displayCurrentTime, 1000);
 	});
-</script>
-
-
+</script> -->
 
 <%@include file="/WEB-INF/views/includes/header.jsp"%>
 
@@ -35,9 +33,9 @@
 	<!-- Page Heading -->
 	<div class="d-sm-flex align-items-center justify-content-between mb-4">
 	    <h1 class="h3 mb-0 text-gray-800"><strong>대쉬보드</strong></h1>
-	    <a href="#" class="d-none d-sm-inline-block btn btn-lg btn-primary shadow-sm">현재 시각
+	    <!-- <a href="#" class="d-none d-sm-inline-block btn btn-lg btn-primary shadow-sm">현재 시각
 	        <i class="fas fa-clock fa-lg text-white-50"></i> <span id="currentTime"></span>
-	    </a>
+	    </a> -->
 	</div>
 
 	<!-- Content Row -->
