@@ -23,7 +23,7 @@ public class memberVO {
 	private String me_image;
 	private int adminCk;
 	private String state;
-	
+	private String aprvStts;
 	
 	
 	

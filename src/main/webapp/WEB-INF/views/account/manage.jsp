@@ -14,7 +14,8 @@
 			var memberId = $(this).data("member-id");
 			var adminCk = $(this).data("admin-ck");
 			var state = $(this).data("state");
-
+			
+			
 			if (confirm("관리자로 지정하시겠습니까?")) {
 				$.ajax({
 					url : "/account/selectManager",
@@ -42,15 +43,16 @@
 		$(".approveBtn").click(function() {
 			var memberId = $(this).data("member-id");
 			var state = $(this).data("state");
-			
-			
+			var aprvStts = $(this).data("aprv-stts");
+
 			if (confirm("회원가입된 회원을 승인 하시겠습니까?")) {
 				$.ajax({
 					url : "/account/state",
 					type : "POST",
 					data : {
 						me_id : memberId,
-						state : "일반회원"
+						state : "일반회원",
+						aprvStts : "승인완료"
 					},
 					success : function(data) {
 						alert("승인이 성공적으로 처리되었습니다.");
@@ -69,7 +71,7 @@
 		$(".notApproveBtn").click(function() {
 			var memberId = $(this).data("member-id");
 			var state = $(this).data("state");
-			
+			var aprvStts = $(this).data("aprv-stts");
 			
 			if (confirm("회원의 활동을 중지 하시겠습니까?")) {
 				$.ajax({
@@ -77,7 +79,8 @@
 					type : "POST",
 					data : {
 						me_id : memberId,
-						state : "활동중지"
+						state : "활동중지",
+						aprvStts : "승인요청"
 					},
 					success : function(data) {
 						alert("해당 회원은 활동 중지 처리되었습니다.");
@@ -141,6 +144,7 @@
 					<thead>
 						<tr>
 							<th class="text-center">번호</th>
+							<th class="text-center">승인여부</th>
 							<th class="text-center">계정</th>
 							<th class="text-center">닉네임</th>
 							<th class="text-center">상태</th>
@@ -153,6 +157,7 @@
 						<c:forEach items="${memberList}" var="member">
 							<tr>
 								<td class="text-center">${member.me_id}</td>
+								<td class="text-center">${member.aprvStts}</td>
 								<td class="text-center">${member.me_email}</td>
 								<td class="text-center">${member.me_name}</td>
 								<td class="text-center">${member.state}</td>
@@ -161,7 +166,7 @@
 										value="${member.me_regDate}" pattern="yyyy-MM-dd" /></td>
 								<td class="text-center">
 								    <div class="btn-group" role="group">
-								        <button type="button" class="btn btn-success approveBtn" data-member-id="${member.me_id}" data-state="${member.state}" ${member.state == '승인대기중' || member.state == '활동중지' ? '' : 'disabled'}>승인</button>
+								        <button type="button" class="btn btn-success approveBtn" data-member-id="${member.me_id}" data-aprv-stts="${member.aprvStts}" data-state="${member.state}" ${member.state == '승인대기중' || member.state == '활동중지' ? '' : 'disabled'}>승인</button>
 								        <button type="button" class="btn btn-secondary admin-button" data-member-id="${member.me_id}" data-admin-ck="${member.adminCk}" data-state="${member.state}" ${member.adminCk != '1' && member.state != '승인대기중' ? '' : 'disabled'}>관리자</button>
 								        <button type="button" class="btn btn-danger notApproveBtn" data-member-id="${member.me_id}" data-admin-ck="${member.adminCk}" ${member.state == '일반회원' || (member.adminCk != '1' && member.state != '활동중지') ? '' : 'disabled'}>중지</button>
 								    </div>

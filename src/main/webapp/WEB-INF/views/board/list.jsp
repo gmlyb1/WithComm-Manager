@@ -128,7 +128,7 @@
 						<c:forEach items="${boardList}" var="list">
 								<%-- <td><input name="RowCheck" type="checkbox" value="${list.board_no}"/></td> --%>
 							<tr data-regdate = "${list.board_regdate}">
-								<td class="text-center"><c:out value="${list.board_no}" /></td>
+								<td class="text-center"><c:out value="${list.rowNo}" /></td>
 								<td><a href="/board/read?board_no=${list.board_no}"><c:out
 											value="${list.board_title}" /></a>
 								</td>

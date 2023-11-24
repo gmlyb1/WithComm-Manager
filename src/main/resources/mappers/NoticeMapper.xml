@@ -8,9 +8,14 @@
 	<!-- 글 목록 -->
 	<select id="NoticeList" resultType="NoticeVO" parameterType="NoticeVO">
 		select
-		 *
+		 	row_number() over() as rowNo
+		 ,	notice_title
+		 ,	notice_writer
+		 ,	notice_count
+		 ,	notice_regdate
 		from
 		 tbl_notice
+		order by rowNo asc
 	</select>
 
 	<select id="selectNoticeImportant" resultType="NoticeVO" parameterType="NoticeVO">

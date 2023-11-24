@@ -8,7 +8,11 @@
 	<!-- 글 목록 -->
 	<select id="BoardList" resultType="boardVO" parameterType="boardVO">
 		select
-		 *
+		 	row_number() over() as rowNo
+		 ,	board_title
+		 ,	board_writer
+		 ,	board_count
+		 ,	board_regdate
 		from
 		 tbl_board
 	</select>

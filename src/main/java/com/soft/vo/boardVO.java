@@ -13,7 +13,8 @@ import lombok.ToString;
 @Setter
 @ToString
 public class boardVO{
-
+	
+	private int rowNo;
 	private int board_no;
 	private String board_title;
 	private String board_content;
