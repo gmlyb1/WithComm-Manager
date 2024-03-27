@@ -21,6 +21,8 @@ public class memberVO {
 	private String me_grade;
 	private Date me_regDate;
 	private String me_image;
+	private String me_posi;
+	private String me_dept;
 	private int adminCk;
 	private String state;
 	private String aprvStts;

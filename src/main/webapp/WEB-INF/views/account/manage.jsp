@@ -2,13 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <%@include file="../includes/header.jsp"%>
 <script type="text/javascript">
 	$(document).ready(function() {
-		
 		//관리자 지정
 		$(".admin-button").click(function() {
 			var memberId = $(this).data("member-id");
@@ -104,7 +102,7 @@
 					url : "/account/pwValid",
 					type : "POST",
 					data : {
-						mePwd : "123456"
+						
 					},
 					success : function(data) {
 						alert("비밀번호가 초기화 되었습니다.");
@@ -157,7 +155,7 @@
 						<c:forEach items="${memberList}" var="member">
 							<tr>
 								<td class="text-center">${member.me_id}</td>
-								<td class="text-center">${member.aprvStts}</td>
+								<td class="text-center status-cell">${member.aprvStts}</td>
 								<td class="text-center">${member.me_email}</td>
 								<td class="text-center">${member.me_name}</td>
 								<td class="text-center">${member.state}</td>
@@ -167,8 +165,9 @@
 								<td class="text-center">
 								    <div class="btn-group" role="group">
 								        <button type="button" class="btn btn-success approveBtn" data-member-id="${member.me_id}" data-aprv-stts="${member.aprvStts}" data-state="${member.state}" ${member.state == '승인대기중' || member.state == '활동중지' ? '' : 'disabled'}>승인</button>
-								        <button type="button" class="btn btn-secondary admin-button" data-member-id="${member.me_id}" data-admin-ck="${member.adminCk}" data-state="${member.state}" ${member.adminCk != '1' && member.state != '승인대기중' ? '' : 'disabled'}>관리자</button>
+								        <button type="button" class="btn btn-secondary admin-button" data-member-id="${member.me_id}" data-admin-ck="${member.adminCk}" data-state="${member.state}" ${member.state != '승인대기중' ? '' : 'disabled'}>관리자</button>
 								        <button type="button" class="btn btn-danger notApproveBtn" data-member-id="${member.me_id}" data-admin-ck="${member.adminCk}" ${member.state == '일반회원' || (member.adminCk != '1' && member.state != '활동중지') ? '' : 'disabled'}>중지</button>
+								    	<button type="button" class="btn btn-primary pwValid">비밀번호 초기화</button>
 								    </div>
 								</td>
 							</tr>

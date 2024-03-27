@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.soft.dao.EmailDAO">
+
+	<!-- 수신 메일 -->
+	<select id="mailList" resultType="MailVO">
+		SELECT * FROM TBL_MAIL
+		WHERE MAIL_ID = #{MAIL_ID}
+		ORDER BY MAIL_REGDATE DESC
+	</select>
+	
+	<!-- 현재 db에 있는 mail_num 최대 값 -->
+	<select id="mailnumCnt" resultType="String">
+		SELECT MAX(MAIL_NUM) FROM TBL_MAIL
+	</select>
+	
+	<!-- 현재 db에 있는 mail_num 최대 값 -->
+	<select id="sendmailnumCnt" resultType="String">
+		SELECT MAX(MAIL_NUM) FROM TBL_SENDMAIL
+	</select>
+
+	<!-- 메일 쓰기 - 해당 이메일 주소가 존재하는지 체크  -->
+	<select id="emailChk" resultType="Boolean">
+		SELECT COUNT(*) FROM TBL_MEMBER
+		WHERE ME_EMAIL = #{ME_EMAIL}
+	</select>
+
+	<!-- 메일 쓰기 -->
+	<insert id="mailWrite">
+		INSERT INTO TBL_MAIL
+		(
+			MAIL_NUM
+		   ,MAIL_ID
+		   ,MAIL_EMAIL
+		   ,MAIL_KEEP
+		   ,MAIL_REGDATE
+		   ,MAIL_TITLE
+		   ,MAIL_CONTENT
+		   ,MAIL_FILE
+		   ,MAIL_READCHK
+		)VALUES
+		(
+			#{MAIL_NUM}
+		   ,#{MAIL_ID}
+		   ,#{MAIL_EMAIL}
+		   ,'0'
+		   ,NOW()
+		   ,#{MAIL_TITLE}
+		   ,#{MAIL_CONTENT}
+		   ,#{MAIL_FILE}
+		   ,'0'
+		)
+	</insert>
+	
+	<!-- 메일 쓰기 - sendmail 테이블도 추가 -->
+	<insert id="mailWriteCopy">
+		INSERT INTO TBL_SENDMAIL
+		(
+			MAIL_NUM
+		   ,MAIL_ID
+		   ,MAIL_EMAIL
+		   ,MAIL_REGDATE
+		   ,MAIL_TITLE
+		   ,MAIL_CONTENT
+		   ,MAIL_FILE
+		) VALUES 
+		(
+			#{MAIL_NUM}
+		   ,#{MAIL_ID}
+		   ,#{MAIL_EMAIL}
+		   ,#{MAIL_REGDATE}
+		   ,#{MAIL_TITLE}
+		   ,#{MAIL_CONTENT}
+		   ,#{MAIL_FILE}
+		)
+	</insert>
+	
+	<!-- 직원 목록 조회 -->
+	<select id="empSelect" resultType="memberVO">
+		SELECT ME_EMAIL,ME_NAME
+		FROM TBL_MEMBER
+		ORDER BY ME_NAME ASC, ME_EMAIL ASC
+	</select>
+	
+	<!-- 메일 읽기 -->
+	<select id="recevRead" resultType="MailVO">
+		SELECT * FROM TBL_MAIL
+		WHERE MAIL_NUM = #{MAIL_NUM}
+	</select>
+	
+	<!-- 수신자가 해당 읽음 처리 -->
+	<update id="recevReadCheckUpdate">
+		UPDATE TBL_MAIL
+		SET MAIL_READCHECK = '1'
+		WHERE MAIL_NUM = #{MAIL_NUM}
+	</update>
+	
+	<!-- 수신자 발신자 이름 가져오기 -->
+	<select id="recevAndSend" resultType="String">
+		SELECT ME_NAME FROM TBL_MEMBER 
+		WHERE ME_EMAIL = #{MAIL}
+	</select>
+	
+	<!-- 체크 목록 삭제하기 -->
+	<delete id="deleteMail">
+		DELETE FROM TBL_EMAIL
+		WHERE MAIL_NUM = #{MAIL_NUM}
+	</delete>
+	
+	<!-- 체크 목록 읽음 처리 -->
+	<update id="updateReadChk">
+		UPDATE TBL_MAIL
+		SET MAIL_READCHECK = '1'
+		WHERE MAIL_NUM = #{MAIL_NUM}
+	</update>
+	
+	<!-- 중요 보관함 처리 -->
+	<update id="updateKeep">
+		UPDATE TBL_MAIL
+		SET MAIL_KEEP = if(mail_keep = '1' , '0', '1')
+		WHERE MAIL_NUM = #{MAIL_NUM}
+	</update>
+	
+	<!-- 발신 메일 -->
+	<select id="sendMailList" resultType="sendMailVO">
+		SELECT * FROM TBL_SENDMAIL
+		WHERE MAIL_EMAIL = #{MAIL_EMAIL}
+		ORDER BY MAIL_REGDATE DESC
+	</select>
+	
+	<!-- 발신 메일 -->
+	<select id="sendRead" resultType="sendMailVO">
+		SELECT * FROM TBL_SENDMAIL
+		WHERE MAIL_NUM = #{MAIL_NUM}
+	</select>
+	
+	<!-- 체크 목록 삭제하기 (발신)-->
+	<delete id="deleteMail2">
+		DELETE FROM TBL_SENDMAIL
+		WHERE MAIL_NUM = #{MAIL_NUM}
+	</delete>
+	
+	<!-- 중요 보관함 -->
+	<select id="mailKeepList" resultType="MailVO">
+		SELECT * FROM TBL_MAIL
+		WHERE MAIL_ID = #{MAIL_ID} AND MAIL_KEEP = '1'
+		ORDER BY MAIL_REGDATE DESC
+	</select>
+</mapper>

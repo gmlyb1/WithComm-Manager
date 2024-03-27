@@ -9,6 +9,7 @@
 	<select id="NoticeList" resultType="NoticeVO" parameterType="NoticeVO">
 		select
 		 	row_number() over() as rowNo
+		 ,  notice_no
 		 ,	notice_title
 		 ,	notice_writer
 		 ,	notice_count
@@ -25,7 +26,7 @@
 	<!-- 메인페이지 바인딩  -->
 	<select id="HomeNoticeList" resultType="noticeVO" parameterType="noticeVO">
 		select * 
-		from tbl_notice LIMIT 5
+		from tbl_notice LIMIT 6
 	</select>
 	
 	<!--  글 작성 -->

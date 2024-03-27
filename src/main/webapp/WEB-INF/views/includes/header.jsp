@@ -148,6 +148,9 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 				<li class="nav-item active"><a class="nav-link"
 					href="/inquiry/list"><i class="fa-thin fa-circle-exclamation"></i>
 					<span>1:1 문의 관리</span></a></li>
+				<li class="nav-item active"><a class="nav-link"
+					href="/mail/recevMail"><i class="fa-thin fa-circle-exclamation"></i>
+					<span>메일 관리</span></a></li>
 			</c:if>
 			
 			<!-- Nav Item - Pages Collapse Menu -->

@@ -19,7 +19,7 @@
 	
 	<select id="HomeBoardList" resultType="boardVO" parameterType="boardVO">
 		select * 
-		from tbl_board LIMIT 5
+		from tbl_board LIMIT 6
 	</select>
 	
 	<!--  글 작성 -->
@@ -131,7 +131,6 @@
 		,	#{stored_file_name}
 		,	#{regdate}
 		,	#{del_gb}
-		
 		)
 	</insert>
 	

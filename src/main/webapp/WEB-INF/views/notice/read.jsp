@@ -1,17 +1,20 @@
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
+    
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@include file="../includes/header.jsp"%>
-
-<script
-	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%-- <script src="${pageContext.request.contextPath }/resources/js/ezform_js/noti_event.js"></script> --%>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		var formObj = $("form[name='readForm']")
-
+		
 		//삭제
 		$("#delete_btn").on("click", function() {
+			if(!confirm("삭제 하시겠습니까?")) return false;
 			formObj.attr("action", "/notice/delete");
 			formObj.attr("method", "post");
 			formObj.submit();
@@ -47,96 +50,66 @@
 		}
 	}
 </script>
-
-
-
-<div class="row" style="margin-bottom: 20px; margin-left: 1px;">
-	<c:if test="${member == null}">
-		<span style="color: red" class="text-center"><strong>
-				현재 페이지의 글쓰기,수정,삭제는 회원만 이용 가능합니다.</strong></span>
-	</c:if>
-
-	<%-- <c:if test="${member != null}">
-		<span style="color: blue" class="text-center"><strong>
-				댓글작성은 관리자만 가능합니다.</strong></span>
-	</c:if> --%>
-	<div class="col-lg-12">
-		<h1 class="page-header text-center">상세 페이지</h1>
-		<c:if test="${member != null}">
-			<span style="color: blue" class="text-center"><strong>
-					글쓰기 권한은 최고 관리자에게 문의해 주시기 바랍니다.</strong></span>
-		</c:if>
-	</div>
-</div>
-
-<div class="panel" style="margin-left: 1px;">
-	<div id="contAreaBox">
-		<div class="panel">
-			<div class="panel-body">
-				<form role="form" method="post" name="readForm">
-				<input type="hidden" id="FILE_NO" name="FILE_NO" value="">
-					<input type="hidden" id="notice_no" name="notice_no"
-						value="${read.notice_no}" />
+<div class="conatiner-fluid content-inner mt-n5 py-0">
+   <div class="row">
+      <div class="col-sm-12">
+         <div class="card">
+            <div class="card-header d-flex justify-content-between">
+               <div class="header-title">
+                  <h4 class="card-title">공지사항</h4>
+               </div>
+            </div>
+            <div class="card-body p-0">
+               <div class="table-responsive mt-4">
+               	  <form role="form" method="post" name="readForm">
+               	  <input type="hidden" id="FILE_NO" name="FILE_NO" value="">
+					<input type="hidden" id="notice_no" name="notice_no" value="${read.notice_no}" />
 					<%-- <input type="hidden" id="reply_no" name="reply_no" value="${replyList.board_no}"> --%>
-					<!-- 게시판 글보기  -->
-					<div class="container">
-						<div class="row">
-							<table class="table table-striped"
-								style="text-align: center; border: 1px solid #dddddd">
-								<thead>
-									<tr>
-										<th colspan="2"
-											style="background-color: #eeeeee; text-align: center;">게시판
-											글 보기</th>
-									</tr>
-								</thead>
-
-								<tbody>
-									<tr>
-										<td style="width: 20%">글 제목</td>
-										<td colspan="2">${read.notice_title}</td>
-									</tr>
-									<tr>
-										<td>작성자</td>
-										<td colspan="2">${read.notice_writer}</td>
-									</tr>
-									<tr>
-										<td>작성일자</td>
-										<td colspan="2">${read.notice_regdate}</td>
-									</tr>
-									<tr>
-										<td>내용</td>
-										<td colspan="2" style="height: 200px; text-align: left;">${read.notice_content}</td>
-									</tr>
-
-								</tbody>
-							</table>
-						</div>
-					</div>
-					<!-- 게시판 글보기  -->
-					<div style="margin-left: 1px;">
-						<c:if test="${member.me_name == read.notice_writer}">
-							<button type="button" class="btn btn-success"
-								onclick="location.href='/notice/update?notice_no=${read.notice_no}';">수정</button>
-							<button type="submit" class="btn btn-danger" id="delete_btn">삭제</button>
-						</c:if>
-						<button type="button" onclick="location.href='/notice/list';"
-							class="btn btn-primary">목록</button>
-						<br>
-						<hr>
-					</div>
-				</form>
-				<!-- 게시판 끝 -->
-				
-				<!-- 첨부파일 -->
-				<%-- <span>파일 목록</span>
-					<div class="form-group" style="border: 1px solid #dbdbdb;">
-						<c:forEach var="file" items="${file}">
-							<a href="#" onclick="fn_fileDown('${file.FILE_NO}'); return false;">${file.ORG_FILE_NAME}</a>(${file.FILE_SIZE}kb)<br>
-						</c:forEach>
-					</div> --%>
-				
-				<!-- 댓글 작성 끝 -->
+	                  <table id="basic-table" class="table table-striped mb-0" role="grid">
+	                     <thead>
+	                        <tr>
+	                           <th>
+	                              <svg width="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+	                                 <path d="M15.7161 16.2234H8.49609" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+	                                 <path d="M15.7161 12.0369H8.49609" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+	                                 <path d="M11.2521 7.86011H8.49707" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+	                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M15.909 2.74976C15.909 2.74976 8.23198 2.75376 8.21998 2.75376C5.45998 2.77076 3.75098 4.58676 3.75098 7.35676V16.5528C3.75098 19.3368 5.47298 21.1598 8.25698 21.1598C8.25698 21.1598 15.933 21.1568 15.946 21.1568C18.706 21.1398 20.416 19.3228 20.416 16.5528V7.35676C20.416 4.57276 18.693 2.74976 15.909 2.74976Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+	                              </svg> Content       
+	                           </th>
+	                        </tr>
+	                     </thead>
+	                     <tbody>
+	                        <tr>
+	                           <th>
+	                              <div class="mb-3">
+	                                <label class="form-label">제목</label>
+									<p class="h6">${read.notice_title}</p>
+								  </div>	
+	                              <div class="mb-3">
+	                                 <label class="form-label">내용</label>
+	                                 <textarea class="form-control" rows="10" style="resize: none; background-color:white;" readonly>${read.notice_title}</textarea>
+	                              </div>
+	                           </th>
+	                        </tr>   
+	                        <tr>
+	                           <td style="text-align:right;">
+	                              <div class="mb-3">
+	                           	  	<c:choose>
+	                           	  	
+										<c:when test="${member.state == '관리자' }">
+											<button type="button" class="btn btn-success btn-sm" onclick="location.href='/notice/update?notice_no=${read.notice_no}';">수정</button>
+											<button type="submit" class="btn btn-danger btn-sm" id="delete_btn">삭제</button>
+										</c:when>
+								 	</c:choose>
+								 	<a href="/notice/list" class="btn btn-primary btn-sm">목록으로</a>
+	                              </div>
+	                           </td>  
+	                        </tr>
+	                     </tbody>
+	                  </table>
+                  </form>
+                  
+                 <!-- 이전글 / 다음글 -->
 				<div class="my-3 p-3 bg-white rounded shadow-sm">
 					<c:choose>
 						<c:when test="${nextNoticeList.notice_no != null}">
@@ -172,11 +145,13 @@
 					</c:choose>
 
 				</div>
-			</div>
-		</div>
-	</div>
+                  
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
 </div>
-
 
 
 <%@include file="../includes/footer.jsp"%>
