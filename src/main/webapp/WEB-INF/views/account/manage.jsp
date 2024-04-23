@@ -65,7 +65,7 @@
 			}
 		});
 
-		// 회원 활동 중지 처리
+		// 회원 활동 중지 처리.
 		$(".notApproveBtn").click(function() {
 			var memberId = $(this).data("member-id");
 			var state = $(this).data("state");
@@ -78,7 +78,7 @@
 					data : {
 						me_id : memberId,
 						state : "활동중지",
-						aprvStts : "승인요청"
+						aprvStts : ""
 					},
 					success : function(data) {
 						alert("해당 회원은 활동 중지 처리되었습니다.");
@@ -102,7 +102,7 @@
 					url : "/account/pwValid",
 					type : "POST",
 					data : {
-						
+						mePwd : 1234567
 					},
 					success : function(data) {
 						alert("비밀번호가 초기화 되었습니다.");
@@ -164,10 +164,18 @@
 										value="${member.me_regDate}" pattern="yyyy-MM-dd" /></td>
 								<td class="text-center">
 								    <div class="btn-group" role="group">
-								        <button type="button" class="btn btn-success approveBtn" data-member-id="${member.me_id}" data-aprv-stts="${member.aprvStts}" data-state="${member.state}" ${member.state == '승인대기중' || member.state == '활동중지' ? '' : 'disabled'}>승인</button>
-								        <button type="button" class="btn btn-secondary admin-button" data-member-id="${member.me_id}" data-admin-ck="${member.adminCk}" data-state="${member.state}" ${member.state != '승인대기중' ? '' : 'disabled'}>관리자</button>
-								        <button type="button" class="btn btn-danger notApproveBtn" data-member-id="${member.me_id}" data-admin-ck="${member.adminCk}" ${member.state == '일반회원' || (member.adminCk != '1' && member.state != '활동중지') ? '' : 'disabled'}>중지</button>
-								    	<button type="button" class="btn btn-primary pwValid">비밀번호 초기화</button>
+									    <c:if test="${member.state == '승인대기중' || member.state == '활동중지'}">
+									        <button type="button" class="btn btn-success approveBtn" data-member-id="${member.me_id}" data-aprv-stts="${member.aprvStts}">승인</button>
+									    </c:if>
+									     <c:if test="${member.state != '승인대기중'}">
+								        	<button type="button" class="btn btn-secondary admin-button" data-member-id="${member.me_id}" data-admin-ck="${member.adminCk}" data-state="${member.state}">관리자</button>
+								         </c:if>
+								         <c:if test="${member.state == '일반회원' || member.adminCk != '1' && member.state != '활동중지'}">
+								        <button type="button" class="btn btn-danger notApproveBtn" data-member-id="${member.me_id}" data-admin-ck="${member.adminCk}"}>중지</button>
+								    	 </c:if>
+								    	 <c:if test="${member.state != '승인대기중'}">
+								    	<button type="button" class="btn btn-primary pwValid" data-member-pwd="${member.me_pwd}">비밀번호 초기화</button>
+								    	</c:if>
 								    </div>
 								</td>
 							</tr>
