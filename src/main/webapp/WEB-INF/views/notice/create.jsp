@@ -8,6 +8,7 @@
 <%-- <script src="${pageContext.request.contextPath }/resources/js/ezform_js/noti_event.js"></script> --%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
+$(document).ready(function() {	
 	function _onSubmit() {
 		if ($("#notice_title").val() == "") {
 			alert("제목을 입력해주세요");
@@ -25,6 +26,30 @@
 			return false;
 		}
 	}
+	
+	function YnCheck(obj) {
+		var checked = obj.checked;
+		if(checked) {
+			obj.value = 1;
+		}else {
+			obj.value = 2;
+		}
+		
+		var isFixed = "${data.isFixed}";
+		if(isFixed == 1) {
+		    $("#isFixed").prop("checked", true);
+		} else {
+		    $("#isFixed").prop("checked", false);
+		}
+		
+		// 체크박스 value값 설정
+		if($("#isFixed").is(':checked')==true) {
+			data.set("isFixed",1);
+		}else {
+			data.set("isFixed",0);
+		}
+	};
+});
 </script>
 <div class="conatiner-fluid content-inner mt-n5 py-0">
    <div class="row">
@@ -70,12 +95,17 @@
 	                                 <textarea class="form-control" rows="10" id="notice_content" name="notice_content" style="resize: none;"></textarea>
 	                              </div>
 	                           </th>
-	                        </tr>   
+	                        </tr> 
+	                        <tr>
+								 <td>
+									<input type="checkbox" id="isFixed" name="isFixed" onchange="YnCheck(this);"><label for="isFixed">상단 고정</label>								
+								</td> 
+							</tr>  
 	                        <tr>
 	                           <td style="text-align:right;">
 	                              <div class="mb-3">
-	                              	<input type="submit" class="btn btn-primary btn-sm" value="글쓰기"/>
-									<input type="button" class="btn btn-primary btn-sm" value="취소" onclick="location.href='list'"/>
+	                              	<input type="submit" class="btn btn-success" value="글쓰기"/>
+									<input type="button" class="btn btn-danger" value="취소" onclick="location.href='list'"/>
 	                              </div>
 	                           </td>  
 	                        </tr>

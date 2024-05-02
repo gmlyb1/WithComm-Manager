@@ -117,14 +117,15 @@
 						<c:forEach items="${boardList}" var="list">
 								<%-- <td><input name="RowCheck" type="checkbox" value="${list.board_no}"/></td> --%>
 							<tr data-regdate = "${list.board_regdate}">
-								<td class="text-center"><c:out value="${list.rowNo}" /></td>
+								<td class="text-center"><c:out value="${list.board_no}" /></td>
 								<td><a href="/board/read?board_no=${list.board_no}"><c:out
 											value="${list.board_title}" /></a>
 								</td>
 								<td class="text-center"><c:out value="${list.board_writer}" /></td>
 								<td class="text-center"><c:out value="${list.board_count}" /></td>
-								<td class="text-center"><fmt:formatDate pattern="yyyy-MM-dd hh:mm"
-										value="${list.board_regdate}" /></td>
+								<td class="text-center">
+									<fmt:formatDate pattern="yyyy-MM-dd hh:mm" value="${list.board_regdate}" />
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -136,7 +137,6 @@
 			</div>
 		</div>
 	</div>
-
 </div>
 
 <%@include file="../includes/footer.jsp"%>

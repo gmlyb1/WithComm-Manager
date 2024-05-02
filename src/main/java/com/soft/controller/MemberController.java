@@ -232,7 +232,6 @@ public class MemberController {
 	@RequestMapping(value="/pwValid", method=RequestMethod.POST)
 	public String pwValidation(memberVO mVO, HttpServletRequest request, Model model, RedirectAttributes rttr) throws Exception
 	{
-		
 		try {
 			memberService.pwValidation(mVO);
 			rttr.addFlashAttribute("msg", "비밀번호가 초기화 되었습니다.");

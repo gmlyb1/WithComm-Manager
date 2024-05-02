@@ -1,6 +1,7 @@
-Âü°íÇÒ ÄÚµåµé.
-0. È¸¿ø°¡ÀÔ Âü°í ÆäÀÌÁö : https://melonpeach.tistory.com/41
-1. ¾Ë¶÷Ç¥½Ã µîµî
+
+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½ï¿½.
+0. È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ : https://melonpeach.tistory.com/41
+1. ï¿½Ë¶ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½
 
 <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
@@ -76,7 +77,7 @@
                                     <div class="font-weight-bold">
                                         <div class="text-truncate">Hi there! I am wondering if you can help me with a
                                             problem I've been having.</div>
-                                        <div class="small text-gray-500">Emily Fowler ¡¤ 58m</div>
+                                        <div class="small text-gray-500">Emily Fowler ï¿½ï¿½ 58m</div>
                                     </div>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -88,7 +89,7 @@
                                     <div>
                                         <div class="text-truncate">I have the photos that you ordered last month, how
                                             would you like them sent to you?</div>
-                                        <div class="small text-gray-500">Jae Chun ¡¤ 1d</div>
+                                        <div class="small text-gray-500">Jae Chun ï¿½ï¿½ 1d</div>
                                     </div>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -100,7 +101,7 @@
                                     <div>
                                         <div class="text-truncate">Last month's report looks great, I am very happy with
                                             the progress so far, keep up the good work!</div>
-                                        <div class="small text-gray-500">Morgan Alvarez ¡¤ 2d</div>
+                                        <div class="small text-gray-500">Morgan Alvarez ï¿½ï¿½ 2d</div>
                                     </div>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -112,7 +113,7 @@
                                     <div>
                                         <div class="text-truncate">Am I a good boy? The reason I ask is because someone
                                             told me that people say this to all dogs, even if they aren't good...</div>
-                                        <div class="small text-gray-500">Chicken the Dog ¡¤ 2w</div>
+                                        <div class="small text-gray-500">Chicken the Dog ï¿½ï¿½ 2w</div>
                                     </div>
                                 </a>
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
@@ -127,7 +128,7 @@
 		  memberVO loginInfo = accountService.actionLogin(searchVO);
 		  
 		  if(loginInfo == null) { redirectAttributes.addFlashAttribute("msg",
-		  "·Î±×ÀÎÀ» ½ÇÆÐÇÏ¿´½À´Ï´Ù."); return "redirect:/account/login.do"; }
+		  "ï¿½Î±ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½."); return "redirect:/account/login.do"; }
 		  
 		  Cookie rememberCookie = new Cookie("CustomCheck", loginInfo.getMe_id());
 		  rememberCookie.setPath("/"); if(searchVO.isCustomCheck()) {
@@ -153,7 +154,7 @@
 		   = (String)URL;
 		 
 		 
-		 <-------------------º¸µå ÄÁÆ®·Ñ·¯------------------->
+		 <-------------------ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½Ñ·ï¿½------------------->
 		 package com.soft.controller;
 
 import java.text.SimpleDateFormat;
@@ -219,9 +220,9 @@ public class BoardController {
 		boardService.getList(searchVO);
 		
 		redirect.addFlashAttribute("redirect", searchVO.getBoard_idx());
-		redirect.addFlashAttribute("msg", "µî·ÏÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.");
+		redirect.addFlashAttribute("msg", "ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
 	} catch (Exception e) {
-		redirect.addFlashAttribute("msg", "µî·Ï¿¡ ½ÇÆÐÇÏ¿´½À´Ï´Ù.");
+		redirect.addFlashAttribute("msg", "ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
 	}	
 		
 		return "redirect:/board/list";
@@ -232,7 +233,7 @@ public class BoardController {
 		 
 	
 !---------------------------------- ----------------------------------~!
-º¸µå service, Impl
+ï¿½ï¿½ï¿½ï¿½ service, Impl
 		 package com.soft.service;
 
 import java.util.List;
@@ -241,10 +242,10 @@ import com.soft.vo.boardVO;
 
 public interface BoardService {
 
-	// °Ô½ÃÆÇ ¸ñ·Ï ¸Þ¼­µå
+	// ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	public List<boardVO> getList(boardVO searchVO);
 	
-	// °Ô½Ã±Û ¾²±â ¸Þ¼­µå
+	// ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	public void insertBoard(boardVO searchVO);
 	
 }

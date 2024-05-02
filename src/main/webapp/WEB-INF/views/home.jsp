@@ -151,7 +151,7 @@
 				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 					<h6 class="m-0 font-weight-bold text-primary">멤버 리스트</h6>
 					<div class="dropdown no-arrow">
-						<a class="btn btn-success" href="/member/list">더보기</a>
+						<a class="btn btn-success" href="/account/manage">더보기</a>
 					</div>
 				</div>
 

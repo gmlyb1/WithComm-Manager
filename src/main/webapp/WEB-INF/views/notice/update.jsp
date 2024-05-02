@@ -16,16 +16,39 @@
 		$(".cancel_btn").on("click", function() {
 			event.preventDefault();
 			location.href = "/board/list";
-		})
-	})
+		});
 
 	function _onSubmit() {
 		if (!confirm("수정 하시겠습니까?")) {
 			return false;
 		}
 	}
+	
+	function YnCheck(obj) {
+		var checked = obj.checked;
+		if(checked) {
+			obj.value = 1;
+		}else {
+			obj.value = 2;
+		}
+		
+		var isFixed = "${data.isFixed}";
+		if(isFixed == 1) {
+		    $("#isFixed").prop("checked", true);
+		} else {
+		    $("#isFixed").prop("checked", false);
+		}
+		
+		// 체크박스 value값 설정
+		if($("#isFixed").is(':checked')==true) {
+			data.set("isFixed",1);
+		}else {
+			data.set("isFixed",0);
+		}
+	};
+});
 </script>
-
+<hr>
 <div class="conatiner-fluid content-inner mt-n5 py-0">
    <div class="row">
       <div class="col-sm-12">
@@ -70,10 +93,15 @@
 	                           </th>
 	                        </tr>   
 	                        <tr>
+								 <td>
+									<input type="checkbox" id="isFixed" name="isFixed" onchange="YnCheck(this);"><label for="isFixed">상단 고정</label>								
+								</td> 
+							</tr>
+	                        <tr>
 	                           <td style="text-align:right;">
 	                              <div class="mb-3">
-									<button type="submit" class="btn btn-primary btn-sm">수정</button>
-									<a href="/notice/list" class="btn btn-danger btn-sm">취소</a>
+									<button type="submit" class="btn btn-success">수정</button>
+									<a href="/notice/list" class="btn btn-danger">취소</a>
 								</div>
 	                           </td>  
 	                        </tr>

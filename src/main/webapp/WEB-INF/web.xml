@@ -9,7 +9,7 @@
 	
 	<!-- 세션 기본값 10초 -->
 		<session-config>
-				<session-timeout>6000</session-timeout>
+				<session-timeout>6</session-timeout>
 		</session-config>
 	
 	<!-- 에러페이지 이동시 해당 템플릿으로 이동 -->

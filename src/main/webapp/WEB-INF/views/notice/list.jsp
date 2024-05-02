@@ -3,9 +3,31 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+	
+	// new 스티커 처리
+	var currentTime = new Date().getTime();
+	
+	$("table tr").each(function() {
+		var regdate = new Date($(this).data("regdate")).getTime();
+		var isNewPost = (currentTime - regdate < 24 * 60 * 60 * 1000);
+		
+		if(isNewPost) {
+			$(this).find("td:eq(1)").append('<span class="badge badge-success">New</span>');
+			
+			setTimeout(function() {
+				$sticker.find(".badge").remove();
+			},24 * 60 * 60 * 1000);
+		}
+	});
+</script>
+<style type="text/css">
+  .btn-right {
+    float: right;
+  }
+</style>
 <%@include file="../includes/header.jsp"%>
 
 <div class="container-fluid">
@@ -31,11 +53,28 @@
 							<th class="text-center">작성자</th>
 							<th class="text-center">조회수</th>
 							<th class="text-center">작성일자</th>
+							<th class="text-center">수정일자</th>
 						</tr>
 					</thead>
 					<tbody>
+						<c:forEach items="${FixedList}" var="FixedList">
+							<tr style="background: LightGray">
+								<td class="text-center"><c:out value="" /><strong>[공지]</strong></td>
+								<td><strong><a
+										href="/notice/read?notice_no=${FixedList.notice_no}"><c:out
+												value="${FixedList.notice_title}" /></a></strong></td>
+								<td class="text-center"><strong><c:out
+											value="${FixedList.notice_writer}" /></strong></td>
+								<td class="text-center"><strong><c:out
+											value="${FixedList.notice_count}" /></strong></td>
+								<td class="text-center"><strong><fmt:formatDate pattern="yyyy-MM-dd hh:mm"
+											value="${FixedList.notice_regdate}" /></strong></td>
+								<td class="text-center"><strong><fmt:formatDate pattern="yyyy-MM-dd hh:mm"
+											value="${FixedList.notice_updateDate}" /></strong></td>
+							</tr>
+						</c:forEach>
 						<c:forEach items="${noticeList}" var="list">
-							<tr>
+							<tr data-regdate = "${list.notice_regdate}">
 								<td class="text-center"><c:out value="${list.notice_no}" /></td>
 								<td><a href="/notice/read?notice_no=${list.notice_no}">
 								<c:out value="${list.notice_title}" /></a></td>
@@ -43,6 +82,8 @@
 								<td class="text-center"><c:out value="${list.notice_count}" /></td>
 								<td class="text-center"><fmt:formatDate pattern="yyyy-MM-dd hh:mm"
 										value="${list.notice_regdate}" /></td>
+								<td class="text-center"><fmt:formatDate pattern="yyyy-MM-dd hh:mm"
+										value="${list.notice_updateDate}" /></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -50,13 +91,11 @@
 				
 				<c:if test="${member.adminCk == 1}">
 					<button type="button" onclick="location.href='/notice/create';"
-						class="btn btn-success">글쓰기</button>
+						class="btn btn-success btn-right">글쓰기</button>
 				</c:if>
 				
 			</div>
 		</div>
 	</div>
 </div>
-
-
 <%@include file="../includes/footer.jsp"%>

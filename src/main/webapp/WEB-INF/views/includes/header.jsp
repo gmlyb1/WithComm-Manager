@@ -316,7 +316,7 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 									</div>
 								 </li>
 						   <div style="display: flex; align-items: center;">
-								<button id="logoutBtn" type="button" class="btn btn-primary btn-sm">로그아웃</button>
+								<button id="logoutBtn" type="button" class="btn btn-primary">로그아웃</button>
 						   </div>
 							</c:if>
                       </ul>

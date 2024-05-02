@@ -100,7 +100,7 @@ signin.addEventListener("click", () => {
 							placeholder="패스워드" id="me_pwd" name="me_pwd" class="login__input">
 					</div>
 					<a href="#" class="login__forgot">계정을 잊으신 분은 관리자에게 문의 바랍니다. </a> 
-					<button type="submit" class="login__button center" id="login-btn" name="login-btn">Sign In</button>
+					<button type="submit" class="login__button center btn-right" id="login-btn" name="login-btn">Sign In</button>
 
 					<!-- <div>
 						<span class="login__account login__account--account">Don't
@@ -150,6 +150,10 @@ signin.addEventListener("click", () => {
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap");
 *, ::before, ::after {
   box-sizing: border-box;
+}
+
+.btn-right {
+	float: right;
 }
 
 body {
