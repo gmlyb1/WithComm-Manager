@@ -23,6 +23,8 @@ public interface MemberService {
 	
 	public List<memberVO> memberManage(memberVO mVO)throws Exception;
 	
+	public List<memberVO> AdminMemberManage(memberVO mVO)throws Exception;
+	
 	public void memberDelete(int me_id) throws Exception;
 
 	public void updateImg(String memberImg, String me_id);

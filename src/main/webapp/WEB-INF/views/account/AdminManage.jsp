@@ -95,15 +95,14 @@
 		
 		// 비밀번호 초기화
 		$(".pwValid").click(function() {
-			//var mePwd = $(this).data("member-pwd");
-			 var memberId = $(this).data("member-id");
+			var mePwd = $(this).data("member-pwd");
+			
 			if (confirm("비밀번호를 초기화 하시겠습니까?")) {
 				$.ajax({
 					url : "/account/pwValid",
 					type : "POST",
 					data : {
-						me_id : memberId
-						//mePwd : 1234567
+						mePwd : 1234567
 					},
 					success : function(data) {
 						alert("비밀번호가 초기화 되었습니다.");
@@ -146,31 +145,30 @@
 							<th class="text-center">계정</th>
 							<th class="text-center">닉네임</th>
 							<th class="text-center">상태</th>
+							<th class="text-center">관리자 여부</th>
 							<th class="text-center">회원가입일자</th>
 							<th class="text-center">비고</th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${memberList}" var="member">
+						<c:forEach items="${AdminMemberList}" var="member">
 							<tr>
 								<td class="text-center">${member.me_id}</td>
 								<td class="text-center">${member.me_email}</td>
 								<td class="text-center">${member.me_name}</td>
 								<td class="text-center">${member.state}</td>
+								<td class="text-center">${member.adminCk}</td>
 								<td class="text-center"><fmt:formatDate
 										value="${member.me_regDate}" pattern="yyyy-MM-dd" /></td>
 								<td class="text-center">
 								    <div class="btn-group" role="group">
-									    <c:if test="${member.state == '승인대기중' || member.state == '활동중지'}">
+									    <c:if test="${member.state == '활동중지'}">
 									        <button type="button" class="btn btn-success approveBtn" data-member-id="${member.me_id}" data-aprv-stts="${member.aprvStts}">승인</button>
 									    </c:if>
-									     <c:if test="${member.state == '일반회원'}">
-								        	<button type="button" class="btn btn-secondary admin-button" data-member-id="${member.me_id}" data-admin-ck="${member.adminCk}" data-state="${member.state}">관리자</button>
-								         </c:if>
-								         <c:if test="${member.state == '일반회원' || member.state != '활동중지'}">
+								         <c:if test="${member.state != '활동중지'}">
 								        <button type="button" class="btn btn-danger notApproveBtn" data-member-id="${member.me_id}" data-admin-ck="${member.adminCk}"}>중지</button>
 								    	 </c:if>
-								    	<button type="button" class="btn btn-primary pwValid" data-member-id="${member.me_id}" data-member-pwd="${member.me_pwd}">비밀번호 초기화</button>
+								    	<button type="button" class="btn btn-primary pwValid" data-member-pwd="${member.me_pwd}">비밀번호 초기화</button>
 								    </div>
 								</td>
 							</tr>

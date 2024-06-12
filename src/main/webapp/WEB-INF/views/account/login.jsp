@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <%@ page session="true"%>
 <!DOCTYPE html>
@@ -14,6 +16,7 @@
 			var me_email = $("#me_email").val();
 			var me_id = $("#me_id").val();
 			var me_pwd = $("#me_pwd").val();
+			var second_me_pwd = $("#second_me_pwd").val();
 
 			if (document.frm.me_email.value == "") {
 				alert("이메일을 입력해 주세요.");
@@ -24,11 +27,11 @@
 				alert("비밀번호를 입력해 주세요.");
 				return false;
 			}
-
-			if (me_email != "" && me_pwd != "") {
-				return "/account/login";
+			
+			if (document.frm.second_me_pwd.value == "") {
+				alert("2차 비밀번호를 입력해 주세요.");
+				return false;
 			}
-
 		});
 	});
 </script>
@@ -63,89 +66,6 @@ signin.addEventListener("click", () => {
     loginup.classList.add("none");
 })
 </script>
-
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
-<title>Login</title>
-<link rel="stylesheet" href="style.css">
-<script src="https://kit.fontawesome.com/51db22a717.js"
-	crossorigin="anonymous"></script>
-<link href="https://fonts.googleapis.com/css2?family=Alata&display=swap"
-	rel="stylesheet">
-<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css'
-	rel='stylesheet'>
-</head>
-<body>
-	<form name="frm" action="/account/login" method="post">
-		<div class="login">
-			<div class="login__content">
-				<div class="login__img">
-					<img
-						src="https://image.freepik.com/free-vector/code-typing-concept-illustration_114360-3581.jpg"
-						alt="user login">
-				</div>
-				<div class="login__forms">
-					<!--         login form -->
-					<h1 class="login__title">WithComm 관리자</h1>
-					<div class="login__box">
-						<i class='bx bx-user login__icon'></i> <input type="email"
-							placeholder="아이디" id="me_email" name="me_email" class="login__input">
-					</div>
-					<div class="login__box">
-						<i class='bx bx-lock login__icon'></i> <input type="password"
-							placeholder="패스워드" id="me_pwd" name="me_pwd" class="login__input">
-					</div>
-					<a href="#" class="login__forgot">계정을 잊으신 분은 관리자에게 문의 바랍니다. </a> 
-					<button type="submit" class="login__button center btn-right" id="login-btn" name="login-btn">Sign In</button>
-
-					<!-- <div>
-						<span class="login__account login__account--account">Don't
-							Have an Account?</span> <span
-							class="login__signin login__signin--signup" id="sign-up">Sign
-							Up</span>
-					</div> -->
-
-					<!--         create account form -->
-					<!-- <form action="" class="login__create none" id="login-up">
-          <h1 class="login__title">Create Account</h1>
-          <div class="login__box">
-            <i class='bx bx-user login__icon'></i>
-            <input type="text" placeholder="Username" class="login__input">
-          </div>
-          
-          <div class="login__box">
-            <i class='bx bx-at login__icon'></i>
-            <input type="text" placeholder="Email" class="login__input">
-          </div>
-          
-          <div class="login__box">
-            <i class='bx bx-lock login__icon'></i>
-            <input type="text" placeholder="Password" class="login__input">
-          </div>
-          
-          <a href="#" class="login__button">Sign Up</a>
-          
-          <div>
-            <span class="login__account login__account--account">Already have an Account?</span>
-            <span class="login__signup login__signup--signup" id="sign-in">Sign In</span>
-          </div>
-          
-          <div class="login__social">
-             <a href="#" class="login__social--icon"><i class='bx bxl-facebook'></i></a>
-             <a href="#" class="login__social--icon"><i class='bx bxl-twitter'></i></a>
-             <a href="#" class="login__social--icon"><i class='bx bxl-google'></i></a>
-             <a href="#" class="login__social--icon"><i class='bx bxl-github'></i></a>
-          </div> -->
-
-				</div>
-			</div>
-		</div>
-	</form>
-
 <style type="text/css">
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap");
 *, ::before, ::after {
@@ -344,3 +264,48 @@ img {
   }
 }
 </style>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>Login</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://kit.fontawesome.com/51db22a717.js"
+	crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css2?family=Alata&display=swap"
+	rel="stylesheet">
+<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css'
+	rel='stylesheet'>
+</head>
+<body>
+	<form name="frm" action="/account/login" method="post">
+		<div class="login">
+			<div class="login__content">
+				<div class="login__img">
+					<img
+						src="https://image.freepik.com/free-vector/code-typing-concept-illustration_114360-3581.jpg"
+						alt="user login">
+				</div>
+				<div class="login__forms">
+					<!--         login form -->
+					<h1 class="login__title">WithComm 관리자</h1>
+					<div class="login__box">
+						<i class='bx bx-user login__icon'></i> <input type="email"
+							placeholder="아이디" id="me_email" name="me_email" class="login__input">
+					</div>
+					<div class="login__box">
+						<i class='bx bx-lock login__icon'></i> <input type="password"
+							placeholder="패스워드" id="me_pwd" name="me_pwd" class="login__input">
+					</div>
+					<div class="login__box login__additional">
+						<i class='bx bx-error-circle login__icon'></i> 
+						<input type="password" placeholder="2차 패스워드" id="second_me_pwd" name="second_me_pwd" class="login__input">
+					</div>
+					<a href="#" class="login__forgot">계정을 잊으신 분은 관리자에게 문의 바랍니다. </a> 
+					<button type="submit" class="login__button center btn-right" id="login-btn" name="login-btn">Sign In</button>
+				</div>
+			</div>
+		</div>
+	</form>

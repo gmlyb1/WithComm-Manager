@@ -19,19 +19,16 @@ public class BoardDAOImpl implements BoardDAO {
 	
 	private static final String namespace = "com.soft.dao.BoardDAO";
 
-	//�۾���
 	@Override
 	public void insertBoard(boardVO vo) throws Exception {
 			sqlSession.insert("namespace.insertBoard", vo);
 	}
 	
-	//÷������
 	@Override
 	public void insertFile(Map<String, Object> map) throws Exception {
 			sqlSession.insert("namespace.insertFile",map);
 	}
 	
-	//�۸��
 	@Override
 	public List<boardVO> BoardList() throws Exception {
 		return sqlSession.selectList("namespace.BoardList");
@@ -42,13 +39,11 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.selectList("namespace.HomeBoardList");
 	}
 	
-	//���б�
 	@Override
 	public boardVO BoardRead(int board_no) throws Exception {
 		return sqlSession.selectOne("namespace.BoardRead", board_no);
 	}
 	
-	// �Խñ� ����
 	@Override	
 	public void BoardUpdate(boardVO vo) throws Exception {
 		sqlSession.update("namespace.BoardUpdate",vo);

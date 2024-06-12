@@ -45,7 +45,6 @@ public class NoticeController {
 		return "/notice/list";
 	}
 	
-	// �Խñ� ��� (GET)
 			@RequestMapping(value = "/create", method= RequestMethod.GET)
 			public void insertNoticeGET() {
 			}
@@ -78,13 +77,8 @@ public class NoticeController {
 			@RequestMapping(value = "/read", method=RequestMethod.GET)
 			public String NoticeRead(@RequestParam("notice_no") int notice_no,NoticeVO vo, Model model) throws Exception {
 				
-				
 				model.addAttribute("read", noticeService.NoticeRead(vo.getNotice_no()));
-				
-				// ���� ��
 				model.addAttribute("lastNoticeList", noticeService.lastNoticeList(notice_no));
-				
-				// ���� ��
 				model.addAttribute("nextNoticeList", noticeService.nextNoticeList(notice_no));
 				
 				
@@ -103,7 +97,6 @@ public class NoticeController {
 				return "/notice/update";
 			}
 			
-			//�Խñ� ����
 			@RequestMapping(value = "/update", method= RequestMethod.POST)
 			public String NoticeUpdatePOST(NoticeVO vo,Model model,RedirectAttributes rttr) throws Exception
 			{
@@ -117,7 +110,6 @@ public class NoticeController {
 				return "redirect:/notice/list";
 			}
 			
-			//�Խñ� ����
 			@RequestMapping(value = "/delete", method=RequestMethod.POST)
 			public String NoticeDeletePOST(NoticeVO vo, RedirectAttributes rttr) throws Exception
 			{

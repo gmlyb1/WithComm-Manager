@@ -100,6 +100,11 @@ public class MemberDAOImpl implements MemberDAO {
 	public void pwValidation(memberVO vo) throws Exception {
 		sqlSession.selectOne("namespace.pwValidation",vo);
 	}
+
+	@Override
+	public List<memberVO> AdminMemberManage(memberVO mVO) throws Exception {
+		return sqlSession.selectList("namespace.AdminMemberManage", mVO);
+	}
 	
 
 

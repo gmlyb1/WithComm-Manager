@@ -20,10 +20,6 @@ public class ReplyController {
 	@Inject
 	private ReplyService replyService;
 	
-	// ¥Ò±€ ¡∂»∏
-	
-	
-	// ¥Ò±€ ¿€º∫
 	@RequestMapping(value = "/write", method=RequestMethod.POST)
 	public String postWrite(replyVO vo,boardVO bvo) throws Exception {
 		
@@ -33,9 +29,6 @@ public class ReplyController {
 		 
 		return "redirect:/board/read?board_no="+bvo.getBoard_no();
 	}
-	// ¥Ò±€ ºˆ¡§
-	
-	// ¥Ò±€ ªË¡¶
 	@RequestMapping(value="/delete" , method=RequestMethod.GET)
 	public String removeReply(@RequestParam("reply_no")int reply_no, @RequestParam("board_no")int board_no, boardVO bvo, replyVO rvo) throws Exception 
 	{

@@ -12,87 +12,26 @@
 
 		//삭제
 		$("#delete_btn").on("click", function() {
-			formObj.attr("action", "/board/delete");
+			formObj.attr("action", "/inquiry/delete");
 			formObj.attr("method", "post");
 			formObj.submit();
 		});
-	})
-</script>
-
-<script type="text/javascript">
-	$(document).ready(function() {
-		var formObj = $("form[name='replyForm']")
-		$(".replyWriteBtn").on("click", function() {
-			var formObj = $("form[name='replyForm']");
-			formObj.attr("action", "/board/WriteReply");
-			formObj.attr("method", "post");
-			formObj.submit();
-		});
-	})
-</script>
-<script type="text/javascript">
-	function fn_fileDown(fileNo) {
-		var formObj = $("form[name='readForm']");
-		$("#FILE_NO").attr("value", fileNo);
-		formObj.attr("action", "/board/fileDown");
-		formObj.submit();
-	}
+	});
 </script>
 <script type="text/javascript">
 	function remove_replyNo(data1, data2) {
 		if (!confirm("삭제 하시겠습니까?"))
 			return false;
 		else {
-			location.href = "/reply/delete?reply_no=" + data1 + "&board_no="
+			location.href = "/reply/delete?reply_no=" + data1 + "&inq_no="
 					+ data2;
 		}
 	}
 </script>
-<style>
-    .table-striped tbody tr:nth-child(odd) {
-        background-color: #f2f2f2;
-    }
-
-    .table-striped tbody tr:nth-child(even) {
-        background-color: #ffffff;
-    }
-
-    .table-striped tbody tr td {
-        padding: 10px;
-        vertical-align: middle;
-    }
-
-    .table-striped tbody tr td:nth-child(1) {
-        width: 20%;
-        font-weight: bold;
-    }
-
-    .table-striped tbody tr td:nth-child(2) {
-        text-align: left;
-    }
-
-    .table-striped tbody tr:last-child td {
-        height: auto;
-    }
-</style>
-
 
 <div class="row" style="margin-bottom: 20px; margin-left: 1px;">
-	<c:if test="${member == null}">
-		<span style="color: red" class="text-center"><strong>
-				현재 페이지의 글쓰기,수정,삭제는 회원만 이용 가능합니다.</strong></span>
-	</c:if>
-
-	<%-- <c:if test="${member != null}">
-		<span style="color: blue" class="text-center"><strong>
-				댓글작성은 관리자만 가능합니다.</strong></span>
-	</c:if> --%>
 	<div class="col-lg-12">
-		<h1 class="page-header text-center">상세 페이지</h1>
-		<c:if test="${member != null}">
-			<span style="color: blue" class="text-center"><strong>
-					댓글작성은 관리자만 가능합니다.</strong></span>
-		</c:if>
+		<h1 class="page-header text-center">1:1 문의 상세 페이지</h1>
 	</div>
 </div>
 
@@ -101,10 +40,10 @@
 		<div class="panel">
 			<div class="panel-body">
 				<form role="form" method="post" name="readForm">
-				    <input type="hidden" id="FILE_NO" name="FILE_NO" value="">
-				    <input type="hidden" id="board_no" name="board_no" value="${read.board_no}" />
-				    <%-- <input type="hidden" id="reply_no" name="reply_no" value="${replyList.board_no}"> --%>
-				    <!-- 게시판 글보기  -->
+					<input type="hidden" id="FILE_NO" name="FILE_NO" value="">
+					<input type="hidden" id="inq_no" name="inq_no"
+						value="${read.inq_no}" />
+					 <!-- 게시판 글보기  -->
 				    <div class="container-fluid">
 				        <div class="row">
 				            <div class="col">
@@ -121,19 +60,19 @@
 				                    <tbody>
 				                        <tr>
 				                            <td style="width: 20%">글 제목</td>
-				                            <td colspan="2">${read.board_title}</td>
+				                            <td colspan="2">${read.inq_title}</td>
 				                        </tr>
 				                        <tr>
 				                            <td>작성자</td>
-				                            <td colspan="2">${read.board_writer}</td>
+				                            <td colspan="2">${read.inq_name}</td>
 				                        </tr>
 				                        <tr>
 				                            <td>작성일자</td>
-				                            <td colspan="2">${read.board_regdate}</td>
+				                            <td colspan="2">${read.inq_regdate}</td>
 				                        </tr>
 				                        <tr>
 				                            <td>내용</td>
-				                            <td colspan="2" style="height: 200px; text-align: left;">${read.board_content}</td>
+				                            <td colspan="2" style="height: 200px; text-align: left;">${read.inq_content}</td>
 				                        </tr>
 				                    </tbody>
 				                </table>
@@ -141,29 +80,19 @@
 				        </div>
 				    </div>
 				    <!-- 게시판 글보기  -->
-				    <div>
-				        <c:if test="${member.me_name == read.board_writer}">
-				            <button type="button" class="btn btn-success"
-				                onclick="location.href='/board/update?board_no=${read.board_no}';">수정</button>
-				            <button type="submit" class="btn btn-danger" id="delete_btn">삭제</button>
-				        </c:if>
-				        <button type="button" onclick="location.href='/board/list';"
-				            class="btn btn-primary">목록</button>
-				        <br>
-				        <hr>
-				    </div>
+					<div style="margin-left: 18px;">
+						<c:if test="${member.me_name == read.inq_name}">
+							<button type="button" class="btn btn-success"
+								onclick="location.href='/inquiry/update?inq_no=${read.inq_no}';">수정</button>
+							<button type="submit" class="btn btn-danger" id="delete_btn">삭제</button>
+						</c:if>
+						<button onclick="location.href='/inquiry/list'" type="button"
+							id="list_btn" class="btn btn-primary">목록</button>
+						<br>
+						<hr>
+					</div> 
 				</form>
-
 				<!-- 게시판 끝 -->
-
-				<!-- 첨부파일 -->
-				<%-- <span>파일 목록</span>
-				<div class="form-group" style="border: 1px solid #dbdbdb;">
-					<c:forEach var="file" items="${file}">
-						<a href="#"
-							onclick="fn_fileDown('${file.FILE_NO}'); return false;">${file.ORG_FILE_NAME}</a>(${file.FILE_SIZE}kb)<br>
-					</c:forEach>
-				</div> --%>
 
 				<!-- 댓글 시작 -->
 				<div class="mb-3" style="height: 270px; OVERFLOW-Y: auto;">
@@ -183,9 +112,12 @@
 										<td style="width: 60%; height: 50px;"><pre
 												style="font-family: arial;">${replyList.reply_content}</pre>
 											<p>
-													<a class="btn btn-primary" href="">수정</a> 
+												<c:if test="${member.me_name == replyList.reply_writer}">
+													<!-- <a class="btn btn-primary" href="">수정</a> / -->
+													<!-- <button type="button" class="btn btn-xs btn-success" data-toggle="modal" data-target="#modifyModal">댓글 수정</button> -->
 													<a class="btn btn-danger"
 														href="javascript:remove_replyNo(${replyList.reply_no},${replyList.board_no});">삭제</a>
+												</c:if>
 											</p></td>
 										<td style="width: 35%; text-align: right;"><fmt:formatDate
 												value="${replyList.reply_regdate}" pattern="yy-MM-dd HH:mm" /></td>
@@ -196,33 +128,36 @@
 						</c:choose>
 					</table>
 				</div>
+
 				<!-- 댓글 끝 -->
 
 
 				<!-- 댓글 작성 시작 -->
-					<div>
-						<form method="post" action="/reply/write">
-							<input type="hidden" name="board_no" value="${read.board_no}">
-							<%-- <input type="hidden" id="reply_no" name="reply_no" value="${replyList.board_no}"> --%>
-							<p>
-								<label>댓글 작성자:</label> <input type="text" name="reply_writer"
-									value="${member.me_name}" readonly>
-							</p>
-							<p>
-								댓글 내용:
-								<textarea class="form-control" rows="3" cols="155"
-									placeholder="댓글을 남겨주세요." name="reply_content"></textarea>
-							</p>
+				<div>
+					<form method="post" action="/reply/write">
+					<input type="hidden" name="inq_no" value="${read.inq_no}">
 
-							<p>
+						<input type="hidden" id="reply_no" name="reply_no" value="${replyList.board_no}">
+						<p>
+							<label>댓글 작성자:</label> 
+							<input type="text" name="reply_writer" value="${member.me_name}" readonly>
+						</p>
+						<p>
+							댓글 내용:
+							<textarea class="form-control" rows="3" cols="155" placeholder="댓글을 남겨주세요." name="reply_content"></textarea>
+						</p>
 
-								<button type="submit" class="btn btn-success"
-									style="margin: 55px 0 0 10px;">댓글 작성</button>
-							</p>
-						</form>
-					</div>
+						<p>
+							<button type="submit" class="btn btn-success" style="margin: 55px 0 0 10px;">댓글 작성</button>
+						</p>
+					</form>
+				</div>
+
+			
+				<!-- 댓글 수정 -->
+
 				<!-- 댓글 작성 끝 -->
-				<div class="my-3 p-3 bg-white rounded shadow-sm">
+				<%-- <div class="my-3 p-3 bg-white rounded shadow-sm">
 					<c:choose>
 						<c:when test="${nextBoardList.board_no != null}">
 
@@ -230,8 +165,8 @@
 								onclick="location.href='/board/read?board_no=${nextBoardList.board_no}'">
 								<span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>다음글
 							</button>
-							<a href="/board/read?board_no=${nextBoardList.board_no}" style="color: black">
-								${nextBoardList.board_title} </a>
+							<a href="/board/read?board_no=${nextBoardList.board_no}"
+								style="color: black"> ${nextBoardList.board_title} </a>
 						</c:when>
 
 						<c:when test="${nextBoardList.board_no == null}">
@@ -246,22 +181,17 @@
 								onclick="location.href='/board/read?board_no=${lastBoardList.board_no}'">
 								<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>이전글
 							</button>
-							<a href="/board/read?board_no=${lastBoardList.board_no}" style="color: black">
-								${lastBoardList.board_title} </a>
+							<a href="/board/read?board_no=${lastBoardList.board_no}"
+								style="color: black"> ${lastBoardList.board_title} </a>
 						</c:when>
 
 						<c:when test="${lastBoardList.board_no == null}">
 							<button type="button" class="btn btn-info mr-3" disabled>이전글이
 								없습니다</button>
 						</c:when>
-					</c:choose>
-
-				</div>
+					</c:choose> 
+				</div>  --%>
 			</div>
 		</div>
 	</div>
-</div>
-
-
-
 <%@include file="../includes/footer.jsp"%>

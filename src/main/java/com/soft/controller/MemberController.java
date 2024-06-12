@@ -20,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -75,14 +76,12 @@ public class MemberController {
 	public String login(HttpServletResponse response,memberVO vo, HttpServletRequest request, RedirectAttributes rttr) throws Exception{
 			
 		HttpSession session = request.getSession();
-		
 		session.setMaxInactiveInterval(6000);
-		
 		memberVO login = memberService.login(vo);
 		
 		if(login == null)  {
 			session.setAttribute("member", null);
-			rttr.addFlashAttribute("msg", "아이디 혹은 비밀번호를 한번 더 확인하여 주십시요.");
+			rttr.addFlashAttribute("msg", "아이디 , 비밀번호 혹은 2차 비밀번호를 한번 더 확인하여 주십시요.");
 			return "redirect:/account/login";
 		
 		} else if(login.getAdminCk() == 0) {
@@ -185,6 +184,15 @@ public class MemberController {
 		return "/account/manage";
 	}
 	
+	@RequestMapping(value = "/AdminManage", method=RequestMethod.GET) 
+	public String getAdminManagePage(memberVO mVO, HttpServletRequest request, Model model) throws Exception {
+		
+		List<memberVO> AdminMemberList = memberService.AdminMemberManage(mVO);
+		model.addAttribute("AdminMemberList", AdminMemberList);
+		
+		return "/account/AdminManage";
+	}
+	
 	//관리자지정
 	@RequestMapping(value="/selectManager", method=RequestMethod.POST)
 	public String selectManager(memberVO mVO, HttpServletRequest request, Model model,RedirectAttributes rttr) throws Exception 
@@ -230,9 +238,11 @@ public class MemberController {
 	
 	// 비밀번호 초기화
 	@RequestMapping(value="/pwValid", method=RequestMethod.POST)
-	public String pwValidation(memberVO mVO, HttpServletRequest request, Model model, RedirectAttributes rttr) throws Exception
+	public String pwValidation(@RequestParam("me_id")int me_id,memberVO mVO, HttpServletRequest request, Model model, RedirectAttributes rttr) throws Exception
 	{
 		try {
+			mVO.setMe_id(me_id);
+			mVO.setMe_pwd("1234567");
 			memberService.pwValidation(mVO);
 			rttr.addFlashAttribute("msg", "비밀번호가 초기화 되었습니다.");
 		}catch (Exception e) {

@@ -20,8 +20,8 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 
 <head>
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		
@@ -135,9 +135,14 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 			<!-- Heading -->
 		<div class="sidebar-heading">Interface</div>
 			<!-- Nav Item - Tables -->
+			<c:if test="${member.state == '최고관리자'}">
+				<li class="nav-item active"><a class="nav-link"
+					href="/account/AdminManage"><i class="fa-thin fa-user"></i>
+					<span>운영진 관리</span></a></li>
+			</c:if>
 			<c:if test="${member != null}">
 				<li class="nav-item active"><a class="nav-link"
-					href="/account/manage"><i class="fa-thin fa-user"></i>
+					href="/account/manage"><i class="fa-sharp fa-solid fa-users"></i>
 					<span>회원 관리</span></a></li>
 				<li class="nav-item active"><a class="nav-link"
 					href="/notice/list"><i class="fa-thin fa-check"></i>

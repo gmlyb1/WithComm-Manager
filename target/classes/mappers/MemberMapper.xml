@@ -16,6 +16,7 @@
 		 ,	me_email
 		 ,  me_name
 		 ,	me_pwd
+		 ,  second_me_pwd
 		 ,	me_regdate
 		)
 		values
@@ -24,6 +25,7 @@
 		,	#{me_email}
 		,   #{me_name}
 		,	#{me_pwd}
+		,	#{second_me_pwd}
 		,	now()
 		)
   	</insert>
@@ -56,6 +58,7 @@
 		tbl_member
 		where me_email = #{me_email} 
 		and me_pwd = #{me_pwd}
+        and second_me_pwd = #{second_me_pwd}
 	</select>
 	
 	<select id="memberInfoSearch" parameterType="memberVO" resultType="memberVO">
@@ -80,7 +83,16 @@
 	
 	<!-- 회원관리 -->
 	<select id="memberManage" resultType="memberVO" parameterType="memberVO">
-	select * from tbl_member
+	select * 
+	from tbl_member
+	where state != '최고관리자' and state != '관리자'
+	</select>
+	
+	<!-- 어드민관리 -->
+	<select id="AdminMemberManage" resultType="memberVO" parameterType="memberVO">
+	select * 
+	from tbl_member
+	where state = '관리자'
 	</select>
 	
 	<!-- 회원탈퇴 -->
@@ -98,7 +110,7 @@
 	</update>
 	
 	<update id="stateChk" parameterType="memberVO">
-	update tbl_member set state = #{state}, aprvStts = #{aprvStts} where me_id = #{me_id}
+	update tbl_member set state = #{state} where me_id = #{me_id}
 	</update>
 	
 	<insert id="insertAccount">

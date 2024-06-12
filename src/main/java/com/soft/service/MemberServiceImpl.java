@@ -102,6 +102,11 @@ public class MemberServiceImpl implements MemberService {
 		memberDAO.pwValidation(vo);
 	}
 
+	@Override
+	public List<memberVO> AdminMemberManage(memberVO mVO) throws Exception {
+		return memberDAO.AdminMemberManage(mVO);
+	}
+
 	
 
 	

@@ -101,7 +101,9 @@
 											<button type="submit" class="btn btn-danger btn-sm" id="delete_btn">삭제</button>
 										</c:when>
 								 	</c:choose>
-								 	<a href="/notice/list" class="btn btn-primary btn-sm">목록으로</a>
+								 	<a href="/notice/list" class="btn btn-primary">목록으로</a>
+								 	<a href="/notice/update" class="btn btn-success">수정</a>
+								 	<button type="button" class="btn btn-danger">삭제</button>
 	                              </div>
 	                           </td>  
 	                        </tr>
