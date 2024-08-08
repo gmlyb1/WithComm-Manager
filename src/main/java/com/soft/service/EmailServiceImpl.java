@@ -29,9 +29,9 @@ public class EmailServiceImpl implements EmailService {
 	}
 
 	@Override
-	public boolean sendEmailChk(String em_email) throws Exception {
+	public boolean sendEmailChk(String me_email) throws Exception {
 		// TODO Auto-generated method stub
-		return emailDAO.sendEmailChk(em_email);
+		return emailDAO.sendEmailChk(me_email);
 	}
 
 	@Override

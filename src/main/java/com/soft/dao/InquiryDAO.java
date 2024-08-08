@@ -13,4 +13,8 @@ public interface InquiryDAO {
 	public void insertInquiry(InquiryVO vo) throws Exception;
 	
 	public void updateState(InquiryVO vo) throws Exception;
+
+	public void updateInquiry(InquiryVO vo) throws Exception;
+	
+	public InquiryVO inquiryCnt(InquiryVO ivo) throws Exception;
 }

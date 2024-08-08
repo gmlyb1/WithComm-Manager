@@ -60,11 +60,20 @@
 									<td class="text-center">
 									<fmt:formatDate pattern="yyyy-MM-dd" value="${list.inq_regdate}"/></td>
 									<td class="text-center">
-									    <select class="form-control" name="answerYn">
-									    	<option class="text-center" value="대기중" ${list.answerYn == '대기중' ? 'selected' : ''}>대기중</option>
-									    	<option class="text-center" value="확인중" ${list.answerYn == '확인중' ? 'selected' : ''}>확인중</option>
-									    	<option class="text-center" value="답변완료" ${list.answerYn == '답변완료' ? 'selected' : ''}>답변완료</option>
-									    </select>
+									    <c:choose>
+									        <c:when test="${list.answerYn == '대기중'}">
+									            <span class="text-danger"><strong>${list.answerYn}</strong></span>
+									        </c:when>
+									        <c:when test="${list.answerYn == '확인중'}">
+									            <span class="text-primary"><strong>${list.answerYn}</strong></span>
+									        </c:when>
+									        <c:when test="${list.answerYn == '답변완료'}">
+									            <span class="text-success"><strong>${list.answerYn}</strong></span>
+									        </c:when>
+									        <c:otherwise>
+									            <span>${list.answerYn}</span>
+									        </c:otherwise>
+									    </c:choose>
 									</td>
 								</tr>
 						</c:forEach>
@@ -74,7 +83,6 @@
 				<c:if test="${member != null}">
 				<br>
 					<a type="button" href="/inquiry/create" class="btn btn-primary">글쓰기</a>
-					<button type="submit" class="btn btn-success" id="submitBtn">상태 저장</button>
 				</c:if>
 			  </form>	
 			</div>

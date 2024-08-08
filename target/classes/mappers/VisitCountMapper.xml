@@ -25,6 +25,14 @@
 			#{VISIT_AGENT}
 		)
 	</insert>
+	
+	<select id="selectVisitList" resultType="VisitCountVO" parameterType="VisitCountVO">
+		select
+		 	a.*
+		from
+		 tbl_visit a
+		 order by visit_id desc
+	</select>
 
 
 

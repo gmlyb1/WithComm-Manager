@@ -105,6 +105,16 @@ public class MemberDAOImpl implements MemberDAO {
 	public List<memberVO> AdminMemberManage(memberVO mVO) throws Exception {
 		return sqlSession.selectList("namespace.AdminMemberManage", mVO);
 	}
+
+	@Override
+	public void updateSecondPassword(String second_me_pwd) throws Exception{
+		sqlSession.update("namespace.updateSecondPassword",second_me_pwd);
+	}
+
+	@Override
+	public memberVO memberCnt(memberVO mvo) throws Exception {
+		return sqlSession.selectOne("namespace.memberCnt", mvo);
+	}
 	
 
 

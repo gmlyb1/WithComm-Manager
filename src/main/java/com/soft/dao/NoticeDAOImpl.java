@@ -70,6 +70,12 @@ public class NoticeDAOImpl implements NoticeDAO {
 		return sqlSession.selectList("namespace.selectNoticeImportant", vo);
 	}
 
+	@Override
+	public NoticeVO noticeCnt(NoticeVO nvo) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("namespace.noticeCnt", nvo);
+	}
+
 	
 	
 

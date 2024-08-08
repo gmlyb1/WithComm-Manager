@@ -24,19 +24,37 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+
+	
+	// 로그인 버튼 클릭 시 모달을 띄우는 예시
+    $('#changePasswordModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // 버튼을 클릭했을 때의 이벤트
+        var recipient = button.data('whatever'); // 버튼의 data-whatever 속성값
+
+        var modal = $(this);
+        modal.find('.modal-title').text('2차 비밀번호 변경');
+        modal.find('.modal-body input').val(recipient);
+    });
+
+    // 폼 제출 전 유효성 검사
+    $("#secondPwdForm").on('submit', function(e) {
+        var second_me_pwd = $('#second_me_pwd').val();
+		console.log(second_me_pwd);
+        if (second_me_pwd == '') {
+        	e.preventDefault();
+            alert('변경하실 2차 비밀번호를 입력해 주십시오.');
+            return;
+        }
+    });	
 		
-		$("#logoutBtn").on("click", function() {
+	$("#logoutBtn").on("click", function() {
 			
 		if(confirm("로그아웃 하시겠습니까?")) {
 			alert("로그아웃을 완료하였습니다.");
 			location.href = "/account/logout"
 		}
-	})
+	});
 
-	var msg = "${msg}";
-	if (msg != "") {
-		alert(msg);
-	}
 	
 	var countdownElement = document.getElementById('countdown');
     var minutesElement = document.getElementById('minutes');
@@ -64,7 +82,8 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
         } else {
             totalSeconds--;
         }
-    }
+    };
+    //끝
 });
 </script> 
 <style>
@@ -97,20 +116,10 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 
 <title>SB Admin 2 - Tables</title>
 
-<!-- Custom fonts for this template -->
-<link href="/resources/vendor/fontawesome-free/css/all.min.css"
-	rel="stylesheet" type="text/css">
-<link
-	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-	rel="stylesheet">
-
-<!-- Custom styles for this template -->
+<link href="/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 <link href="/resources/css/sb-admin-2.min.css" rel="stylesheet">
-
-<!-- Custom styles for this page -->
-<link href="/resources/vendor/datatables/dataTables.bootstrap4.min.css"
-	rel="stylesheet">
-
+<link href="/resources/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -137,82 +146,32 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 			<!-- Nav Item - Tables -->
 			<c:if test="${member.state == '최고관리자'}">
 				<li class="nav-item active"><a class="nav-link"
-					href="/account/AdminManage"><i class="fa-thin fa-user"></i>
+					href="/account/AdminManage"><i class="fa-solid fa-person"></i>
 					<span>운영진 관리</span></a></li>
 			</c:if>
 			<c:if test="${member != null}">
 				<li class="nav-item active"><a class="nav-link"
-					href="/account/manage"><i class="fa-sharp fa-solid fa-users"></i>
+					href="/account/manage"><i class="fa-solid fa-person"></i>
 					<span>회원 관리</span></a></li>
 				<li class="nav-item active"><a class="nav-link"
-					href="/notice/list"><i class="fa-thin fa-check"></i>
+					href="/notice/list"><i class="fa-solid fa-person"></i>
 					<span>공지사항 관리</span></a></li>
 				<li class="nav-item active"><a class="nav-link"
-					href="/board/list"><i class="fa-thin fa-mug-hot"></i>
+					href="/board/list"><i class="fa-solid fa-person"></i>
 					<span>게시판 관리</span></a></li>
 				<li class="nav-item active"><a class="nav-link"
-					href="/inquiry/list"><i class="fa-thin fa-circle-exclamation"></i>
+					href="/inquiry/list"><i class="fa-solid fa-person"></i>
 					<span>1:1 문의 관리</span></a></li>
 				<li class="nav-item active"><a class="nav-link"
-					href="/mail/recevMail"><i class="fa-thin fa-circle-exclamation"></i>
+					href="/mail/recevMail"><i class="fa-solid fa-persone"></i>
 					<span>메일 관리</span></a></li>
+				<li class="nav-item active"><a class="nav-link"
+					href="/visit/list"><i class="fa-solid fa-persone"></i>
+					<span>접속자 정보 관리</span></a></li>
 			</c:if>
-			
-			<!-- Nav Item - Pages Collapse Menu -->
-			
-			<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-				<div class="bg-white py-2 collapse-inner rounded">
-					<h6 class="collapse-header">Custom Components:</h6>
-					<a class="collapse-item" href="buttons.html">Buttons</a> <a
-						class="collapse-item" href="cards.html">Cards</a>
-				</div>
-			</div>
-
-			<!-- Nav Item - Utilities Collapse Menu -->
-			
-			<div id="collapseUtilities" class="collapse"
-				aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-				<div class="bg-white py-2 collapse-inner rounded">
-					<h6 class="collapse-header">Custom Utilities:</h6>
-					<a class="collapse-item" href="utilities-color.html">Colors</a> <a
-						class="collapse-item" href="utilities-border.html">Borders</a> <a
-						class="collapse-item" href="utilities-animation.html">Animations</a>
-					<a class="collapse-item" href="utilities-other.html">Other</a>
-				</div>
-			</div>
 
 			<!-- Divider -->
-			<hr class="sidebar-divider">
 
-			<!-- Heading -->
-			<div class="sidebar-heading">Addons</div>
-
-			<!-- Nav Item - Pages Collapse Menu -->
-			
-			<div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-				<div class="bg-white py-2 collapse-inner rounded">
-					<h6 class="collapse-header">Login Screens:</h6>
-					<a class="collapse-item" href="/account/login">Login</a> <a
-						class="collapse-item" href="/account/register">Register</a> <a
-						class="collapse-item" href="forgot-password.html">Forgot
-						Password</a>
-					<div class="collapse-divider"></div>
-					<h6 class="collapse-header">Other Pages:</h6>
-					<a class="collapse-item" href="/error/404.jsp">404 Page</a> <a
-						class="collapse-item" href="blank.html">Blank Page</a>
-				</div>
-			</div>
-
-			<!-- Nav Item - Charts -->
-
-			<!-- Nav Item - Tables -->
-			<!-- Divider -->
-			<hr class="sidebar-divider d-none d-md-block">
-
-			<!-- Sidebar Toggler (Sidebar) -->
-			<div class="text-center d-none d-md-inline">
-				<button class="rounded-circle border-0" id="sidebarToggle"></button>
-			</div>
 
 		</ul>
 		<!-- End of Sidebar -->
@@ -301,15 +260,15 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 									<div
 										class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
 										aria-labelledby="userDropdown">
-										<a class="dropdown-item" href="/account/profile"> <i
-											class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> 프로필
+										<a class="dropdown-item" href="/account/profile"> 
+											<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> 프로필
 										</a>
-										<a class="dropdown-item" href="/account/updateImg"> <i
-											class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> 이미지변경
+										<a class="dropdown-item" href="/account/updateImg"> 
+											<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> 이미지변경
 										</a>
-										<c:if test="${member.adminCk == 1}">
-											<a class="dropdown-item" href="/account/manage"> <i
-												class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i> 회원관리
+										<c:if test="${member.adminCk == 9999}">
+											<a class="dropdown-item" href="/account/manage"> 
+												<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i> 회원관리
 											</a>
 										</c:if>
 										<a class="dropdown-item" href="#"> <i
@@ -321,10 +280,39 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 									</div>
 								 </li>
 						   <div style="display: flex; align-items: center;">
-								<button id="logoutBtn" type="button" class="btn btn-primary">로그아웃</button>
+								<button id="logoutBtn" type="button" class="btn btn-danger">로그아웃</button>&nbsp;
+								<c:if test="${member.state == '최고관리자'}">
+									 <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#changePasswordModal">2차 비밀번호 변경</a>
+								</c:if>
 						   </div>
 							</c:if>
                       </ul>
 					</form>
 				</nav>
+				
+				<!-- 2차 비밀번호 변경 모달 -->
+			    <div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+			        <div class="modal-dialog" role="document">
+			            <div class="modal-content">
+			                <div class="modal-header">
+			                    <h5 class="modal-title" id="changePasswordModalLabel">2차 비밀번호 변경</h5>
+			                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			                        <span aria-hidden="true">&times;</span>
+			                    </button>
+			                </div>
+			                <form action="/account/updateSecondPassword" method="post" id="secondPwdForm">
+			                    <div class="modal-body">
+			                        <div class="form-group">
+			                            <label for="second_me_pwd">비밀번호:</label>
+			                            <input type="password" class="form-control" id="second_me_pwd" name="second_me_pwd">
+			                        </div>
+			                    </div>
+			                    <div class="modal-footer">
+			                        <button type="submit" class="btn btn-primary">변경하기</button>
+			                        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+			                    </div>
+			                </form>
+			            </div>
+			        </div>
+			    </div>
 				<!-- End of Topbar -->

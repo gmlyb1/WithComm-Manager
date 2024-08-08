@@ -24,7 +24,10 @@ public class NoticeVO {
 	private Timestamp notice_updateDate;
 	private Boolean isFixed;
 	
-	
+	private int dayCnt;
+	private int weekCnt;
+	private int monthCnt;
+	private int yearCnt;
 
 	
 	

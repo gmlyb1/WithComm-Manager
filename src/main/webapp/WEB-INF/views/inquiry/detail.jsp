@@ -67,6 +67,10 @@
 				                            <td colspan="2">${read.inq_name}</td>
 				                        </tr>
 				                        <tr>
+				                            <td>상태</td>
+				                            <td colspan="2">${read.answerYn}</td>
+				                        </tr>
+				                        <tr>
 				                            <td>작성일자</td>
 				                            <td colspan="2">${read.inq_regdate}</td>
 				                        </tr>
@@ -82,8 +86,7 @@
 				    <!-- 게시판 글보기  -->
 					<div style="margin-left: 18px;">
 						<c:if test="${member.me_name == read.inq_name}">
-							<button type="button" class="btn btn-success"
-								onclick="location.href='/inquiry/update?inq_no=${read.inq_no}';">수정</button>
+							<a href="/inquiry/update?inq_no=${read.inq_no}" class="btn btn-success">수정</a>
 							<button type="submit" class="btn btn-danger" id="delete_btn">삭제</button>
 						</c:if>
 						<button onclick="location.href='/inquiry/list'" type="button"

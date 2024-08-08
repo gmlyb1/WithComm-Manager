@@ -27,8 +27,12 @@ public class memberVO {
 	private int adminCk;
 	private String state;
 	private String aprvStts;
+	private boolean locked;
 	
-	
+	private int dayCnt;
+	private int weekCnt;
+	private int monthCnt;
+	private int yearCnt;
 	
 	
 	

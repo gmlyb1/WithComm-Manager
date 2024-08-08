@@ -70,6 +70,11 @@ public class NoticeServiceImpl implements NoticeService {
 		return noticeDAO.selectNoticeImportant(vo);
 	}
 
+	@Override
+	public NoticeVO noticeCnt(NoticeVO nvo) throws Exception {
+		return noticeDAO.noticeCnt(nvo);
+	}
+
 	
 
 }

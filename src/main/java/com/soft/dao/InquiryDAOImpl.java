@@ -35,4 +35,15 @@ public class InquiryDAOImpl implements InquiryDAO {
 		sqlSession.update("namespace.updateState",vo);
 	}
 
+	@Override
+	public void updateInquiry(InquiryVO vo) throws Exception {
+		sqlSession.update("namespace.updateInquiry",vo);
+	}
+
+	@Override
+	public InquiryVO inquiryCnt(InquiryVO ivo) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("namespace.inquiryCnt", ivo);
+	}
+
 }

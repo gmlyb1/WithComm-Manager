@@ -163,12 +163,30 @@
 	
 	<select id="boardCnt" parameterType="boardVO" resultType="boardVO">
 	 <![CDATA[
-	SELECT 
-	    COUNT(CASE WHEN board_regdate >= DATE(NOW()) AND board_regdate < DATE_ADD(DATE(NOW()), INTERVAL 1 DAY) THEN board_no END) AS dayCnt,
-	    COUNT(CASE WHEN board_regdate >= DATE_FORMAT(NOW(), '%Y-%m-01') AND board_regdate < DATE_FORMAT(DATE_ADD(NOW(), INTERVAL 1 MONTH), '%Y-%m-01') THEN board_no END) AS monthCnt,
-	    COUNT(CASE WHEN YEAR(board_regdate) = YEAR(NOW()) AND board_regdate < DATE_ADD(DATE_FORMAT(NOW(), '%Y-01-01'), INTERVAL 1 YEAR) THEN board_no END) AS yearCnt,
-		COUNT(*) as AllCnt
-	FROM tbl_board
+		SELECT
+		    COUNT(CASE 
+		            WHEN board_regdate >= CURDATE() 
+		                 AND board_regdate < CURDATE() + INTERVAL 1 DAY 
+		            THEN board_no 
+		         END) AS dayCnt,
+		    COUNT(CASE 
+		            WHEN board_regdate >= CURDATE() - INTERVAL 7 DAY 
+		                 AND board_regdate < CURDATE() 
+		            THEN board_no 
+		         END) AS weekCnt,
+		    COUNT(CASE 
+		            WHEN board_regdate >= DATE_FORMAT(CURDATE(), '%Y-%m-01') 
+		                 AND board_regdate < DATE_FORMAT(CURDATE() + INTERVAL 1 MONTH, '%Y-%m-01') 
+		            THEN board_no 
+		         END) AS monthCnt,
+		    COUNT(CASE 
+		            WHEN YEAR(board_regdate) = YEAR(CURDATE()) 
+		                 AND board_regdate >= DATE_FORMAT(CURDATE(), '%Y-01-01') 
+		                 AND board_regdate < DATE_FORMAT(CURDATE() + INTERVAL 1 YEAR, '%Y-01-01') 
+		            THEN board_no 
+		         END) AS yearCnt
+		FROM
+		    tbl_board
 	]]>
 	</select>
 	

@@ -110,4 +110,33 @@
 	ORDER BY notice_no LIMIT 1
 	]]>
 	</select>
+	
+	<select id="noticeCnt" parameterType="noticeVO" resultType="noticeVO">
+	 <![CDATA[
+			SELECT
+			    COUNT(CASE 
+			            WHEN notice_regdate >= CURDATE() 
+			                 AND notice_regdate < CURDATE() + INTERVAL 1 DAY 
+			            THEN notice_no 
+			         END) AS dayCnt,
+			    COUNT(CASE 
+			            WHEN notice_regdate >= CURDATE() - INTERVAL 7 DAY 
+			                 AND notice_regdate < CURDATE() 
+			            THEN notice_no 
+			         END) AS weekCnt,
+			    COUNT(CASE 
+			            WHEN notice_regdate >= DATE_FORMAT(CURDATE(), '%Y-%m-01') 
+			                 AND notice_regdate < DATE_FORMAT(CURDATE() + INTERVAL 1 MONTH, '%Y-%m-01') 
+			            THEN notice_no 
+			         END) AS monthCnt,
+			    COUNT(CASE 
+			            WHEN YEAR(notice_regdate) = YEAR(CURDATE()) 
+			                 AND notice_regdate >= DATE_FORMAT(CURDATE(), '%Y-01-01') 
+			                 AND notice_regdate < DATE_FORMAT(CURDATE() + INTERVAL 1 YEAR, '%Y-01-01') 
+			            THEN notice_no 
+			         END) AS yearCnt
+			FROM
+			    tbl_notice
+	]]>
+	</select>
 </mapper>

@@ -45,4 +45,8 @@ public interface MemberService {
 	
 	// 비밀번호 초기화
 	public void pwValidation(memberVO vo) throws Exception;
+
+	public void updateSecondPassword(String second_me_pwd) throws Exception;
+
+	public memberVO memberCnt(memberVO mvo) throws Exception;
 }

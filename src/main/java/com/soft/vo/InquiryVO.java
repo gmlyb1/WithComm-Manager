@@ -20,4 +20,9 @@ public class InquiryVO {
 	private String me_name;
 	private int inqCount;
 	private String answerYn;
+	
+	private int dayCnt;
+	private int weekCnt;
+	private int monthCnt;
+	private int yearCnt;
 }

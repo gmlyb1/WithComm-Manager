@@ -107,11 +107,15 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.AdminMemberManage(mVO);
 	}
 
-	
+	@Override
+	public void updateSecondPassword(String second_me_pwd) throws Exception{
+		memberDAO.updateSecondPassword(second_me_pwd);
+	}
 
-	
-	
-	 
-	
-	
+	@Override
+	public memberVO memberCnt(memberVO mvo) throws Exception {
+		return memberDAO.memberCnt(mvo);
+	}
+
+
 }

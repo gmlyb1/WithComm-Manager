@@ -9,8 +9,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-
-<%@include file="../includes/header.jsp"%>
 <script type="text/javascript">
 	function _onSubmit() {
 
@@ -33,7 +31,7 @@
 </script>
 
 
-
+<%@include file="../includes/header.jsp"%>
 
 <div class="row" style="margin-bottom: 20px; margin-left: 1px;">
 	<div class="col-lg-12">
@@ -46,7 +44,8 @@
 	<div id="contAreaBox">
 		<div class="panel">
 			<div class="panel-body">
-				<form action="/inquiry/create" method="post">
+				<form action="/inquiry/update" method="post">
+					<input type="hidden" id="inq_no" name="inq_no" value="${update.inq_no}">
 					<div class="table-responsive" style="text-align: center;">
 						<table id="datatable-scroller"
 							class="table table-bordered tbl_Form">
@@ -60,35 +59,36 @@
 									<th class="active">작성자</th>
 									<td class="form-inline"><input type="text"
 										id="inq_name" name="inq_name" class="form-control"
-										style="width: 200px" value="${member.me_name}" readonly /></td>
+										style="width: 200px" value="${update.inq_name}" readonly /></td>
 								</tr>
 								<tr>
 									<th class="active">제목</th>
 									<td class="form-inline">
-									<input type="text" id="inq_title" name="inq_title" placeholder="제목을 입력해주세요." class="form-control" style="width: 840px" />
+									<input type="text" id="inq_title" name="inq_title" placeholder="제목을 입력해주세요." class="form-control" style="width: 840px" value="${update.inq_title}"/>
 									</td>
 								</tr>
 								<tr>
 									<th class="active">상태</th>
-									<td class="form-inline">
-										<select class="form-control" name="answerYn">
-									    	<option class="text-center">대기중</option>
-									    	<option class="text-center">확인중</option>
-									    	<option class="text-center">답변완료</option>
-									    </select>
-									</td>
+										<td class="form-inline">
+											<select class="form-control" name="answerYn">
+										    	<option class="text-center" value="대기중" ${update.answerYn == '대기중' ? 'selected' : ''}>대기중</option>
+										    	<option class="text-center" value="확인중" ${update.answerYn == '확인중' ? 'selected' : ''}>확인중</option>
+										    	<option class="text-center" value="답변완료" ${update.answerYn == '답변완료' ? 'selected' : ''}>답변완료</option>
+										    </select>
+								    	</td>
 								</tr>
 								<tr>
 									<th class="active">내용</th>
 									<td class="form-inline">
-									<textarea id="inq_content" name="inq_content" cols="100" rows="10" placeholder="내용을 입력해주세요." class="form-control"></textarea></td>
+										<textarea id="inq_content" name="inq_content" cols="100" rows="10" placeholder="내용을 입력해주세요." class="form-control">${update.inq_title}</textarea>
+									</td>
 								</tr>
 
 							</tbody>
 						</table>
 					</div>
 					<div style="margin-left: 1px;">
-						<button type="submit" class="btn btn-primary" onclick="_onSubmit();">등록</button>
+						<button onclick="_onsubmit();" type="submit" class="btn btn-primary">등록</button>
 						<a href="/inquiry/list" class="btn btn-danger">취소</a>
 					</div>
 				</form>

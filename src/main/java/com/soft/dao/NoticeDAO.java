@@ -26,4 +26,6 @@ public interface NoticeDAO {
 	public List<NoticeVO> HomeNoticeList() throws Exception;
 	
 	public List<NoticeVO> selectNoticeImportant(NoticeVO vo) throws Exception;
+	
+	public NoticeVO noticeCnt(NoticeVO nvo) throws Exception;
 }

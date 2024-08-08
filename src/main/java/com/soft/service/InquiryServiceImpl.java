@@ -33,4 +33,14 @@ public class InquiryServiceImpl implements InquiryService {
 	public void updateState(InquiryVO vo) throws Exception {
 		inquiryDAO.updateState(vo);
 	}
+
+	@Override
+	public void updateInquiry(InquiryVO vo) throws Exception {
+		inquiryDAO.updateInquiry(vo);
+	}
+
+	@Override
+	public InquiryVO inquiryCnt(InquiryVO ivo) throws Exception {
+		return inquiryDAO.inquiryCnt(ivo);
+	}
 }

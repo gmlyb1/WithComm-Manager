@@ -1,5 +1,7 @@
 package com.soft.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -17,6 +19,12 @@ public class VisitCountServiceImpl implements VisitCountService{
 	@Override
 	public int insertVisitor(VisitCountVO vo) throws Exception {
 		return visitCountDAO.insertVisitor(vo);
+	}
+
+
+	@Override
+	public List<VisitCountVO> selectVisitList(VisitCountVO vvo) throws Exception {
+		return visitCountDAO.selectVisitList(vvo);
 	}
 
 }

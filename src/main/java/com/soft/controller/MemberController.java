@@ -175,6 +175,21 @@ public class MemberController {
 		
 	}
 	
+	@RequestMapping(value = "/updateSecondPassword", method=RequestMethod.POST)
+	public String updateSecondPassword( @RequestParam("second_me_pwd") String second_me_pwd,
+	        RedirectAttributes rttr) throws Exception {
+		
+		try {
+			memberService.updateSecondPassword(second_me_pwd);
+			rttr.addFlashAttribute("msg", "2차 비밀번호가 변경되었습니다. \n 재 로그인시 변경된 2차 비밀번호로 로그인 할 수 있습니다.");
+		} catch (Exception e) {
+			rttr.addFlashAttribute("msg", "에러가 발생했습니다.");
+		}
+		
+		
+		return "redirect:/home";
+	}
+	
 	@RequestMapping(value = "/manage", method=RequestMethod.GET) 
 	public String getManagePage(memberVO mVO, HttpServletRequest request, Model model) throws Exception {
 		
@@ -197,7 +212,6 @@ public class MemberController {
 	@RequestMapping(value="/selectManager", method=RequestMethod.POST)
 	public String selectManager(memberVO mVO, HttpServletRequest request, Model model,RedirectAttributes rttr) throws Exception 
 	{
-		logger.debug("mVO : {} " , mVO);
 		try {
 			memberService.selectManage(mVO);
 		} catch (Exception e) {
@@ -241,8 +255,14 @@ public class MemberController {
 	public String pwValidation(@RequestParam("me_id")int me_id,memberVO mVO, HttpServletRequest request, Model model, RedirectAttributes rttr) throws Exception
 	{
 		try {
+			
+		   String newPassword = generateRandomPassword(6);
+			
+		   
+		   logger.info("newPassword:"+newPassword);
 			mVO.setMe_id(me_id);
-			mVO.setMe_pwd("1234567");
+			mVO.setMe_pwd(newPassword);
+//			mVO.setMe_pwd("1234567");
 			memberService.pwValidation(mVO);
 			rttr.addFlashAttribute("msg", "비밀번호가 초기화 되었습니다.");
 		}catch (Exception e) {
@@ -250,6 +270,17 @@ public class MemberController {
 		}
 		
 		return "redirect:/account/manage";
+	}
+	
+	// 랜덤 비밀번호 생성 함수 (Math.random() 사용)
+	private String generateRandomPassword(int length) {
+	    StringBuilder sb = new StringBuilder(length);
+	    for (int i = 0; i < length; i++) {
+	        // 0부터 9까지의 숫자 중 랜덤으로 선택
+	        int digit = (int) (Math.random() * 10);
+	        sb.append(digit);
+	    }
+	    return sb.toString();
 	}
 	
 

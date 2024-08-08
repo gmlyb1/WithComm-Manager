@@ -50,13 +50,45 @@
 	<!-- 글쓰기 -->
 	<insert id="updateState">
 		update tbl_inquiry set
-		 inq_no = #{inq_no}
-		,inq_title = #{inq_title} 
-		,answerYn = #{answerYn}
-		,inq_content = #{inq_content}
-		,inq_name = #{inq_name}
-		,inq_regdate = now()
+			answerYn = #{answerYn}
 		where inq_no = #{inq_no}
 	</insert>
+	
+	<update id="updateInquiry" parameterType="inquiryVO">
+		update tbl_inquiry set 
+			 inq_title = #{inq_title}
+			,inq_content = #{inq_content}
+			,answerYn = #{answerYn}
+		where inq_no = #{inq_no}
+	</update>
+	
+	<select id="inquiryCnt" parameterType="inquiryVO" resultType="inquiryVO">
+	 <![CDATA[
+		SELECT
+		    COUNT(CASE 
+		            WHEN inq_regdate >= CURDATE() 
+		                 AND inq_regdate < CURDATE() + INTERVAL 1 DAY 
+		            THEN inq_no 
+		         END) AS dayCnt,
+		    COUNT(CASE 
+		            WHEN inq_regdate >= CURDATE() - INTERVAL 7 DAY 
+		                 AND inq_regdate < CURDATE() 
+		            THEN inq_no 
+		         END) AS weekCnt,
+		    COUNT(CASE 
+		            WHEN inq_regdate >= DATE_FORMAT(CURDATE(), '%Y-%m-01') 
+		                 AND inq_regdate < DATE_FORMAT(CURDATE() + INTERVAL 1 MONTH, '%Y-%m-01') 
+		            THEN inq_no 
+		         END) AS monthCnt,
+		    COUNT(CASE 
+		            WHEN YEAR(inq_regdate) = YEAR(CURDATE()) 
+		                 AND inq_regdate >= DATE_FORMAT(CURDATE(), '%Y-01-01') 
+		                 AND inq_regdate < DATE_FORMAT(CURDATE() + INTERVAL 1 YEAR, '%Y-01-01') 
+		            THEN inq_no 
+		         END) AS yearCnt
+		FROM
+		    tbl_inquiry
+	]]>
+	</select>
 
 </mapper>

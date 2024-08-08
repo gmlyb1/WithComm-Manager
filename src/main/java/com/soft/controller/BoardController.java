@@ -97,16 +97,13 @@ public class BoardController {
 		
 		model.addAttribute("read", boardService.BoardRead(vo.getBoard_no()));
 		
-		// ���� ��
 		model.addAttribute("lastBoardList", boardService.lastBoardList(board_no));
 		
-		// ���� ��
 		model.addAttribute("nextBoardList", boardService.nextBoardList(board_no));
 		
 		List<replyVO> replyList = replyService.replyList(vo.getBoard_no());
 		model.addAttribute("replyList", replyList);
 		
-//		System.out.println(vo.getBoard_no());
 		
 		return "/board/read";
 	}

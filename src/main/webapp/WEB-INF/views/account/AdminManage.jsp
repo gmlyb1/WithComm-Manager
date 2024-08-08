@@ -95,19 +95,18 @@
 		
 		// 비밀번호 초기화
 		$(".pwValid").click(function() {
-			var mePwd = $(this).data("member-pwd");
-			
+			 var mePwd = $(this).data("member-pwd");
+			 var memberId = $(this).data("member-id");
 			if (confirm("비밀번호를 초기화 하시겠습니까?")) {
 				$.ajax({
 					url : "/account/pwValid",
 					type : "POST",
 					data : {
-						mePwd : 1234567
+						me_id : memberId
+						//mePwd : 1234567
 					},
 					success : function(data) {
-						alert("비밀번호가 초기화 되었습니다.");
-						console.log(data);
-						location.reload();
+						alert("비밀번호가 초기화 되었습니다.\n새로운 비밀번호는 "+mePwd+"입니다.");
 					},
 					error : function(error) {
 						console.log(error);
@@ -126,7 +125,7 @@
 <div class="container-fluid">
 
 	<!-- Page Heading -->
-	<h1 class="h3 mb-2 text-gray-800">회원 관리</h1>
+	<h1 class="h3 mb-2 text-gray-800">운영자 관리</h1>
 
 	<!-- DataTales Example -->
 	<div class="card shadow mb-4">

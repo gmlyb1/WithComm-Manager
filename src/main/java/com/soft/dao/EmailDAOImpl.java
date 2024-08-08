@@ -28,9 +28,9 @@ public class EmailDAOImpl implements EmailDAO {
 	}
 
 	@Override
-	public boolean sendEmailChk(String em_email) throws Exception {
+	public boolean sendEmailChk(String me_email) throws Exception {
 
-		boolean check = sqlSession.selectOne("namespace.emailChk", em_email);
+		boolean check = sqlSession.selectOne("namespace.emailChk", me_email);
 		logger.info("mailDAO : 보내려는 메일 주소 존재 여부 : "+check);
 		return check;
 	}

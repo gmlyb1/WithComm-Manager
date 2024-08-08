@@ -24,86 +24,45 @@
 
 <script type="text/javascript">
 	function _onsubmit() {
-		if ($("#me_email").val() == "") {
-			alert("이메일 입력해주세요");
-			$("#me_email").focus();
-			return false;
-		}
 
 		if ($("#me_pwd").val() == "") {
-			alert("제목을 입력해주세요");
+			alert("비밀번호를 입력해주세요");
 			$("#me_pwd").focus();
 			return false;
 		}
 
-		if ($("#me_pwd2").val() == "") {
-			alert("비밀번호를 한번 더 입력해 주세요");
-			$("#me_pwd2").focus();
-			return false;
-		}
 
-		if (!confirm("회원 정보를 변경 하시겠습니까?")) {
+		if (!confirm("2차 비밀번호를 변경 하시겠습니까?")) {
 			return false;
 		}
 	}
 </script>
-<!-- Custom fonts for this template-->
-	<div class="container">
-		<div class="card o-hidden border-0 shadow-lg my-5">
-			<div class="card-body p-0">
-				<div class="row">
-					<div class="col-lg-5 d-none d-lg-block be-register-image">
-						<div class="col-lg-7">
-							<div class="p-5">
-								<div class="text-center">
-									<h1 class="h4 text-gray-900 mb-4">프로필</h1>
-								</div>
-							</div>
-								<div class="form-group">
-								    <div class="col-sm-12 mb-3 mb-sm-0">
-								        <label for="me_email">계정 아이디:</label>
-								        <input type="text" class="form-control form-control-user" id="me_email" name="me_email" style="text-align: center;" value="${member.me_email}" placeholder="아이디" disabled>
-								    </div>
-								</div>
-								
-								<div class="form-group">
-								    <div class="col-sm-12 mb-3 mb-sm-0">
-								        <label for="me_name">닉네임:</label>
-								        <input type="text" class="form-control form-control-user" id="me_name" name="me_name" style="text-align: center;" value="${member.me_name}" placeholder="닉네임" disabled>
-								    </div>
-								</div>
-								
-								<div class="form-group">
-								    <div class="col-sm-12 mb-3 mb-sm-0">
-								        <label for="me_grade">회원등급:</label>
-								        <input type="text" class="form-control form-control-user" id="me_grade" name="me_grade" style="text-align: center;" value="${member.state}" disabled>
-								    </div>
-								</div>
-								
-								<div class="form-group">
-								    <div class="col-sm-12 mb-3 mb-sm-0">
-								        <label for="me_pwd">비밀번호:</label>
-								        <input type="password" class="form-control form-control-user" id="me_pwd" name="me_pwd" style="text-align: center;" placeholder="비밀번호">
-								    </div>
-								</div>
-								
-								<div class="form-group">
-								    <div class="col-sm-12 mb-3 mb-sm-0">
-								        <label for="me_pwd2">비밀번호 확인:</label>
-								        <input type="password" class="form-control form-control-user" id="me_pwd2" name="me_pwd2" style="text-align: center;" placeholder="비밀번호 확인">
-								    </div>
-								</div>
 
-								<a href="/account/update" class="btn btn-primary"> 수정하기</a>
-								<button type="submit" class="btn btn-danger">회원탈퇴</button>
-								<!-- 회원 탈퇴 -->
-								 <a href="/home" class="btn btn-warning"> 메인으로 </a>
-							
-							<hr>
+<!-- Custom fonts for this template-->
+<div class="container">
+	<div class="card o-hidden border-12 shadow-lg my-12">
+		<div class="card-body p-0">
+			<div class="row">
+				<div class="col-lg-12 d-none d-lg-block be-register-image">
+					<div class="col-lg-12">
+						<div class="p-12">
+						<div class="text-center">
+							<h1 class="h4 text-gray-900 mb-12">2차 비밀번호 변경</h1>
 						</div>
+						</div>
+						<div class="form-group">
+						    <div class="col-sm-12 mb-12 mb-sm-12">
+						        <label for="me_pwd">비밀번호:</label>
+						        <input type="password" class="form-control form-control-user" id="me_pwd" name="me_pwd" style="text-align: center;" placeholder="비밀번호">
+						    </div>
+						</div>
+						<a href="/account/update" class="btn btn-primary"> 수정하기</a>
+						 <a href="/home" class="btn btn-warning"> 메인으로 </a>
+						<hr>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
 <%@include file="../includes/footer.jsp"%>

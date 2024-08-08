@@ -1,11 +1,11 @@
 package com.soft.controller;
 
-import java.lang.System.Logger;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,7 +26,7 @@ public class InquiryController {
 	@Autowired
 	private InquiryService inquiryService;
 	
-//	private static final Logger logger = LoggerFactory.getLogger(InquiryController.class);
+	private static final Logger logger = LoggerFactory.getLogger(InquiryController.class);
 	
 	@RequestMapping(value="/list",method = {RequestMethod.GET, RequestMethod.POST})
 	public String inquiryGET(InquiryVO vo,Model model) throws Exception{
@@ -60,6 +60,31 @@ public class InquiryController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			rttr.addFlashAttribute("msg", "에러가 발생했습니다.");
+			
+		}
+		
+		return "redirect:/inquiry/list";
+	}
+	
+	@RequestMapping(value = "/update" , method=RequestMethod.GET)
+	public String updateInquiryPage(InquiryVO vo, Model model) throws Exception{
+			
+		
+		model.addAttribute("update", inquiryService.selectInquiryDetail(vo.getInq_no()));
+		
+		return "/inquiry/update";
+	}
+	
+	@RequestMapping(value = "/update" , method=RequestMethod.POST)
+	public String updateInquiry(InquiryVO vo, HttpServletRequest request, RedirectAttributes rttr, memberVO mVO) throws Exception
+	{
+		try {
+			inquiryService.updateInquiry(vo);
+			rttr.addFlashAttribute("msg", "글 수정을 완료하였습니다.");
+		} catch (Exception e) {
+			e.printStackTrace();
+			rttr.addFlashAttribute(""
+					+ "msg", "에러가 발생했습니다.");
 			
 		}
 		

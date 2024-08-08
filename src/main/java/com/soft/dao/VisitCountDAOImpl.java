@@ -1,5 +1,7 @@
 package com.soft.dao;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -16,5 +18,10 @@ public class VisitCountDAOImpl implements VisitCountDAO {
 	@Override
 	public int insertVisitor(VisitCountVO vo) throws Exception {
 		return sqlSession.insert("namespace.insertVisitor",vo);
+	}
+
+	@Override
+	public List<VisitCountVO> selectVisitList(VisitCountVO vvo) throws Exception {
+		return sqlSession.selectList("namespace.selectVisitList", vvo);
 	}
 }

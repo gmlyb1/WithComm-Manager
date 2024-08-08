@@ -9,6 +9,20 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
+<script type="text/javascript">
+ $(document).ready(function () {
+	var state = "${member.state}";
+	console.log("state:"+state);
+	
+	if(state === '최고관리자') {
+		$("#adminBtn").show();	
+	}else {
+		$("#adminBtn").hide();
+	}
+ });
+
+</script>
+
 <%@include file="/WEB-INF/views/includes/header.jsp"%>
 
 <div class="container-fluid">
@@ -21,6 +35,158 @@
 	</div>
 
 	<div class="row">
+	<!-- 접속자 -->
+		<div class="col-xl-3 col-md-6 mb-4">
+			<div class="card border-left-primary shadow h-100 py-2">
+				<div class="card-body">
+					<div class="row no-gutters align-items-center">
+						<div class="col mr-2">
+							<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+								금일 접속자 수
+							</div>
+							
+							<div class="h5 mb-0 font-weight-bold text-gray-800">${memberCnt.dayCnt}명</div>
+						</div>
+						<div class="col-auto">
+							<i class="fas fa-calendar fa-3x text-gray-300"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-xl-3 col-md-6 mb-4">
+			<div class="card border-left-success shadow h-100 py-2">
+				<div class="card-body">
+					<div class="row no-gutters align-items-center">
+						<div class="col mr-2">
+							<div
+								class="text-xs font-weight-bold text-success text-uppercase mb-1">
+								금주 접속자 수</div>
+							<div class="h5 mb-0 font-weight-bold text-gray-800">${memberCnt.weekCnt}명</div>
+						</div>
+						<div class="col-auto">
+							<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-xl-3 col-md-6 mb-4">
+			<div class="card border-left-danger shadow h-100 py-2">
+				<div class="card-body">
+					<div class="row no-gutters align-items-center">
+						<div class="col mr-2">
+							<div
+								class="text-xs font-weight-bold text-success text-uppercase mb-1">
+								금월 접속자 수</div>
+							<div class="h5 mb-0 font-weight-bold text-gray-800">${memberCnt.monthCnt}명</div>
+						</div>
+						<div class="col-auto">
+							<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-xl-3 col-md-6 mb-4">
+			<div class="card border-left-warning shadow h-100 py-2">
+				<div class="card-body">
+					<div class="row no-gutters align-items-center">
+						<div class="col mr-2">
+							<div
+								class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+								금년 접속자 수</div>
+							<div class="h5 mb-0 font-weight-bold text-gray-800">${memberCnt.yearCnt}명</div>
+						</div>
+						<div class="col-auto">
+							<i class="fas fa-comments fa-2x text-gray-300"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	<!-- 접속자 -->
+	
+	<!-- 공지사항 -->
+		<div class="col-xl-3 col-md-6 mb-4">
+			<div class="card border-left-primary shadow h-100 py-2">
+				<div class="card-body">
+					<div class="row no-gutters align-items-center">
+						<div class="col mr-2">
+							<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+								금일 공지사항 수
+							</div>
+							
+							<div class="h5 mb-0 font-weight-bold text-gray-800">${noticeCnt.dayCnt}개</div>
+						</div>
+						<div class="col-auto">
+							<i class="fas fa-calendar fa-3x text-gray-300"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-xl-3 col-md-6 mb-4">
+			<div class="card border-left-success shadow h-100 py-2">
+				<div class="card-body">
+					<div class="row no-gutters align-items-center">
+						<div class="col mr-2">
+							<div
+								class="text-xs font-weight-bold text-success text-uppercase mb-1">
+								금주 공지사항 글 수</div>
+							<div class="h5 mb-0 font-weight-bold text-gray-800">${noticeCnt.weekCnt}개</div>
+						</div>
+						<div class="col-auto">
+							<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-xl-3 col-md-6 mb-4">
+			<div class="card border-left-danger shadow h-100 py-2">
+				<div class="card-body">
+					<div class="row no-gutters align-items-center">
+						<div class="col mr-2">
+							<div
+								class="text-xs font-weight-bold text-success text-uppercase mb-1">
+								금월 공지사항 글 수</div>
+							<div class="h5 mb-0 font-weight-bold text-gray-800">${noticeCnt.monthCnt}개</div>
+						</div>
+						<div class="col-auto">
+							<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-xl-3 col-md-6 mb-4">
+			<div class="card border-left-warning shadow h-100 py-2">
+				<div class="card-body">
+					<div class="row no-gutters align-items-center">
+						<div class="col mr-2">
+							<div
+								class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+								금년 공지사항 글 수</div>
+							<div class="h5 mb-0 font-weight-bold text-gray-800">${noticeCnt.yearCnt}개</div>
+						</div>
+						<div class="col-auto">
+							<i class="fas fa-comments fa-2x text-gray-300"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	<!-- 공지사항 -->
+	
+	
+	<!-- 자유게시판 -->	
 		<div class="col-xl-3 col-md-6 mb-4">
 			<div class="card border-left-primary shadow h-100 py-2">
 				<div class="card-body">
@@ -47,8 +213,8 @@
 						<div class="col mr-2">
 							<div
 								class="text-xs font-weight-bold text-success text-uppercase mb-1">
-								금월 자유게시판 글 수</div>
-							<div class="h5 mb-0 font-weight-bold text-gray-800">${boardCnt.monthCnt}개</div>
+								금주 자유게시판 글 수</div>
+							<div class="h5 mb-0 font-weight-bold text-gray-800">${boardCnt.weekCnt}개</div>
 						</div>
 						<div class="col-auto">
 							<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -59,14 +225,14 @@
 		</div>
 
 		<div class="col-xl-3 col-md-6 mb-4">
-			<div class="card border-left-success shadow h-100 py-2">
+			<div class="card border-left-danger shadow h-100 py-2">
 				<div class="card-body">
 					<div class="row no-gutters align-items-center">
 						<div class="col mr-2">
 							<div
 								class="text-xs font-weight-bold text-success text-uppercase mb-1">
-								금년 자유게시판 글 수</div>
-							<div class="h5 mb-0 font-weight-bold text-gray-800">${boardCnt.yearCnt}개</div>
+								금월 자유게시판 글 수</div>
+							<div class="h5 mb-0 font-weight-bold text-gray-800">${boardCnt.monthCnt}개</div>
 						</div>
 						<div class="col-auto">
 							<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -83,8 +249,8 @@
 						<div class="col mr-2">
 							<div
 								class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-								전체 게시판 글 수</div>
-							<div class="h5 mb-0 font-weight-bold text-gray-800">${boardCnt.allCnt}개</div>
+								금년 자유게시판 글 수</div>
+							<div class="h5 mb-0 font-weight-bold text-gray-800">${boardCnt.yearCnt}개</div>
 						</div>
 						<div class="col-auto">
 							<i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -93,6 +259,83 @@
 				</div>
 			</div>
 		</div>
+		<!-- 자유게시판 -->	
+		
+		<!-- 1:1 문의 -->	
+		<div class="col-xl-3 col-md-6 mb-4">
+			<div class="card border-left-primary shadow h-100 py-2">
+				<div class="card-body">
+					<div class="row no-gutters align-items-center">
+						<div class="col mr-2">
+							<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+								금일 1:1문의 글 수
+							</div>
+							
+							<div class="h5 mb-0 font-weight-bold text-gray-800">${inquiryCnt.dayCnt}개</div>
+						</div>
+						<div class="col-auto">
+							<i class="fas fa-calendar fa-3x text-gray-300"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-xl-3 col-md-6 mb-4">
+			<div class="card border-left-success shadow h-100 py-2">
+				<div class="card-body">
+					<div class="row no-gutters align-items-center">
+						<div class="col mr-2">
+							<div
+								class="text-xs font-weight-bold text-success text-uppercase mb-1">
+								금주 1:1문의 글 수</div>
+							<div class="h5 mb-0 font-weight-bold text-gray-800">${inquiryCnt.weekCnt}개</div>
+						</div>
+						<div class="col-auto">
+							<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-xl-3 col-md-6 mb-4">
+			<div class="card border-left-danger shadow h-100 py-2">
+				<div class="card-body">
+					<div class="row no-gutters align-items-center">
+						<div class="col mr-2">
+							<div
+								class="text-xs font-weight-bold text-success text-uppercase mb-1">
+								금월 1:1문의 글 수</div>
+							<div class="h5 mb-0 font-weight-bold text-gray-800">${inquiryCnt.monthCnt}개</div>
+						</div>
+						<div class="col-auto">
+							<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-xl-3 col-md-6 mb-4">
+			<div class="card border-left-warning shadow h-100 py-2">
+				<div class="card-body">
+					<div class="row no-gutters align-items-center">
+						<div class="col mr-2">
+							<div
+								class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+								금년 1:1문의 수</div>
+							<div class="h5 mb-0 font-weight-bold text-gray-800">${inquiryCnt.yearCnt}개</div>
+						</div>
+						<div class="col-auto">
+							<i class="fas fa-comments fa-2x text-gray-300"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 1:1 문의 -->	
+		
 	</div>
 
 
@@ -178,7 +421,6 @@
 						</c:if>
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</div>
@@ -188,7 +430,7 @@
 			<div class="card shadow mb-4">
 				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 					<h6 class="m-0 font-weight-bold text-primary">자유 게시판 -상위6개</h6>
-						<a class="btn btn-success" href="/member/list">더보기</a>
+						<a class="btn btn-success" href="/board/list">더보기</a>
 				</div>
 				<div class="card-body">
 					<div class="chart-area">
@@ -234,7 +476,7 @@
 				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 					<h6 class="m-0 font-weight-bold text-primary">관리자 리스트</h6>
 					<div class="dropdown no-arrow">
-						<a class="btn btn-success" href="#">더보기</a>
+						<a id="adminBtn" class="btn btn-success" href="/account/AdminManage">더보기</a>
 					</div>
 				</div>
 
@@ -263,7 +505,6 @@
 			</div>
 		</div>
 	</div>
-
 </div>
 
 <%@include file="/WEB-INF/views/includes/footer.jsp"%>

@@ -13,7 +13,7 @@ public interface EmailDAO {
 	public List<MailVO> mailList(String mail_id) throws Exception;
 
 	// 메일 쓰기 - 해당 이메일 주소가 존재하는지 체크
-	public boolean sendEmailChk(String em_email) throws Exception;
+	public boolean sendEmailChk(String me_email) throws Exception;
 	
 	// 메일 쓰기
 	public void mailWrite(MailVO vo) throws Exception;

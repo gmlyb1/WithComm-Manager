@@ -11,31 +11,15 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
-	$(document).ready(function(e) {
-			
+	$(document).ready(function() {
 		$("#LoginBtn").click(function() {
-			var me_email = $("#me_email").val();
-			var me_id = $("#me_id").val();
-			var me_pwd = $("#me_pwd").val();
 			var second_me_pwd = $("#second_me_pwd").val();
-
-			if (document.frm.me_email.value == "") {
-				alert("이메일을 입력해 주세요.");
-				return false;
-			}
-
-			if (document.frm.me_pwd.value == "") {
-				alert("비밀번호를 입력해 주세요.");
-				return false;
-			}
 			
 			if (document.frm.second_me_pwd.value == "") {
 				alert("2차 비밀번호를 입력해 주세요.");
 				return false;
 			}
 		});
-		
-		//끝
 	});
 </script>
 <script type="text/javascript">
@@ -293,20 +277,12 @@ img {
 				</div>
 				<div class="login__forms">
 					<!--         login form -->
-					<h1 class="login__title">WithComm 관리자</h1>
-					<div class="login__box">
-						<i class='bx bx-user login__icon'></i> <input type="email"
-							placeholder="아이디" id="me_email" name="me_email" class="login__input">
-					</div>
-					<div class="login__box">
-						<i class='bx bx-lock login__icon'></i> <input type="password"
-							placeholder="패스워드" id="me_pwd" name="me_pwd" class="login__input">
-					</div>
-					<div class="login__box login__additional" id="additional-box">
-						<i class='bx bx-error-circle login__icon'></i> 
-						<input type="password" placeholder="2차 패스워드" id="second_me_pwd" name="second_me_pwd" class="login__input">
-					</div>
-					<a href="#" class="login__forgot">계정을 잊으신 분은 관리자에게 문의 바랍니다. </a> 
+					<h1 class="login__title">WithComm 관리자 개인 비밀번호</h1>
+						<div class="login__box login__additional">
+							<i class='bx bx-error-circle login__icon'></i> 
+							<input type="password" placeholder="개인 패스워드" id="second_me_pwd" name="second_me_pwd" class="login__input">
+						</div>
+					<a href="#" class="login__forgot">2차 비번을 잊으신 분은 관리자에게 문의 바랍니다. </a> 
 					<button type="submit" class="login__button center btn-right" id="login-btn" name="login-btn">Sign In</button>
 				</div>
 			</div>

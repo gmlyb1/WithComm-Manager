@@ -23,8 +23,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.soft.service.BoardService;
+import com.soft.service.InquiryService;
 import com.soft.service.MemberService;
 import com.soft.service.NoticeService;
+import com.soft.vo.InquiryVO;
 import com.soft.vo.NoticeVO;
 import com.soft.vo.boardVO;
 import com.soft.vo.memberVO;
@@ -49,8 +51,12 @@ public class HomeController {
 	@Inject
 	private NoticeService noticeService;
 	
+	@Autowired
+	@Inject
+	private InquiryService inquiryService;
+	
 	@RequestMapping(value = "home", method = RequestMethod.GET)
-	public String home(HttpServletResponse response,@ModelAttribute("vo")boardVO vo,Locale locale, HttpServletRequest request,Model model, HttpSession session, memberVO mvo) throws Exception {
+	public String home(HttpServletResponse response,@ModelAttribute("nvo")NoticeVO nvo,@ModelAttribute("bvo")boardVO bvo,@ModelAttribute("ivo")InquiryVO ivo,Locale locale, HttpServletRequest request,Model model, HttpSession session, @ModelAttribute("mvo")memberVO mvo) throws Exception {
 
 		memberVO memberVO = (memberVO) session.getAttribute("memberVO");
 		
@@ -66,20 +72,29 @@ public class HomeController {
 		model.addAttribute("memberVO", memberSearch);
 		model.addAttribute("memberVO", memberVO);
 		
-		List<boardVO> HomeBoardList = boardService.HomeBoardList(vo);
+		List<boardVO> HomeBoardList = boardService.HomeBoardList(bvo);
 		model.addAttribute("HomeBoardList", HomeBoardList);
 		
 		List<NoticeVO> HomeNoticeList = noticeService.HomeNoticeList();
 		model.addAttribute("HomeNoticeList", HomeNoticeList);
-		
-		boardVO boardCnts = boardService.boardCnt(vo);
-		model.addAttribute("boardCnt", boardCnts);
 		
 		List<memberVO> HomeMemberList = memberService.HomeMemberList(memberVO);
 		model.addAttribute("HomeMemberList", HomeMemberList);
 		
 		List<memberVO> HomeGmList = memberService.HomeGmList(memberVO);
 		model.addAttribute("HomeGmList", HomeGmList);
+		
+		boardVO boardCnts = boardService.boardCnt(bvo);
+		model.addAttribute("boardCnt", boardCnts);
+		
+		NoticeVO noticeCnt = noticeService.noticeCnt(nvo);
+		model.addAttribute("noticeCnt", noticeCnt);
+		
+		InquiryVO inquiryCnt = inquiryService.inquiryCnt(ivo);
+		model.addAttribute("inquiryCnt", inquiryCnt);
+		
+		memberVO memberCnt = memberService.memberCnt(mvo);
+		model.addAttribute("memberCnt", memberCnt);
 		
 		
 		Map<String, ?> inputFlashMap = RequestContextUtils.getInputFlashMap(request);
