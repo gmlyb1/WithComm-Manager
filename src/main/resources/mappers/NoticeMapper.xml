@@ -14,10 +14,10 @@
 		 ,	notice_count
 		 ,	notice_regdate
 		 ,	notice_updateDate
+		 ,  isFixed
 		from
 		 tbl_notice
 		 where useYn = '1'
-		 order by notice_no desc
 	</select>
 
 	<select id="selectNoticeImportant" resultType="NoticeVO" parameterType="NoticeVO">
@@ -44,6 +44,7 @@
 		 ,	notice_writer
 		 ,	notice_count
 		 ,	notice_regdate
+		 ,  isFixed
 		)
 		values
 		(
@@ -53,6 +54,7 @@
 		,	#{notice_writer}
 		,	#{notice_count}
 		,	CURRENT_TIMESTAMP()
+		,	#{isFixed}
 		)
 	</insert>
 	
@@ -70,8 +72,9 @@
 	<update id="NoticeUpdate" parameterType="NoticeVO">
 		update tbl_notice
 			set notice_title = #{notice_title},	
-				notice_content = #{notice_content}
-				notice_updateDate = CURRENT_TIMESTAMP()
+				notice_content = #{notice_content},
+				notice_updateDate = CURRENT_TIMESTAMP(),
+				isFixed = #{isFixed}
 		where notice_no = #{notice_no}
 	</update>
 	

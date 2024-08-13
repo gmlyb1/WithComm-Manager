@@ -97,7 +97,7 @@
 				</form>
 				<!-- 게시판 끝 -->
 
-				<!-- 댓글 시작 -->
+					<!-- 댓글 시작 -->
 				<div class="mb-3" style="height: 270px; OVERFLOW-Y: auto;">
 					<table class="table table-striped">
 						<c:choose>
@@ -112,18 +112,18 @@
 										<td style="font-weight: bold;" colspan="3">${replyList.reply_writer}</td>
 									</tr>
 									<tr>
-										<td style="width: 60%; height: 50px;"><pre
-												style="font-family: arial;">${replyList.reply_content}</pre>
-											<p>
-												<c:if test="${member.me_name == replyList.reply_writer}">
-													<!-- <a class="btn btn-primary" href="">수정</a> / -->
-													<!-- <button type="button" class="btn btn-xs btn-success" data-toggle="modal" data-target="#modifyModal">댓글 수정</button> -->
-													<a class="btn btn-danger"
-														href="javascript:remove_replyNo(${replyList.reply_no},${replyList.board_no});">삭제</a>
-												</c:if>
-											</p></td>
-										<td style="width: 35%; text-align: right;"><fmt:formatDate
-												value="${replyList.reply_regdate}" pattern="yy-MM-dd HH:mm" /></td>
+										<td style="width: 60%; height: 50px;">
+											<pre style="font-family: arial;">${replyList.reply_content}</pre>
+												<p>
+													<c:if test="${member.state == '최고관리자'  || member.me_name == replyList.reply_writer}">
+														<!-- <a class="btn btn-primary" href="#">댓글 수정</a> -->
+														<a class="btn btn-primary" href="javascript:void(0);" onclick="openEditModal(${replyList.reply_no}, '${replyList.reply_content}')">수정</a>
+														<a class="btn btn-danger" href="javascript:remove_replyNo(${replyList.reply_no},${replyList.board_no});">삭제</a>
+													</c:if>
+												</p></td>
+										<td style="width: 35%; text-align: right;">
+											<fmt:formatDate value="${replyList.reply_regdate}" pattern="yy-MM-dd hh:mm:ss" />
+										</td>
 										<td style="width: 5%;">&nbsp;</td>
 									</tr>
 								</c:forEach>
@@ -131,70 +131,93 @@
 						</c:choose>
 					</table>
 				</div>
-
 				<!-- 댓글 끝 -->
-
 
 				<!-- 댓글 작성 시작 -->
 				<div>
 					<form method="post" action="/reply/write">
-					<input type="hidden" name="inq_no" value="${read.inq_no}">
-
-						<input type="hidden" id="reply_no" name="reply_no" value="${replyList.board_no}">
+						<input type="hidden" name="board_no" value="${read.inq_no}">
+						<input type="hidden" name="reply_no" value="${read.reply_no}">
+					<div class="comment-form">
 						<p>
 							<label>댓글 작성자:</label> 
 							<input type="text" name="reply_writer" value="${member.me_name}" readonly>
 						</p>
+					</div>
 						<p>
-							댓글 내용:
-							<textarea class="form-control" rows="3" cols="155" placeholder="댓글을 남겨주세요." name="reply_content"></textarea>
+							댓글 내용: <textarea class="form-control" rows="3" cols="155" placeholder="댓글을 남겨주세요." name="reply_content"></textarea>
 						</p>
-
 						<p>
 							<button type="submit" class="btn btn-success" style="margin: 55px 0 0 10px;">댓글 작성</button>
 						</p>
 					</form>
 				</div>
 
-			
-				<!-- 댓글 수정 -->
-
 				<!-- 댓글 작성 끝 -->
-				<%-- <div class="my-3 p-3 bg-white rounded shadow-sm">
+				<div class="my-3 p-3 bg-white rounded shadow-sm">
 					<c:choose>
-						<c:when test="${nextBoardList.board_no != null}">
-
+						<c:when test="${nextBoardList.inq_no != null}">
 							<button type="button" class="btn btn-warning mr-3 mb-3"
-								onclick="location.href='/board/read?board_no=${nextBoardList.board_no}'">
+								onclick="location.href='/inquiry/detail?inq_no=${nextBoardList.inq_no}'">
 								<span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>다음글
 							</button>
-							<a href="/board/read?board_no=${nextBoardList.board_no}"
-								style="color: black"> ${nextBoardList.board_title} </a>
+							<a href="/inquiry/detail?inq_no=${nextBoardList.inq_no}"
+								style="color: black"> ${nextBoardList.inq_title} </a>
 						</c:when>
 
-						<c:when test="${nextBoardList.board_no == null}">
+						<c:when test="${nextBoardList.inq_no == null}">
 							<button type="button" class="btn btn-warning mr-3 mb-3" disabled>다음글이
 								없습니다</button>
 						</c:when>
 					</c:choose>
 					<br />
 					<c:choose>
-						<c:when test="${lastBoardList.board_no != null}">
+						<c:when test="${lastBoardList.inq_no != null}">
 							<button type="button" class="btn btn-info mr-3 "
-								onclick="location.href='/board/read?board_no=${lastBoardList.board_no}'">
+								onclick="location.href='/board/read?board_no=${lastBoardList.inq_no}'">
 								<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>이전글
 							</button>
-							<a href="/board/read?board_no=${lastBoardList.board_no}"
-								style="color: black"> ${lastBoardList.board_title} </a>
+							<a href="/board/read?board_no=${lastBoardList.inq_no}"
+								style="color: black"> ${lastBoardList.inq_title} </a>
 						</c:when>
 
-						<c:when test="${lastBoardList.board_no == null}">
+						<c:when test="${lastBoardList.inq_no == null}">
 							<button type="button" class="btn btn-info mr-3" disabled>이전글이
 								없습니다</button>
 						</c:when>
-					</c:choose> 
-				</div>  --%>
+					</c:choose>
+
+				</div>
 			</div>
 		</div>
 	</div>
+</div>
+
+<!-- 댓글 수정 모달 팝업 -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">수정</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="replyEditCancel">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editForm">
+                    <input type="hidden" name="reply_no" id="editReplyNo">
+                    <div class="form-group">
+                        <label for="reply_content">댓글 내용:</label>
+                        <textarea class="form-control" id="reply_content" name="reply_content"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="replyModal">취소</button>
+		        <button type="button" class="btn btn-primary" id="submitModifyReply">수정하기</button>
+	   		</div>
+        </div>
+    </div>
+</div>
+
 <%@include file="../includes/footer.jsp"%>

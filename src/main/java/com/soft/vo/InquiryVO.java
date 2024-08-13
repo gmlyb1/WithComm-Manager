@@ -21,6 +21,10 @@ public class InquiryVO {
 	private int inqCount;
 	private String answerYn;
 	
+	private int reply_no;
+	private String reply_content;
+	private String reply_regdate;
+	
 	private int dayCnt;
 	private int weekCnt;
 	private int monthCnt;

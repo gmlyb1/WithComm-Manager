@@ -33,7 +33,6 @@
 							<th class="text-center">번호</th>
 							<th class="text-center">방문자ip</th>
 							<th class="text-center">접속일자</th>
-							<th class="text-center">방문자 게정 ID</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -50,7 +49,6 @@
 						            </c:otherwise>
 						        </c:choose>
 									<td class="text-center">${list.regdate}</td>
-								<td class="text-center">${list.me_name}</td>
 							</tr>
 						</c:forEach>
 					</tbody>

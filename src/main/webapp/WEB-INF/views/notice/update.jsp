@@ -11,42 +11,44 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <script type="text/javascript">
-	$(document).ready(function() {
+var isFixed = "${update.isFixed}";
 
-		$(".cancel_btn").on("click", function() {
-			event.preventDefault();
-			location.href = "/board/list";
-		});
+console.log("isFixed:",isFixed);
+function YnCheck(cb) {
+	if (cb.checked) {
+	    document.updateForm.isFixed.checked = true;
+	  } else {
+	    document.updateForm.isFixed.checked = false;
+	  }
+}
 
-	function _onSubmit() {
-		if (!confirm("수정 하시겠습니까?")) {
-			return false;
-		}
-	}
-	
-	function YnCheck(obj) {
-		var checked = obj.checked;
-		if(checked) {
-			obj.value = 1;
-		}else {
-			obj.value = 2;
-		}
-		
-		var isFixed = "${data.isFixed}";
-		if(isFixed == 1) {
-		    $("#isFixed").prop("checked", true);
-		} else {
-		    $("#isFixed").prop("checked", false);
-		}
-		
-		// 체크박스 value값 설정
-		if($("#isFixed").is(':checked')==true) {
-			data.set("isFixed",1);
-		}else {
-			data.set("isFixed",0);
-		}
-	};
-});
+// 페이지 로드 후, 체크박스의 체크 여부에 따라 isFixed 변수와 isFixed 필드를 초기화합니다.
+window.onload = function() {
+    var checkbox = document.getElementById('isFixed');
+    checkbox.checked = isFixed;
+    document.updateForm.isFixed.value = isFixed ? true : false;
+};
+</script>
+<script type="text/javascript">
+$("#isFixed").click(function () {
+	  let chekObj = document.getElementsByClassName("isFixed");
+	  let lenth = chekObj.length;
+	  let checked = 0;
+	  let isFixed;
+
+	  for (i = 0; i < lenth; i++) {
+	    if (chekObj[i].checked === true) {
+	      checked += 1;
+	      isFixed = chekObj[i].getAttribute("id");
+	      console.log(isFixed);
+	    }
+	  }
+
+	  if (checked >= 2){
+	    swal.fire("체크 해제 후 한 가지만 선택해 주세요");
+	    return false;
+	  }
+	});
 </script>
 <hr>
 <div class="conatiner-fluid content-inner mt-n5 py-0">
@@ -60,8 +62,8 @@
             </div>
             <div class="card-body p-0">
                <div class="table-responsive mt-4">
-               	  <form action="/notice/update" role="form" method="post" name="updateForm" onsubmit="return _onSubmit();">
-					<input type="hidden" name="notice_no" value="${update.notice_no}" readonly="readonly" />
+               	  <form action="/notice/update" method="post" id="updateForm" name="updateForm">
+					<input type="hidden" name="notice_no" value="${update.notice_no}"/>
 	                  <table id="basic-table" class="table table-striped mb-0" role="grid">
 	                     <thead>
 	                        <tr>

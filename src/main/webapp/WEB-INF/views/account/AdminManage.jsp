@@ -102,8 +102,8 @@
 					url : "/account/pwValid",
 					type : "POST",
 					data : {
-						me_id : memberId
-						//mePwd : 1234567
+						me_id : memberId,
+						me_pwd : mePwd
 					},
 					success : function(data) {
 						alert("비밀번호가 초기화 되었습니다.\n새로운 비밀번호는 "+mePwd+"입니다.");
@@ -167,7 +167,7 @@
 								         <c:if test="${member.state != '활동중지'}">
 								        <button type="button" class="btn btn-danger notApproveBtn" data-member-id="${member.me_id}" data-admin-ck="${member.adminCk}"}>중지</button>
 								    	 </c:if>
-								    	<button type="button" class="btn btn-primary pwValid" data-member-pwd="${member.me_pwd}">비밀번호 초기화</button>
+								    	<button type="button" class="btn btn-primary pwValid" data-member-id="${member.me_id}" data-member-pwd="${member.me_pwd}">비밀번호 초기화</button>
 								    </div>
 								</td>
 							</tr>

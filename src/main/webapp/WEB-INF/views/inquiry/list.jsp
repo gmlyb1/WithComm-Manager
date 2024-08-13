@@ -16,7 +16,81 @@
 		var msg = "${msg}";
 		if (msg != "") {
 			alert(msg);
-		}
+		};
+		
+		
+		$(".loading-button").click(function() {
+			 var answerYn = $(this).data("answerYn");
+			 var inq_no = $(this).data("inq-no");
+			 
+			
+			if (confirm("상태를 '대기중' 으로 변경 하시겠습니까?")) {
+				$.ajax({
+					url : "/inquiry/updateState",
+					type : "POST",
+					data : {
+						inq_no : inq_no,
+						answerYn : "대기중"
+					},
+					success : function(data) {
+						alert("상태를 '대기중' 으로 변경 하였습니다.");
+						location.reload();
+					},
+					error : function(error) {
+						console.log(error);
+						alert("요청 처리 중 오류가 발생하였습니다."+error);
+					}
+				});
+			}
+		});
+		
+		$(".confirm-button").click(function() {
+			 var answerYn = $(this).data("answerYn");
+			 var inq_no = $(this).data("inq-no");
+			if (confirm("상태를 '확인중' 으로 변경 하시겠습니까?")) {
+				$.ajax({
+					url : "/inquiry/updateState",
+					type : "POST",
+					data : {
+						inq_no : inq_no,
+						answerYn : "확인중"
+					},
+					success : function(data) {
+						alert("상태를 '확인중' 으로 변경 하였습니다.");
+						location.reload();
+					},
+					error : function(error) {
+						console.log(error);
+						alert("요청 처리 중 오류가 발생하였습니다."+error);
+					}
+				});
+			}
+		});
+		
+		$(".complete-button").click(function() {
+			 var answerYn = $(this).data("answerYn");
+			 var inq_no = $(this).data("inq-no");
+			if (confirm("상태를 '답변완료' 로 변경 하시겠습니까?")) {
+				$.ajax({
+					url : "/inquiry/updateState",
+					type : "POST",
+					data : {
+						inq_no : inq_no,
+						answerYn : "답변완료"
+					},
+					success : function(data) {
+						alert("상태를 '답변완료' 으로 변경 하였습니다.");
+						location.reload();
+					},
+					error : function(error) {
+						console.log(error);
+						alert("요청 처리 중 오류가 발생하였습니다."+error);
+					}
+				});
+			}
+		});
+		
+		
 	});
 </script>
 
@@ -48,6 +122,7 @@
 							<th class="text-center">주제</th>
 							<th class="text-center">작성자</th>
 							<th class="text-center">작성일자</th>
+							<th class="text-center">현재상태</th>
 							<th class="text-center">답변여부</th>
 						</tr>
 					</thead>
@@ -59,21 +134,17 @@
 									<td class="text-center"><c:out value="${list.inq_name}" /></td>
 									<td class="text-center">
 									<fmt:formatDate pattern="yyyy-MM-dd" value="${list.inq_regdate}"/></td>
+									<td class="text-center"><c:out value="${list.answerYn}" /></td>
 									<td class="text-center">
-									    <c:choose>
-									        <c:when test="${list.answerYn == '대기중'}">
-									            <span class="text-danger"><strong>${list.answerYn}</strong></span>
-									        </c:when>
-									        <c:when test="${list.answerYn == '확인중'}">
-									            <span class="text-primary"><strong>${list.answerYn}</strong></span>
-									        </c:when>
-									        <c:when test="${list.answerYn == '답변완료'}">
-									            <span class="text-success"><strong>${list.answerYn}</strong></span>
-									        </c:when>
-									        <c:otherwise>
-									            <span>${list.answerYn}</span>
-									        </c:otherwise>
-									    </c:choose>
+										<c:if test="${list.answerYn != '대기중' }">
+								        	<button type="button" class="btn btn-success loading-button" data-answerYn="${list.answerYn}" data-inq-no="${list.inq_no}">대기중</button>
+							        	</c:if>
+							        	<c:if test="${list.answerYn != '확인중' }">
+							        		<button type="button" class="btn btn-secondary confirm-button" data-answerYn="${list.answerYn}" data-inq-no="${list.inq_no}">확인중</button>
+								        </c:if>
+								        <c:if test="${list.answerYn != '답변완료' }">
+								        	<button type="button" class="btn btn-danger complete-button" data-answerYn="${list.answerYn}" data-inq-no="${list.inq_no}">완료</button>
+										</c:if>
 									</td>
 								</tr>
 						</c:forEach>

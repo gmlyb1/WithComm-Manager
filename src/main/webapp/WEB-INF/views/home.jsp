@@ -392,33 +392,30 @@
 		<div class="col-xl-4 col-lg-5">
 			<div class="card shadow mb-4">
 				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-					<h6 class="m-0 font-weight-bold text-primary">멤버 리스트</h6>
+					<h6 class="m-0 font-weight-bold text-primary">회원 리스트</h6>
 					<div class="dropdown no-arrow">
-						<a class="btn btn-success" href="/account/manage">더보기</a>
+						<a id="adminBtn" class="btn btn-success" href="/account/manage">더보기</a>
 					</div>
 				</div>
 
 				<div class="card-body">
 					<div class="chart-area">
-						<%-- <canvas id="myAreaChart"></canvas> --%>
-						<c:if test="${member != null}">
-							<table class="table table-bordered">
-								<thead>
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th class="text-center">아이디</th>
+									<th class="text-center">닉네임</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${HomeMemberList}" var="HomeMemberList">
 									<tr>
-										<th class="text-center">아이디</th>
-										<th class="text-center">닉네임</th>
+										<td class="text-center"><c:out value="${HomeMemberList.me_email}" /></td>
+										<td class="text-center"><c:out value="${HomeMemberList.me_name}" /></td>
 									</tr>
-								</thead>
-								<tbody>
-									<c:forEach items="${HomeMemberList}" var="HomeMemberList">
-										<tr>
-											<td class="text-center"><c:out value="${HomeMemberList.me_email}" /></td>
-											<td class="text-center"><c:out value="${HomeMemberList.me_name}" /></td>
-										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-						</c:if>
+								</c:forEach>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>

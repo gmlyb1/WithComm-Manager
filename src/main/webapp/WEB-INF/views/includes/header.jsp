@@ -142,7 +142,7 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 
 
 			<!-- Heading -->
-		<div class="sidebar-heading">Interface</div>
+		<div class="sidebar-heading">멤버 관리</div>
 			<!-- Nav Item - Tables -->
 			<c:if test="${member.state == '최고관리자'}">
 				<li class="nav-item active"><a class="nav-link"
@@ -153,6 +153,7 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 				<li class="nav-item active"><a class="nav-link"
 					href="/account/manage"><i class="fa-solid fa-person"></i>
 					<span>회원 관리</span></a></li>
+		<div class="sidebar-heading">게시판 관리</div>
 				<li class="nav-item active"><a class="nav-link"
 					href="/notice/list"><i class="fa-solid fa-person"></i>
 					<span>공지사항 관리</span></a></li>
@@ -162,6 +163,7 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 				<li class="nav-item active"><a class="nav-link"
 					href="/inquiry/list"><i class="fa-solid fa-person"></i>
 					<span>1:1 문의 관리</span></a></li>
+		<div class="sidebar-heading">기타 관리</div>
 				<li class="nav-item active"><a class="nav-link"
 					href="/mail/recevMail"><i class="fa-solid fa-persone"></i>
 					<span>메일 관리</span></a></li>
@@ -266,7 +268,7 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 										<a class="dropdown-item" href="/account/updateImg"> 
 											<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> 이미지변경
 										</a>
-										<c:if test="${member.adminCk == 9999}">
+										<c:if test="${member.state == '관리자'}">
 											<a class="dropdown-item" href="/account/manage"> 
 												<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i> 회원관리
 											</a>

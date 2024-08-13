@@ -81,7 +81,7 @@ public class MemberController {
 		
 		if(login == null)  {
 			session.setAttribute("member", null);
-			rttr.addFlashAttribute("msg", "아이디 , 비밀번호 혹은 2차 비밀번호를 한번 더 확인하여 주십시요.");
+			rttr.addFlashAttribute("msg", "계정 정보를 한번 더 확인하여 주십시요.");
 			return "redirect:/account/login";
 		
 		} else if(login.getAdminCk() == 0) {
@@ -257,13 +257,16 @@ public class MemberController {
 		try {
 			
 		   String newPassword = generateRandomPassword(6);
-			
-		   
+
 		   logger.info("newPassword:"+newPassword);
-			mVO.setMe_id(me_id);
-			mVO.setMe_pwd(newPassword);
-//			mVO.setMe_pwd("1234567");
-			memberService.pwValidation(mVO);
+		   logger.info("me_id:"+mVO.getMe_id());
+		   logger.info("me_pwd:"+mVO.getMe_pwd());
+		   
+		   mVO.setMe_id(me_id);
+		   mVO.setMe_pwd(newPassword);
+		   memberService.pwValidation(mVO);
+			
+	    
 			rttr.addFlashAttribute("msg", "비밀번호가 초기화 되었습니다.");
 		}catch (Exception e) {
 			rttr.addFlashAttribute("msg", "오류가 발생했습니다."+e);

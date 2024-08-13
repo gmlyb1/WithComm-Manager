@@ -95,6 +95,8 @@
 		
 		// 비밀번호 초기화
 		$(".pwValid").click(function() {
+			 var newPassword = "${newPassword}";
+			 console.log("newPassword:",newPassword);
 			 var mePwd = $(this).data("member-pwd");
 			 var memberId = $(this).data("member-id");
 			if (confirm("비밀번호를 초기화 하시겠습니까?")) {
@@ -103,7 +105,6 @@
 					type : "POST",
 					data : {
 						me_id : memberId
-						//mePwd : 1234567
 					},
 					success : function(data) {
 						alert("비밀번호가 초기화 되었습니다.\n새로운 비밀번호는 "+mePwd+"입니다.");

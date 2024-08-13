@@ -94,16 +94,9 @@
 	                        <tr>
 	                           <td style="text-align:right;">
 	                              <div class="mb-3">
-	                           	  	<c:choose>
-	                           	  	
-										<c:when test="${member.state == '관리자' }">
-											<button type="button" class="btn btn-success btn-sm" onclick="location.href='/notice/update?notice_no=${read.notice_no}';">수정</button>
-											<button type="submit" class="btn btn-danger btn-sm" id="delete_btn">삭제</button>
-										</c:when>
-								 	</c:choose>
+									<button type="button" class="btn btn-success" onclick="location.href='/notice/update?notice_no=${read.notice_no}';">수정</button>
+									<button type="submit" class="btn btn-danger" id="delete_btn">삭제</button>
 								 	<a href="/notice/list" class="btn btn-primary">목록으로</a>
-								 	<a href="/notice/update" class="btn btn-success">수정</a>
-								 	<button type="button" class="btn btn-danger">삭제</button>
 	                              </div>
 	                           </td>  
 	                        </tr>

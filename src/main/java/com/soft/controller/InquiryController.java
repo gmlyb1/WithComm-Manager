@@ -94,7 +94,8 @@ public class InquiryController {
 	@RequestMapping(value = "/updateState", method=RequestMethod.POST)
 	public String inquiryUpdate(InquiryVO vo, Model model , RedirectAttributes rttr) throws Exception
 	{
-		System.out.println("answerYn : " + vo.getAnswerYn());
+		logger.info("inq_no : " + vo.getInq_no());
+		logger.info("answerYn : " + vo.getAnswerYn());
 		inquiryService.updateState(vo);
 		
 		return "redirect:/inquiry/list";

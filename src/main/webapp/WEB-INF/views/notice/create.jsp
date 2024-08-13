@@ -86,10 +86,6 @@ $(document).ready(function() {
 	                                <label class="form-label">제목</label>
 									<input class="form-control form-control-sm" id="notice_title" name="notice_title" >
 	                              </div>
-	                           <!--    <div class="mb-3">
-	                                 <label class="form-label">첨부파일</label>
-	                                 <input type="file" class="form-control form-control-sm" id="notice_file" name="uploadFile">
-	                              </div> -->
 	                              <div class="mb-3">
 	                                 <label class="form-label">내용</label>
 	                                 <textarea class="form-control" rows="10" id="notice_content" name="notice_content" style="resize: none;"></textarea>

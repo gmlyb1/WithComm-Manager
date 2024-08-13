@@ -72,20 +72,21 @@
 								<td class="text-center"><strong><fmt:formatDate pattern="yyyy-MM-dd hh:mm"
 											value="${FixedList.notice_updateDate}" /></strong></td>
 							</tr>
-						</c:forEach>
-						<c:forEach items="${noticeList}" var="list">
-							<tr data-regdate = "${list.notice_regdate}">
-								<td class="text-center"><c:out value="${list.notice_no}" /></td>
-								<td><a href="/notice/read?notice_no=${list.notice_no}">
-								<c:out value="${list.notice_title}" /></a></td>
-								<td class="text-center"><c:out value="${list.notice_writer}" /></td>
-								<td class="text-center"><c:out value="${list.notice_count}" /></td>
-								<td class="text-center"><fmt:formatDate pattern="yyyy-MM-dd hh:mm"
-										value="${list.notice_regdate}" /></td>
-								<td class="text-center"><fmt:formatDate pattern="yyyy-MM-dd hh:mm"
-										value="${list.notice_updateDate}" /></td>
-							</tr>
-						</c:forEach>
+							</c:forEach>
+							
+							<c:forEach items="${noticeList}" var="list">
+								<tr data-regdate = "${list.notice_regdate}">
+									<td class="text-center"><c:out value="${list.notice_no}" /></td>
+									<td><a href="/notice/read?notice_no=${list.notice_no}">
+									<c:out value="${list.notice_title}" /></a></td>
+									<td class="text-center"><c:out value="${list.notice_writer}" /></td>
+									<td class="text-center"><c:out value="${list.notice_count}" /></td>
+									<td class="text-center"><fmt:formatDate pattern="yyyy-MM-dd hh:mm"
+											value="${list.notice_regdate}" /></td>
+									<td class="text-center"><fmt:formatDate pattern="yyyy-MM-dd hh:mm"
+											value="${list.notice_updateDate}" /></td>
+								</tr>
+							</c:forEach>
 					</tbody>
 				</table>
 				
