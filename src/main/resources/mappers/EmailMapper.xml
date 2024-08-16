@@ -149,4 +149,10 @@
 		WHERE MAIL_ID = #{MAIL_ID} AND MAIL_KEEP = '1'
 		ORDER BY MAIL_REGDATE DESC
 	</select>
+	
+	<select id="mailAprvSttsCnt" parameterType="MailVO" resultType="MailVO">
+		select 
+			count(mail_id) as mailAprvCnt
+		from tbl_mail
+	</select>
 </mapper>

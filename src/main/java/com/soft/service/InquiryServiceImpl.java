@@ -43,4 +43,9 @@ public class InquiryServiceImpl implements InquiryService {
 	public InquiryVO inquiryCnt(InquiryVO ivo) throws Exception {
 		return inquiryDAO.inquiryCnt(ivo);
 	}
+
+	@Override
+	public InquiryVO inquiryAprvSttsCnt(InquiryVO ivo) throws Exception {
+		return inquiryDAO.inquiryAprvSttsCnt(ivo);
+	}
 }

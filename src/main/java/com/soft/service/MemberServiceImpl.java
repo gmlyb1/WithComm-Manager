@@ -117,5 +117,10 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.memberCnt(mvo);
 	}
 
+	@Override
+	public memberVO memberRegisterAprvSttsCnt(memberVO mvo) throws Exception {
+		return memberDAO.memberRegisterAprvSttsCnt(mvo);
+	}
+
 
 }

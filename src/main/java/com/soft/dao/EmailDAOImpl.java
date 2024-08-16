@@ -122,6 +122,11 @@ public class EmailDAOImpl implements EmailDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("namespace.mailKeepList", mail_id);
 	}
+
+	@Override
+	public MailVO mailAprvSttsCnt(MailVO mailvo) throws Exception {
+		return sqlSession.selectOne("namespace.mailAprvSttsCnt", mailvo);
+	}
 	
 
 }

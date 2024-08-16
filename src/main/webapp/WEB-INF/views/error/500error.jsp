@@ -1,215 +1,71 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isErrorPage="true"%>
 <style type="text/css">
-@import url("https://fonts.googleapis.com/css?family=Nunito:400,700");
-
-* {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
+html, body {
+	 height: 100%;
+	 margin: 0;
 }
-
-html {
-	height: 100%;
+ body {
+	 background: linear-gradient(#111, #333, #111);
+	 background-repeat: no-repeat;
+	 background-size: cover;
+	 color: #eee;
+	 position: relative;
+	 font-family: 'Roboto', sans-serif;
 }
-
-body {
-	background: #fff1f1;
-	font-family: "Nunito", sans-serif;
+ .message {
+	 position: absolute;
+	 left: 50%;
+	 top: 50%;
+	 transform: translate(-50%, -50%);
+	 text-align: center;
 }
-
-.container {
-	width: 75%;
-	max-width: 700px;
-	margin: 1.5rem auto;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+ .message h1, .message h2, .message h3 {
+	 margin: 0;
+	 line-height: 0.8;
 }
-
-@media ( max-width : 650px) {
-	.container {
-		width: 85%;
-	}
+ .message h2, .message h3 {
+	 font-weight: 300;
+	 color: #c8fff4;
 }
-
-.container .header {
-	color: #fb3958;
-	font-size: 5em;
-	font-weight: 700;
-	text-align: center;
-	text-shadow: 2px 2px 5px #b1041f;
+ .message h1 {
+	 font-weight: 700;
+	 color: #03dac6;
+	 font-size: 8em;
 }
-
-@media ( max-width : 650px) {
-	.container .header {
-		font-size: 3em;
-	}
+ .message h2 {
+	 margin: 30px 0;
 }
-
-.compcontainer {
-	width: 75%;
-	height: 13rem;
-	padding: 1rem 0;
+ .message h3 {
+	 font-size: 2.5em;
 }
-
-@media ( max-width : 650px) {
-	.compcontainer {
-		height: 10rem;
-	}
+ .message h4 {
+	 display: inline-block;
+	 margin: 0 15px;
 }
-
-.compcontainer svg {
-	max-width: 100%;
-	max-height: 100%;
-	animation: bouncy 1300ms linear infinite;
+ .message button {
+	 background: transparent;
+	 border: 2px solid #c8fff4;
+	 color: #c8fff4;
+	 padding: 5px 15px;
+	 font-size: 1.25em;
+	 transition: all 0.15s ease;
+	 border-radius: 3px;
 }
-
-@import url("https://fonts.googleapis.com/css?family=Nunito:400,700");
-
-* {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
+ .message button:hover {
+	 background: #03dac6;
+	 border: 2px solid #03dac6;
+	 color: #111;
+	 cursor: pointer;
+	 transform: scale(1.05);
 }
-
-html {
-	height: 100%;
-}
-
-body {
-	background: #fff1f1;
-	font-family: "Nunito", sans-serif;
-}
-
-.container {
-	width: 75%;
-	max-width: 700px;
-	margin: 1.5rem auto;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-@media ( max-width : 650px) {
-	.container {
-		width: 85%;
-	}
-}
-
-.container .header {
-	color: #fb3958;
-	font-size: 5em;
-	font-weight: 700;
-	text-align: center;
-	text-shadow: 2px 2px 5px #b1041f;
-}
-
-@media ( max-width : 650px) {
-	.container .header {
-		font-size: 3em;
-	}
-}
-
-.compcontainer {
-	width: 75%;
-	height: 13rem;
-	padding: 1rem 0;
-}
-
-@media ( max-width : 650px) {
-	.compcontainer {
-		height: 10rem;
-	}
-}
-
-.compcontainer svg {
-	max-width: 100%;
-	max-height: 100%;
-	animation: bouncy 1300ms linear infinite;
-}
-
-.instructions {
-	background: #FEFEFE;
-	width: 80%;
-	height: auto;
-	padding: 1rem;
-	border: 1px solid #DCDCDC;
-	border-radius: 0.25rem;
-	text-align: center; /* 텍스트 및 아이콘 가운데 정렬 */
-}
-
-@media ( max-width : 650px) {
-	.instructions {
-		width: 100%;
-	}
-}
-
-.instructions h2 {
-	font-size: 1.25em;
-	line-height: 1.3;
-	color: #e30528;
-	margin-bottom: 1rem; /* 하단 여백 추가 */
-}
-
-.instructions p {
-	font-size: 1.15em;
-	line-height: 1.5;
-	color: #122125;
-	margin: 0.5rem 0; /* 상하 여백 추가 */
-}
-
-.instructions .step {
-	display: flex;
-	flex-direction: row;
-	align-items: center; /* 아이콘과 텍스트를 수직으로 가운데 정렬 */
-	justify-content: center; /* 아이콘과 텍스트를 가로로 가운데 정렬 */
-	width: 100%;
-	margin: 0.5rem 0; /* 상하 여백 추가 */
-}
-
-.instructions .step .icon {
-	width: 1.25rem;
-	height: 1.25rem;
-	margin-right: 0.5rem; /* 아이콘과 텍스트 사이의 여백 추가 */
-}
+ 
 </style>
-<div class="container">
-	<div class="compcontainer">
-		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90.5 74.769">
-			<path fill="#C7CCDB" d="M58.073 74.769H32.426l6.412-19.236h12.824z" />
-			<path fill="#373F45"
-				d="M90.5 52.063c0 1.917-2.025 3.471-4.525 3.471H4.525C2.025 55.534 0 53.98 0 52.063V3.471C0 1.554 2.026 0 4.525 0h81.449c2.5 0 4.525 1.554 4.525 3.471v48.592z" />
-			<path fill="#F1F2F2"
-				d="M84.586 46.889c0 1.509-1.762 2.731-3.936 2.731H9.846c-2.172 0-3.933-1.223-3.933-2.731V8.646c0-1.508 1.761-2.732 3.933-2.732H80.65c2.174 0 3.936 1.225 3.936 2.732v38.243z" />
-			<path fill="#A2A7A5"
-				d="M16.426 5.913L8.051 23h13l-6.875 12.384L26.75 46.259l-8.375-11.375L26.75 20H14.625l6.801-14.087zM68.551 49.62l-8.375-17.087h13l-6.875-12.384L78.875 9.274 70.5 20.649l8.375 14.884H66.75l6.801 14.087z" />
-		</svg>
-	</div>
-	<h1 class="header">500 ERROR</h1>
-	<div class="instructions">
-		<h2 class="first">죄송합니다 접근하실수 없습니다.</h2>
-		<p>잠시만 기다려 주십시오.</p>
-		<div class="step">
-			<svg class="icon" xmlns="http://www.w3.org/2000/svg"
-				viewBox="0 0 489.711 489.711">
-				<path
-					d="M112.156,97.111c72.3-65.4,180.5-66.4,253.8-6.7l-58.1,2.2c-7.5,0.3-13.3,6.5-13,14c0.3,7.3,6.3,13,13.5,13    c0.2,0,0.3,0,0.5,0l89.2-3.3c7.3-0.3,13-6.2,13-13.5v-1c0-0.2,0-0.3,0-0.5v-0.1l0,0l-3.3-88.2c-0.3-7.5-6.6-13.3-14-13    c-7.5,0.3-13.3,6.5-13,14l2.1,55.3c-36.3-29.7-81-46.9-128.8-49.3c-59.2-3-116.1,17.3-160,57.1c-60.4,54.7-86,137.9-66.8,217.1    c1.5,6.2,7,10.3,13.1,10.3c1.1,0,2.1-0.1,3.2-0.4c7.2-1.8,11.7-9.1,9.9-16.3C36.656,218.211,59.056,145.111,112.156,97.111z"></path>
-					<path
-					d="M462.456,195.511c-1.8-7.2-9.1-11.7-16.3-9.9c-7.2,1.8-11.7,9.1-9.9,16.3c16.9,69.6-5.6,142.7-58.7,190.7    c-37.3,33.7-84.1,50.3-130.7,50.3c-44.5,0-88.9-15.1-124.7-44.9l58.8-5.3c7.4-0.7,12.9-7.2,12.2-14.7s-7.2-12.9-14.7-12.2l-88.9,8    c-7.4,0.7-12.9,7.2-12.2,14.7l8,88.9c0.6,7,6.5,12.3,13.4,12.3c0.4,0,0.8,0,1.2-0.1c7.4-0.7,12.9-7.2,12.2-14.7l-4.8-54.1    c36.3,29.4,80.8,46.5,128.3,48.9c3.8,0.2,7.6,0.3,11.3,0.3c55.1,0,107.5-20.2,148.7-57.4    C456.056,357.911,481.656,274.811,462.456,195.511z"></path>
-			</svg>
-			<p><a href="/">로그인 페이지로 이동</a></p>
-		</div>
-		<div class="step">
-			<svg class="icon" xmlns="http://www.w3.org/2000/svg"
-				viewBox="0 0 60 60">
-				<path
-					d="M30,0C13.458,0,0,13.458,0,30s13.458,30,30,30s30-13.458,30-30S46.542,0,30,0z M30,58C14.561,58,2,45.439,2,30   S14.561,2,30,2s28,12.561,28,28S45.439,58,30,58z"></path>
-				<path
-					d="M30,6c-0.552,0-1,0.447-1,1v23H14c-0.552,0-1,0.447-1,1s0.448,1,1,1h16c0.552,0,1-0.447,1-1V7C31,6.447,30.552,6,30,6z"></path>
-			</svg>
-			<p>잠시만 기다려 주십시오</p>
-		</div>
-		</ul>
-	</div>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
+<div class="message">
+	<h1>500</h1>
+	<h3>Server Error</h3>
+	<h2>It's not you, it's me.</h2>
+	<!-- use window.history.back(); to go back -->
+	<button onclick="location.href='/account/login'">Go Back</button>
 </div>

@@ -49,4 +49,6 @@ public interface MemberDAO {
 	public void updateSecondPassword(String second_me_pwd)throws Exception;
 	
 	public memberVO memberCnt(memberVO mvo) throws Exception;
+	
+	public memberVO memberRegisterAprvSttsCnt(memberVO mvo)throws Exception;
 }

@@ -1,32 +1,36 @@
 package com.soft.interceptor;
 
+import java.io.PrintWriter;
+
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.soft.vo.memberVO;
 
-public class LoginInterceptor implements HandlerInterceptor{
+public class AuthorityInterceptor implements HandlerInterceptor{
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		
-		memberVO login = new memberVO();
+
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
 		
 		HttpSession session = request.getSession();
-		
-		if(login == null) {
-			response.sendRedirect("/account/login");
+		memberVO member = (memberVO)session.getAttribute("member");
+		PrintWriter out = response.getWriter();
+		if(!member.getState().equals("최고관리자")) {
+			out.println("<script>alert('권한이 없습니다.'); history.go(-1);</script>");
+			out.flush();
 			return false;
 		}
 		
-		session.invalidate();
 		
 		return true;
 	}
@@ -34,16 +38,13 @@ public class LoginInterceptor implements HandlerInterceptor{
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
-		// TODO Auto-generated method stub
 		
 	}
 
-	
 }

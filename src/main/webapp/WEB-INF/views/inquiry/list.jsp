@@ -122,6 +122,7 @@
 							<th class="text-center">주제</th>
 							<th class="text-center">작성자</th>
 							<th class="text-center">작성일자</th>
+							<th class="text-center">수정일자</th>
 							<th class="text-center">현재상태</th>
 							<th class="text-center">답변여부</th>
 						</tr>
@@ -134,6 +135,14 @@
 									<td class="text-center"><c:out value="${list.inq_name}" /></td>
 									<td class="text-center">
 									<fmt:formatDate pattern="yyyy-MM-dd" value="${list.inq_regdate}"/></td>
+									<c:if test="${list.inq_updateDate != null }">
+										<td class="text-center">
+											<fmt:formatDate pattern="yyyy-MM-dd" value="${list.inq_updateDate}"/>
+										</td>
+									</c:if>
+									<c:if test="${list.inq_updateDate == null }">
+										<td class="text-center">-</td>
+									</c:if>
 									<td class="text-center"><c:out value="${list.answerYn}" /></td>
 									<td class="text-center">
 										<c:if test="${list.answerYn != '대기중' }">

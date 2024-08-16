@@ -24,8 +24,6 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-
-	
 	// 로그인 버튼 클릭 시 모달을 띄우는 예시
     $('#changePasswordModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget); // 버튼을 클릭했을 때의 이벤트
@@ -46,6 +44,12 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
             return;
         }
     });	
+    
+ // 결제 대기 상태 모달을 표시하는 예시 (버튼 클릭 시)
+    $('#showaprvSttsModal').on('click', function () {
+        $('#aprvSttsModal').modal('show');
+    });
+    
 		
 	$("#logoutBtn").on("click", function() {
 			
@@ -107,6 +111,7 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
     font-size: 24px;
     color: #000; /* 아이콘 색상 (검은색) */
   }
+  
 </style>
 <meta charset="UTF-8"> <!-- 추가할부분 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 추가할부분 -->
@@ -244,12 +249,10 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 							</c:if>
 							
 							<c:if test="${member != null }">
-							<a href="#" style="color: black; font-size: 16px; text-decoration: none; font-weight: bold;">
-							    <c:out value="${list.memberVO.me_name}" />
-							</a>
 								<li>
 									<!-- 타임아웃 -->
 									<div class="d-flex align-items-center">
+									  	<button id="showaprvSttsModal" type="button" class="btn btn-warning mr-3">결제 대기 상태</button>
 									    <strong>자동 로그아웃 <i id="clock-icon" class="fas fa-clock"></i></strong>
 									    <span id="countdown" class="mr-3">
 									        <strong><span id="minutes">30</span>:<span id="seconds">00</span></strong>
@@ -292,6 +295,7 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 					</form>
 				</nav>
 				
+				
 				<!-- 2차 비밀번호 변경 모달 -->
 			    <div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
 			        <div class="modal-dialog" role="document">
@@ -318,3 +322,45 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 			        </div>
 			    </div>
 				<!-- End of Topbar -->
+				
+				
+				<!-- 결제 대기 상태 모달 -->
+				<div class="modal fade" id="aprvSttsModal" tabindex="-1" role="dialog" aria-labelledby="aprvSttsModallabel" aria-hidden="true">
+				    <div class="modal-dialog" role="document">
+				        <div class="modal-content">
+				            <div class="modal-header bg-primary text-white">
+				                <h5 class="modal-title" id="aprvSttsModallabel">📊 결제 대기 상태</h5>
+				                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				                    <span aria-hidden="true">&times;</span>
+				                </button>
+				            </div>
+				            <div class="modal-body">
+				                <div class="alert alert-info" role="alert">
+				                    현재 다음 항목들의 결제 상태를 확인해주세요.<br> 필요에 따라 조치를 취해주시기 바랍니다.
+				                </div>
+				                <ul class="list-group">
+				                    <li class="list-group-item d-flex justify-content-between align-items-center">
+				                        <strong>회원 관리</strong>
+				                        <span class="badge badge-success badge-pill"><a href="/account/manage">${memberRegisterAprvSttsCnt.memberAprvCnt} 건</a></span>
+				                    </li>
+				                    <li class="list-group-item d-flex justify-content-between align-items-center">
+				                        <strong>1:1 문의 관리</strong>
+				                        <span class="badge badge-success badge-pill"><a href="/inquiry/list">${inquiryAprvSttsCnt.inquiryAprvCnt} 건</a></span>
+				                    </li>
+				                    <li class="list-group-item d-flex justify-content-between align-items-center">
+				                        <strong>메일 관리</strong>
+				                        <span class="badge badge-success badge-pill"><a href="/mail/list">${mailAprvSttsCnt.mailAprvCnt} 건</a></span>
+				                    </li>
+				                    <li class="list-group-item d-flex justify-content-between align-items-center">
+				                        <strong>접속자 관리</strong>
+				                        <span class="badge badge-success badge-pill"><a href="/visit/list">${visitAprvSttsCnt.visitAprvCnt} 건</a></span>
+				                    </li>
+				                </ul>
+				            </div>
+				            <div class="modal-footer">
+				                <button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+				            </div>
+				        </div>
+				    </div>
+				</div>
+				<!-- End of 결제 대기 상태 모달 -->

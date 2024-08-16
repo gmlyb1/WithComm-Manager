@@ -31,13 +31,20 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 
-	<context:component-scan
-		base-package="com.soft.controller" />
+	<context:component-scan base-package="com.soft.controller" />
+	
+	<!-- 최고관리자의 권한을 설정한다 -->
+	<beans:bean id="AuthorityInterceptor" class="com.soft.interceptor.AuthorityInterceptor"></beans:bean>
+	<interceptors>
+		<interceptor>
+				<mapping path="/account/AdminManage"/>
+				<beans:ref bean="AuthorityInterceptor"/>		
+		</interceptor>
+	</interceptors>
+	
 	<!-- GET방식의 도메인 입력으로 페이지 접근을 금지시킨다. 접근 경로가 추가 될때마다 이곳에 경로를 추가한다. -->
 	<beans:bean id="AdminInterceptor"
 		class="com.soft.interceptor.AdminInterceptor"></beans:bean>
-		
-		
 	<!-- 인터셉터 적용 -->
 	<interceptors>
 		<interceptor>
@@ -51,6 +58,8 @@
 			<mapping path="/notice/**"></mapping>
 			<mapping path="/inquiry/**"></mapping>
 			<mapping path="/account/manage"></mapping>
+			<mapping path="/account/AdminManage"/>
+			<mapping path="/visit/list"/>
 			<!-- <mapping path="/item/**"></mapping> -->
 			
 			<beans:bean id="AdminIntreceptor"

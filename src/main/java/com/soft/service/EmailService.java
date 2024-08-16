@@ -47,4 +47,6 @@ public interface EmailService {
 		
 		// 중요 보관함 불러오기
 		public List<MailVO> mailKeepList(String mail_id) throws Exception;
+
+		public MailVO mailAprvSttsCnt(MailVO mailvo) throws Exception;
 }

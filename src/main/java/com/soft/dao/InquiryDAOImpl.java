@@ -46,4 +46,9 @@ public class InquiryDAOImpl implements InquiryDAO {
 		return sqlSession.selectOne("namespace.inquiryCnt", ivo);
 	}
 
+	@Override
+	public InquiryVO inquiryAprvSttsCnt(InquiryVO ivo) throws Exception {
+		return sqlSession.selectOne("namespace.inquiryAprvSttsCnt", ivo);
+	}
+
 }

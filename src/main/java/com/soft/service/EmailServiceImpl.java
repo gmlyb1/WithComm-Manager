@@ -99,6 +99,12 @@ public class EmailServiceImpl implements EmailService {
 		// TODO Auto-generated method stub
 		return emailDAO.mailKeepList(mail_id);
 	}
+
+	@Override
+	public MailVO mailAprvSttsCnt(MailVO mailvo) throws Exception {
+		// TODO Auto-generated method stub
+		return emailDAO.mailAprvSttsCnt(mailvo);
+	}
 	
 
 }

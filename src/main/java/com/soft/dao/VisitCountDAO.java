@@ -10,5 +10,5 @@ public interface VisitCountDAO {
 	
 	public List<VisitCountVO> selectVisitList(VisitCountVO vvo) throws Exception;
 	
-	
+	public VisitCountVO visitAprvSttsCnt(VisitCountVO vvo) throws Exception;
 }

@@ -24,4 +24,9 @@ public class VisitCountDAOImpl implements VisitCountDAO {
 	public List<VisitCountVO> selectVisitList(VisitCountVO vvo) throws Exception {
 		return sqlSession.selectList("namespace.selectVisitList", vvo);
 	}
+
+	@Override
+	public VisitCountVO visitAprvSttsCnt(VisitCountVO vvo) throws Exception {
+		return sqlSession.selectOne("namespace.visitAprvSttsCnt", vvo);
+	}
 }

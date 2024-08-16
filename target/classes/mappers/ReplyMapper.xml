@@ -14,7 +14,7 @@
 		,	b.reply_regdate 
 		from soft.tbl_board a inner join soft.tbl_reply b 
 		on a.board_no = b.board_no 
-		where b.board_no = #{board_no};
+		where b.board_no = #{board_no}
 	</select>
 
 	<select id="boardReplyCount" parameterType="int" resultType="replyVO">
@@ -22,8 +22,8 @@
 	</select>
 
 	<insert id="replyWrite" parameterType="com.soft.vo.replyVO">
-		insert into tbl_reply(reply_no ,board_no,reply_writer, reply_content,reply_regdate)
-			value(#{reply_no},#{board_no},#{reply_writer},#{reply_content},CURRENT_TIMESTAMP)	
+		insert into tbl_reply(reply_no ,board_no,inq_no,reply_writer, reply_content,reply_regdate)
+			value(#{reply_no},#{board_no},#{inq_no},#{reply_writer},#{reply_content},CURRENT_TIMESTAMP)	
 	</insert>
 
 	<update id="replyModify" parameterType="replyVO">

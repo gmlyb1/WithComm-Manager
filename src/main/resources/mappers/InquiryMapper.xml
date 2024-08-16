@@ -15,6 +15,7 @@
 	   ,inq_name
 	   ,answerYn
 	   ,inq_regdate
+	   ,inq_updateDate
 	from tbl_inquiry
 	order by inq_no desc
 	</select>
@@ -48,11 +49,12 @@
 	</insert>
 	
 	<!-- 글쓰기 -->
-	<insert id="updateState">
+	<update id="updateState">
 		update tbl_inquiry set
 			answerYn = #{answerYn}
+			,inq_updateDate = now()
 		where inq_no = #{inq_no}
-	</insert>
+	</update>
 	
 	<update id="updateInquiry" parameterType="inquiryVO">
 		update tbl_inquiry set 
@@ -89,6 +91,13 @@
 		FROM
 		    tbl_inquiry
 	]]>
+	</select>
+	
+	<select id="inquiryAprvSttsCnt" parameterType="inquiryVO" resultType="inquiryVO">
+		select 
+			count(inq_no) as inquiryAprvCnt
+		from tbl_inquiry
+		where answerYn = '대기중'
 	</select>
 
 </mapper>

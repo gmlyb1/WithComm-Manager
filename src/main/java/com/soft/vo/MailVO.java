@@ -24,4 +24,5 @@ public class MailVO {
 	private String mail_readCheck;
 	private MultipartFile uploadFile;
 	
+	private int mailAprvCnt;
 }

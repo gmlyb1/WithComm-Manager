@@ -18,4 +18,6 @@ public interface InquiryService {
 	public void updateInquiry(InquiryVO vo) throws Exception;
 
 	public InquiryVO inquiryCnt(InquiryVO ivo) throws Exception;
+
+	public InquiryVO inquiryAprvSttsCnt(InquiryVO ivo)throws Exception;
 }

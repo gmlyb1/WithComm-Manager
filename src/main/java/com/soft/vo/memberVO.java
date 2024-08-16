@@ -33,6 +33,7 @@ public class memberVO {
 	private int weekCnt;
 	private int monthCnt;
 	private int yearCnt;
+	private int memberAprvCnt;
 	
 	
 	

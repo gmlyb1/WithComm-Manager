@@ -17,7 +17,7 @@ public class VisitCountVO {
 	private String me_name; // 계정 아이디 불러오기용
 	
 	
-	
+	private int visitAprvCnt;
 	
 
 }

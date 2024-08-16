@@ -16,19 +16,67 @@
 			formObj.attr("method", "post");
 			formObj.submit();
 		});
+		
+		var formObj = $("form[name='replyForm']")
+		$(".replyWriteBtn").on("click", function() {
+			var formObj = $("form[name='replyForm']");
+			formObj.attr("action", "/inquiry/WriteReply");
+			formObj.attr("method", "post");
+			formObj.submit();
+		});
+		
+		function remove_replyNo(data1, data2) {
+			if (!confirm("삭제 하시겠습니까?"))
+				return false;
+			else {
+				location.href = "/reply/delete?reply_no=" + data1 + "&inq_no="
+						+ data2;
+			}
+		}
+		
+		
+		//댓글수정창 닫기
+		$('#replyModal').on('click',function() {
+			
+			$('#editModal').modal('hide');
+		});
+
+		$('#replyEditCancel').on('click',function() {
+			$('#editModal').modal('hide');
+		});
+
+
+		$('#submitModifyReply').on('click', function() {
+		    var reply_content = $('#reply_content').val();
+		    var reply_no = $('#editReplyNo').val();
+		    var inq_no = $('#inq_no').val();
+		    
+		    // Make an AJAX request to update the comment on the server
+		    $.ajax({
+		        type: 'POST',
+		        url: '/reply/modify',
+		        data: {
+		        	inq_no : inq_no,
+		            reply_no: reply_no, // Correct the variable name
+		            reply_content: reply_content // Correct the variable name
+		        },
+		        success: function(response) {
+		        	//console.log(response);
+		        	console.log("reply_content:" + reply_content);
+		            alert('댓글 수정에 성공하였습니다.');
+		            $('#editModal').modal('hide');
+		            location.reload();
+		        },
+		        error: function(xhr, textStatus, errorThrown) {
+		            alert('실패: ' + xhr.status + ' ' + errorThrown);
+		        }
+		        
+		    });
+		  
+		});
+		
 	});
 </script>
-<script type="text/javascript">
-	function remove_replyNo(data1, data2) {
-		if (!confirm("삭제 하시겠습니까?"))
-			return false;
-		else {
-			location.href = "/reply/delete?reply_no=" + data1 + "&inq_no="
-					+ data2;
-		}
-	}
-</script>
-
 <div class="row" style="margin-bottom: 20px; margin-left: 1px;">
 	<div class="col-lg-12">
 		<h1 class="page-header text-center">1:1 문의 상세 페이지</h1>
@@ -97,7 +145,7 @@
 				</form>
 				<!-- 게시판 끝 -->
 
-					<!-- 댓글 시작 -->
+				<!-- 댓글 시작 -->
 				<div class="mb-3" style="height: 270px; OVERFLOW-Y: auto;">
 					<table class="table table-striped">
 						<c:choose>
@@ -118,7 +166,7 @@
 													<c:if test="${member.state == '최고관리자'  || member.me_name == replyList.reply_writer}">
 														<!-- <a class="btn btn-primary" href="#">댓글 수정</a> -->
 														<a class="btn btn-primary" href="javascript:void(0);" onclick="openEditModal(${replyList.reply_no}, '${replyList.reply_content}')">수정</a>
-														<a class="btn btn-danger" href="javascript:remove_replyNo(${replyList.reply_no},${replyList.board_no});">삭제</a>
+														<a class="btn btn-danger" href="javascript:remove_replyNo(${replyList.reply_no},${replyList.inq_no});">삭제</a>
 													</c:if>
 												</p></td>
 										<td style="width: 35%; text-align: right;">
@@ -136,7 +184,7 @@
 				<!-- 댓글 작성 시작 -->
 				<div>
 					<form method="post" action="/reply/write">
-						<input type="hidden" name="board_no" value="${read.inq_no}">
+						<input type="hidden" name="inq_no" value="${read.inq_no}">
 						<input type="hidden" name="reply_no" value="${read.reply_no}">
 					<div class="comment-form">
 						<p>
@@ -156,32 +204,33 @@
 				<!-- 댓글 작성 끝 -->
 				<div class="my-3 p-3 bg-white rounded shadow-sm">
 					<c:choose>
-						<c:when test="${nextBoardList.inq_no != null}">
+						<c:when test="${nextInquiryList.inq_no != null}">
+
 							<button type="button" class="btn btn-warning mr-3 mb-3"
-								onclick="location.href='/inquiry/detail?inq_no=${nextBoardList.inq_no}'">
+								onclick="location.href='/inquiry/detaiol?inq_no=${nextInquiryList.inq_no}'">
 								<span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>다음글
 							</button>
-							<a href="/inquiry/detail?inq_no=${nextBoardList.inq_no}"
-								style="color: black"> ${nextBoardList.inq_title} </a>
+							<a href="/inquiry/detail?inq_no=${nextInquiryList.inq_no}"
+								style="color: black"> ${nextInquiryList.inq_title} </a>
 						</c:when>
 
-						<c:when test="${nextBoardList.inq_no == null}">
+						<c:when test="${nextInquiryList.inq_no == null}">
 							<button type="button" class="btn btn-warning mr-3 mb-3" disabled>다음글이
 								없습니다</button>
 						</c:when>
 					</c:choose>
 					<br />
 					<c:choose>
-						<c:when test="${lastBoardList.inq_no != null}">
+						<c:when test="${lastInquiryList.inq_no != null}">
 							<button type="button" class="btn btn-info mr-3 "
-								onclick="location.href='/board/read?board_no=${lastBoardList.inq_no}'">
+								onclick="location.href='/inquiry/detail?inq_no=${lastInquiryList.inq_no}'">
 								<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>이전글
 							</button>
-							<a href="/board/read?board_no=${lastBoardList.inq_no}"
-								style="color: black"> ${lastBoardList.inq_title} </a>
+							<a href="/inquiry/detail?inq_no=${lastInquiryList.inq_no}"
+								style="color: black"> ${lastInquiryList.inq_title} </a>
 						</c:when>
 
-						<c:when test="${lastBoardList.inq_no == null}">
+						<c:when test="${lastInquiryList.inq_no == null}">
 							<button type="button" class="btn btn-info mr-3" disabled>이전글이
 								없습니다</button>
 						</c:when>
