@@ -7,17 +7,21 @@
 
 	
 	<!-- 글 목록 -->
-	<select id="selectInquiryList" resultType="InquiryVO">
+	<select id="selectInquiryList" resultType="InquiryVO" parameterType="InquiryVO">
 	select 
-		inq_no
-	   ,inq_title
-	   ,inq_content
-	   ,inq_name
-	   ,answerYn
-	   ,inq_regdate
-	   ,inq_updateDate
+	*
 	from tbl_inquiry
-	order by inq_no desc
+	WHERE 
+		1=1
+	 <if test="inq_name != null and inq_name != ''">
+	    AND inq_name LIKE CONCAT('%', #{inq_name}, '%')
+	  </if>
+	  <if test="inq_title != null and inq_title != ''">
+	    AND inq_title = #{inq_title}
+	  </if>
+	    <if test="startDate != null and endDate != null and startDate != '' and endDate != ''">
+        AND inq_regdate BETWEEN #{startDate} AND #{endDate}
+      </if>
 	</select>
 
 	<!-- 게시글 조회 -->

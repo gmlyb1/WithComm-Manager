@@ -12,7 +12,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class NoticeVO {
+public class NoticeVO extends Common{
 	
 	private int rowNo;
 	private int notice_no;

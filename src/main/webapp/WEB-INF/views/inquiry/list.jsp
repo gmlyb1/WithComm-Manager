@@ -97,10 +97,46 @@
  <div class="container-fluid">
 <br>
 	<h1 class="h3 mb-2 text-gray-800">1:1문의</h1>
-	<p class="mb-4">
-		<a><strong>관리자와 1:1 문의가 가능합니다.</strong></a>
-	</p>
-
+	
+	<!-- Search Form -->
+	<div class="card mb-4">
+		<div class="card-header">
+			<h6 class="m-0 font-weight-bold text-primary">검색 조건</h6>
+		</div>
+		<div class="card-body">
+			<form id="searchForm" action="/inquiry/list" method="GET">
+				<div class="form-row">
+					<div class="col-md-4 mb-3">
+						<label for="inq_name">작성자</label>
+						<input type="text" class="form-control" id="inq_name" name="inq_name" placeholder="작성자" value="${param.inq_name}">
+					</div>
+					<div class="col-md-4 mb-3">
+						<label for="inq_title">제목</label>
+						<input type="text" class="form-control" id="inq_title" name="inq_title" placeholder="제목" value="${param.inq_title}">
+					</div>
+					<div class="col-md-4 mb-3">
+						<label for="answerYn">상태</label>
+						<select class="form-control" id="answerYn" name="answerYn">
+							<option value="">전체</option>
+			                <option value="대기중" ${param.answerYn == '대기중' ? 'selected' : ''}>대기중</option>
+			                <option value="확인중" ${param.answerYn == '확인중' ? 'selected' : ''}>확인중</option>
+			                <option value="답변완료" ${param.answerYn == '답변완료' ? 'selected' : ''}>답변완료</option>
+						</select>
+					</div>
+				 	<div class="col-md-4 mb-3">
+			            <label for="startDate">시작 날짜</label>
+			            <input type="date" class="form-control" id="startDate" name="startDate" value="${param.startDate}">
+			        </div>
+			        <div class="col-md-4 mb-3">
+			            <label for="endDate">종료 날짜</label>
+			            <input type="date" class="form-control" id="endDate" name="endDate" value="${param.endDate}">
+			        </div>
+				</div>
+				<button type="submit" id="searchBtn" class="button-container btn btn-primary">조회</button>
+			</form>
+		</div>
+	</div>
+	
 	<div class="card shadow mb-4">
 		<div class="card-header py-3">
 			<h6 class="m-0 font-weight-bold text-primary">고객 게시판 리스트</h6>
@@ -112,8 +148,6 @@
 		</div>
 		<div class="card-body">
 			<div class="table-responsive">
-			  <form method="post" id="updateform" action="/inquiry/updateState">
-			  <input type="hidden" name="inq_no" value="${list.inq_no}" />
 				<table class="table table-bordered" id="dataTable" width="100%"
 					cellspacing="0">
 					<thead>
@@ -164,7 +198,6 @@
 				<br>
 					<a type="button" href="/inquiry/create" class="btn btn-primary">글쓰기</a>
 				</c:if>
-			  </form>	
 			</div>
 		</div>
 	</div>

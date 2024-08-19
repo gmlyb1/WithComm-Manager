@@ -8,16 +8,21 @@
 	<!-- 글 목록 -->
 	<select id="NoticeList" resultType="NoticeVO" parameterType="NoticeVO">
 		select
-		    notice_no
-		 ,	notice_title
-		 ,	notice_writer
-		 ,	notice_count
-		 ,	notice_regdate
-		 ,	notice_updateDate
-		 ,  isFixed
+		 *
 		from
 		 tbl_notice
-		 where useYn = '1'
+		 where 
+		 	1=1
+		AND useYn = '1'
+	   <if test="notice_writer != null and notice_writer != ''">
+	    AND notice_writer LIKE CONCAT('%', #{notice_writer}, '%')
+	  </if>
+	  <if test="notice_title != null and notice_title != ''">
+	    AND notice_title = #{notice_title}
+	  </if>
+	    <if test="startDate != null and endDate != null and startDate != '' and endDate != ''">
+        AND notice_regDate BETWEEN #{startDate} AND #{endDate}
+      </if>
 	</select>
 
 	<select id="selectNoticeImportant" resultType="NoticeVO" parameterType="NoticeVO">

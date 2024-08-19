@@ -12,7 +12,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class boardVO{
+public class boardVO extends Common{
 	
 	private int rowNo;
 	private int board_no;
@@ -21,6 +21,7 @@ public class boardVO{
 	private String board_writer;
 	private int board_count;
 	private Timestamp board_regdate;
+	private Timestamp board_updateDate;
 	private int reply_cnt;
 	private int boardCnt;
 	

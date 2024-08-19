@@ -24,6 +24,14 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+	
+	var path = location.pathname;
+	
+	if(path === '/home') {
+		$('#showaprvSttsModal').show();
+	}else {
+		$('#showaprvSttsModal').hide();
+	}
 	// 로그인 버튼 클릭 시 모달을 띄우는 예시
     $('#changePasswordModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget); // 버튼을 클릭했을 때의 이벤트
@@ -341,15 +349,15 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 				                <ul class="list-group">
 				                    <li class="list-group-item d-flex justify-content-between align-items-center">
 				                        <strong>회원 관리</strong>
-				                        <span class="badge badge-success badge-pill"><a href="/account/manage">${memberRegisterAprvSttsCnt.memberAprvCnt} 건</a></span>
+				                        <span class="badge badge-success badge-pill"><a href="/account/manage?state=승인대기중">${memberRegisterAprvSttsCnt.memberAprvCnt} 건</a></span>
 				                    </li>
 				                    <li class="list-group-item d-flex justify-content-between align-items-center">
 				                        <strong>1:1 문의 관리</strong>
-				                        <span class="badge badge-success badge-pill"><a href="/inquiry/list">${inquiryAprvSttsCnt.inquiryAprvCnt} 건</a></span>
+				                        <span class="badge badge-success badge-pill"><a href="/inquiry/list?answerYn=대기중">${inquiryAprvSttsCnt.inquiryAprvCnt} 건</a></span>
 				                    </li>
 				                    <li class="list-group-item d-flex justify-content-between align-items-center">
 				                        <strong>메일 관리</strong>
-				                        <span class="badge badge-success badge-pill"><a href="/mail/list">${mailAprvSttsCnt.mailAprvCnt} 건</a></span>
+				                        <span class="badge badge-success badge-pill"><a href="/mail/recevMail">${mailAprvSttsCnt.mailAprvCnt} 건</a></span>
 				                    </li>
 				                    <li class="list-group-item d-flex justify-content-between align-items-center">
 				                        <strong>접속자 관리</strong>

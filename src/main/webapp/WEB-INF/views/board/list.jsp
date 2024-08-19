@@ -83,57 +83,72 @@
 
 <%@include file="../includes/header.jsp"%>
 
+<!-- Begin Page Content -->
 <div class="container-fluid">
 
-	<h1 class="h3 mb-2 text-gray-800">자유 게시판</h1>
-	<p class="mb-4">
-		<a><strong>저희 소프트홈페이지의 고객 게시판을 찾아 주셔서 감사합니다.</strong></a>
-	</p>
-
-	<div class="card shadow mb-4">
-		<div class="card-header py-3">
-			<h6 class="m-0 font-weight-bold text-primary">고객 게시판 리스트</h6>
-			<br>
-				<span style="color: red"><strong> 현재 페이지의 글쓰기,수정,삭제는 회원만 이용 가능합니다.</strong></span>
-
-			<%-- <c:if test="${member != null }">
-				<a href="/board/mypage" class="btn btn-success">마이페이지로 이동</a>
-			</c:if> --%>
+	<!-- Page Heading -->
+	<h1 class="h3 mb-2 text-gray-800">게시판 관리</h1>
+	
+	<!-- Search Form -->
+	<div class="card mb-4">
+		<div class="card-header">
+			<h6 class="m-0 font-weight-bold text-primary">검색 조건</h6>
 		</div>
+		<div class="card-body">
+			<form id="searchForm" action="/board/list" method="GET">
+				<div class="form-row">
+					<div class="col-md-4 mb-3">
+						<label for="board_writer">작성자</label>
+						<input type="text" class="form-control" id="board_writer" name="board_writer" placeholder="작성자" value="${param.board_writer}">
+					</div>
+					<div class="col-md-4 mb-3">
+						<label for="board_title">제목</label>
+						<input type="text" class="form-control" id="board_title" name="board_title" placeholder="제목" value="${param.board_title}">
+					</div>
+				 	<div class="col-md-4 mb-3">
+			            <label for="startDate">시작 날짜</label>
+			            <input type="date" class="form-control" id="startDate" name="startDate" value="${param.startDate}">
+			        </div>
+			        <div class="col-md-4 mb-3">
+			            <label for="endDate">종료 날짜</label>
+			            <input type="date" class="form-control" id="endDate" name="endDate" value="${param.endDate}">
+			        </div>
+				</div>
+				<button type="submit" id="searchBtn" class="button-container btn btn-primary">조회</button>
+			</form>
+		</div>
+	</div>
+	
+	<!-- DataTales Example -->
+	<div class="card shadow mb-4">
 		<div class="card-body">
 			<div class="table-responsive">
 				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 					<thead>
 						<tr>
-							<!-- <th><input class="form-check-input" id="allCheck" type="checkbox" name="allCheck"/></th> -->
 							<th class="text-center">번호</th>
-							<th class="text-center">주제</th>
+							<th class="text-center">제목</th>
 							<th class="text-center">작성자</th>
-							<th class="text-center">조회수</th>
-							<th class="text-center">작성일자</th>
+							<th class="text-center">등록일자</th>
+							<th class="text-center">수정일자</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${boardList}" var="list">
-								<%-- <td><input name="RowCheck" type="checkbox" value="${list.board_no}"/></td> --%>
-							<tr data-regdate = "${list.board_regdate}">
-								<td class="text-center"><c:out value="${list.board_no}" /></td>
-								<td><a href="/board/read?board_no=${list.board_no}"><c:out
-											value="${list.board_title}" /></a>
-								</td>
-								<td class="text-center"><c:out value="${list.board_writer}" /></td>
-								<td class="text-center"><c:out value="${list.board_count}" /></td>
+							<tr>
+								<td class="text-center">${list.board_no}</td>
+								<td class="text-center">${list.board_title}</td>
+								<td class="text-center">${list.board_writer}</td>
 								<td class="text-center">
-									<fmt:formatDate pattern="yyyy-MM-dd hh:mm" value="${list.board_regdate}" />
+									<fmt:formatDate value="${list.board_regdate}" pattern="yyyy-MM-dd" />
+								</td>
+								<td class="text-center">
+									<fmt:formatDate value="${list.board_updateDate}" pattern="yyyy-MM-dd" />
 								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
-				<c:if test="${member != null}">
-					<button type="button" onclick="location.href='/board/create';" class="btn btn-success">글쓰기</button>
-					<input type="button" value="선택삭제" class="btn btn-outline-info" onclick="deleteValue();"/>	
-				</c:if>
 			</div>
 		</div>
 	</div>

@@ -18,7 +18,27 @@
 
 	<!-- Page Heading -->
 	<h1 class="h3 mb-2 text-gray-800">방문자 로그 관리</h1>
-
+	
+	<div class="card-body">
+			<form id="searchForm" action="/visit/list" method="GET">
+				<div class="form-row">
+					<div class="col-md-4 mb-3">
+						<label for="visit_ip">ip</label>
+						<input type="text" class="form-control" id="visit_ip" name="visit_ip" placeholder="ip" value="${param.visit_ip}">
+					</div>
+				 	<div class="col-md-4 mb-3">
+			            <label for="startDate">시작 날짜</label>
+			            <input type="date" class="form-control" id="startDate" name="startDate" value="${param.startDate}">
+			        </div>
+			        <div class="col-md-4 mb-3">
+			            <label for="endDate">종료 날짜</label>
+			            <input type="date" class="form-control" id="endDate" name="endDate" value="${param.endDate}">
+			        </div>
+				</div>
+				<button type="submit" id="searchBtn" class="button-container btn btn-primary">조회</button>
+			</form>
+		</div>
+	
 	<!-- DataTales Example -->
 	<div class="card shadow mb-4">
 		<div class="card-header py-3">

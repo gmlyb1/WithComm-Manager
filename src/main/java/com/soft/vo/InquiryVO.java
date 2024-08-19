@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @ToString
-public class InquiryVO {
+public class InquiryVO extends Common{
 
 	private int inq_no;
 	private String inq_title;

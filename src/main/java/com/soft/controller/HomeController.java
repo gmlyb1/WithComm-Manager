@@ -83,6 +83,7 @@ public class HomeController {
 
 		model.addAttribute("memberVO", memberSearch);
 		model.addAttribute("memberVO", memberVO);
+		
 
 		//대쉬보드 - 게시판 건수	리스트
 		List<boardVO> HomeBoardList = boardService.HomeBoardList(bvo);

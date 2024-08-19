@@ -12,7 +12,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class memberVO {
+public class memberVO extends Common{
 
 	private int me_id;
 	private String me_email;

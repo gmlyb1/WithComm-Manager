@@ -8,14 +8,20 @@
 	<!-- 글 목록 -->
 	<select id="BoardList" resultType="boardVO" parameterType="boardVO">
 		select
-		 	row_number() over() as rowNo
-		 ,  board_no
-		 ,	board_title
-		 ,	board_writer
-		 ,	board_count
-		 ,	board_regdate
+		*
 		from
 		 tbl_board
+		where
+			1=1
+	 <if test="board_writer != null and board_writer != ''">
+	    AND board_writer LIKE CONCAT('%', #{board_writer}, '%')
+	  </if>
+	  <if test="board_title != null and board_title != ''">
+	    AND board_title = #{board_title}
+	  </if>
+	    <if test="startDate != null and endDate != null and startDate != '' and endDate != ''">
+        AND board_regDate BETWEEN #{startDate} AND #{endDate}
+      </if>
 	</select>
 	
 	<select id="HomeBoardList" resultType="boardVO" parameterType="boardVO">

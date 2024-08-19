@@ -126,7 +126,46 @@
 
 	<!-- Page Heading -->
 	<h1 class="h3 mb-2 text-gray-800">운영자 관리</h1>
-
+	
+	<div class="card mb-4">
+		<div class="card-header">
+			<h6 class="m-0 font-weight-bold text-primary">검색 조건</h6>
+		</div>
+		<div class="card-body">
+			<form id="searchForm" action="/account/AdminManage" method="GET">
+				<div class="form-row">
+					<div class="col-md-4 mb-3">
+						<label for="me_email">계정</label>
+						<input type="text" class="form-control" id="me_email" name="me_email" placeholder="이메일" value="${param.me_email}">
+					</div>
+					<div class="col-md-4 mb-3">
+						<label for="me_name">닉네임</label>
+						<input type="text" class="form-control" id="me_name" name="me_name" placeholder="닉네임" value="${param.me_name}">
+					</div>
+					<div class="col-md-4 mb-3">
+						<label for="state">상태</label>
+						<select class="form-control" id="state" name="state" disabled>
+							<option value="">전체</option>
+			                <option value="관리자" selected>관리자</option>
+			                <option value="승인대기중">승인대기중</option>
+			                <option value="일반회원">일반회원</option>
+			                <option value="활동중지">활동중지</option>
+						</select>
+					</div>
+				 	<div class="col-md-4 mb-3">
+			            <label for="startDate">시작 날짜</label>
+			            <input type="date" class="form-control" id="startDate" name="startDate" value="${param.startDate}">
+			        </div>
+			        <div class="col-md-4 mb-3">
+			            <label for="endDate">종료 날짜</label>
+			            <input type="date" class="form-control" id="endDate" name="endDate" value="${param.endDate}">
+			        </div>
+				</div>
+				<button type="submit" id="searchBtn" class="button-container btn btn-primary">조회</button>
+			</form>
+		</div>
+	</div>
+	
 	<!-- DataTales Example -->
 	<div class="card shadow mb-4">
 		<div class="card-header py-3">

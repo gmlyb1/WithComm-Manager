@@ -87,6 +87,18 @@
 	select * 
 	from tbl_member
 	where state != '최고관리자' and state != '관리자'
+	  <if test="me_email != null and me_email != ''">
+	    AND me_email = #{me_email}
+	  </if>
+	  <if test="me_name != null and me_name != ''">
+	    AND me_name LIKE CONCAT('%', #{me_name}, '%')
+	  </if>
+	  <if test="state != null and state != ''">
+	    AND state = #{state}
+	  </if>
+	    <if test="startDate != null and endDate != null and startDate != '' and endDate != ''">
+        AND me_regDate BETWEEN #{startDate} AND #{endDate}
+      </if>
 	</select>
 	
 	<!-- 어드민관리 -->
@@ -94,6 +106,18 @@
 	select * 
 	from tbl_member
 	where state = '관리자'
+	 <if test="me_email != null and me_email != ''">
+	    AND me_email = #{me_email}
+	  </if>
+	  <if test="me_name != null and me_name != ''">
+	    AND me_name LIKE CONCAT('%', #{me_name}, '%')
+	  </if>
+	  <if test="state != null and state != ''">
+	    AND state = #{state}
+	  </if>
+	    <if test="startDate != null and endDate != null and startDate != '' and endDate != ''">
+        AND me_regDate BETWEEN #{startDate} AND #{endDate}
+      </if>
 	</select>
 	
 	<!-- 회원탈퇴 -->

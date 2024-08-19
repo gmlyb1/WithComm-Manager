@@ -32,10 +32,37 @@
 
 <div class="container-fluid">
 	<h1 class="h3 mb-2 text-gray-800">공지사항</h1>
-	<p class="mb-4">
-		<a><strong>이곳은 공지사항입니다. 관리자 외에는 글을 조회만 가능합니다.</strong></a>
-	</p>
-
+	
+	<!-- Search Form -->
+	<div class="card mb-4">
+		<div class="card-header">
+			<h6 class="m-0 font-weight-bold text-primary">검색 조건</h6>
+		</div>
+		<div class="card-body">
+			<form id="searchForm" action="/notice/list" method="GET">
+				<div class="form-row">
+					<div class="col-md-4 mb-3">
+						<label for="notice_writer">작성자</label>
+						<input type="text" class="form-control" id="notice_writer" name="notice_writer" placeholder="작성자" value="${param.notice_writer}">
+					</div>
+					<div class="col-md-4 mb-3">
+						<label for="notice_title">제목</label>
+						<input type="text" class="form-control" id="notice_title" name="notice_title" placeholder="제목" value="${param.notice_title}">
+					</div>
+				 	<div class="col-md-4 mb-3">
+			            <label for="startDate">시작 날짜</label>
+			            <input type="date" class="form-control" id="startDate" name="startDate" value="${param.startDate}">
+			        </div>
+			        <div class="col-md-4 mb-3">
+			            <label for="endDate">종료 날짜</label>
+			            <input type="date" class="form-control" id="endDate" name="endDate" value="${param.endDate}">
+			        </div>
+				</div>
+				<button type="submit" id="searchBtn" class="button-container btn btn-primary">조회</button>
+			</form>
+		</div>
+	</div>
+	
 	<!-- DataTales Example -->
 	<div class="card shadow mb-4">
 		<div class="card-header py-3">

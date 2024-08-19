@@ -8,7 +8,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class VisitCountVO {
+public class VisitCountVO extends Common{
 
 	private int visit_id;
 	private String visit_ip;
