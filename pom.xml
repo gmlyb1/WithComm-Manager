@@ -306,6 +306,11 @@
 				</configuration>
 			</plugin>
 			 <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.2</version> <!-- Use a more recent version if needed -->
+            </plugin>
+			 <plugin>
 	            <groupId>org.apache.maven.plugins</groupId>
 	            <artifactId>maven-compiler-plugin</artifactId>
 	            <version>3.10.1</version>
