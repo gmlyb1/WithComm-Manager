@@ -67,11 +67,11 @@
 
 		<!-- 첨부파일 START -->
 		<!-- MultipartHttpServletRequset -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>2.0.1</version>
-		</dependency>
+		</dependency> -->
 
 		<dependency>
 			<groupId>commons-fileupload</groupId>
@@ -305,7 +305,7 @@
 					<downloadJavadocs>true</downloadJavadocs>
 				</configuration>
 			</plugin>
-			<plugin>
+			 <plugin>
 	            <groupId>org.apache.maven.plugins</groupId>
 	            <artifactId>maven-compiler-plugin</artifactId>
 	            <version>3.10.1</version>
@@ -314,7 +314,7 @@
 	                <target>18</target>
 	                <encoding>UTF-8</encoding>
 	            </configuration>
-       		</plugin>
+	        </plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
