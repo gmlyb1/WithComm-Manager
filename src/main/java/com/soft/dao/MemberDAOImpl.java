@@ -112,11 +112,6 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public memberVO memberCnt(memberVO mvo) throws Exception {
-		return sqlSession.selectOne("namespace.memberCnt", mvo);
-	}
-
-	@Override
 	public memberVO memberRegisterAprvSttsCnt(memberVO mvo) throws Exception {
 		return sqlSession.selectOne("namespace.memberRegisterAprvSttsCnt", mvo);
 	}

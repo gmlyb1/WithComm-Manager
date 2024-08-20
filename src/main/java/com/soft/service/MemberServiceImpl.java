@@ -112,10 +112,6 @@ public class MemberServiceImpl implements MemberService {
 		memberDAO.updateSecondPassword(second_me_pwd);
 	}
 
-	@Override
-	public memberVO memberCnt(memberVO mvo) throws Exception {
-		return memberDAO.memberCnt(mvo);
-	}
 
 	@Override
 	public memberVO memberRegisterAprvSttsCnt(memberVO mvo) throws Exception {

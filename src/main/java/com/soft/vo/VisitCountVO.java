@@ -19,5 +19,10 @@ public class VisitCountVO extends Common{
 	
 	private int visitAprvCnt;
 	
+	private int dayCnt;
+	private int weekCnt;
+	private int monthCnt;
+	private int yearCnt;
+	
 
 }

@@ -46,6 +46,24 @@
 			FROM tbl_visit 
 		WHERE DATE(regdate) = CURDATE()
 	</select>
-
+	
+	
+	<select id="selectVisitCount" parameterType="VisitCountVO" resultType="VisitCountVO">
+	<![CDATA[
+	SELECT 
+    COALESCE((SELECT SUM(visitCount)
+              FROM tbl_visit
+              WHERE regDate >= CURDATE() AND regDate < CURDATE() + INTERVAL 1 DAY), 0) AS dayCnt,
+    COALESCE((SELECT SUM(visitCount)
+              FROM tbl_visit
+              WHERE regDate >= CURDATE() - INTERVAL 7 DAY AND regDate < CURDATE()), 0) AS weekCnt,
+    COALESCE((SELECT SUM(visitCount)
+              FROM tbl_visit
+              WHERE regDate >= CURDATE() - INTERVAL 1 MONTH AND regDate < CURDATE()), 0) AS monthCnt,
+    COALESCE((SELECT SUM(visitCount)
+              FROM tbl_visit
+              WHERE regDate >= CURDATE() - INTERVAL 1 YEAR AND regDate < CURDATE()), 0) AS yearCnt
+	]]>
+	</select>
 
 </mapper>

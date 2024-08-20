@@ -187,34 +187,6 @@
 			SET second_me_pwd = #{second_me_pwd}
 	</update>
 	
-	<select id="memberCnt" parameterType="memberVO" resultType="memberVO">
-	 <![CDATA[
-		SELECT
-		    COUNT(CASE 
-		            WHEN me_regdate >= CURDATE() 
-		                 AND me_regdate < CURDATE() + INTERVAL 1 DAY 
-		            THEN me_id 
-		         END) AS dayCnt,
-		    COUNT(CASE 
-		            WHEN me_regdate >= CURDATE() - INTERVAL 7 DAY 
-		                 AND me_regdate < CURDATE() 
-		            THEN me_id 
-		         END) AS weekCnt,
-		    COUNT(CASE 
-		            WHEN me_regdate >= DATE_FORMAT(CURDATE(), '%Y-%m-01') 
-		                 AND me_regdate < DATE_FORMAT(CURDATE() + INTERVAL 1 MONTH, '%Y-%m-01') 
-		            THEN me_id 
-		         END) AS monthCnt,
-		    COUNT(CASE 
-		            WHEN YEAR(me_regdate) = YEAR(CURDATE()) 
-		                 AND me_regdate >= DATE_FORMAT(CURDATE(), '%Y-01-01') 
-		                 AND me_regdate < DATE_FORMAT(CURDATE() + INTERVAL 1 YEAR, '%Y-01-01') 
-		            THEN me_id 
-		         END) AS yearCnt
-		FROM
-		    tbl_member
-	]]>
-	</select>
 	
 	<select id="memberRegisterAprvSttsCnt" parameterType="memberVO" resultType="memberVO">
 		select 

@@ -11,63 +11,38 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
-	$(document).ready(function(e) {
+	$(document).ready(function() {
 			
-		$("#LoginBtn").click(function() {
+		var msg = "${msg}"
+
+			if (msg != "") {
+				alert(msg);
+			}
+		
+		$("#login-btn").click(function(e) {
 			var me_email = $("#me_email").val();
 			var me_id = $("#me_id").val();
 			var me_pwd = $("#me_pwd").val();
 			var second_me_pwd = $("#second_me_pwd").val();
-
-			if (document.frm.me_email.value == "") {
+			
+			if (me_email == "") {
 				alert("이메일을 입력해 주세요.");
 				return false;
 			}
 
-			if (document.frm.me_pwd.value == "") {
+			if (me_pwd == "") {
 				alert("비밀번호를 입력해 주세요.");
 				return false;
 			}
 			
-			if (document.frm.second_me_pwd.value == "") {
+			if (second_me_pwd == "") {
 				alert("2차 비밀번호를 입력해 주세요.");
 				return false;
-			}
+			} 
 		});
 		
 		//끝
 	});
-</script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		var msg = "${msg}"
-
-		if (msg != "") {
-			alert(msg);
-		}
-	});
-</script>
-<script type="text/javascript">
-const signup = document.getElementById("sign-up");
-signin = document.getElementById("sign-in");
-loginin = document.getElementById("login-in");
-loginup = document.getElementById("login-up");
-
-signup.addEventListener("click", () => {
-    loginin.classList.remove("block");
-    loginup.classList.remove("none");
-
-    loginin.classList.add("none");
-    loginup.classList.add("block");
-})
-
-signin.addEventListener("click", () => {
-    loginin.classList.remove("none");
-    loginup.classList.remove("block");
-
-    loginin.classList.add("block");
-    loginup.classList.add("none");
-})
 </script>
 <style type="text/css">
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap");

@@ -114,7 +114,7 @@ public class HomeController {
 		model.addAttribute("inquiryCnt", inquiryCnt);
 		
 		//대쉬보드 - 접속자 건수(일,월,주,년)
-		memberVO memberCnt = memberService.memberCnt(mvo);
+		VisitCountVO memberCnt = visitCountService.selectVisitCount(vvo);
 		model.addAttribute("memberCnt", memberCnt);
 		
 		memberVO memberRegisterAprvSttsCnt = memberService.memberRegisterAprvSttsCnt(mvo);

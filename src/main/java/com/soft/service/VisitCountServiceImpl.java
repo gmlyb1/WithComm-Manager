@@ -33,4 +33,10 @@ public class VisitCountServiceImpl implements VisitCountService{
 		return visitCountDAO.visitAprvSttsCnt(vvo);
 	}
 
+
+	@Override
+	public VisitCountVO selectVisitCount(VisitCountVO vvo) throws Exception {
+		return visitCountDAO.selectVisitCount(vvo);
+	}
+
 }

@@ -13,6 +13,7 @@ import lombok.ToString;
 public class replyVO {
 
 	private int board_no;
+	private int inq_no;
 	private int reply_no;
 	private String reply_content;
 	private String reply_writer;

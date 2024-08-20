@@ -177,7 +177,7 @@
 									<c:if test="${list.inq_updateDate == null }">
 										<td class="text-center">-</td>
 									</c:if>
-									<td class="text-center"><c:out value="${list.answerYn}" /></td>
+									<td class="text-center"><c:out value="${list.answerYn}"/></td>
 									<td class="text-center">
 										<c:if test="${list.answerYn != '대기중' }">
 								        	<button type="button" class="btn btn-success loading-button" data-answerYn="${list.answerYn}" data-inq-no="${list.inq_no}">대기중</button>

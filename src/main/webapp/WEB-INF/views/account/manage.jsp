@@ -143,7 +143,7 @@
 					</div>
 					<div class="col-md-4 mb-3">
 						<label for="me_name">닉네임</label>
-						<input type="text" class="form-control" id="me_name" name="me_name" placeholder="닉네임" value="${param.me_name}">
+						<input type="text" class="form-control" id="me_name" name="me_name" placeholder="닉네임" value="">
 					</div>
 					<div class="col-md-4 mb-3">
 						<label for="state">상태</label>
